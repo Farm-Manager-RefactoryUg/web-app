@@ -1,15 +1,15 @@
 import React from 'react';
-import Navbar from 'Navbar.js'
-import Stats from 'Stats.js'
-import Graphs from 'Graphs.js'
-import Activities from 'Activities.js'
+//import Navbar from 'Navbar.js'
+//import Stats from 'Stats.js'
+//import Graphs from 'Graphs.js'
+import Activities from './Activities'
 
 function Dashboard() {
   return (
     <div className="App">
-        <Navbar />
+       {/* <Navbar />
         <Stats />
-        <Graphs />
+        <Graphs /> */}
         <Activities />
     </div>
   );
