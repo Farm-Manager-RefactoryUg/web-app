@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.card-heading{
+margin: 2px;
+padding: 2px;
+margin-left: 15px;
+/* color: green; */
+color: #006432
+
+}
