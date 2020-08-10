@@ -36,9 +36,9 @@ class Customers extends Component {
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
-                <Card className="text-left">
+                <div className="text-left">
                   <h5 className="card-heading">RECENT CUSTOMERS</h5>
-                  <Card.Body>
+                  
                     <Table striped bordered hover size="sm">
                       <thead>
                         <tr>
@@ -69,8 +69,8 @@ class Customers extends Component {
                         </tbody>
                       ))}
                     </Table>
-                  </Card.Body>
-                </Card>
+                  
+                </div>
               </div>
             </div>
           </div>
