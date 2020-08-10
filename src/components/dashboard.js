@@ -1,19 +1,11 @@
-import React from 'react';
-import Navbar from 'Navbar.js'
-import Stats from 'stats.js'
-import Graphs from 'Graphs.js'
-import Activities from 'Activities.js'
+import React, {Component} from 'react';
 
-function Dashboard() {
-  return (
-    <div className="App">
-        <Navbar />
-        <Stats />
-        <Graphs />
-        <Activities />
-    </div>
-  );
-}
+class Dashboard extends Component{
+    
+    render() {
+    return <div>Hello Dashboard</div>
+    }
 
+};
 export default Dashboard;
 
