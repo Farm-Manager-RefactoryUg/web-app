@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from 'Navbar.js'
-import Stats from 'Stats.js'
+import Stats from 'stats.js'
 import Graphs from 'Graphs.js'
 import Activities from 'Activities.js'
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css'
-import Dashboard from './components/dashboard.js'
 import Login from './components/login'
 import SignUp from './components/signup'
 
