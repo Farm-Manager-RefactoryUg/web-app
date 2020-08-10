@@ -1,6 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import 'bootstrap/dist/css/bootstrap.css'
 import Login from './components/login'
 import SignUp from './components/signup'
@@ -10,12 +8,21 @@ import ExpenditurePieChart from "./component/ExpenditurePieChart";
 import SalesBarGraph from "./component/SalesBarGraph";
 import "../css/App.css";
 
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from './components/Navbar';
+// import { NavigationBar } from './components/NavigationBar';
+// import { Sidebar } from './components/Sidebar';
+// import logo from './logo.svg';
+import './App.css';
 
-function App() {
+class App extends React.Component{
+render () {
   return (
     <div className="App">
+       <React.Fragment>
       <Router>
-       
+           <Navbar />
           <Switch>
             
             <Route path="/" exact component={Login} />
@@ -31,8 +38,12 @@ function App() {
         </Switch >
     
       </Router>
+     </React.Fragment>
+     
+
     </div>
   );
+}
 }
 
 export default App;
