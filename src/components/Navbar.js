@@ -24,17 +24,25 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import HomeIcon from '@material-ui/icons/Home';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import CollectionsIcon from '@material-ui/icons/Collections';
 
 const drawerWidth = 240;
 
+
 const useStyles = makeStyles((theme) => ({
+  
   root: {
     display: 'flex',
   },
   appBar: {
+    
+    background: "green",
     transition: theme.transitions.create(['margin', 'width'], {
+      
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -84,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  
 }));
 
 export default function PersistentDrawerLeft() {
@@ -139,6 +148,16 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
+        <TextField id="standard-bare"
+        defaultValue="Search"
+        margin="normal"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon/>
+            </InputAdornment>
+          )
+        }}/>
         <ListItem button >
           <ListItemIcon>
             <HomeIcon />
@@ -178,7 +197,7 @@ export default function PersistentDrawerLeft() {
           <ListItemIcon>
             <GroupIcon />
           </ListItemIcon>
-          <ListItemText primary="Group" />
+          <ListItemText primary="Users" />
         </ListItem>
         </List>
 
