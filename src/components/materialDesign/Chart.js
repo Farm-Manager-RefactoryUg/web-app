@@ -63,7 +63,7 @@ const options = {
   
 
 
-export default function ExpenditurePieChart() {
+export default function Chart() {
     
     
 //   console.log(this.options.yData)

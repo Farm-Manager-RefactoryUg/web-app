@@ -4,13 +4,14 @@ import Login from './components/login'
 import SignUp from './components/signup'
 import Activities from "./components/Activities";
 import Customers from "./components/Customers";
-import ExpenditurePieChart from "./components/ExpenditurePieChart";
+// import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Requisitions from './components/Requisitions';
 import CustomerDetails from './components/CustomerDetails';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Navbar from './components/Navbar';
-import "./css/App.css";
-import './App.css';
+
+// import "./css/App.css";
+// import './App.css';
+// import Dashboard from './components/materialDesign/Dashboard'
 
 class App extends React.Component{
 render () {
@@ -18,9 +19,11 @@ render () {
     <div className="App">
       <React.Fragment>
         <Router>
-          <Navbar />
+          
           <Switch>
-            <Route path="/" component={ExpenditurePieChart} exact />
+            {/* <Route exact path="/mi-dashboard" component={Dashboard}></Route> */}
+            {/* <Route path="/" component={ExpenditurePieChart} exact /> */}
+
             <Route path="/login" exact component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route path="/requisitions" component={Requisitions} />

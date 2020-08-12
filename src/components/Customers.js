@@ -3,6 +3,9 @@ import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
+import SalesBarGraph from "./SalesBarGraph"
+import Navbar from "./Navbar";
+import Stats from "./stats"
 
 import "../css/index.css";
 
@@ -32,11 +35,17 @@ class Customers extends Component {
     } else {
       return (
         <>
+          <Navbar />
+          <Stats/>
           <div className="container-fluid">
             <div className="row">
-                      <div className="col-md-12">
-                      <ExpenditurePieChart />
-                      </div>
+              <div className="col-md-6">
+                <ExpenditurePieChart />
+              </div>
+
+              <div className="col-md-6">
+                <SalesBarGraph />
+              </div>
             </div>
           </div>
 
