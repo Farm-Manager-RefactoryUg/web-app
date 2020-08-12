@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import axios from "axios";
 
+import '../css/index.css'
+
 const ExpenditurePieChart = () => {
   const [chartData, setChartData] = useState({});
 
@@ -72,12 +74,13 @@ const ExpenditurePieChart = () => {
   useEffect(() => {
     chart();
   }, []);
+
   return (
     <>
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-5">
-            <h3 style={{ margin: "5px" }}>Salaries Expenditure Graph</h3>
+            <h3 className='salary-heading'>Salaries Expenditure Graph</h3>
             <div>
               <Pie
                 data={chartData}
@@ -91,40 +94,7 @@ const ExpenditurePieChart = () => {
           </div>
           <div className="col-md-7">
             <div>
-              <Bar
-                data={chartData}
-                options={{
-                  responsive: true,
-                  title: {
-                    text: "Sales Trend - Last 12 months",
-                    display: true,
-                  },
-                  scales: {
-                    yAxes: [
-                      {
-                        gridLines: {
-                          display: true,
-                        },
-                        scaleLabel: {
-                          display: true,
-                          labelString: "Amounts(UGX)",
-                        },
-                      },
-                    ],
-                    xAxes: [
-                      {
-                        gridLines: {
-                          display: false,
-                        },
-                        scaleLabel: {
-                          display: true,
-                          labelString: "Months",
-                        },
-                      },
-                    ],
-                  },
-                }}
-              />
+              <Bar />
             </div>
           </div>
         </div>
