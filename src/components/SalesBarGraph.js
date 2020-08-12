@@ -58,7 +58,7 @@ const SalesBarGraph = () => {
   }, []);
   return (
     <div
-      className="sales-bar-graph col-md-5"
+      className="sales-bar-graph col-md-6"
       style={{ width:"50%", marginRight:'0px',display:"inline",float:"left",paddingLeft:"0px", }}
     >
       <h3 style={{margin:"5px"}}>Sales Performance Graph</h3>

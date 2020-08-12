@@ -36,7 +36,7 @@ class Customers extends Component {
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
-                <Card className="text-left">
+                <Card className="text-left" style={{border:"none"}}>
                   <h5 className="card-heading">RECENT CUSTOMERS</h5>
                   <Card.Body>
                     <Table striped bordered hover size="sm">
