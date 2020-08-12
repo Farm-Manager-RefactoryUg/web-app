@@ -351,13 +351,6 @@ export default function PrimarySearchAppBar() {
 
           <ListItem button>
             <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <ListItemText primary="Requisitions" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
               <CalendarTodayIcon />
             </ListItemIcon>
             <ListItemText primary="Calendar" />
@@ -365,10 +358,24 @@ export default function PrimarySearchAppBar() {
 
           <ListItem button>
             <ListItemIcon>
+              <CollectionsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Media" />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
+              <BookIcon />
+            </ListItemIcon>
+            <ListItemText primary="Requisitions" />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="Inventory" />            
-            </ListItem>
+            <ListItemText primary="Inventory" />
+          </ListItem>
 
           <Switch>
             <Route exact path="/" component={Link} />
@@ -384,18 +391,14 @@ export default function PrimarySearchAppBar() {
             </ListItemIcon>
             <ListItemText primary="Reports" />
           </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="Analytics" />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Media" />
-          </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <SettingsIcon />
