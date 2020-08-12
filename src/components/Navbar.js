@@ -26,11 +26,8 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import CollectionsIcon from '@material-ui/icons/Collections';
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import Notifications from "./Notifications";
-=======
->>>>>>> 6e91d78bfbc4325593009ebd599ffd75b9eac1d3
 
 const drawerWidth = 240;
 
@@ -104,13 +101,10 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-<<<<<<< HEAD
   const navstyle ={
     color: 'green'
   }
 
-=======
->>>>>>> 6e91d78bfbc4325593009ebd599ffd75b9eac1d3
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -146,20 +140,15 @@ export default function PersistentDrawerLeft() {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-<<<<<<< HEAD
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
             )}
-=======
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
->>>>>>> 6e91d78bfbc4325593009ebd599ffd75b9eac1d3
           </IconButton>
         </div>
         <Divider />
         <List>
-<<<<<<< HEAD
           <ListItem button>
             <ListItemIcon>
               <HomeIcon />
@@ -238,80 +227,6 @@ export default function PersistentDrawerLeft() {
             </ListItemIcon>
             <ListItemText primary="Settings" />
           </ListItem>
-=======
-        <ListItem button >
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <ListItemText primary="Profile" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <ChatIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <BookIcon />
-          </ListItemIcon>
-          <ListItemText primary="Invoice" />
-        </ListItem><ListItem button >
-          <ListItemIcon>
-            <NotificationsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Notifications" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <CalendarTodayIcon />
-          </ListItemIcon>
-          <ListItemText primary="Calendar" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <GroupIcon />
-          </ListItemIcon>
-          <ListItemText primary="Group" />
-        </ListItem>
-        </List>
-
-        <Divider />
-        
-        <List>
-
-        <ListItem button >
-          <ListItemIcon>
-            <ListIcon />
-          </ListItemIcon>
-          <ListItemText primary="Reports" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <BarChartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Analytics" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <CollectionsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Media" />
-        </ListItem>
-        <ListItem button >
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItem>
-
->>>>>>> 6e91d78bfbc4325593009ebd599ffd75b9eac1d3
         </List>
       </Drawer>
       <main
@@ -320,10 +235,6 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-<<<<<<< HEAD
-=======
-       
->>>>>>> 6e91d78bfbc4325593009ebd599ffd75b9eac1d3
       </main>
     </div>
   );
