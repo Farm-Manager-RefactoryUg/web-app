@@ -151,7 +151,7 @@ export default function Dashboard() {
         <ThemeProvider theme={theme}>
           <div className={classes.root}>
             <CssBaseline />
-            <AppBar
+            {/* <AppBar
               position="absolute"
               className={clsx(classes.appBar, open && classes.appBarShift)}
             >
@@ -183,8 +183,8 @@ export default function Dashboard() {
                   </Badge>
                 </IconButton>
               </Toolbar>
-            </AppBar>
-            <Drawer
+            </AppBar> */}
+            {/* <Drawer
               variant="permanent"
               classes={{
                 paper: clsx(
@@ -203,7 +203,7 @@ export default function Dashboard() {
               <List>{mainListItems}</List>
               <Divider />
               <List>{secondaryListItems}</List>
-            </Drawer>
+            </Drawer> */}
             <main className={classes.content}>
               <div className={classes.appBarSpacer} />
               <Container maxWidth="lg" className={classes.container}>

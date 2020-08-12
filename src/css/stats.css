@@ -1,0 +1,20 @@
+.box{
+    border: 1px solid rgb(221, 221, 221);
+    display: flex;
+    padding: 15px 10px 10px 10px; 
+}
+
+#kpicontainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.box h3, .box p{
+    margin: 0;
+    padding: 0;
+}
+
+.box h3{
+    font-size: 2rem;
+    font-weight: 500;
+}

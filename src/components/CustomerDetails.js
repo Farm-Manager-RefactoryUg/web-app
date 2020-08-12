@@ -2,58 +2,41 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ExpenditurePieChart from "./ExpenditurePieChart";
-import SalesBarGraph from "./SalesBarGraph"
-import Navbar from "./Navbar";
-import Stats from "./stats"
 
 import "../css/index.css";
 
-class Customers extends Component {
+class CustomerDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      item: [],
       isLoaded: true,
     };
   }
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+  componentDidMount(item) {
+    fetch(`https://jsonplaceholder.typicode.com/users?id=${item}`)
       .then((response) => response.json())
       .then((json) => {
         this.setState({
           isLoaded: true,
-          items: json,
+          item: json,
         });
       });
+      console.log(item);
   }
   render() {
-    let { isLoaded, items } = this.state;
+    let { isLoaded, item } = this.state;
 
     if (!isLoaded) {
-      return <div>Loading Customers.....</div>;
+      return <div>Loading Custome Details.....</div>;
     } else {
       return (
         <>
-          <Navbar />
-          <Stats/>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-6">
-                <ExpenditurePieChart />
-              </div>
-
-              <div className="col-md-6">
-                <SalesBarGraph />
-              </div>
-            </div>
-          </div>
-
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
                 <div className="text-left">
-                  <h5 className="card-heading">RECENT CUSTOMERS</h5>
+                  <h5 className="card-heading">CUSTOMER DETAILS</h5>
 
                   <Table striped bordered hover size="sm">
                     <thead>
@@ -63,10 +46,9 @@ class Customers extends Component {
                         <th>Phone number</th>
                         <th>Location</th>
                         <th>Options</th>
-                        <th>Details</th>
                       </tr>
                     </thead>
-                    {items.map((item) => (
+                    {/* {item.map((item) => ( */}
                       <tbody>
                         <tr>
                           <td key={item.id}>{item.name}</td>
@@ -74,16 +56,18 @@ class Customers extends Component {
                           <td>{item.phone} </td>
                           <td>{item.city}</td>
                           <td>
-                            <Button variant="secondary">Options</Button>
+                            <Link>
+                              <Button variant="secondary">Options</Button>
+                            </Link>
                           </td>
-                          <td>
+                          {/* <td>
                             <Link to={`/customer/${item.id}`}>
                               <Button variant="success">Details</Button>
                             </Link>
-                          </td>
+                          </td> */}
                         </tr>
                       </tbody>
-                    ))}
+                    {/* ))} */}
                   </Table>
                 </div>
               </div>
@@ -96,4 +80,4 @@ class Customers extends Component {
   }
 }
 
-export default Customers;
+export default CustomerDetails;
