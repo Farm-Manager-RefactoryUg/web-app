@@ -5,7 +5,10 @@ import SignUp from './components/signup'
 import Activities from "./components/Activities";
 import Customers from "./components/Customers";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
-import SalesBarGraph from "./components/SalesBarGraph";
+import Requisitions from './components/Requisitions';
+import CustomerDetails from './components/CustomerDetails';
+
+
 import "./css/App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -22,18 +25,15 @@ render () {
       <React.Fragment>
         <Router>
           <Navbar />
-          <ExpenditurePieChart />
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/" component={ExpenditurePieChart} exact />
+            <Route path="/login" exact component={Login} />
             <Route path="/signup" component={SignUp} />
-
-            {/* <SalesBarGraph/> */}
-
-            {/* <Route path="/" component={Dashboard} exact></Route> */}
-            {/* <Route path="/piechart" component={ExpenditurePieChart} exact /> */}
-            {/* <Route path="/bargraph" component={SalesBarGraph} /> */}
+            <Route path="/requisitions" component={Requisitions} />
             <Route path="/customers" component={Customers} axact></Route>
             <Route path="/activities" component={Activities} exact></Route>
+            <Route path="/customer/:id" component={CustomerDetails}></Route>
+            {/* <Route path="/notifications" component={Notifications}></Route> */}
           </Switch>
         </Router>
       </React.Fragment>
