@@ -27,7 +27,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import CollectionsIcon from '@material-ui/icons/Collections';
 import { Link } from "react-router-dom";
-import Notifications from "./Notifications";
+// import Notifications from "./Notifications";
 
 const drawerWidth = 240;
 
