@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   toolBar: {
-  backgroundColor:'green'
+    backgroundColor:'green'
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -130,6 +130,7 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap>
             TeleFarmer
           </Typography>
+          <NotificationsIcon />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -180,13 +181,7 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary="Requisitions" />
             </Link>
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <NotificationsIcon />
-            </ListItemIcon>
-            <ListItemText />
-            <Notifications />
-          </ListItem>
+          
           <ListItem button>
             <ListItemIcon>
               <CalendarTodayIcon />
@@ -232,13 +227,13 @@ export default function PersistentDrawerLeft() {
           </ListItem>
         </List>
       </Drawer>
-      {/* <main
+      <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
-      </main> */}
+         {/* <div className={classes.drawerHeader} /> */}
+      </main>
     </div>
   );
 }

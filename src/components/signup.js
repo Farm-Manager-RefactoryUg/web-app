@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import '../styles/signup.css'
+import '../css/signup.css'
 
 class SignUp extends Component {
     state = {}

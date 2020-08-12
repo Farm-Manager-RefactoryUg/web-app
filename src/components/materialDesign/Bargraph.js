@@ -78,7 +78,7 @@ const options = {
   },
 };
 
-export default function SalesBarGraph() {
+export default function Bargraph() {
   return (
     <React.Fragment>
       <HighchartsReact highcharts={Highcharts} options={options} />

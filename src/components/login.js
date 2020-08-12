@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import Stats from './stats'
-import '../styles/login.css'
+
+import '../css/login.css'
 
 const formValid = ({formErrors, ...rest}) => {
     let valid = true;
@@ -98,7 +98,7 @@ class Login extends Component {
                     </div>
                     <button className="btn btn-secondary">Log in</button>
                 </form>
-            <Stats />
+          
             </Fragment>
         );
     }

@@ -21,7 +21,7 @@ export default function Notifications() {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
-    const drawerWidth = 140;
+    const drawerWidth = 120;
     const navstyle = {
       color: "green",
       marginLeft: -drawerWidth,
