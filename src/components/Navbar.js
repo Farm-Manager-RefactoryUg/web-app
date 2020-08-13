@@ -1,13 +1,12 @@
 
 import React from "react";
-import { BrowserRouter as Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Switch, Route } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Link from "@material-ui/core/Link";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -37,6 +36,7 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -166,6 +166,10 @@ export default function PrimarySearchAppBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const navstyle = {
+    color: "green",
+  };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -217,16 +221,16 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton  color="inherit">
+          <Badge color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton  color="inherit">
+          <Badge  color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -271,13 +275,13 @@ export default function PrimarySearchAppBar() {
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+            <IconButton aria-label="show 2 new mails" color="inherit">
+              <Badge badgeContent={2} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+            <IconButton aria-label="show 6 new notifications" color="inherit">
+              <Badge badgeContent={6} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -329,11 +333,11 @@ export default function PrimarySearchAppBar() {
         <List>
           <TextField
             id="standard-bare"
-            defaultValue="Search"
+            placeholder="Search"
             margin="normal"
             InputProps={{
               endAdornment: (
-                <InputAdornment position="start">
+                <InputAdornment type="submit" position="start">
                   <SearchIcon />
                 </InputAdornment>
               ),
@@ -344,40 +348,47 @@ export default function PrimarySearchAppBar() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home" to="/" component={Link} />
+            <Link style={navstyle} to="/">
+            <ListItemText primary="Home"  />
+            </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
-            <ListItemText primary="Requisitions" />
+            <Link style={navstyle} to="/requisitions" >
+            <ListItemText primary="Requisitions"  />
+            </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <InboxIcon />  
             </ListItemIcon>
+            <Link style={navstyle} to="/">
             <ListItemText primary="Inventory" />
+            </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <CalendarTodayIcon />
             </ListItemIcon>
+            <Link style={navstyle} to="/">
             <ListItemText primary="Calendar" />
+            </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <GroupIcon />
             </ListItemIcon>
+            <Link style={navstyle} to= "/customer/:id">
             <ListItemText primary="Customers" />
+            </Link>
           </ListItem>
 
-          <Switch>
-            <Route exact path="/" component={Link} />
-          </Switch>
         </List>
 
         <Divider />
@@ -387,25 +398,36 @@ export default function PrimarySearchAppBar() {
             <ListItemIcon>
               <ListIcon />
             </ListItemIcon>
+            <Link style={navstyle} to="/customers">
             <ListItemText primary="Reports" />
+            </Link>
           </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
+            <Link style={navstyle} to="/activities">
             <ListItemText primary="Analytics" />
+            </Link>
           </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <CollectionsIcon />
             </ListItemIcon>
+            <Link style={navstyle} to="/">
             <ListItemText primary="Media" />
+            </Link>
           </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
+            <Link style={navstyle} to="/">
             <ListItemText primary="Settings" />
+            </Link>
           </ListItem>
         </List>
       </Drawer>

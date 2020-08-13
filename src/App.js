@@ -20,6 +20,7 @@ render () {
       <React.Fragment>
         <Router>
           
+          
           <Switch>
             {/* <Route exact path="/mi-dashboard" component={Dashboard}></Route> */}
             {/* <Route path="/" component={ExpenditurePieChart} exact /> */}
@@ -27,8 +28,8 @@ render () {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route path="/requisitions" component={Requisitions} />
-            <Route path="/customers" component={Customers} axact></Route>
-            <Route path="/activities" component={Activities} exact></Route>
+            <Route path="/customers" component={Customers} ></Route>
+            <Route path="/activities" component={Activities} ></Route>
             <Route path="/customer/:id" component={CustomerDetails}></Route>
             {/* <Route path="/notifications" component={Notifications}></Route> */}
           </Switch>
