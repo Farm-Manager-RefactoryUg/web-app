@@ -82,6 +82,7 @@ export default function SalesBarGraph() {
   return (
     <React.Fragment>
       <HighchartsReact highcharts={Highcharts} options={options} />
+      <br></br>
     </React.Fragment>
   );
 }

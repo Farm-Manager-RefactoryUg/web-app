@@ -77,6 +77,9 @@ class Login extends Component {
                     <Link to="/signup">
                         <button className="btn btn-secondary">Create account</button>
                     </Link>
+                    <Link to="/customers">
+                        <button className="btn btn-secondary">Login</button>
+                    </Link>
                 </nav>
                 <form noValidate onSubmit={this.handleSubmit}>
                     <h1>Log in</h1>
