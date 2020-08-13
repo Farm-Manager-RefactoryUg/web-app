@@ -1,36 +1,31 @@
-import React from "react";
-import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListIcon from "@material-ui/icons/List";
-import ChatIcon from "@material-ui/icons/Chat";
-import BookIcon from "@material-ui/icons/Book";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import GroupIcon from "@material-ui/icons/Group";
-import SettingsIcon from "@material-ui/icons/Settings";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import HomeIcon from "@material-ui/icons/Home";
-import PersonIcon from "@material-ui/icons/Person";
-import CollectionsIcon from "@material-ui/icons/Collections";
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListIcon from '@material-ui/icons/List';
+import ChatIcon from '@material-ui/icons/Chat';
+import BookIcon from '@material-ui/icons/Book';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import GroupIcon from '@material-ui/icons/Group';
+import SettingsIcon from '@material-ui/icons/Settings';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import HomeIcon from '@material-ui/icons/Home';
+import PersonIcon from '@material-ui/icons/Person';
+import CollectionsIcon from '@material-ui/icons/Collections';
 import { Link } from "react-router-dom";
-import Notifications from "./Notifications";
-
-
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -204,7 +199,7 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <ListIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/customers">
+            <Link to="/reports" style={navstyle}>
               <ListItemText primary="Reports" />
             </Link>
           </ListItem>

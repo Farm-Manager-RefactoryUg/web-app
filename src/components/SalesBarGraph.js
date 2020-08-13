@@ -2,6 +2,7 @@ import React from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import Navbar from "./Navbar";
 
 const options = {
   chart: {
@@ -81,6 +82,8 @@ const options = {
 export default function SalesBarGraph() {
   return (
     <React.Fragment>
+      <Navbar />
+      <br></br>
       <HighchartsReact highcharts={Highcharts} options={options} />
       <br></br>
     </React.Fragment>

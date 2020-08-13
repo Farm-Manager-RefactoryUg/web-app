@@ -8,6 +8,10 @@ import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import Reports from "./components/Reports";
+import ExpenditurePieChart from "./components/ExpenditurePieChart";
+import SalesBarGraph from "./components/SalesBarGraph";
+import Home from './components/Home'
 
 // import "./css/App.css";
 // import './App.css';
@@ -20,16 +24,18 @@ class App extends React.Component {
         <React.Fragment>
           <Router>
             <Switch>
-              {/* <Route exact path="/mi-dashboard" component={Dashboard}></Route> */}
-              {/* <Route path="/" component={ExpenditurePieChart} exact /> */}
-
+              <Route path="//" component={Home}axact></Route>
               <Route path="/login" exact component={Login} />
               <Route path="/signup" component={SignUp} />
               <Route path="/requisitions" component={Requisitions} />
-              <Route path="/customers" component={Customers} axact></Route>
+              <Route path="/reports" component={Customers} axact></Route>
               <Route path="/activities" component={Activities} exact></Route>
               <Route path="/customer/:id" component={CustomerDetails}></Route>
-              {/* <Route path="/notifications" component={Notifications}></Route> */}
+              <Route
+                path="/expenditurechart"
+                component={ExpenditurePieChart}
+              ></Route>
+              <Route path="/saleschart" component={SalesBarGraph}></Route>
             </Switch>
           </Router>
         </React.Fragment>

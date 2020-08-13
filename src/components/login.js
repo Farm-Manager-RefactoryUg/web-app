@@ -72,37 +72,56 @@ class Login extends Component {
     render() {
         const { formErrors } = this.state
         return (
-            <Fragment>
-                <nav id="navbar">
-                    <Link to="/signup">
-                        <button className="btn btn-secondary">Create account</button>
-                    </Link>
-                    <Link to="/customers">
-                        <button className="btn btn-secondary">Login</button>
-                    </Link>
-                </nav>
-                <form noValidate onSubmit={this.handleSubmit}>
-                    <h1>Log in</h1>
-                    <label htmlFor="email">Email</label>
-                    <input
-                    className={formErrors.email.length > 0 ? "error" : null}
-                    type="email"
-                    name="email"
-                    id="email"
-                    onChange={this.handleChange} />
-                    {formErrors.email.length > 0 && <small style={{color: "red"}}>{formErrors.email}</small>}
-                    <label htmlFor="password">Password</label> 
-                    <input type="password" name="password" id="password" onChange={this.handleChange} />
-                    {formErrors.password.length > 0 && <small style={{color: "red"}}>{formErrors.password}</small>}
-                    <div id="checkboxDiv">
-                        <input type="checkbox" name="checkbox" id="checkbox" onChange={this.handleChange} />
-                        <span>Keep me signed in</span>
-                        <span id="passwordRecoveryLink"><a href="google.com">Forgot password?</a></span>
-                    </div>
-                    <button className="btn btn-secondary">Log in</button>
-                </form>
-          
-            </Fragment>
+          <Fragment>
+            <nav id="navbar">
+              <Link to="/signup">
+                <button className="btn btn-secondary">Create account</button>
+              </Link>
+              <Link to="/reports">
+                <button className="btn btn-secondary">Login</button>
+              </Link>
+              <Link to="/">
+                <button className="btn btn-secondary">Home</button>
+              </Link>
+            </nav>
+            <form noValidate onSubmit={this.handleSubmit}>
+              <h1>Log in</h1>
+              <label htmlFor="email">Email</label>
+              <input
+                className={formErrors.email.length > 0 ? "error" : null}
+                type="email"
+                name="email"
+                id="email"
+                onChange={this.handleChange}
+              />
+              {formErrors.email.length > 0 && (
+                <small style={{ color: "red" }}>{formErrors.email}</small>
+              )}
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                onChange={this.handleChange}
+              />
+              {formErrors.password.length > 0 && (
+                <small style={{ color: "red" }}>{formErrors.password}</small>
+              )}
+              <div id="checkboxDiv">
+                <input
+                  type="checkbox"
+                  name="checkbox"
+                  id="checkbox"
+                  onChange={this.handleChange}
+                />
+                <span>Keep me signed in</span>
+                <span id="passwordRecoveryLink">
+                  <a href="google.com">Forgot password?</a>
+                </span>
+              </div>
+              <button className="btn btn-secondary">Log in</button>
+            </form>
+          </Fragment>
         );
     }
 }

@@ -2,6 +2,7 @@ import React from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import Navbar from "./Navbar";
 
 const options = {
   chart: {
@@ -10,6 +11,9 @@ const options = {
     plotShadow: false,
     type: "pie",
     
+  },
+  credits: {
+    enabled: false,
   },
 
   title: {
@@ -69,8 +73,10 @@ export default function ExpenditurePieChart() {
 //   console.log(this.options.yData)
   
   return (
-    <React.Fragment>      
-          <HighchartsReact highcharts={Highcharts} options={options} />  
+    <React.Fragment>  
+      <Navbar />
+    <br></br>  
+      <HighchartsReact highcharts={Highcharts} options={options} />  
           
     </React.Fragment>
   );
