@@ -340,73 +340,7 @@ export default function PrimarySearchAppBar() {
             }}
           />
 
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" to="/" component={Link} />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <ListItemText primary="Requisitions" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon />  
-            </ListItemIcon>
-            <ListItemText primary="Inventory" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <CalendarTodayIcon />
-            </ListItemIcon>
-            <ListItemText primary="Calendar" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <GroupIcon />
-            </ListItemIcon>
-            <ListItemText primary="Customers" />
-          </ListItem>
-
-          <Switch>
-            <Route exact path="/" component={Link} />
-          </Switch>
-        </List>
-
-        <Divider />
-
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Analytics" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Media" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItem>
+         
         </List>
       </Drawer>
       <main
