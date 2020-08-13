@@ -21,11 +21,14 @@ import BookIcon from "@material-ui/icons/Book";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
 import CollectionsIcon from "@material-ui/icons/Collections";
 import { Link } from "react-router-dom";
+import Notifications from "./Notifications";
+
 
 
 const drawerWidth = 240;
