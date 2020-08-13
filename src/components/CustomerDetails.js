@@ -34,6 +34,7 @@ class CustomerDetails extends Component {
       return (
         <>
           <Navbar />
+          <br></br>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
