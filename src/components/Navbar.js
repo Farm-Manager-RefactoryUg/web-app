@@ -1,7 +1,4 @@
-
 import React from "react";
-import { BrowserRouter as Switch, Route } from "react-router-dom";
-
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,7 +16,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListIcon from "@material-ui/icons/List";
-import InboxIcon from "@material-ui/icons/Inbox";
 import BookIcon from "@material-ui/icons/Book";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import GroupIcon from "@material-ui/icons/Group";
