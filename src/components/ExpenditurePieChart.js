@@ -11,6 +11,9 @@ const options = {
     type: "pie",
     
   },
+  credits: {
+    enabled: false,
+  },
 
   title: {
     text: "Expenditure Distribution Last Planting Season",
