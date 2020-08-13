@@ -407,7 +407,7 @@ export default function PrimarySearchAppBar() {
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/activities">
+            <Link style={navstyle} to="/analytics">
             <ListItemText primary="Analytics" />
             </Link>
           </ListItem>
