@@ -8,7 +8,7 @@ class SignUp extends Component {
         return (
             <Fragment>
                 <nav>
-                    <Link to="/">
+                    <Link to="/login">
                         <button className="btn btn-secondary">Log in</button>
                     </Link>
                 </nav>
