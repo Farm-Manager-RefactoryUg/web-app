@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 import "../css/index.css";
 
@@ -32,6 +33,8 @@ class CustomerDetails extends Component {
     } else {
       return (
         <>
+          <Navbar />
+          <br></br>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
@@ -60,14 +63,8 @@ class CustomerDetails extends Component {
                               <Button variant="secondary">Options</Button>
                             </Link>
                           </td>
-                          {/* <td>
-                            <Link to={`/customer/${item.id}`}>
-                              <Button variant="success">Details</Button>
-                            </Link>
-                          </td> */}
-                        </tr>
+                      </tr>
                       </tbody>
-                    {/* ))} */}
                   </Table>
                 </div>
               </div>

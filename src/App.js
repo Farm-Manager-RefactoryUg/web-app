@@ -1,6 +1,4 @@
 import React from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import Login from './components/login'
 import SignUp from './components/signup'
@@ -10,12 +8,13 @@ import Requisitions from './components/Requisitions';
 import CustomerDetails from './components/CustomerDetails';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+
 class App extends React.Component{
 render () {
   return (
     <div className="App">
       <React.Fragment>
-        <Router> 
+        <Router>
           <Switch>
             <Route path="/login" exact component={Login} />
             <Route path="/signup" component={SignUp} />
