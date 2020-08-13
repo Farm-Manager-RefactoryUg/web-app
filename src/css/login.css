@@ -1,0 +1,55 @@
+#navbar{
+    background-color: rgb(255, 241, 226);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#navbar button{
+    margin-right: 100px;
+
+}
+
+form{
+    width: 23%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+form h1{
+    margin-bottom: 23px;
+}
+
+form label{
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+form input{
+    outline: none;
+}
+
+#checkboxDiv{
+    margin-top: 12px;
+    margin-bottom: 3px;
+}
+
+#checkboxDiv span{
+    margin-left: 7px;
+    font-size: 13px;
+}
+
+#checkboxDiv #passwordRecoveryLink{
+    float: right;
+}
+
+form button{
+    width: 100px;
+}
+
+.error{
+    border-color: red;
+}
