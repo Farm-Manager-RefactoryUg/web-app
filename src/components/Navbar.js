@@ -36,6 +36,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import clsx from 'clsx';
 import ChatIcon from '@material-ui/icons/Chat';
 import PersonIcon from '@material-ui/icons/Person';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -354,7 +355,7 @@ export default function PrimarySearchAppBar() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/">
+            <Link style={navstyle} to="/login">
               <ListItemText primary="Home" />
             </Link>
           </ListItem>
