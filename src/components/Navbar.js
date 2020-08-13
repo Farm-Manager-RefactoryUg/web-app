@@ -37,22 +37,9 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
-
 import clsx from 'clsx';
-
-
-
-
 import ChatIcon from '@material-ui/icons/Chat';
-
-
-
-
-
 import PersonIcon from '@material-ui/icons/Person';
-
-
-// import Notifications from "./Notifications";
 
 const drawerWidth = 240;
 
