@@ -1,4 +1,7 @@
+
 import React from "react";
+import { BrowserRouter as Switch, Route } from "react-router-dom";
+import clsx from "clsx";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,6 +19,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListIcon from "@material-ui/icons/List";
+import InboxIcon from "@material-ui/icons/Inbox";
 import BookIcon from "@material-ui/icons/Book";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import GroupIcon from "@material-ui/icons/Group";
@@ -33,19 +37,12 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import clsx from 'clsx';
-import ChatIcon from '@material-ui/icons/Chat';
-import PersonIcon from '@material-ui/icons/Person';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-  },
-  toolBar: {
-    backgroundColor:'green'
   },
   appBar: {
     background: "green",
@@ -249,10 +246,6 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const navstyle ={
-    color: 'green'
-  }
-
   return (
     <div className={classes.grow}>
       <CssBaseline />
@@ -262,7 +255,7 @@ export default function PrimarySearchAppBar() {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar className={classes.toolBar}>
+        <Toolbar>
           <IconButton
             edge="start"
             color="inherit"
@@ -310,7 +303,6 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </div>
-          <NotificationsIcon />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -347,51 +339,47 @@ export default function PrimarySearchAppBar() {
               ),
             }}
           />
-</List>
-         
-        <Divider />
-        <List>
+
           <ListItem button>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/login">
-              <ListItemText primary="Home" />
-            </Link>
+            <ListItemText primary="Home" to="/" component={Link} />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ChatIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-          </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/requisitions">
-              <ListItemText primary="Requisitions" />
-            </Link>
+            <Link></Link>
+            <ListItemText primary="Requisitions" />
+            
           </ListItem>
-          
+
+          <ListItem button>
+            <ListItemIcon>
+              <InboxIcon />  
+            </ListItemIcon>
+            <ListItemText primary="Inventory" />
+          </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <CalendarTodayIcon />
             </ListItemIcon>
             <ListItemText primary="Calendar" />
           </ListItem>
+
           <ListItem button>
             <ListItemIcon>
               <GroupIcon />
             </ListItemIcon>
-            <ListItemText primary="Group" />
+            <ListItemText primary="Customers" />
           </ListItem>
+
+          <Switch>
+            <Route exact path="/" component={Link} />
+          </Switch>
         </List>
 
         <Divider />
@@ -401,9 +389,7 @@ export default function PrimarySearchAppBar() {
             <ListItemIcon>
               <ListIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/customers">
-              <ListItemText primary="Reports" />
-            </Link>
+            <ListItemText primary="Reports" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
@@ -430,7 +416,7 @@ export default function PrimarySearchAppBar() {
           [classes.contentShift]: open,
         })}
       >
-         {/* <div className={classes.drawerHeader} /> */}
+        <div className={classes.drawerHeader} />
       </main>
       {renderMobileMenu}
       {renderMenu}
