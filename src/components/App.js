@@ -12,14 +12,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        
-        {/* <ExpenditurePieChart />
-        <SalesBarGraph/><br></br> */}
-        {/* <SalesBarGraph/> */}
         <Switch>
-          {/* <Route path="/" component={Dashboard} exact></Route> */}
-          {/* <Route path="/piechart" component={ExpenditurePieChart} exact /> */}
-          {/* <Route path="/bargraph" component={SalesBarGraph} /> */}
           <Route exact path="/mi-dashboard" component={Dashboard}></Route>
           <Route path="/customers" component={Customers} exact></Route>
           <Route path="/activities" component={Activities} exact></Route>
