@@ -12,7 +12,9 @@ const options = {
   title: {
     text: "Sales Distribution",
   },
-
+  credits: {
+    enabled: false,
+  },
   // subtitle: {
   //   text: "Resize the frame or click buttons to change appearance",
   // },
@@ -24,7 +26,20 @@ const options = {
   },
 
   xAxis: {
-    categories: ["Jan 2020", "Feb2020", "Mar2020","Apr2020","May2020","Jun2020","Jul2020","Aug2020","Sep2020","Oct2020","Nov2020","Dec2020"],
+    categories: [
+      "Jan 2020",
+      "Feb2020",
+      "Mar2020",
+      "Apr2020",
+      "May2020",
+      "Jun2020",
+      "Jul2020",
+      "Aug2020",
+      "Sep2020",
+      "Oct2020",
+      "Nov2020",
+      "Dec2020",
+    ],
     labels: {
       x: 0,
     },
@@ -40,9 +55,21 @@ const options = {
   series: [
     {
       name: "Sales",
-      data: [670000, 2000000, 3600000,150000, 400000, 320000, 1000000, 1200000, 700000, 550000, 1300000,900000],
+      data: [
+        670000,
+        2000000,
+        3600000,
+        150000,
+        400000,
+        320000,
+        1000000,
+        1200000,
+        700000,
+        550000,
+        1300000,
+        900000,
+      ],
     },
-   
   ],
 
   responsive: {

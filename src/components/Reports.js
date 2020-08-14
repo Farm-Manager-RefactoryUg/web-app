@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -67,12 +66,12 @@ const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: "30vh",
+    height: "25vh",
     // overflow: "auto",
   },
   container: {
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(8),
   },
   paper: {
     padding: theme.spacing(2),
@@ -102,7 +101,6 @@ function Reports() {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  // eslint-disable-next-line no-unused-vars
   const [totalCapital, settotalCapital] = useState(150000);
   const [totalSales, setTotalSales] = useState(50000);
   const [totalIncome, setTotalIncome] = useState(
