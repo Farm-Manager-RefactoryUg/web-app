@@ -4,8 +4,8 @@ import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
-import Navbar from "./Navbar";
-import Stats from "./stats"
+import PersistentDrawerLeft from "./Navbar";
+import Reports from "./Reports"
 
 import "../css/index.css";
 
@@ -35,8 +35,8 @@ class Customers extends Component {
     } else {
       return (
         <>
-          <Navbar />
-          <Stats/>
+          {/* <PersistentDrawerLeft /> */}
+          <Reports />
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-6">

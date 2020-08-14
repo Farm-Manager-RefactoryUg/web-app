@@ -6,7 +6,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-
+import Navbar from "./Navbar";
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -70,6 +70,8 @@ export default function Requisitions() {
   const classes = useStyles();
   return (
     <React.Fragment>
+      <Navbar />
+      <br></br>
       <div className="container-fluid">
         <div classNmae="row">
           <div className="col">

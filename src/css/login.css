@@ -1,6 +1,6 @@
 #navbar{
-    background-color: rgb(255, 241, 226);
-    height: 100px;
+    background-color: green;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -53,3 +53,6 @@ form button{
 .error{
     border-color: red;
 }
+
+.heading4{
+text-align: center;}
