@@ -2,6 +2,10 @@
   "name": "web-app",
   "version": "0.1.0",
   "private": true,
+   "engines": {
+    "npm": "6.13.4",
+    "node": "12.4.1"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/react-fontawesome": "^0.1.11",
