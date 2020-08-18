@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
-import PersistentDrawerLeft from "./Navbar";
+// import PersistentDrawerLeft from "./Navbar";
 import Reports from "./Reports"
 
 import "../css/index.css";

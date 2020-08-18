@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
+// import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
-import Navbar from "./Navbar";
-import Typography from "@material-ui/core/Typography";
+// import Link from "@material-ui/core/Link";
+// import Navbar from "./Navbar";
+// import Typography from "@material-ui/core/Typography";
 import Deposits from "./materialDesign/Deposits";
-import Orders from "./materialDesign/Orders";
+// import Orders from "./materialDesign/Orders";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,26 +84,26 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
 }));
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Farm Manager
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Farm Manager
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 function Reports() {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [totalCapital, settotalCapital] = useState(150000);
-  const [totalSales, setTotalSales] = useState(50000);
-  const [totalIncome, setTotalIncome] = useState(
+  const [totalCapital] = useState(150000);
+  const [totalSales] = useState(50000);
+  const [totalIncome] = useState(
     `${totalCapital - totalSales}`
   );
 

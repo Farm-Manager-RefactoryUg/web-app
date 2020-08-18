@@ -1,41 +1,47 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import bg from '../css/bg6.jpg'
 import '../css/signup.css'
 
 class SignUp extends Component {
     state = {}
     render() {
         return (
-          <Fragment>
-            <nav>
+          <div id="div">
+            {/* <nav>
               <Link to="/login">
                 <button className="btn btn-secondary">Log in</button>
               </Link>
               <Link to="/">
                 <button className="btn btn-secondary">Home</button>
               </Link>
-            </nav>
-            <section>
-              <h1>Sign Up</h1>
-              <label htmlFor="username">Username</label>
+            </nav> */}
+            <div id="images">
+                <img src={bg} alt="_._._!" />
+                <img src={bg} alt="_._._!" />
+            </div>
+            <form>
+              <h1>Farm Manager<span id="period">.</span></h1>
+              <label htmlFor="username">Username*</label>
               <input type="text" name="username" id="username" />
-              <label htmlFor="firstname">First name</label>
+              <label htmlFor="firstname">First name*</label>
               <input type="text" name="firstname" id="firstname" />
-              <label htmlFor="lastname">Last name</label>
+              <label htmlFor="lastname">Last name*</label>
               <input type="text" name="lastname" id="lastname" />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email*</label>
               <input type="email" name="email" id="email" />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password*</label>
               <input type="password" name="password" id="password" />
-              <label htmlFor="mobilenumber">Mobile number</label>
+              <label htmlFor="mobilenumber">Mobile number*</label>
               <input type="text" name="mobilenumber" id="mobilenumber" />
-              <label htmlFor="farmname">Farm name</label>
+              <label htmlFor="farmname">Farm name*</label>
               <input type="text" name="farmname" id="farmname" />
-              <label htmlFor="farmlocation">Farm location</label>
+              <label htmlFor="farmlocation">Farm location*</label>
               <input type="text" name="farmlocation" id="farmlocation" />
-              <button className="btn btn-secondary">Sign Up</button>
-            </section>
-          </Fragment>
+              <button>SIGN UP</button>
+              <span id="loginText">Already have an account? <Link to="/login">Login!</Link></span>
+            </form>
+          </div>
         );
     }
 }
