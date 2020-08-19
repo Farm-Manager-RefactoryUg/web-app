@@ -1,45 +1,43 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListIcon from '@material-ui/icons/List';
-import ChatIcon from '@material-ui/icons/Chat';
-import BookIcon from '@material-ui/icons/Book';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import GroupIcon from '@material-ui/icons/Group';
-import SettingsIcon from '@material-ui/icons/Settings';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import HomeIcon from '@material-ui/icons/Home';
-import PersonIcon from '@material-ui/icons/Person';
-import CollectionsIcon from '@material-ui/icons/Collections';
+import React from "react";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListIcon from "@material-ui/icons/List";
+import ChatIcon from "@material-ui/icons/Chat";
+import BookIcon from "@material-ui/icons/Book";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import GroupIcon from "@material-ui/icons/Group";
+import SettingsIcon from "@material-ui/icons/Settings";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import HomeIcon from "@material-ui/icons/Home";
+import PersonIcon from "@material-ui/icons/Person";
+import CollectionsIcon from "@material-ui/icons/Collections";
 import { Link } from "react-router-dom";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
 
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-
+import Button from "@material-ui/core/Button";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
-
 
 const drawerWidth = 240;
 
@@ -119,7 +117,7 @@ export default function PersistentDrawerLeft() {
   const navstyle = {
     color: "green",
   };
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -134,7 +132,6 @@ export default function PersistentDrawerLeft() {
     setMobileMoreAnchorEl(null);
   };
 
-
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -142,6 +139,12 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -162,7 +165,6 @@ export default function PersistentDrawerLeft() {
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
-      
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "left" }}
       id={mobileMenuId}
@@ -171,7 +173,7 @@ export default function PersistentDrawerLeft() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem >
+      <MenuItem>
         <IconButton color="inherit">
           <Badge color="secondary">
             <MailIcon />
@@ -314,12 +316,41 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Inbox" />
           </ListItem>
           <ListItem button>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
             <Link style={navstyle} to="/requisitions">
               <ListItemText primary="Requisitions" />
+            </Link> */}
+          </ListItem>
+          <ListItem
+            button
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <Link to="/reports" style={navstyle}>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                Finances
+              </Button>
             </Link>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
           </ListItem>
 
           <ListItem button>
