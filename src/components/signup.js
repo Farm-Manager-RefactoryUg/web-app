@@ -15,7 +15,7 @@ class SignUp extends Component {
                 <button className="btn btn-secondary">Home</button>
               </Link>
             </nav>
-            <section>
+            <form>
               <h1>Sign Up</h1>
               <label htmlFor="username">Username</label>
               <input type="text" name="username" id="username" />
@@ -34,7 +34,7 @@ class SignUp extends Component {
               <label htmlFor="farmlocation">Farm location</label>
               <input type="text" name="farmlocation" id="farmlocation" />
               <button className="btn btn-secondary">Sign Up</button>
-            </section>
+            </form>
           </Fragment>
         );
     }

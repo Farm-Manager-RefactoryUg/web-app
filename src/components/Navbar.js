@@ -31,7 +31,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-import Button from "@material-ui/core/Button";
+
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -139,12 +139,9 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
+    // const handleClose = () => {
+    //   setAnchorEl(null);
+    // };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -316,43 +313,13 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Inbox" />
           </ListItem>
           <ListItem button>
-            {/* <ListItemIcon>
+            <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
             <Link style={navstyle} to="/requisitions">
               <ListItemText primary="Requisitions" />
-            </Link> */}
-          </ListItem>
-          <ListItem
-            button
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <Link to="/reports" style={navstyle}>
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                Finances
-              </Button>
             </Link>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
-          </ListItem>
-
+            </ListItem>
           <ListItem button>
             <ListItemIcon>
               <CalendarTodayIcon />
