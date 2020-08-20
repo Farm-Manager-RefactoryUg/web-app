@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import '../css/login.css'
 
@@ -74,15 +74,21 @@ class Login extends Component {
         return (
           <Fragment>
             <nav id="navbar">
-              <Link to="/signup">
-                <button className="btn btn-secondary">Create account</button>
-              </Link>
-              <Link to="/reports">
-                <button className="btn btn-secondary">Login</button>
-              </Link>
-              <Link to="/">
-                <button className="btn btn-secondary">Home</button>
-              </Link>
+              <Router>
+                <Link to="/signup">
+                  <button className="btn btn-secondary">Create account</button>
+                </Link>
+              </Router>
+              <Router>
+                <Link to="/reports">
+                  <button className="btn btn-secondary">Login</button>
+                </Link>
+              </Router>
+              <Router>
+                <Link to="/">
+                  <button className="btn btn-secondary">Home</button>
+                </Link>
+              </Router>
             </nav>
             <form noValidate onSubmit={this.handleSubmit}>
               <h1>Log in</h1>

@@ -25,7 +25,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
 import CollectionsIcon from "@material-ui/icons/Collections";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import TextField from "@material-ui/core/TextField";
@@ -296,9 +296,11 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Home" />
-            </Link>
+            <Router>
+              <Link style={navstyle} to="/">
+                <ListItemText primary="Home" />
+              </Link>
+            </Router>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
@@ -316,17 +318,21 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <BookIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/requisitions">
-              <ListItemText primary="Requisitions" />
-            </Link>
-            </ListItem>
+            <Router>
+              <Link style={navstyle} to="/requisitions">
+                <ListItemText primary="Requisitions" />
+              </Link>
+            </Router>
+          </ListItem>
           <ListItem button>
             <ListItemIcon>
               <CalendarTodayIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Calendar" />
-            </Link>
+            <Router>
+              <Link style={navstyle} to="/">
+                <ListItemText primary="Calendar" />
+              </Link>
+            </Router>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
@@ -343,36 +349,44 @@ export default function PersistentDrawerLeft() {
             <ListItemIcon>
               <ListIcon />
             </ListItemIcon>
-            <Link to="/reports" style={navstyle}>
-              <ListItemText primary="Reports" />
-            </Link>
+            <Router>
+              <Link to="/reports" style={navstyle}>
+                <ListItemText primary="Reports" />
+              </Link>
+            </Router>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <BarChartIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/analytics">
-              <ListItemText primary="Analytics" />
-            </Link>
+            <Router>
+              <Link style={navstyle} to="/analytics">
+                <ListItemText primary="Analytics" />
+              </Link>
+            </Router>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <CollectionsIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Media" />
-            </Link>
+            <Router>
+              <Link style={navstyle} to="/">
+                <ListItemText primary="Media" />
+              </Link>
+            </Router>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Settings" />
-            </Link>
+            <Router>
+              <Link style={navstyle} to="/">
+                <ListItemText primary="Settings" />
+              </Link>
+            </Router>
           </ListItem>
         </List>
       </Drawer>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
 //import PersistentDrawerLeft from "./Navbar";
@@ -77,9 +77,11 @@ class Customers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Link to={`/customer/${item.id}`}>
-                              <Button variant="success">Details</Button>
-                            </Link>
+                            <Router>
+                              <Link to={`/customer/${item.id}`}>
+                                <Button variant="success">Details</Button>
+                              </Link>
+                            </Router>
                           </td>
                         </tr>
                       </tbody>

@@ -1,5 +1,5 @@
 // import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import "../css/home.css";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,12 +24,16 @@ export default function FullWidthGrid() {
     <div className={classes.root}>
       <nav id="navbar">
         {" "}
-        <Link to="/signup">
-          <button className="btn btn-secondary">Create account</button>{" "}
-        </Link>{" "}
-        <Link to="/login">
-          <button className="btn btn-secondary">Login</button>{" "}
-        </Link>{" "}
+        <Router>
+          <Link to="/signup">
+            <button className="btn btn-secondary">Create account</button>{" "}
+          </Link>
+        </Router>{" "}
+        <Router>
+          <Link to="/login">
+            <button className="btn btn-secondary">Login</button>{" "}
+          </Link>
+        </Router>{" "}
       </nav>
 
       <Grid container spacing={3}>

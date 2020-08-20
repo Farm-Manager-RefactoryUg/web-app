@@ -5,7 +5,8 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Typography from "@material-ui/core/Typography";
 import Deposits from "./materialDesign/Deposits";
@@ -88,9 +89,11 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Farm Manager
-      </Link>{" "}
+      <Router>
+        <Link color="inherit" href="https://material-ui.com/">
+          Farm Manager
+        </Link>
+      </Router>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -110,7 +113,7 @@ function Reports() {
   return (
     <>
       {/* <Navbar /> */}
-      <main className={classes.content}>
+      <div className={classes.content}>
         {/* <div className={classes.appBarSpacer} /> */}
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={2}>
@@ -150,7 +153,7 @@ function Reports() {
             <Copyright />
           </Box> */}
         </Container>
-      </main>
+      </div>
     </>
   );
 }
