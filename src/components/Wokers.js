@@ -35,20 +35,7 @@ class Wokers extends Component {
     } else {
       return (
         <>
-          {/* <PersistentDrawerLeft /> */}
-          {/* <Reports /> */}
-          {/* <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-6">
-                <ExpenditurePieChart />
-              </div>
-
-              <div className="col-md-6">
-                <SalesBarGraph />
-              </div>
-            </div>
-          </div> */}
-
+          
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">

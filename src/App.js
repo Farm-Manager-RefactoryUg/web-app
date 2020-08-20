@@ -9,13 +9,13 @@ import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import Reports from "./components/Reports";
+import Workers from "./components/Wokers";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Home from './components/Home'
 
 // import "./css/App.css";
 // import './App.css';
-// import Dashboard from './components/materialDesign/Dashboard'
+
 
 class App extends React.Component {
   render() {
@@ -31,6 +31,7 @@ class App extends React.Component {
               <Route path="/reports" component={Customers} axact></Route>
               <Route path="/activities" component={Activities} exact></Route>
               <Route path="/customer/:id" component={CustomerDetails}></Route>
+              <Route path="/workers" component={Workers}></Route>
               <Route
                 path="/expenditurechart"
                 component={ExpenditurePieChart}
