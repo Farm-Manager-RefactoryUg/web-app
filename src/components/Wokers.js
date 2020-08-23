@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 //import ExpenditurePieChart from "./ExpenditurePieChart";
 //import SalesBarGraph from "./SalesBarGraph";
-//import PersistentDrawerLeft from "./Navbar";
+import Navbar from "./Navbar";
 //import Reports from "./Reports";
 
 import "../css/index.css";
@@ -35,6 +35,8 @@ class Wokers extends Component {
     } else {
       return (
         <>
+          <Navbar />
+          <br></br>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">

@@ -24,16 +24,16 @@ export default function FullWidthGrid() {
     <div className={classes.root}>
       <nav id="navbar">
         {" "}
-        <Router>
+        {/* <Router> */}
           <Link to="/signup">
             <button className="btn btn-secondary">Create account</button>{" "}
           </Link>
-        </Router>{" "}
-        <Router>
+        {/* </Router>*/}{" "}
+        {/* <Router> */}
           <Link to="/login">
             <button className="btn btn-secondary">Login</button>{" "}
           </Link>
-        </Router>{" "}
+        {/* </Router>{" "} */}
       </nav>
 
       <Grid container spacing={3}>

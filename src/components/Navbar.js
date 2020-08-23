@@ -25,7 +25,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
 import CollectionsIcon from "@material-ui/icons/Collections";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, NavLink,Switch } from "react-router-dom";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import TextField from "@material-ui/core/TextField";
@@ -38,6 +38,10 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { Dropdown } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
+import '../css/nav.css'
 
 const drawerWidth = 240;
 
@@ -278,117 +282,147 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <TextField
-            id="standard-bare"
-            placeholder="Search"
-            margin="normal"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment type="submit" position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+        {/* <List>
+            <TextField
+              id="standard-bare"
+              placeholder="Search"
+              margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment type="submit" position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <Router>
-              <Link style={navstyle} to="/">
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+           
+              <NavLink style={navstyle} to="/">
                 <ListItemText primary="Home" />
-              </Link>
-            </Router>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ChatIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <Router>
-              <Link style={navstyle} to="/requisitions">
+              </NavLink>
+            
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <ChatIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BookIcon />
+              </ListItemIcon>
+             
+              <NavLink style={navstyle} to="/requisitions">
                 <ListItemText primary="Requisitions" />
-              </Link>
-            </Router>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <CalendarTodayIcon />
-            </ListItemIcon>
-            <Router>
-              <Link style={navstyle} to="/">
+              </NavLink>
+              
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CalendarTodayIcon />
+              </ListItemIcon>
+             
+              <NavLink style={navstyle} to="/">
                 <ListItemText primary="Calendar" />
-              </Link>
-            </Router>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <GroupIcon />
-            </ListItemIcon>
-            <ListItemText primary="Group" />
-          </ListItem>
-        </List>
+              </NavLink>
+             
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Group" />
+            </ListItem>
+          </List>
 
-        <Divider />
+          <Divider />
 
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <Router>
-              <Link to="/reports" style={navstyle}>
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <ListIcon />
+              </ListItemIcon>
+             
+              <NavLink to="/reports" style={navstyle}>
                 <ListItemText primary="Reports" />
-              </Link>
-            </Router>
-          </ListItem>
+              </NavLink>
+             
+            </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <Router>
-              <Link style={navstyle} to="/analytics">
+            <ListItem button>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              
+              <NavLink style={navstyle} to="/analytics">
                 <ListItemText primary="Analytics" />
-              </Link>
-            </Router>
-          </ListItem>
+              </NavLink>
+            
+            </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon />
-            </ListItemIcon>
-            <Router>
-              <Link style={navstyle} to="/">
-                <ListItemText primary="Media" />
-              </Link>
-            </Router>
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CollectionsIcon />
+              </ListItemIcon>
+              
+                <NavLink style={navstyle} to="/">
+                  <ListItemText primary="Media" />
+                </NavLink>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+                  <NavLink style={navstyle} to="/">
+                    <ListItemText primary="Settings" />
+                  </NavLink>
+                
+            
+            </ListItem>
+          </List> */}
+        <Button variant="success" href="/">Home</Button>
+        <Dropdown className="dropdown">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Finances
+          </Dropdown.Toggle>
 
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <Router>
-              <Link style={navstyle} to="/">
-                <ListItemText primary="Settings" />
-              </Link>
-            </Router>
-          </ListItem>
-        </List>
+          <Dropdown.Menu>
+            <Dropdown.Item href="/reports">Reports</Dropdown.Item>
+            <Dropdown.Item href="customers">Customers</Dropdown.Item>
+            <Dropdown.Item href="/requisitions">Requisitions</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Stores
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="/reports">Reports</Dropdown.Item>
+            <Dropdown.Item href="customers">Customers</Dropdown.Item>
+            <Dropdown.Item href="/requisitions">Requisitions</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Employees
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="/workers">Workers</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Drawer>
       <main
         className={clsx(classes.content, {

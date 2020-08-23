@@ -74,21 +74,21 @@ class Login extends Component {
         return (
           <Fragment>
             <nav id="navbar">
-              <Router>
+              {/* <Router> */}
                 <Link to="/signup">
                   <button className="btn btn-secondary">Create account</button>
                 </Link>
-              </Router>
-              <Router>
+              {/* </Router> */}
+              {/* <Router> */}
                 <Link to="/reports">
                   <button className="btn btn-secondary">Login</button>
                 </Link>
-              </Router>
-              <Router>
+              {/* </Router> */}
+              {/* <Router> */}
                 <Link to="/">
                   <button className="btn btn-secondary">Home</button>
                 </Link>
-              </Router>
+              {/* </Router> */}
             </nav>
             <form noValidate onSubmit={this.handleSubmit}>
               <h1>Log in</h1>
