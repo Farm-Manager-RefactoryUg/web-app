@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -94,9 +95,11 @@ export default function Orders() {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more reports
-        </Link>
+        <Router>
+          <Link color="primary" href="#" onClick={preventDefault}>
+            See more reports
+          </Link>
+        </Router>
       </div>
     </React.Fragment>
   );
