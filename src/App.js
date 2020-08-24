@@ -12,6 +12,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Reports from "./components/Reports";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Home from './components/Home'
+import Suppliers from "./components/Suppliers";
+import Payroll from "./components/Payroll";
 
 // import "./css/App.css";
 // import './App.css';
@@ -24,19 +26,21 @@ class App extends React.Component {
         <React.Fragment>
           <Router>
             <Switch>
-              <Route path="//" component={Home} axact></Route>
+              <Route path="//" component={Home} exact></Route>
               <Route path="/login" exact component={Login} />
               <Route path="/signup" component={SignUp} />
               <Route path="/requisitions" component={Requisitions} />
               <Route path="/reports" component={Customers} axact></Route>
               <Route path="/activities" component={Activities} exact></Route>
+              <Route path="/suppliers" component={Suppliers}></Route>
+              <Route path="/payroll" component={Payroll}></Route>
               <Route path="/customer/:id" component={CustomerDetails}></Route>
               <Route
                 path="/expenditurechart"
                 component={ExpenditurePieChart}
               ></Route>
               <Route path="/saleschart" component={SalesBarGraph}></Route>
-              <Route path="/analytics" component={ExpenditurePieChart} ></Route>
+              <Route path="/analytics" component={ExpenditurePieChart}></Route>
             </Switch>
           </Router>
         </React.Fragment>

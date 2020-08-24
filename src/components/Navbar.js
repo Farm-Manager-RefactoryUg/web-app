@@ -27,8 +27,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import CollectionsIcon from '@material-ui/icons/Collections';
 import { Link } from "react-router-dom";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
-
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -364,7 +362,7 @@ export default function PersistentDrawerLeft() {
               <CollectionsIcon />
             </ListItemIcon>
             <Link style={navstyle} to="/">
-              <ListItemText primary="Media" />
+              <ListItemText primary="Simple Dialog"/>
             </Link>
           </ListItem>
 
