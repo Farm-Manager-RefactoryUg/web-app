@@ -5,12 +5,10 @@ nav{
     align-items: center;
     justify-content: flex-end;
 }
-
 nav button{
     margin-right: 100px;
 
 }
-
 section{
     width: 23%;
     margin: auto;
@@ -18,19 +16,15 @@ section{
     flex-direction: column;
     margin-top: 20px;
 }
-
 section h1{
     margin-bottom: 30px;
 }
-
 section label{
     font-weight: 600;
 }
-
 section input{
     margin-bottom: 12px;
 }
-
 section button{
     width: 100px;
     margin-bottom: 50px;
