@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
@@ -27,11 +27,10 @@ export default function Deposits({title, amount,details,link}) {
         UGX {amount}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        <Link to={link}>
-          {details}
-        </Link>
+        <Router>
+          <Link to={link}>{details}</Link>
+        </Router>
       </Typography>
-     
     </React.Fragment>
   );
 }

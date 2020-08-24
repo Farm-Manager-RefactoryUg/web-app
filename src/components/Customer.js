@@ -3,17 +3,12 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 //import Popup from "reactjs-popup";
-import Modal from "react-bootstrap/Modal";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import ExpenditurePieChart from "./ExpenditurePieChart";
-import SalesBarGraph from "./SalesBarGraph"
-<<<<<<< HEAD
-// import PersistentDrawerLeft from "./Navbar";
-=======
+// import Modal from "react-bootstrap/Modal";
+//import { BrowserRouter as Router, Link } from "react-router-dom";
+import Navbar from "./Navbar"
 import Example from "./Example";
 //import PersistentDrawerLeft from "./Navbar";
->>>>>>> f13ba105f80ceb0bce5a4b06fbe651b6bad5ef36
-import Reports from "./Reports"
+
 
 import "../css/customer.css";
 
@@ -42,20 +37,9 @@ class Customers extends Component {
       return <div>Loading Customers.....</div>;
     } else {
       return (
-        <>
-          <Reports />
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-6">
-                <ExpenditurePieChart />
-              </div>
-
-              <div className="col-md-6">
-                <SalesBarGraph />
-              </div>
-            </div>
-          </div>
-
+          <>
+              <Navbar />
+              <br></br>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
@@ -83,10 +67,7 @@ class Customers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Link to="/customer/:id">
-                              {/* <Example /> */}
-                              Details
-                            </Link>
+                            <Example />
                           </td>
                         </tr>
                       </tbody>

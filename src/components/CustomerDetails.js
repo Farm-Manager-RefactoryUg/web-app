@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
 import "../css/index.css";
@@ -52,19 +52,21 @@ class CustomerDetails extends Component {
                       </tr>
                     </thead>
                     {/* {item.map((item) => ( */}
-                      <tbody>
-                        <tr>
-                          <td key={item.id}>{item.name}</td>
-                          <td>{item.email}</td>
-                          <td>{item.phone} </td>
-                          <td>{item.city}</td>
-                          <td>
+                    <tbody>
+                      <tr>
+                        <td key={item.id}>{item.name}</td>
+                        <td>{item.email}</td>
+                        <td>{item.phone} </td>
+                        <td>{item.city}</td>
+                        <td>
+                          <Router>
                             <Link>
                               <Button variant="secondary">Options</Button>
                             </Link>
-                          </td>
+                          </Router>
+                        </td>
                       </tr>
-                      </tbody>
+                    </tbody>
                   </Table>
                 </div>
               </div>

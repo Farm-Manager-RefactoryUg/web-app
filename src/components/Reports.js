@@ -6,8 +6,14 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 // import Link from "@material-ui/core/Link";
+<<<<<<< HEAD
 // import Navbar from "./Navbar";
 // import Typography from "@material-ui/core/Typography";
+=======
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import Typography from "@material-ui/core/Typography";
+>>>>>>> f13ba105f80ceb0bce5a4b06fbe651b6bad5ef36
 import Deposits from "./materialDesign/Deposits";
 // import Orders from "./materialDesign/Orders";
 
@@ -70,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     // overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(9.5),
+    paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -84,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
 }));
+<<<<<<< HEAD
 // function Copyright() {
 //   return (
 //     <Typography variant="body2" color="textSecondary" align="center">
@@ -96,6 +103,22 @@ const useStyles = makeStyles((theme) => ({
 //     </Typography>
 //   );
 // }
+=======
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Router>
+        <Link color="inherit" href="https://material-ui.com/">
+          Farm Manager
+        </Link>
+      </Router>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+>>>>>>> f13ba105f80ceb0bce5a4b06fbe651b6bad5ef36
 
 function Reports() {
   const classes = useStyles();
@@ -110,7 +133,7 @@ function Reports() {
   return (
     <>
       {/* <Navbar /> */}
-      <main className={classes.content}>
+      <div className={classes.content}>
         {/* <div className={classes.appBarSpacer} /> */}
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={2}>
@@ -150,7 +173,7 @@ function Reports() {
             <Copyright />
           </Box> */}
         </Container>
-      </main>
+      </div>
     </>
   );
 }
