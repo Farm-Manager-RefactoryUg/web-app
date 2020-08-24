@@ -7,8 +7,12 @@ import Modal from "react-bootstrap/Modal";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
+<<<<<<< HEAD
+// import PersistentDrawerLeft from "./Navbar";
+=======
 import Example from "./Example";
 //import PersistentDrawerLeft from "./Navbar";
+>>>>>>> f13ba105f80ceb0bce5a4b06fbe651b6bad5ef36
 import Reports from "./Reports"
 
 import "../css/customer.css";
