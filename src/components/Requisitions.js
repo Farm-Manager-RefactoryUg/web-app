@@ -100,7 +100,7 @@ export default function Requisitions() {
             </Table>
             <div className={classes.seeMore}>
               <Link color="primary" href="#" onClick={preventDefault}>
-                See more requisitions
+                See more orders
               </Link>
             </div>
           </div>
