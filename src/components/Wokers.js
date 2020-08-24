@@ -65,11 +65,11 @@ class Wokers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Router>
+                            
                               <Link to={`/customer/${item.id}`}>
                                 <Button variant="success">Details</Button>
                               </Link>
-                            </Router>
+                           
                           </td>
                         </tr>
                       </tbody>
