@@ -9,6 +9,7 @@ import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
 import Example from "./Example";
 //import PersistentDrawerLeft from "./Navbar";
+// import PersistentDrawerLeft from "./Navbar";
 import Reports from "./Reports"
 
 import "../css/customer.css";
