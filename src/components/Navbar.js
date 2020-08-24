@@ -1,31 +1,31 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListIcon from '@material-ui/icons/List';
-import ChatIcon from '@material-ui/icons/Chat';
-import BookIcon from '@material-ui/icons/Book';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import GroupIcon from '@material-ui/icons/Group';
-import SettingsIcon from '@material-ui/icons/Settings';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import HomeIcon from '@material-ui/icons/Home';
-import PersonIcon from '@material-ui/icons/Person';
-import CollectionsIcon from '@material-ui/icons/Collections';
-import { Link } from "react-router-dom";
+import React from "react";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListIcon from "@material-ui/icons/List";
+import ChatIcon from "@material-ui/icons/Chat";
+import BookIcon from "@material-ui/icons/Book";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import GroupIcon from "@material-ui/icons/Group";
+import SettingsIcon from "@material-ui/icons/Settings";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import HomeIcon from "@material-ui/icons/Home";
+import PersonIcon from "@material-ui/icons/Person";
+import CollectionsIcon from "@material-ui/icons/Collections";
+import { BrowserRouter as Router, NavLink,Switch } from "react-router-dom";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -37,7 +37,10 @@ import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import { Dropdown } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
+import '../css/nav.css'
 
 const drawerWidth = 240;
 
@@ -117,7 +120,7 @@ export default function PersistentDrawerLeft() {
   const navstyle = {
     color: "green",
   };
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -132,7 +135,6 @@ export default function PersistentDrawerLeft() {
     setMobileMoreAnchorEl(null);
   };
 
-
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -140,6 +142,9 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+    // const handleClose = () => {
+    //   setAnchorEl(null);
+    // };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -160,7 +165,6 @@ export default function PersistentDrawerLeft() {
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
-      
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "left" }}
       id={mobileMenuId}
@@ -169,7 +173,7 @@ export default function PersistentDrawerLeft() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem >
+      <MenuItem>
         <IconButton color="inherit">
           <Badge color="secondary">
             <MailIcon />
@@ -277,104 +281,147 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <TextField
-            id="standard-bare"
-            placeholder="Search"
-            margin="normal"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment type="submit" position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+        {/* <List>
+            <TextField
+              id="standard-bare"
+              placeholder="Search"
+              margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment type="submit" position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Home" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ChatIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/requisitions">
-              <ListItemText primary="Requisitions" />
-            </Link>
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+           
+              <NavLink style={navstyle} to="/">
+                <ListItemText primary="Home" />
+              </NavLink>
+            
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <ChatIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BookIcon />
+              </ListItemIcon>
+             
+              <NavLink style={navstyle} to="/requisitions">
+                <ListItemText primary="Requisitions" />
+              </NavLink>
+              
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CalendarTodayIcon />
+              </ListItemIcon>
+             
+              <NavLink style={navstyle} to="/">
+                <ListItemText primary="Calendar" />
+              </NavLink>
+             
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Group" />
+            </ListItem>
+          </List>
 
-          <ListItem button>
-            <ListItemIcon>
-              <CalendarTodayIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Calendar" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <GroupIcon />
-            </ListItemIcon>
-            <ListItemText primary="Group" />
-          </ListItem>
-        </List>
+          <Divider />
 
-        <Divider />
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <ListIcon />
+              </ListItemIcon>
+             
+              <NavLink to="/reports" style={navstyle}>
+                <ListItemText primary="Reports" />
+              </NavLink>
+             
+            </ListItem>
 
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <Link to="/reports" style={navstyle}>
-              <ListItemText primary="Reports" />
-            </Link>
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              
+              <NavLink style={navstyle} to="/analytics">
+                <ListItemText primary="Analytics" />
+              </NavLink>
+            
+            </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/analytics">
-              <ListItemText primary="Analytics" />
-            </Link>
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CollectionsIcon />
+              </ListItemIcon>
+              
+                <NavLink style={navstyle} to="/">
+                  <ListItemText primary="Media" />
+                </NavLink>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+                  <NavLink style={navstyle} to="/">
+                    <ListItemText primary="Settings" />
+                  </NavLink>
+                
+            
+            </ListItem>
+          </List> */}
+        <Button variant="success" href="/">Home</Button>
+        <Dropdown className="dropdown">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Finances
+          </Dropdown.Toggle>
 
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Simple Dialog"/>
-            </Link>
-          </ListItem>
+          <Dropdown.Menu>
+            <Dropdown.Item href="/reports">Reports</Dropdown.Item>
+            <Dropdown.Item href="customers">Customers</Dropdown.Item>
+            <Dropdown.Item href="/requisitions">Requisitions</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Stores
+          </Dropdown.Toggle>
 
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Settings" />
-            </Link>
-          </ListItem>
-        </List>
+          <Dropdown.Menu>
+            <Dropdown.Item href="/reports">Reports</Dropdown.Item>
+            <Dropdown.Item href="customers">Customers</Dropdown.Item>
+            <Dropdown.Item href="/requisitions">Requisitions</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Employees
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="/workers">Workers</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Drawer>
       <main
         className={clsx(classes.content, {

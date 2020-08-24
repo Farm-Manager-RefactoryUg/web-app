@@ -1,19 +1,15 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-//import Popup from "reactjs-popup";
-import Modal from "react-bootstrap/Modal";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import ExpenditurePieChart from "./ExpenditurePieChart";
-import SalesBarGraph from "./SalesBarGraph"
-import Example from "./Example";
-//import PersistentDrawerLeft from "./Navbar";
-import Reports from "./Reports"
+//import ExpenditurePieChart from "./ExpenditurePieChart";
+//import SalesBarGraph from "./SalesBarGraph";
+import Navbar from "./Navbar";
+//import Reports from "./Reports";
 
-import "../css/customer.css";
+import "../css/index.css";
 
-class Customers extends Component {
+class Wokers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,28 +31,18 @@ class Customers extends Component {
     let { isLoaded, items } = this.state;
 
     if (!isLoaded) {
-      return <div>Loading Customers.....</div>;
+      return <div>Loading Employees.....</div>;
     } else {
       return (
         <>
-          <Reports />
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-6">
-                <ExpenditurePieChart />
-              </div>
-
-              <div className="col-md-6">
-                <SalesBarGraph />
-              </div>
-            </div>
-          </div>
-
+          <Navbar />
+          <br></br>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
                 <div className="text-left">
-                  <h5 className="card-heading">RECENT CUSTOMERS</h5>
+                  <h5 className="card-heading">EMPLOYEES DETAILS</h5>
+
                   <Table striped bordered hover size="sm">
                     <thead>
                       <tr>
@@ -79,10 +65,11 @@ class Customers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Link to="/customer/:id">
-                              {/* <Example /> */}
-                              Details
-                            </Link>
+                            <Router>
+                              <Link to={`/customer/${item.id}`}>
+                                <Button variant="success">Details</Button>
+                              </Link>
+                            </Router>
                           </td>
                         </tr>
                       </tbody>
@@ -99,4 +86,4 @@ class Customers extends Component {
   }
 }
 
-export default Customers;
+export default Wokers;

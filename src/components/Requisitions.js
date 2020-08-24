@@ -73,7 +73,7 @@ export default function Requisitions() {
       <Navbar />
       <br></br>
       <div className="container-fluid">
-        <div classNmae="row">
+        <div className="row">
           <div className="col">
             <h5 align="left">Recent Orders</h5>
             <Table size="small">

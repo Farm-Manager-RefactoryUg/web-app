@@ -9,15 +9,16 @@ import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import Reports from "./components/Reports";
+import Workers from "./components/Wokers";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Home from './components/Home'
 import Suppliers from "./components/Suppliers";
 import Payroll from "./components/Payroll";
+import Customer from "./components/Customer";
 
-// import "./css/App.css";
-// import './App.css';
-// import Dashboard from './components/materialDesign/Dashboard'
+//import Example from "./components/Example";
+//import { Button } from "react-bootstrap";
+
 
 class App extends React.Component {
   render() {
@@ -34,7 +35,9 @@ class App extends React.Component {
               <Route path="/activities" component={Activities} exact></Route>
               <Route path="/suppliers" component={Suppliers}></Route>
               <Route path="/payroll" component={Payroll}></Route>
+              <Route path="/customers" component={Customer}></Route>
               <Route path="/customer/:id" component={CustomerDetails}></Route>
+              <Route path="/workers" component={Workers}></Route>
               <Route
                 path="/expenditurechart"
                 component={ExpenditurePieChart}
@@ -48,30 +51,4 @@ class App extends React.Component {
     );
   }
 }
-// class App extends React.Component{
-// render () {
-//   return (
-//     <div className="App">
-//       <React.Fragment>
-//         <Router>
-          
-          
-//           <Switch>
-//             {/* <Route exact path="/mi-dashboard" component={Dashboard}></Route> */}
-//             <Route path="/login" exact component={Login} />
-//             <Route path="/signup" component={SignUp} />
-//             <Route path="/requisitions" component={Requisitions} />
-//             <Route path="/customers" component={Customers} ></Route>
-//             <Route path="/activities" component={Activities} ></Route>
-//             <Route path="/customer/:id" component={CustomerDetails}></Route>
-//             <Route path="/analytics" component={ExpenditurePieChart} ></Route>
-//             {/* <Route path="/notifications" component={Notifications}></Route> */}
-//           </Switch>
-//         </Router>
-//       </React.Fragment>
-//     </div>
-//   );
-// }
-// }
-
 export default App;
