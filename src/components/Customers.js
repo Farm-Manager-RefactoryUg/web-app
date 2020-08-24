@@ -39,7 +39,6 @@ class Customers extends Component {
     } else {
       return (
         <>
-          
           <Reports />
           <div className="container-fluid">
             <div className="row">
@@ -80,7 +79,10 @@ class Customers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Example />
+                            <Link to="/customer/:id">
+                              {/* <Example /> */}
+                              Details
+                            </Link>
                           </td>
                         </tr>
                       </tbody>

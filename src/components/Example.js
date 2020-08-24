@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { Button } from "react-bootstrap";
 import Dialog from "@material-ui/core/Dialog";
@@ -63,14 +64,20 @@ export default function Example() {
   const handleClose = () => {
     setOpen(false);
   };
-    
-//   const [items ,setItem] = useState({});
 
-//   useEffect(() =>
-//     fetch("https://jsonplaceholder.typicode.com/users")
-//       .then(response => response.json())
-//       .then(response => this.setState({ items:response }))
-//   );
+  const [user, setuser] = useState({});
+  const [id, setId] = useState(3);
+
+  useEffect(() => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then((response) => {
+        setuser(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
   return (
     <div>
       <Button variant="success" color="primary" onClick={handleClickOpen}>
@@ -102,14 +109,18 @@ export default function Example() {
                           <th>Options</th>
                         </tr>
                       </thead>
-                      {/* {items.name((items) => ( */}
+
                       <tbody>
+                        {/* <input
+                          value={id}
+                          onChange={(e) => setId(e.target.value)}
+                        ></input> */}
                         <tr>
-                          {/* <td key={items.id}>{items.name}</td> */}
-                          <td>Name</td>
-                          <td>Email</td>
-                          <td>Phone number</td>
-                          <td>Location</td>
+                          <td key={user.id}>{user.name}</td>
+                          <td>{user.email}</td>
+                          <td>{user.phone}</td>
+                          <td>Kampala</td>
+                          <td>{user.website}</td>
                           <td>Product</td>
                           <td>Amount</td>
                           <td>
@@ -117,7 +128,6 @@ export default function Example() {
                           </td>
                         </tr>
                       </tbody>
-                      {/* ))} */}
                     </Table>
                   </div>
                 </div>
