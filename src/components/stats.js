@@ -15,14 +15,14 @@ class Stats extends Component {
                 <div id="kpicontainer">
                     <div className="box">
                         <div>
-                            <h3>MONTHLY CAPITAL</h3>
+                            <h4>MONTHLY CAPITAL</h4>
                             <p>UGX {this.state.kpi.capital}</p>
                         </div>
                         <div><i></i></div>
                     </div>
                     <div className="box">
                         <div>
-                            <h3>MONTHLY SALES</h3>
+                            <h4>MONTHLY SALES</h4>
                             <p>UGX {this.state.kpi.sales}</p>
                         </div>
                         <div>
@@ -31,7 +31,7 @@ class Stats extends Component {
                     </div>
                     <div className="box">
                         <div>
-                            <h3>MONTHLY PROFIT</h3>
+                            <h4>MONTHLY PROFIT</h4>
                             <p>UGX {this.state.kpi.profit}</p>
                         </div>
                         <div>
@@ -39,6 +39,7 @@ class Stats extends Component {
                         </div>
                     </div>
                 </div>
+                <br></br>
             </Fragment>
         );
     }

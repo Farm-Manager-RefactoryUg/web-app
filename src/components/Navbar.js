@@ -1,8 +1,6 @@
-
 import React from "react";
-// import { BrowserRouter as Switch, Route } from "react-router-dom";
 import clsx from "clsx";
-import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -18,25 +16,32 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListIcon from "@material-ui/icons/List";
-import InboxIcon from "@material-ui/icons/Inbox";
+import ChatIcon from "@material-ui/icons/Chat";
 import BookIcon from "@material-ui/icons/Book";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import HomeIcon from "@material-ui/icons/Home";
+import PersonIcon from "@material-ui/icons/Person";
+import CollectionsIcon from "@material-ui/icons/Collections";
+import { BrowserRouter as Router, NavLink,Switch } from "react-router-dom";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-import CollectionsIcon from "@material-ui/icons/Collections";
+
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { Link } from "react-router-dom";
+import { Dropdown } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
+import '../css/nav.css'
 
 const drawerWidth = 240;
 
@@ -44,8 +49,10 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  toolBar: {
+    backgroundColor: "green",
+  },
   appBar: {
-    background: "green",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -96,65 +103,9 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -170,6 +121,7 @@ export default function PrimarySearchAppBar() {
   const navstyle = {
     color: "green",
   };
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -184,14 +136,16 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(null);
   };
 
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+    // const handleClose = () => {
+    //   setAnchorEl(null);
+    // };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -213,15 +167,15 @@ export default function PrimarySearchAppBar() {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: "top", horizontal: "left" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "left" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton  color="inherit">
+        <IconButton color="inherit">
           <Badge color="secondary">
             <MailIcon />
           </Badge>
@@ -229,8 +183,8 @@ export default function PrimarySearchAppBar() {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton  color="inherit">
-          <Badge  color="secondary">
+        <IconButton color="inherit">
+          <Badge color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -251,26 +205,26 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="static"
+        position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolBar}>
           <IconButton
-            edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
+            edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Tele Farmer
+          <Typography variant="h6" noWrap>
+            TeleFarmer
           </Typography>
 
           <div className={classes.grow} />
@@ -327,130 +281,158 @@ export default function PrimarySearchAppBar() {
             )}
           </IconButton>
         </div>
-
         <Divider />
+        {/* <List>
+            <TextField
+              id="standard-bare"
+              placeholder="Search"
+              margin="normal"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment type="submit" position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-        <List>
-          <TextField
-            id="standard-bare"
-            placeholder="Search"
-            margin="normal"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment type="submit" position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+           
+              <NavLink style={navstyle} to="/">
+                <ListItemText primary="Home" />
+              </NavLink>
+            
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <ChatIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BookIcon />
+              </ListItemIcon>
+             
+              <NavLink style={navstyle} to="/requisitions">
+                <ListItemText primary="Requisitions" />
+              </NavLink>
+              
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CalendarTodayIcon />
+              </ListItemIcon>
+             
+              <NavLink style={navstyle} to="/">
+                <ListItemText primary="Calendar" />
+              </NavLink>
+             
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <GroupIcon />
+              </ListItemIcon>
+              <ListItemText primary="Group" />
+            </ListItem>
+          </List>
 
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Home"  />
-            </Link>
-          </ListItem>
+          <Divider />
 
-          <ListItem button>
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/requisitions" >
-            <ListItemText primary="Requisitions"  />
-            </Link>
-          </ListItem>
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <ListIcon />
+              </ListItemIcon>
+             
+              <NavLink to="/reports" style={navstyle}>
+                <ListItemText primary="Reports" />
+              </NavLink>
+             
+            </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon />  
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Inventory" />
-            </Link>
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              
+              <NavLink style={navstyle} to="/analytics">
+                <ListItemText primary="Analytics" />
+              </NavLink>
+            
+            </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <CalendarTodayIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Calendar" />
-            </Link>
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CollectionsIcon />
+              </ListItemIcon>
+              
+                <NavLink style={navstyle} to="/">
+                  <ListItemText primary="Media" />
+                </NavLink>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+                  <NavLink style={navstyle} to="/">
+                    <ListItemText primary="Settings" />
+                  </NavLink>
+                
+            
+            </ListItem>
+          </List> */}
+        <Button variant="success" href="/">Home</Button>
+        <Dropdown className="dropdown">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Finances
+          </Dropdown.Toggle>
 
-          <ListItem button>
-            <ListItemIcon>
-              <GroupIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to= "/customer/:id">
-            <ListItemText primary="Customers" />
-            </Link>
-          </ListItem>
+          <Dropdown.Menu>
+            <Dropdown.Item href="/reports">Reports</Dropdown.Item>
+            <Dropdown.Item href="customers">Customers</Dropdown.Item>
+            <Dropdown.Item href="/requisitions">Requisitions</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Stores
+          </Dropdown.Toggle>
 
-        </List>
+          <Dropdown.Menu>
+            <Dropdown.Item href="/reports">Reports</Dropdown.Item>
+            <Dropdown.Item href="customers">Customers</Dropdown.Item>
+            <Dropdown.Item href="/requisitions">Requisitions</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Employees
+          </Dropdown.Toggle>
 
-        <Divider />
-
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/customers">
-            <ListItemText primary="Reports" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/analytics">
-            <ListItemText primary="Analytics" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Media" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Settings" />
-            </Link>
-          </ListItem>
-        </List>
+          <Dropdown.Menu>
+            <Dropdown.Item href="/workers">Workers</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
+        {/* <div className={classes.drawerHeader} /> */}
       </main>
       {renderMobileMenu}
       {renderMenu}
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
