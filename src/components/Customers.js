@@ -3,11 +3,9 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 //import Popup from "reactjs-popup";
-import Modal from "react-bootstrap/Modal";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
-import Example from "./Example";
 //import PersistentDrawerLeft from "./Navbar";
 // import PersistentDrawerLeft from "./Navbar";
 import Reports from "./Reports"
