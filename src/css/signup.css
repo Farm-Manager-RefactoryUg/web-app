@@ -66,3 +66,8 @@ form button{
     font-size: 0.9rem;
     color: rgba(0, 0, 0, 0.7);
 }
+#navbar{
+width: 100%;
+background-color: green;
+height: 50px;
+}

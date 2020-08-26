@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 //import ExpenditurePieChart from "./ExpenditurePieChart";
 //import SalesBarGraph from "./SalesBarGraph";
 import Navbar from "./Navbar";
@@ -9,7 +9,7 @@ import Navbar from "./Navbar";
 
 import "../css/index.css";
 
-class Wokers extends Component {
+class Workers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,11 +65,11 @@ class Wokers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Router>
+                            
                               <Link to={`/customer/${item.id}`}>
                                 <Button variant="success">Details</Button>
                               </Link>
-                            </Router>
+                            
                           </td>
                         </tr>
                       </tbody>
@@ -86,4 +86,4 @@ class Wokers extends Component {
   }
 }
 
-export default Wokers;
+export default Workers;

@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-// import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-// import Link from "@material-ui/core/Link";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import Typography from "@material-ui/core/Typography";
 import Deposits from "./materialDesign/Deposits";
-// import Orders from "./materialDesign/Orders";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,24 +76,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-    height: 150,
+    height: 140,
     color: "black",
   },
 }));
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Router>
-        <Link color="inherit" href="https://material-ui.com/">
-          Farm Manager
-        </Link>
-      </Router>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 function Reports() {
   const classes = useStyles();
@@ -112,12 +93,12 @@ function Reports() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className={classes.content}>
-        {/* <div className={classes.appBarSpacer} /> */}
+       
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={2}>
-            <Grid item xs={4} md={4} lg={9}>
+            <Grid item xs={2} md={4} lg={9}>
               <Paper item xs className={fixedHeightPaper}>
                 <Deposits
                   title="Current Season Capital"
@@ -142,16 +123,7 @@ function Reports() {
                 <Deposits title="Current Season Profits" amount={totalIncome} />
               </Paper>
             </Grid>
-
-            {/* <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid> */}
           </Grid>
-          {/* <Box pt={4}>
-            <Copyright />
-          </Box> */}
         </Container>
       </div>
     </>

@@ -1,16 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-//import Popup from "reactjs-popup";
-import Modal from "react-bootstrap/Modal";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
 import Example from "./Example";
-//import PersistentDrawerLeft from "./Navbar";
 import Reports from "./Reports"
-
 import "../css/customer.css";
 
 class Customers extends Component {
@@ -60,6 +54,7 @@ class Customers extends Component {
                   <Table striped bordered hover size="sm">
                     <thead>
                       <tr>
+                        <th>No.</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone number</th>
@@ -71,7 +66,8 @@ class Customers extends Component {
                     {items.map((item) => (
                       <tbody>
                         <tr>
-                          <td key={item.id}>{item.name}</td>
+                          <td key={item.id}>{item.id}</td>
+                          <td>{item.name}</td>
                           <td>{item.email}</td>
                           <td>{item.phone} </td>
                           <td>{item.city}</td>
@@ -79,10 +75,10 @@ class Customers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Link to="/customer/:id">
-                              {/* <Example /> */}
-                              Details
-                            </Link>
+                            {/* <Link to="/customer/:id"> */}
+                              <Example />
+                              {/* Details */}
+                            {/* </Link> */}
                           </td>
                         </tr>
                       </tbody>
