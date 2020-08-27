@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+//import { Link } from "react-router-dom"
 import Navbar from "./Navbar";
 import Deposits from "./materialDesign/Deposits";
 
@@ -54,20 +55,20 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing(7),
+    width: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9),
+      width: theme.spacing(7),
     },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: "29vh",
+    height: "30vh",
     // overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(0),
   },
   paper: {
     padding: theme.spacing(2),
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-    height: 140,
+    height: 150,
     color: "black",
   },
 }));
@@ -95,16 +96,16 @@ function Reports() {
     <>
       <Navbar />
       <div className={classes.content}>
-       
+        {/* <div className={classes.appBarSpacer} /> */}
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={2}>
-            <Grid item xs={2} md={4} lg={9}>
+            <Grid item xs={4} md={4} lg={9}>
               <Paper item xs className={fixedHeightPaper}>
                 <Deposits
                   title="Current Season Capital"
                   amount={totalCapital}
                   details="View details"
-                  link="./expenditurechart"
+                  link ="./expenditurechart"
                 />
               </Paper>
             </Grid>

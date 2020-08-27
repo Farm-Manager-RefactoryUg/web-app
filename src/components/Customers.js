@@ -34,7 +34,8 @@ class Customers extends Component {
       return (
         <>
           <Reports />
-          <div className="container-fluid">
+
+          <div className="container-fluid1">
             <div className="row">
               <div className="col-md-6">
                 <ExpenditurePieChart />
@@ -46,7 +47,7 @@ class Customers extends Component {
             </div>
           </div>
 
-          <div className="container-fluid">
+          <div className="container-fluid" >
             <div className="row">
               <div className="col-md-12">
                 <div className="text-left">

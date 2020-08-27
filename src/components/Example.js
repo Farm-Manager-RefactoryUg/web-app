@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Example() {
   const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState("sm");
+  const [maxWidth, setMaxWidth] = React.useState("md");
   const [open, setOpen] = React.useState(false);
   const [user, setuser] = useState({});
   const [id, setId] = useState();
