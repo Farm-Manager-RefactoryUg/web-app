@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import { Nav, NavDropdown } from "react-bootstrap";
 import bg from "../css/bg6.jpg";
 import "../css/login.css";
 
@@ -20,20 +22,41 @@ class Login extends Component {
   render() {
     return (
       <>
-        <nav id="navbar">
-          {" "}
-          <Link to="/">
-            <button className="btn btn-secondary">Home</button>{" "}
-          </Link>
-          <Link to="/signup">
-            <button className="btn btn-secondary">Create account</button>{" "}
-          </Link>
-          <span>
-            <Link to="/reports">
-              <button className="btn btn-secondary">Login</button>{" "}
-            </Link>
-          </span>
-        </nav>
+        <Navbar collapseOnSelect expand="lg" className="nav">
+          <Navbar.Brand href="/" >
+            Home
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="#features" className="hreff">
+                Features
+              </Nav.Link>
+              <Nav.Link a href="#pricing">
+                Pricing
+              </Nav.Link>
+              <NavDropdown title="Crop" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Nav>
+              <Nav.Link href="/reports">Login</Nav.Link>
+              <Nav.Link eventKey={2} href="/signup">
+                Signup
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-5">
