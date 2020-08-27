@@ -5,6 +5,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import {Navbar} from "react-bootstrap";
+import { Nav, NavDropdown }from "react-bootstrap";
 // import ButtonBase from "@material-ui/core/ButtonBase";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,19 +24,33 @@ export default function FullWidthGrid() {
 
   return (
     <div className={classes.root}>
-      <nav id="navbar">
-        {" "}
-        {/* <Router> */}
-          <Link to="/signup">
-            <button className="btn btn-secondary">Create account</button>{" "}
-          </Link>
-        {/* </Router>*/}{" "}
-        {/* <Router> */}
-          <Link to="/login">
-            <button className="btn btn-secondary">Login</button>{" "}
-          </Link>
-        {/* </Router>{" "} */}
-      </nav>
+      <Navbar collapseOnSelect expand="lg" className="nav">
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Nav>
+            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              Dank memes
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
 
       <Grid container spacing={3}>
         <Grid item xs={12} sm={5}>
