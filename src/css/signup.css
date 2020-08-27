@@ -1,10 +1,8 @@
-body{
-    background-color: white;
-}
 #div{
     display: flex;
 }
 form{
+    flex-grow: 1;
     background-color: #fff;
     border-radius: 2px;
     margin: 3% 0 0 13%;
@@ -27,6 +25,7 @@ label{
 #images{
     display: flex;
     flex-direction: column;
+    max-width: 100%;
 }
 img{
     height: 500px;
