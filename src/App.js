@@ -11,6 +11,7 @@ import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Customer from "./components/Customer";
 import Home from './components/Home';
+import SalesDetails from "./components/SalesDetails"
 
 
 
@@ -35,6 +36,7 @@ class App extends React.Component {
               ></Route>
               <Route path="/saleschart" component={SalesBarGraph}></Route>
               <Route path="/analytics" component={ExpenditurePieChart} ></Route>
+              <Route path="/salesdetails" component={SalesDetails}></Route>
             </Switch>
           </Router>
         </React.Fragment>
