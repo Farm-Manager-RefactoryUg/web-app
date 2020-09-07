@@ -1,36 +1,30 @@
-#div{
-    display: flex;
+body{
+    background-color: rgb(255, 237, 220);
 }
 label{
     color: rgba(0, 0, 0, 0.5);
     margin-top: 25px;
+    margin-left: -237px;
+}
+#emailLabel{
+    margin-left: -265px;
 }
 #loginImg{
     height: 100vh;
     width: 50vw;
 }
 #loginForm{
-    margin-top: 100px;
-    width: 50vw;
-    border-radius: 2px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    margin: auto;
+    border-radius: 2px;
 }
-#forgotPasswordText{
-    font-size: 0.9rem;
-    margin-left: 190px;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    color: rgba(0, 0, 0, 0.7);
-}
-#signUpText{
-    font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.7);
-}
-#loginForm h1{
-    margin-bottom: 25px;
+h1{
     color: green;
-    font-size: 2.65rem;
+    font-size: 2.3rem;
+    text-align: center;
+    font-weight: bolder;
 }
 #period{
     color: saddlebrown;
@@ -70,13 +64,26 @@ label{
     margin-bottom: 15px;
     outline: 0;
 }
+#forgotPasswordText{
+    font-size: 0.9rem;
+    margin-left: 190px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.7);
+}
+#signUpText{
+    margin-left: -95px;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7);
+}
 #loginFooter{
     position: absolute;
     bottom: 0;
-    margin-left: 2%;
-    color: rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    background-color: rgb(255, 238, 225);
-    border-radius: 3px;
+    width: 100%;
+    margin-top: 50px;
+    padding: 25px;
+    background-color: #008000;
+    color: white;
+    text-align: center;
     font-size: 0.9rem;
 }
