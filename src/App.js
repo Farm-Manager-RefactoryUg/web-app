@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Login from './components/login'
 import SignUp from './components/signup'
 import Activities from "./components/Activities";
+// import landingpage from "./components/landingpage";
 import Customers from "./components/Customers";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Requisitions from './components/Requisitions';
@@ -26,6 +27,7 @@ render () {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route path="/requisitions" component={Requisitions} />
+            {/* <Route path="/landing" component={landingpage} ></Route> */}
             <Route path="/customers" component={Customers} ></Route>
             <Route path="/activities" component={Activities} ></Route>
             <Route path="/customer/:id" component={CustomerDetails}></Route>
