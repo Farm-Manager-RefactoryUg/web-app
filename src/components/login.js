@@ -12,25 +12,35 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+const Buttonn = withStyles({
+  root: {
+    
+    '&:hover': {
+      backgroundColor: 'green',
+      opacity: '0.9'
+    },
+    '&:active , &:focus': {
+      outline: 'none',
+    },
+  },
+})(Button);
 
-var CssTextField = withStyles({
+const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
       color: 'green',
     },
-    // '& .MuiInput-underline:after': {
-    //   borderBottomColor: 'green',
-    // },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: '#964c22',
       },
-      '&:hover fieldset': {
-        borderColor: 'green',
-      },
       '&.Mui-focused fieldset': {
         borderColor: '#964c22',
       },
+      '&.Mui-error fieldset': {
+        borderColor: 'red',
+      },
+
     },
   },
 })(TextField);
@@ -59,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     backgroundColor: 'green',
     color: 'white',
+    outline: 'none',
+    paddingTop: '10px',
+    paddingBottom: '10px',
   },
   footer: {
     padding: theme.spacing(1, 2),
@@ -69,53 +82,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props) {
-  let [email, setEmail] = useState()
-  let [errors, setErrors] = useState()
+export default function SignIn() {
+  let [errors, setErrors] = useState("")
   const handleSubmit = event => {
     event.preventDefault()
   }
   const handleChange = event => {
     const emailInput = event.target.value;
-    if (emailInput.length < 4) {
-      CssTextField = withStyles({
-        root: {
-          '& label.Mui-focused': {
-            color: 'red',
-          },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: 'red',
-            },
-            '&:hover fieldset': {
-              borderColor: 'red',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: 'red',
-            },
-          },
-        },
-      })(TextField);
-      setErrors("Invalid Email")
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+    if (!regex.test(emailInput)) {
+      setErrors("Invalid email address")
     } else {
-      CssTextField = withStyles({
-        root: {
-          '& label.Mui-focused': {
-            color: 'green',
-          },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: '#964c22',
-            },
-            '&:hover fieldset': {
-              borderColor: 'green',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: '#964c22',
-            },
-          },
-        },
-      })(TextField);
       setErrors("")
     }
   }
@@ -123,7 +100,7 @@ export default function SignIn(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -142,11 +119,11 @@ export default function SignIn(props) {
               id="email"
               label="Email Address"
               name="email"
-              //value={email}
+              error={errors.length > 0}
               //autoComplete="email"
               onChange={handleChange}
             />
-            <small style={{ color: "red" }}> {errors}</small>
+            <small style={{ color: 'red', marginLeft: "15px" }}>{errors}</small>
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -158,19 +135,15 @@ export default function SignIn(props) {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" style={{ color: "#964c22" }} />}
-              label="Remember me"
-              style={{ color: "green" }}
-            />
-            <Button
+
+            <Buttonn
               type="submit"
               fullWidth
               variant="contained"
               className={classes.submit}
             >
               Log In
-            </Button>
+            </Buttonn>
             <Grid container>
               <Grid item xs>
                 <Link to="/" variant="body2" style={{ color: 'darkblue', cursor: 'pointer' }}>
@@ -194,71 +167,7 @@ export default function SignIn(props) {
           </Typography>
         </Container>
       </footer>
-    </div>
+    </div >
   );
 }
 
-
-
-
-
-
-
-
-
-// class Login extends Component {
-//   constructor(props) {
-//     super(props)
-
-//     this.state = {
-//       email: null,
-//       password: null,
-//     };
-//   }
-
-//   handleSubmit = event => {
-//     event.preventDefault();
-//   }
-
-//   render() {
-//     return (
-//       <div id="div">
-
-//         <h1>Log in<span id="period">.</span></h1>
-
-//         <form id="loginForm">
-
-//           <label htmlFor="email" id="emailLabel">Email</label>
-//           <input
-//             type="email"
-//             name="email"
-//             id="email"
-//           />
-
-//           <label htmlFor="password">Password</label>
-//           <input
-//             type="password"
-//             name="password"
-//             id="password"
-//           />
-
-//           <span id="forgotPasswordText"><Link to="/">Forgot password?</Link></span>
-
-//           <button>LOGIN</button>
-
-//           <span id="signUpText">Don't have an account? <Link to="/signup">Sign up!</Link></span>
-
-//         </form>
-
-//         <footer id="loginFooter">
-//           Refactory &copy; 2020. All rights reserved.
-//         </footer>
-
-//         {/* <img id="loginImg" src={bg} alt="_._._!" /> */}
-
-//       </div>
-//     );
-//   }
-// }
-
-// export default Login;
