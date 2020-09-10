@@ -13,14 +13,26 @@ import MainFeaturedPost from "./MainFeaturedPost";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: "green",
+    color: "white",
   },
+  
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
+    color: "white",
+    
   },
   title: {
     flexGrow: 1,
   },
 }));
+
+const mainFeaturedPost = {
+  title: "Title of a longer featured blog post",
+  description:
+    "Multiple lines of text that form the lede, informing new readers quickly",
+  linkText: "Continue reading…",
+};
 
 function ButtonAppBar() {
   const classes = useStyles();
@@ -28,34 +40,47 @@ function ButtonAppBar() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.root}>
           <IconButton
             edge="start"
-            className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-          >
-            
-          </IconButton>
+          ></IconButton>
           <Typography variant="h6" className={classes.title}>
             Tele-Farmer
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            variant="outlined"
+            color="white"
+            className={classes.menuButton}
+            size="small"
+          >
+            Login
+          </Button>
+          <Button
+            variant="outlined"
+            color="white"
+            className={classes.menuButton}
+            size="small"
+          >
+            Sign Up
+          </Button>
         </Toolbar>
       </AppBar>
-      <MainFeaturedPost/>
+      <MainFeaturedPost post={mainFeaturedPost} />
     </div>
   );
 }
 
+
 function Home() {
   return (
     <>
-      <ButtonAppBar/>
-      <h1>Hello</h1>
-      </>
+      <ButtonAppBar />
+
+    </>
     
   )
 }
 
-export default Home
+export default Home 

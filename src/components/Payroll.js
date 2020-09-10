@@ -75,7 +75,7 @@ export default function Payroll() {
     <React.Fragment>
       <Navbar />
       <br></br>
-      <Title>Recent Payments</Title>
+      <Title>Employees</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -84,7 +84,7 @@ export default function Payroll() {
             <TableCell>Gross Salary</TableCell>
             <TableCell>Pay Period</TableCell>
             <TableCell>Terms</TableCell>
-            <TableCell>Show Details</TableCell>
+            <TableCell alignItems="right">Show Details</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -94,8 +94,8 @@ export default function Payroll() {
               <TableCell>{row.companyName}</TableCell>
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.address}</TableCell>
-              <TableCell>{row.terms}</TableCell>
-              <TableCell>
+              <TableCell >{row.terms}</TableCell>
+              <TableCell align="right">
                 <Popup
                   trigger={
                     <Button variant="contained" color="primary">

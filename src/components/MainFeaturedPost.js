@@ -43,14 +43,14 @@ export default function MainFeaturedPost(props) {
   return (
     <Paper
       className={classes.mainFeaturedPost}
-    //   style={{ backgroundImage: `url(${post.image})` }}
+      //   style={{ backgroundImage: `url(${post.image})` }}
     >
       {/* Increase the priority of the hero background image */}
       {
         <img
-          style={{ display: "none" }}
-          src={post.image}
-          alt={post.imageText}
+          src="../../public/farmlogo.jpg"
+          alt="logo"         
+          className="paper-three-image"
         />
       }
       <div className={classes.overlay} />

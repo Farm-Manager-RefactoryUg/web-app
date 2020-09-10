@@ -7,53 +7,42 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import ProjectAppBar from "./materialDesign/ProjectAppBar"
+import ProjectAppBar from "./materialDesign/ProjectAppBar";
+
+import Button from "@material-ui/core/Button";
+import Popup from "reactjs-popup";
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+function createData(id, name, companyName, email, address, terms) {
+  return { id, name, companyName, email, address, terms };
 }
 
 const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
-  ),
+  createData(0, "Malinga Daniel", "Manager", 700000, "Busia", "Seedlings"),
   createData(
     1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
+    "Wandira Elton",
+    "Operations Head",
+    400000,
+    "Jinja",
+    "Vaccines"
   ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
-  ),
+  createData(2, "Wamala Emma", "Mechanic", 100000, "Kampala", "Hoes"),
   createData(
     3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
+    "Edith Tess",
+    "Driver",
+    200000,
+    "Kasese",
+    "Irrigation materials"
   ),
   createData(
     4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
+    "Tusiime Godwin",
+    "IT Specialist",
+    500000,
+    "Kabale",
+    "Gumboots"
   ),
 ];
 
@@ -105,26 +94,41 @@ export default function Requisitions() {
 
         <main className={classes.content}>
           <h5 align="left" style={{ marginLeft: "0.5rem" }}>
-            Recent Orders
+            Employees
           </h5>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell>Ship To</TableCell>
-                <TableCell>Payment Method</TableCell>
-                <TableCell align="right">Sale Amount</TableCell>
+                <TableCell>Position</TableCell>
+                <TableCell>Gross Salary</TableCell>
+                <TableCell>Pay Period</TableCell>
+
+                <TableCell>Tools Used</TableCell>
+                <TableCell align="right">Show Details</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
                   <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.shipTo}</TableCell>
-                  <TableCell>{row.paymentMethod}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
+                  <TableCell>{row.companyName}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.address}</TableCell>
+                  <TableCell>{row.terms}</TableCell>
+                  <TableCell align="right">
+                    <Popup
+                      trigger={
+                        <Button variant="contained" color="primary">
+                          View
+                        </Button>
+                      }
+                      modal
+                      closeOnDocumentClick
+                    >
+                      {(close) => <div>Content here</div>}
+                    </Popup>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -139,4 +143,3 @@ export default function Requisitions() {
     </div>
   );
 }
-
