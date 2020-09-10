@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
+import Grid from "@material-ui/core/Grid";
 import ExpenditurePieChart from "./ExpenditurePieChart";
 import SalesBarGraph from "./SalesBarGraph"
 import Example from "./Example";
@@ -89,7 +90,14 @@ class Customers extends Component {
               </div>
             </div>
           </div>
-          <br></br>
+          <Grid container spacing={6}>
+        <Grid item xs={12}>
+          {/* <Paper className={classes.paper}> */}
+          <footer>Farm manager</footer>
+          {/* </Paper> */}
+        </Grid>
+      </Grid>
+          
         </>
       );
     }

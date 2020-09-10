@@ -8,19 +8,38 @@ import Grid from "@material-ui/core/Grid";
 import {Navbar} from "react-bootstrap";
 import { Nav, NavDropdown }from "react-bootstrap";
 // import ButtonBase from "@material-ui/core/ButtonBase";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MainFeaturedPost from "./MainFeaturedPost";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: "green",
     color: "white",
   },
-  paper: {
-    padding: theme.spacing(5),
-    textAlign: "left",
+  
+  menuButton: {
+    marginRight: theme.spacing(1),
+    color: "white",
+    
+  },
+  title: {
+    flexGrow: 1,
   },
 }));
 
-export default function FullWidthGrid() {
+const mainFeaturedPost = {
+  title: "Title of a longer featured blog post",
+  description:
+    "Multiple lines of text that form the lede, informing new readers quickly",
+  linkText: "Continue reading…",
+};
+
+export default function Home() {
   const classes = useStyles();
 
   return (
@@ -35,7 +54,7 @@ export default function FullWidthGrid() {
             <Nav.Link href="#features" className="hreff">
               Features
             </Nav.Link>
-            <Nav.Link  href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
             <NavDropdown title="Crop" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -51,7 +70,7 @@ export default function FullWidthGrid() {
           <Nav>
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link eventKey={2} href="/signup">
-             Signup
+              Signup
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -110,75 +129,49 @@ export default function FullWidthGrid() {
             </p>
           </Paper>
         </Grid>
+        <AppBar position="static">
+          <Toolbar className={classes.root}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+            ></IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Tele-Farmer
+            </Typography>
+            <Button
+              variant="outlined"
+              color="white"
+              className={classes.menuButton}
+              size="small"
+            >
+              Login
+            </Button>
+            <Button
+              variant="outlined"
+              color="white"
+              className={classes.menuButton}
+              size="small"
+            >
+              Sign Up
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <MainFeaturedPost post={mainFeaturedPost} />
+      </Grid>
+      {/* function Home() {
+  return (
+    <>
+      <ButtonAppBar />
 
-        <Grid item xs={12} sm={7}>
-          <Paper className="paper-two">
-            <img
-              src={require("../static/images/farm/farm2.png")}
-              alt=""
-              className="paper-two-image"
-            />
-          </Paper>
-        </Grid>
-      </Grid>
+    </>
+    
+  )
+}
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={5}>
-          <Paper className="paper-three">
-            <img
-              src={require("../static/images/farm/farm-inventory-custom_crop.jpeg")}
-              alt=""
-              className="paper-three-image"
-            />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} sm={7}>
-          <Paper className="paper-three">
-            <h4>Farm Inventory</h4>
-            <p>
-              The different tools used at your farm may easily be put to waste
-              if not properly accounted for. Farm manager application helps to
-              keep track of the tools at your farm and giving accountability for
-              each tool lost or bought for your farm. Don't just waste your
-              money on this tools, Know what needs to be bought, what is lost
-              and what is available with proper accountability.
-            </p>
-          </Paper>
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={5}>
-          <Paper className="paper-four">
-            <h4>Employees</h4>
-            <p>
-              Having proper records of the different workers at your farm can
-              greatly improve productivity by knowing which activity is
-              performed by who, who needs to be paid and knowing how much each
-              employee to be paid can help you plan well. Farm manager app comes
-              with a great feature to easily track your employees' performance
-              tools to help you motivate them like reminders to p[ay them on
-              time.
-            </p>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={7}>
-          <Paper className="paper-four">
-            <img
-              src={require("../static/images/farm/farm-employees.jpg")}
-              alt=""
-              className="paper-four-image"
-            />
-          </Paper>
-        </Grid>
-      </Grid>
-      <Grid container spacing={6}>
-        <Grid item xs={12}>
-          {/* <Paper className={classes.paper}> */}
-          <footer>Farm manager</footer>
-          {/* </Paper> */}
-        </Grid>
-      </Grid>
+export default Home  */}
     </div>
   );
 }
+
+

@@ -3,15 +3,13 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
+import ProjectAppBar from "./ProjectAppBar"
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import ProjectAppBar from "./materialDesign/ProjectAppBar"
-
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+function createData(id, name, email, phoneNumber, options, details) {
+  return { id, name, email, phoneNumber, options, details };
 }
 
 const rows = [
@@ -95,36 +93,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Requisitions() {
+export default function Customers1() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <React.Fragment>
-        {/* <CssBaseline/> */}
-        <ProjectAppBar />
+          <React.Fragment>
+          <ProjectAppBar />
 
         <main className={classes.content}>
           <h5 align="left" style={{ marginLeft: "0.5rem" }}>
-            Recent Orders
+            Recent Customers
           </h5>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell>Ship To</TableCell>
-                <TableCell>Payment Method</TableCell>
-                <TableCell align="right">Sale Amount</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Phone Number</TableCell>
+                <TableCell>Options</TableCell>
+                <TableCell align="right">Details</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
                   <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.shipTo}</TableCell>
-                  <TableCell>{row.paymentMethod}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.phoneNumber}</TableCell>
+                  <TableCell>{row.options}</TableCell>
+                  <TableCell align="right">{row.details}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -139,4 +136,3 @@ export default function Requisitions() {
     </div>
   );
 }
-

@@ -9,26 +9,33 @@ import Title from "./Title";
 const useStyles = makeStyles({
   depositContext: {
     flex: 1,
+    paddingLeft: 0,
   },
-  amountStyles: {
-    paddingBottom: "10px"
+  amountStyles: {   
+    padding: "0px",    
   },
   titleStyles: {
-    textColor: "black"
+    color: "green"
+  },
+  typography: {    
+      color: "green"
   }
+  
 });
 
 export default function Deposits({title, amount,details,link}) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title className={classes.titleStyles}>{title}</Title>
-      <Typography component="p" variant="h5" className={classes.amountStyles}>
+      <Title className={classes.titleStyles} >
+        {title}
+      </Title>
+      <Typography component="span" variant="h6">
         UGX {amount}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         <Router>
-          <Link to={link}>{details}</Link>
+          <Link exact to={link}>{details}</Link>
         </Router>
       </Typography>
     </React.Fragment>
