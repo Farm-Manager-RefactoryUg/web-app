@@ -3,8 +3,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+//import FormHelperText from '@material-ui/core/FormHelperText';
+//import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,7 +14,6 @@ import Container from '@material-ui/core/Container';
 
 const Buttonn = withStyles({
   root: {
-    
     '&:hover': {
       backgroundColor: 'green',
       opacity: '0.9'
@@ -83,18 +82,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  let [errors, setErrors] = useState("")
+  let [[emaile, passworde], setErrors] = useState(["", ""])
+
   const handleSubmit = event => {
     event.preventDefault()
   }
   const handleChange = event => {
-    const emailInput = event.target.value;
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    if (!regex.test(emailInput)) {
-      setErrors("Invalid email address")
-    } else {
-      setErrors("")
+    const { name, value } = event.target;
+
+    switch (name) {
+      case "email":
+        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        if (!regex.test(value)) {
+          setErrors(["Invalid email address", passworde])
+        } else {
+          setErrors(["", passworde])
+        }
+      break;
+      case "password":
+        if (value.length < 6) {
+          setErrors([emaile, "Password too short"])
+        } else {
+          setErrors([emaile, ""])
+        }
+      break;
+      default:
+        break;
     }
+
   }
 
   const classes = useStyles();
@@ -119,11 +134,11 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-              error={errors.length > 0}
+              error={emaile.length > 0}
               //autoComplete="email"
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px" }}>{errors}</small>
+            <small style={{ color: 'red', marginLeft: "15px" }}>{emaile}</small>
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -134,8 +149,11 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={passworde.length > 0}
+              // FormHelperText={passworde.length > 0 && passworde}
+              onChange={handleChange}
             />
-
+            <small style={{ color: 'red', marginLeft: "15px" }}>{passworde}</small>
             <Buttonn
               type="submit"
               fullWidth
