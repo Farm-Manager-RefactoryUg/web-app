@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  var [[ emaile, passworde ], setErrors] = useState(["", ""])
+  const [[ emaile, passworde ], setErrors] = useState(["", ""])
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -90,20 +90,23 @@ export default function SignIn() {
 
   const handleChange = event => {
     const { name, value } = event.target;
+    let exy
 
     switch (name) {
       case "email":
         const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-        emaile = (!regex.test(value)) ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde]) : setErrors(["", passworde])
+        exy = (!regex.test(value)) ? "Enter valid email e.g. abc@gmail.com" : ""
       break;
 
       case "password":
-        passworde = (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""])
+        exy = (value.length < 6) ? "Password should be more than 6 characters" : ""
       break;
 
       default:
         break;
     }
+
+    setErrors([name, exy])
   }
 
   const classes = useStyles();
