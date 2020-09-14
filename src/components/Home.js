@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <div className={classes.root}>
-      <Navbar collapseOnSelect expand="lg" className="nav">
+      {/* <Navbar collapseOnSelect expand="lg" className="nav">
         <Navbar.Brand href="/" className={classes.root}>
           Home
         </Navbar.Brand>
@@ -74,9 +74,9 @@ export default function Home() {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
 
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}>
         <Grid item xs={12} sm={5}>
           <Paper className="paper-one">
             <img
@@ -128,37 +128,40 @@ export default function Home() {
               your farm finances now .
             </p>
           </Paper>
-        </Grid>
-        <AppBar position="static">
-          <Toolbar className={classes.root}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            ></IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Tele-Farmer
-            </Typography>
-            <Button
-              variant="outlined"
-              color="white"
-              className={classes.menuButton}
-              size="small"
-            >
-              Login
-            </Button>
-            <Button
-              variant="outlined"
-              color="white"
-              className={classes.menuButton}
-              size="small"
-            >
-              Sign Up
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <MainFeaturedPost post={mainFeaturedPost} />
-      </Grid>
+        </Grid> */}
+      <AppBar position="static">
+        <Toolbar className={classes.root}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          ></IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Tele-Farmer
+          </Typography>
+          <Button
+            variant="outlined"
+            color="white"
+            className={classes.menuButton}
+            size="small"
+            href="/login"
+          >
+            Login
+          </Button>
+          <Button
+            variant="outlined"
+            color="white"
+            className={classes.menuButton}
+            size="small"
+            href="/sign"
+          >
+            Sign Up
+          </Button>
+        </Toolbar>
+      </AppBar>
+      {/* <MainFeaturedPost post={mainFeaturedPost} /> */}
+      {/* <ButtonAppBar /> */}
+      {/* </Grid> */}
       {/* function Home() {
   return (
     <>

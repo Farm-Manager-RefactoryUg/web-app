@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Login from "./components/login";
 import SignUp from "./components/signup";
+//import Activities from "./components/Activities";
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
