@@ -147,7 +147,7 @@ export default function ProjectAppBar() {
           </Toolbar>
         </AppBar>
         <Drawer
-          variant="permanent"
+          variant="permanent" 
           classes={{
             paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
           }}

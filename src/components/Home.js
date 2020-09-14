@@ -9,12 +9,15 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MainFeaturedPost from "./MainFeaturedPost";
+import Features from "./Features"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "green",
     color: "white",
+    height: "2rem",
+    minHeight: "3rem",
   },
   
   menuButton: {
@@ -25,21 +28,24 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  appBar: {
+    height: "3.3rem",
+  }
 }));
 
 const mainFeaturedPost = {
-  title: "Title of a longer featured blog post",
+  title: "Earn more from your farm with Farm Manger",
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly",
-  linkText: "Continue reading…",
+    "Gain full control of your farm and get crucial insight to key decisions.",
+  
 };
 
 function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div >
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar className={classes.root}>
           <IconButton
             edge="start"
@@ -68,6 +74,7 @@ function ButtonAppBar() {
         </Toolbar>
       </AppBar>
       <MainFeaturedPost post={mainFeaturedPost} />
+      <Features/>
     </div>
   );
 }
