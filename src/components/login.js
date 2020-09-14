@@ -82,34 +82,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  let [[emaile, passworde], setErrors] = useState(["", ""])
+  var [[ emaile, passworde ], setErrors] = useState(["", ""])
 
   const handleSubmit = event => {
     event.preventDefault()
   }
+
   const handleChange = event => {
     const { name, value } = event.target;
 
     switch (name) {
       case "email":
         const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-        if (!regex.test(value)) {
-          setErrors(["Invalid email address", passworde])
-        } else {
-          setErrors(["", passworde])
-        }
+        emaile = (!regex.test(value)) ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde]) : setErrors(["", passworde])
       break;
+
       case "password":
-        if (value.length < 6) {
-          setErrors([emaile, "Password too short"])
-        } else {
-          setErrors([emaile, ""])
-        }
+        passworde = (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""])
       break;
+
       default:
         break;
     }
-
   }
 
   const classes = useStyles();
@@ -135,10 +129,10 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               error={emaile.length > 0}
-              //autoComplete="email"
+              autoComplete="email"
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px" }}>{emaile}</small>
+            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{emaile}</small>
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -150,10 +144,9 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
               error={passworde.length > 0}
-              // FormHelperText={passworde.length > 0 && passworde}
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px" }}>{passworde}</small>
+            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
             <Buttonn
               type="submit"
               fullWidth
@@ -162,14 +155,14 @@ export default function SignIn() {
             >
               Log In
             </Buttonn>
-            <Grid container>
+            <Grid container >
               <Grid item xs>
-                <Link to="/" variant="body2" style={{ color: 'darkblue', cursor: 'pointer' }}>
+                <Link to="/" variant="body2" style={{ color: 'green', cursor: 'pointer' }}>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2" style={{ color: 'darkblue', cursor: 'pointer' }}>
+                <Link href="/signup" variant="body2" style={{ color: 'green', cursor: 'pointer' }}>
                   Don't have an account? Sign Up
                 </Link>
               </Grid>
@@ -181,7 +174,7 @@ export default function SignIn() {
       <footer className={classes.footer}>
         <Container maxWidth="sm">
           <Typography variant="body2" >
-            {'Copyright © Refactory '}{new Date().getFullYear()}{'.'}
+            © {new Date().getFullYear()} Refactory
           </Typography>
         </Container>
       </footer>
