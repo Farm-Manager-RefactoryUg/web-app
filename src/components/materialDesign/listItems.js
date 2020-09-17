@@ -8,41 +8,49 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
-import {BrowserRouter as Router, Link, withRouter} from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export const mainListItems = (
   <div>
     <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <Link exact to="/dashboard">
+      <Link to="/dashboard">
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+      </Link>
+      <Link to="/dashboard">
         <ListItemText primary="Dashboard" />
       </Link>
     </ListItem>
 
     <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
+      <Link to="/requisitions">
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+      </Link>
       <Link to="/requisitions">
         <ListItemText primary="Requisitions" />
       </Link>
     </ListItem>
 
     <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <Link exact to="/customers">
+      <Link to="/customers">
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+      </Link>
+      <Link  to="/customers">
         <ListItemText primary="Customers" />
       </Link>
     </ListItem>
 
     <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
+      <Link to="/analytics">
+        <ListItemIcon>
+          <BarChartIcon />
+        </ListItemIcon>
+      </Link>
       <Link to="/analytics">
         <ListItemText primary="Analytics" />
       </Link>
@@ -56,7 +64,6 @@ export const mainListItems = (
         <ListItemText primary="Reports" />
       </Link>
     </ListItem>
-
   </div>
 );
 
@@ -67,7 +74,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>    
-        <Link to="/payroll" exact>
+        <Link to="/payroll" >
           <ListItemText primary="Employees" />
         </Link>        
     </ListItem>
@@ -85,7 +92,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>      
-        <Link>
+        <Link to="/suppliers">
           <ListItemText primary="Suppliers" />
         </Link>      
     </ListItem>

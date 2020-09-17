@@ -108,22 +108,26 @@ const handleMaxWidthChange = (event) => {
                             <th>Product purchased</th>
                             <th>Amount</th>
                             <th>Date</th>
-                            <th>Options</th>
+                            {/* <th>Options</th> */}
                           </tr>
                         </thead>
 
                         <tbody>
                           <tr>
                             <td key={user.id}>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.phone}</td>
+                            <td>
+                              <a href="emailto:{user.email} ">{user.email} </a>{" "}
+                            </td>
+                            <td>
+                              <a href="tel:{user.phone} ">{user.phone} </a>{" "}
+                            </td>
                             <td>Kampala</td>
                             <td>Product</td>
                             <td>Amount</td>
                             <td>Date</td>
-                            <td>
+                            {/* <td>
                               <Button variant="secondary">Options</Button>
-                            </td>
+                            </td> */}
                           </tr>
                         </tbody>
                       </Table>

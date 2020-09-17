@@ -69,7 +69,8 @@ export default function Chart() {
 //   console.log(this.options.yData)
   
   return (
-    <React.Fragment>      
+    <React.Fragment>  
+      
           <HighchartsReact highcharts={Highcharts} options={options} />  
           
     </React.Fragment>

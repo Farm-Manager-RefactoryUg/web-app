@@ -1,6 +1,6 @@
 import React from "react";
 // import Link from "@material-ui/core/Link";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+//import { BrowserRouter as Router, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -57,9 +57,9 @@ const rows = [
   ),
 ];
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+// function preventDefault(event) {
+//   event.preventDefault();
+// }
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -68,10 +68,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Orders() {
+  let url="/"
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Reports</Title>
+      <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -95,11 +96,11 @@ export default function Orders() {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Router>
-          <Link color="primary" href="#" onClick={preventDefault}>
+        {/* <Router> */}
+          <a href={url} color="primary"  >
             See more reports
-          </Link>
-        </Router>
+          </a>
+        {/* </Router> */}
       </div>
     </React.Fragment>
   );

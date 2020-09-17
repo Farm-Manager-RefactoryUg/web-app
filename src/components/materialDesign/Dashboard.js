@@ -1,8 +1,12 @@
 import React from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import clsx from "clsx";
-import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+//import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -12,9 +16,9 @@ import Link from "@material-ui/core/Link";
 import PieChart from "./PieChart";
 import Deposits from "./Deposits";
 import Requisitions from "./Requisitions";
-import Bargraph from "./Bargraph"
-import ProjectAppBar from "./ProjectAppBar"
-
+import Bargraph from "./Bargraph";
+import ProjectAppBar from "./ProjectAppBar";
+import Customers from "../Customers";
 
 function Copyright() {
   return (
@@ -30,13 +34,13 @@ function Copyright() {
 }
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({  
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   spacing: {
-    margin: 0,    
-  }, 
+    margin: 0,
+  },
   title: {
     flexGrow: 1,
   },
@@ -51,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },  
+  },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -71,17 +75,18 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
-  
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [investment, setInvestment] = React.useState(3500000);  
-  const [sales, setSales] = React.useState(5000000);
+  //const [open, setOpen] = React.useState(false);
+  //const [investment, setInvestment] = React.useState(3500000);
+  const [investment] = React.useState(3500000);
+  //const [sales, setSales] = React.useState(5000000);
+  const [sales] = React.useState(5000000);
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
@@ -90,7 +95,7 @@ export default function Dashboard() {
         overrides: {
           MuiGrid: {
             "spacing-xs-2": "-6px !important",
-          }
+          },
         },
         palette: {
           type: prefersDarkMode ? "light" : "dark",
@@ -99,87 +104,89 @@ export default function Dashboard() {
     [prefersDarkMode]
   );
 
-    return (
-      <>
-        <ThemeProvider theme={theme}>
-          <div className={classes.root}>
-            <CssBaseline />
-            <ProjectAppBar />
-            <main className={classes.content}>
-              <div
-                className={classes.appBarSpacer}
-                style={{ minHeight: "3rem" }}
-              />
-              <Container maxWidth="lg" className={classes.container}>
-                <Grid container spacing={2} className={theme.overrides.MuiGrid}>
-                  <Grid
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          {/* <CssBaseline /> */}
+          <ProjectAppBar />
+          <main className={classes.content}>
+            <div
+              className={classes.appBarSpacer}
+              style={{ minHeight: "3rem" }}
+            />
+            <Container maxWidth="lg" className={classes.container}>
+              <Grid container spacing={2} >
+                {/* <Grid
                     container
                     style={{ marginBottom: "0.3rem" }}
                     spacing={2}
                     classes={classes.paper}
-                  >
-                    <Grid item xs={4} md={4} lg={4}>
-                      <Paper className={fixedHeightPaper}>
-                        <Deposits
-                          title="TOTAL INVESTMENT"
-                          amount={investment}
-                          details="Details"
-                          link="/reports"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={4} md={4} lg={4}>
-                      <Paper className={fixedHeightPaper}>
-                        <Deposits
-                          title="TOTAL SALES"
-                          amount={sales}
-                          details="Details"
-                          link="/salesChart"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={4} md={4} lg={4}>
-                      <Paper className={fixedHeightPaper}>
-                        <Deposits
-                          title="TOTAL PROFIT"
-                          amount={sales - investment}
-                        />
-                      </Paper>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={2} classes={classes.paper}>
-                    <Grid item xs={6} md={6} lg={6}>
-                      <Paper style={{ borderRadius: "4px" }}>
-                        <PieChart />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6} md={6} lg={6}>
-                      <Paper>
-                        <Bargraph />
-                      </Paper>
-                    </Grid>
-                  </Grid>
-
-                  <Grid
-                    item
-                    xs={12}
-                    style={{ paddingLeft: "0px", paddingRight: "0px" }}
-                  >
-                    <Paper
-                      className={classes.paper}
-                      style={{ width: "calc(100 % + 16px)" }}
-                    >
-                      <Requisitions />
-                    </Paper>
-                  </Grid>
+                  > */}
+                <Grid item xs={12} md={4} lg={4}>
+                  <Paper className={fixedHeightPaper}>
+                    <Deposits
+                      title="TOTAL INVESTMENT"
+                      amount={investment}
+                      details="Details"
+                      link="/reports"
+                    />
+                  </Paper>
                 </Grid>
-                <Box pt={4}>
-                  <Copyright />
-                </Box>
-              </Container>
-            </main>
-          </div>
-        </ThemeProvider>
-      </>
-    );
+                <Grid item xs={12} md={4} lg={4}>
+                  <Paper className={fixedHeightPaper}>
+                    <Deposits
+                      title="TOTAL SALES"
+                      amount={sales}
+                      details="Details"
+                      link="/salesChart"
+                    />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={4} lg={4}>
+                  <Paper className={fixedHeightPaper}>
+                    <Deposits
+                      title="TOTAL PROFIT"
+                      amount={sales - investment}
+                    />
+                  </Paper>
+                </Grid>
+              </Grid>
+              <br></br>
+              <Grid container spacing={2} >
+                <Grid item xs={12} sm={6} lg={6}>
+                  <Paper style={{ borderRadius: "4px" }}>
+                    <PieChart />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} lg={6}>
+                  <Paper>
+                    <Bargraph />
+                  </Paper>
+                </Grid>
+              </Grid>
+              <br></br>
+          
+              <Grid item xs={12} sm={12}>
+                <Paper className={classes.paper}>
+                  <Requisitions />
+                </Paper>
+              </Grid>
+              <br></br>
+              
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Customers />
+                </Paper>
+              </Grid>
+              {/* </Grid> */}
+              <Box pt={4}>
+                <Copyright />
+              </Box>
+            </Container>
+          </main>
+        </div>
+      </ThemeProvider>
+    </>
+  );
 }

@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import Grid from "@material-ui/core/Grid";
-import ExpenditurePieChart from "./ExpenditurePieChart";
-import SalesBarGraph from "./SalesBarGraph"
+// import ProjectAppBar from "./materialDesign/ProjectAppBar";
+// import ExpenditurePieChart from "./ExpenditurePieChart";
+// import SalesBarGraph from "./SalesBarGraph"
 import Example from "./Example";
-import Reports from "./Reports"
+// import Reports from "./Reports"
 import "../css/customer.css";
 
 class Customers extends Component {
@@ -34,23 +35,9 @@ class Customers extends Component {
     } else {
       return (
         <>
-          <Reports />
-
-          <div className="container-fluid1">
+          <div className="container">
             <div className="row">
-              <div className="col-md-6">
-                <ExpenditurePieChart />
-              </div>
-
-              <div className="col-md-6">
-                <SalesBarGraph />
-              </div>
-            </div>
-          </div>
-
-          <div className="container-fluid" >
-            <div className="row">
-              <div className="col-md-12">
+              <Grid item xs={12}>
                 <div className="text-left">
                   <h5 className="card-heading">RECENT CUSTOMERS</h5>
                   <Table striped bordered hover size="sm">
@@ -66,20 +53,27 @@ class Customers extends Component {
                       </tr>
                     </thead>
                     {items.map((item) => (
-                      <tbody>
+                      <tbody key={item.id}>
                         <tr>
-                          <td key={item.id}>{item.id}</td>
-                          <td>{item.name}</td>
-                          <td>{item.email}</td>
-                          <td>{item.phone} </td>
-                          <td>{item.city}</td>
+                          <td >{item.id}</td>
+                          <td >{item.name}</td>
+                          <td>
+                            {" "}
+                            <a href="emailto:{user.email} ">
+                              {item.email}{" "}
+                            </a>{" "}
+                          </td>
+                          <td>
+                            <a href="tel:{item.phone} ">{item.phone} </a>{" "}
+                          </td>
+                          <td>Location</td>
                           <td>
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
                             {/* <Link to="/customer/:id"> */}
-                              <Example />
-                              {/* Details */}
+                            <Example />
+                            {/* Details */}
                             {/* </Link> */}
                           </td>
                         </tr>
@@ -87,17 +81,9 @@ class Customers extends Component {
                     ))}
                   </Table>
                 </div>
-              </div>
+              </Grid>
             </div>
           </div>
-          <Grid container spacing={6}>
-        <Grid item xs={12}>
-          {/* <Paper className={classes.paper}> */}
-          <footer>Farm manager</footer>
-          {/* </Paper> */}
-        </Grid>
-      </Grid>
-          
         </>
       );
     }

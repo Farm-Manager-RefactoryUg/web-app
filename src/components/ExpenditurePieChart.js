@@ -2,7 +2,8 @@ import React from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import Navbar from "./Navbar";
+//import Navbar from "./Navbar";
+import ProjectAppBar from "./materialDesign/ProjectAppBar";
 
 const options = {
   chart: {
@@ -74,8 +75,9 @@ export default function ExpenditurePieChart() {
   
   return (
     <React.Fragment>  
-      <Navbar />
-    <br></br>  
+      {/* <Navbar /> */}
+      <ProjectAppBar />
+    
       <HighchartsReact highcharts={Highcharts} options={options} />  
           
     </React.Fragment>

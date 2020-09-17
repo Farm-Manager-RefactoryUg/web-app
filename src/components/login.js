@@ -1,111 +1,9 @@
-// import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import { Navbar } from "react-bootstrap";
-// import { Nav, NavDropdown } from "react-bootstrap";
-// import bg from "../css/bg6.jpg";
-// import "../css/login.css";
-
-// class Login extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       email: null,
-//       password: null,
-//     };
-//   }
-
-//   handleSubmit = (event) => {
-//     event.preventDefault();
-//   };
-
-//   render() {
-//     return (
-//       <>
-//         <Navbar collapseOnSelect expand="lg" className="nav">
-//           <Navbar.Brand href="/" >
-//             Home
-//           </Navbar.Brand>
-//           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-//           <Navbar.Collapse id="responsive-navbar-nav">
-//             <Nav className="mr-auto">
-//               <Nav.Link href="#features" className="hreff">
-//                 Features
-//               </Nav.Link>
-//               <Nav.Link a href="#pricing">
-//                 Pricing
-//               </Nav.Link>
-//               <NavDropdown title="Crop" id="collasible-nav-dropdown">
-//                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-//                 <NavDropdown.Item href="#action/3.2">
-//                   Another action
-//                 </NavDropdown.Item>
-//                 <NavDropdown.Item href="#action/3.3">
-//                   Something
-//                 </NavDropdown.Item>
-//                 <NavDropdown.Divider />
-//                 <NavDropdown.Item href="#action/3.4">
-//                   Separated link
-//                 </NavDropdown.Item>
-//               </NavDropdown>
-//             </Nav>
-//             <Nav>
-//               <Nav.Link href="/reports">Login</Nav.Link>
-//               <Nav.Link eventKey={2} href="/signup">
-//                 Signup
-//               </Nav.Link>
-//             </Nav>
-//           </Navbar.Collapse>
-//         </Navbar>
-//         <div className="container-fluid">
-//           <div className="row">
-//             <div className="col-md-5">
-//               <form id="loginForm">
-//                 <h1>
-//                   Farm Manager<span id="period">.</span>
-//                 </h1>
-
-//                 <label htmlFor="email">Email</label>
-//                 <input type="email" name="email" id="email" />
-
-//                 <label htmlFor="password">Password</label>
-//                 <input type="password" name="password" id="password" />
-
-//                 <span id="forgotPasswordText">
-//                   <Link to="/">Forgot password?</Link>
-//                 </span>
-
-//                 <button>LOGIN</button>
-
-//                 <span id="signUpText">
-//                   Don't have an account? <Link to="/signup">Sign up!</Link>
-//                 </span>
-//               </form>
-//             </div>
-//             <div className="col">
-//               <img id="loginImg" src={bg} alt="_._._!" />
-//             </div>
-//           </div>
-//         </div>
-//         <br></br>
-//         <div className="container-fluid">
-//           <div className="row">
-//             <div className="col">
-//               <footer id="loginFooter">
-//                 Refactory &copy; 2020. All rights reserved.
-//               </footer>
-//             </div>
-//           </div>
-//         </div>
-//       </>
-//     );
-//   }
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
+//import FormHelperText from '@material-ui/core/FormHelperText';
 //import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -113,10 +11,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import  TopNav from "./TopNav"
 
 const Buttonn = withStyles({
   root: {
-    
     '&:hover': {
       backgroundColor: 'green',
       opacity: '0.9'
@@ -149,60 +47,80 @@ const CssTextField = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
+    flexGrow: 1,
+    //  backgroundColor: "green",
+    color: "white",
+  },
+  menuButton: {
+    marginRight: theme.spacing(1),
+    color: "white",
+  },
+  title: {
+    flexGrow: 1,
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#964c22',
+    backgroundColor: "#964c22",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'green',
-    color: 'white',
-    outline: 'none',
-    paddingTop: '10px',
-    paddingBottom: '10px',
+    backgroundColor: "green",
+    color: "white",
+    outline: "none",
+    paddingTop: "10px",
+    paddingBottom: "10px",
   },
   footer: {
     padding: theme.spacing(1, 2),
     paddingBottom: 60,
-    marginTop: 'auto',
-    backgroundColor: 'green',
-    color: 'white',
+    marginTop: "auto",
+    backgroundColor: "green",
+    color: "white",
   },
 }));
 
 export default function SignIn() {
-  let [errors, setErrors] = useState("")
+  var [[ emaile, passworde ], setErrors] = useState(["", ""])
+
   const handleSubmit = event => {
     event.preventDefault()
   }
+
   const handleChange = event => {
-    const emailInput = event.target.value;
-    const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    if (!regex.test(emailInput)) {
-      setErrors("Invalid email address")
-    } else {
-      setErrors("")
+    const { name, value } = event.target;
+
+    switch (name) {
+      case "email":
+        const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        emaile = (!regex.test(value)) ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde]) : setErrors(["", passworde])
+      break;
+
+      case "password":
+        passworde = (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""])
+      break;
+
+      default:
+        break;
     }
   }
 
   const classes = useStyles();
 
   return (
-    <div className={classes.root} >
+  
+    <div className={classes.root}>
+      <TopNav />
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -221,11 +139,15 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-              error={errors.length > 0}
-              //autoComplete="email"
+              error={emaile.length > 0}
+              autoComplete="email"
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px" }}>{errors}</small>
+            <small
+              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
+            >
+              {emaile}
+            </small>
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -236,8 +158,14 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={passworde.length > 0}
+              onChange={handleChange}
             />
-
+            <small
+              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
+            >
+              {passworde}
+            </small>
             <Buttonn
               type="submit"
               fullWidth
@@ -248,28 +176,36 @@ export default function SignIn() {
             </Buttonn>
             <Grid container>
               <Grid item xs>
-                <Link to="/" variant="body2" style={{ color: 'darkblue', cursor: 'pointer' }}>
+                <Link
+                  to="/"
+                  variant="body2"
+                  style={{ color: "green", cursor: "pointer" }}
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2" style={{ color: 'darkblue', cursor: 'pointer' }}>
+                <Link
+                  href="/signup"
+                  variant="body2"
+                  style={{ color: "green", cursor: "pointer" }}
+                >
                   Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
           </form>
         </div>
-
       </Container>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body2" >
-            {'Copyright © Refactory '}{new Date().getFullYear()}{'.'}
+          <Typography variant="body2">
+            © {new Date().getFullYear()} Refactory
           </Typography>
         </Container>
       </footer>
     </div >
+    
   );
 }
 
