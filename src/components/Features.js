@@ -34,7 +34,7 @@ const Features = () => {
             <div>
               <h2 className={classes.h2}>
                 Some Features
-                <IoIosBulb size={70} style={{verticalAlign: 'baseline'}}/>
+                <IoIosBulb size={70} style={{ verticalAlign: "baseline" }} />
               </h2>
             </div>
 
@@ -46,25 +46,25 @@ const Features = () => {
           <div className="col m3"></div>
         </div>
         <div className="row">
-          <div className="col m3">
+          <div className="col m2">
             <FaBusinessTime size={70} />
             <h5>Real Time Updates</h5>
-            <p className={classes.paragraphs}>
+            <p className={classes.paragraphs} style={{ width: "15rem" }}>
               Get real time updates concerning exactly what is transpiring on
-              your farm
+              your farm.
             </p>
           </div>
           <div className="col m3">
             <IoMdAnalytics size={70} />
             <h5>Valuable Insight</h5>
-            <p className={classes.paragraphs}>
+            <p className={classes.paragraphs} style={{ width: "15rem" }}>
               Gain valuable insight that will help you make the right decisions.
             </p>
           </div>
           <div className="col m3">
             <MdHdrStrong size={70} />
             <h5>Full Control</h5>
-            <p className={classes.paragraphs}>
+            <p className={classes.paragraphs} style={{ width: "14rem" }}>
               Be in complete control of your farm even from miles away.
             </p>
           </div>

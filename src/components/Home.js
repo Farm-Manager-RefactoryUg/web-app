@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MainFeaturedPost from "./MainFeaturedPost";
 import Features from "./Features"
+import {Copyright} from "./materialDesign/Dashboard"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +75,8 @@ function ButtonAppBar() {
         </Toolbar>
       </AppBar>
       <MainFeaturedPost post={mainFeaturedPost} />
-      <Features/>
+      <Features />
+      <Copyright/>
     </div>
   );
 }
