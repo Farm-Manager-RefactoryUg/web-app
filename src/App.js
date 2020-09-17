@@ -17,6 +17,7 @@ import Payroll2 from "./components/Payroll2";
 import SalesDetails from "./components/SalesDetails"
 import Dashboard from "./components/materialDesign/Dashboard"
 import Customers1 from "./components/materialDesign/Customers1";
+//import PieChart from "./components/materialDesign/PieChart";
 
 
 
@@ -37,14 +38,11 @@ function App (){
               <Route path="/customers" component={Customers1} exact></Route>
               <Route path="/customer/:id" component={CustomerDetails}></Route>
               <Route path="/workers" exact component={Workers}></Route>
-              <Route
-                path="/expenditurechart"
-                component={ExpenditurePieChart}
-              ></Route>
               <Route path="/saleschart" component={SalesBarGraph}></Route>
-              <Route path="/analytics" component={ExpenditurePieChart} ></Route>
-              <Route path="/salesdetails" component={SalesDetails}></Route>
               <Route path="/analytics" component={ExpenditurePieChart}></Route>
+              {/* <Route path="/analytics" component={PieChart}></Route> */}
+              <Route path="/salesdetails" component={SalesDetails}></Route>
+             
             </Switch>
           </>
         </div>

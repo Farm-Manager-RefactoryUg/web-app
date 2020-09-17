@@ -83,7 +83,7 @@ export default function Dashboard() {
   //const [investment, setInvestment] = React.useState(3500000);
   const [investment] = React.useState(3500000);
   //const [sales, setSales] = React.useState(5000000);
-  const [sales] = React.useState(5000000);
+  const [sales] = React.useState(1000000);
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -129,7 +129,7 @@ export default function Dashboard() {
                       title="TOTAL INVESTMENT"
                       amount={investment}
                       details="Details"
-                      link="/reports"
+                      link="/analytics"
                     />
                   </Paper>
                 </Grid>
