@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 //import CssBaseline from "@material-ui/core/CssBaseline";
-import ProjectAppBar from "./materialDesign/ProjectAppBar"
+import ProjectAppBar from "./ProjectAppBar"
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {

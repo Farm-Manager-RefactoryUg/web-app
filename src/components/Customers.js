@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import Grid from "@material-ui/core/Grid";
-// import ProjectAppBar from "./materialDesign/ProjectAppBar";
+// import ProjectAppBar from "./ProjectAppBar";
 // import ExpenditurePieChart from "./ExpenditurePieChart";
 // import SalesBarGraph from "./SalesBarGraph"
 import Example from "./Example";
@@ -41,7 +41,7 @@ class Customers extends Component {
                 <div className="text-left">
                   <h5 className="card-heading">RECENT CUSTOMERS</h5>
                   <Table striped bordered hover size="sm">
-                    <thead>
+                    <thead className="table-headings">
                       <tr>
                         <th>No.</th>
                         <th>Name</th>
@@ -53,18 +53,26 @@ class Customers extends Component {
                       </tr>
                     </thead>
                     {items.map((item) => (
-                      <tbody key={item.id}>
+                      <tbody key={item.id} className="table-headings">
                         <tr>
-                          <td >{item.id}</td>
-                          <td >{item.name}</td>
+                          <td>{item.id}</td>
+                          <td>{item.name}</td>
                           <td>
                             {" "}
-                            <a href="emailto:{user.email} ">
+                            <a
+                              href="emailto:{user.email} "
+                              className="table-headings"
+                            >
                               {item.email}{" "}
                             </a>{" "}
                           </td>
                           <td>
-                            <a href="tel:{item.phone} ">{item.phone} </a>{" "}
+                            <a
+                              href="tel:{item.phone} "
+                              className="table-headings"
+                            >
+                              {item.phone}{" "}
+                            </a>{" "}
                           </td>
                           <td>Location</td>
                           <td>

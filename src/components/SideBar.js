@@ -8,7 +8,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <div>
@@ -75,28 +75,32 @@ export const secondaryListItems = (
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
-      </ListItemIcon>    
-        <Link to="/payroll" >
-          <ListItemText primary="Employees" />
-        </Link>        
+      </ListItemIcon>
+      <Link to="/workers">
+        <ListItemText primary="Employees" />
+      </Link>
     </ListItem>
 
     <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>    
-        <Link to="/customers">
-          <ListItemText primary="Customers" />
-        </Link>    
+      <Link to="/customers">
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+      </Link>
+      <Link to="/customers">
+        <ListItemText primary="Customers" />
+      </Link>
     </ListItem>
 
     <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>      
-        <Link to="/suppliers">
-          <ListItemText primary="Suppliers" />
-        </Link>      
+      <Link to="/suppliers">
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+      </Link>
+      <Link to="/suppliers">
+        <ListItemText primary="Suppliers" />
+      </Link>
     </ListItem>
   </div>
 );

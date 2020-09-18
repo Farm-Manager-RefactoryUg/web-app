@@ -3,7 +3,7 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 //import Navbar from "./Navbar";
-import ProjectAppBar from "./materialDesign/ProjectAppBar";
+import ProjectAppBar from "./ProjectAppBar";
 import { makeStyles } from "@material-ui/core/styles";
 
 const options = {
