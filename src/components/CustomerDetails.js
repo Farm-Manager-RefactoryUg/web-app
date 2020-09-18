@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 import "../css/index.css";
 
@@ -32,6 +33,8 @@ class CustomerDetails extends Component {
     } else {
       return (
         <>
+          <Navbar />
+          <br></br>
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
@@ -49,25 +52,21 @@ class CustomerDetails extends Component {
                       </tr>
                     </thead>
                     {/* {item.map((item) => ( */}
-                      <tbody>
-                        <tr>
-                          <td key={item.id}>{item.name}</td>
-                          <td>{item.email}</td>
-                          <td>{item.phone} </td>
-                          <td>{item.city}</td>
-                          <td>
+                    <tbody>
+                      <tr>
+                        <td key={item.id}>{item.name}</td>
+                        <td>{item.email}</td>
+                        <td>{item.phone} </td>
+                        <td>{item.city}</td>
+                        <td>
+                          <Router>
                             <Link>
                               <Button variant="secondary">Options</Button>
                             </Link>
-                          </td>
-                          {/* <td>
-                            <Link to={`/customer/${item.id}`}>
-                              <Button variant="success">Details</Button>
-                            </Link>
-                          </td> */}
-                        </tr>
-                      </tbody>
-                    {/* ))} */}
+                          </Router>
+                        </td>
+                      </tr>
+                    </tbody>
                   </Table>
                 </div>
               </div>

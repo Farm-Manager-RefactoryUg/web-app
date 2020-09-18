@@ -1,9 +1,6 @@
-
 import React from "react";
-// import { BrowserRouter as Switch, Route } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
-// import { withStyles } from '@material-ui/core/styles';
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -19,9 +16,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListIcon from "@material-ui/icons/List";
-import Button from '@material-ui/core/Button';
 import InboxIcon from "@material-ui/icons/Inbox";
-// import BookIcon from "@material-ui/icons/Book";
+import BookIcon from "@material-ui/icons/Book";
+import TableChartIcon from "@material-ui/icons/TableChart";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -37,9 +34,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
-import MoreIcon from "@material-ui/icons/MoreVert";
-// import DraftsIcon from '@material-ui/icons/Drafts';
-// import SendIcon from '@material-ui/icons/Send';
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -63,10 +57,10 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  
+  // menuButton: {
+  //   marginRight: theme.spacing(1),
+  // },
+
   hide: {
     display: "none",
   },
@@ -162,6 +156,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const theme = useTheme();
+
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -175,18 +170,25 @@ export default function PrimarySearchAppBar() {
   const navstyle = {
     color: "green",
   };
+
+
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [refAnchorEl, setrefAnchorEl] = React.useState(null);
+  const [invAnchorEl, setinvAnchorEl] = React.useState(null);
+  const [repoAnchorEl, setrepoAnchorEl] = React.useState(null);
+  const [proAnchorEl, setproAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isrefOpen = Boolean(refAnchorEl);
+  const isinvOpen = Boolean(invAnchorEl);
+  const isrepoOpen = Boolean(repoAnchorEl);
+  const isproOpen = Boolean(proAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
@@ -194,17 +196,48 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleClick = (event) => {
-    // setAnchorEl(event.currentTarget);
-    setAnchorEl(event);
+  const handlerefMenuOpen = (event) => {
+    setrefAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handlerefMenuClose = () => {
+    setrefAnchorEl(null);
+  };
+
+  const handleinvMenuOpen = (event) => {
+    setinvAnchorEl(event.currentTarget);
+  };
+
+  const handleinvMenuClose = () => {
+    setinvAnchorEl(null);
+  };
+
+  const handlerepoMenuOpen = (event) => {
+    setrepoAnchorEl(event.currentTarget);
+  };
+
+  const handlerepoMenuClose = () => {
+    setrepoAnchorEl(null);
+  };
+
+  const handleproMenuOpen = (event) => {
+    setproAnchorEl(event.currentTarget);
+  };
+
+  const handleproMenuClose = () => {
+    setproAnchorEl(null);
   };
 
   const menuId = "primary-search-account-menu";
@@ -222,75 +255,177 @@ export default function PrimarySearchAppBar() {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-  // const StyledMenu = withStyles({
-  //   paper: {
-  //     border: '1px solid #d3d4d5',
-  //   },
-  // })((props) => (
-  //   <Menu
-  //     elevation={0}
-  //     getContentAnchorEl={null}
-  //     anchorOrigin={{
-  //       vertical: 'bottom',
-  //       horizontal: 'center',
-  //     }}
-  //     transformOrigin={{
-  //       vertical: 'top',
-  //       horizontal: 'center',
-  //     }}
-  //     {...props}
-  //   />
-  // ));
-  
-  // const StyledMenuItem = withStyles((theme) => ({
-  //   root: {
-  //     '&:focus': {
-  //       backgroundColor: theme.palette.primary.main,
-  //       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-  //         color: theme.palette.common.white,
-  //       },
-  //     },
-  //   },
-  // }))(MenuItem);
-  
-  
-  const mobileMenuId = "primary-search-account-menu-mobile";
+
+  const mobileMenuId = "";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      // anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      // keepMounted
+      // transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton  color="inherit">
-          <Badge color="secondary">
-            <MailIcon />
-          </Badge>
+      <MenuItem style={navstyle}>
+        <IconButton>
+          <MailIcon style={navstyle} />
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton  color="inherit">
-          <Badge  color="secondary">
-            <NotificationsIcon />
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <NotificationsIcon style={navstyle} />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          // aria-label="account of current user"
+          // aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          style={navstyle}
         >
-          <AccountCircle />
+          <AccountCircle style={navstyle} />
         </IconButton>
         <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+
+  const refMenuId = "primary-search-account-menu";
+  const renderrefMenu = (
+    <Menu
+      anchorEl={refAnchorEl}
+      // anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      id={refMenuId}
+      keepMounted
+      // transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isrefOpen}
+      onClose={handlerefMenuClose}
+    >
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BarChartIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Sales</p>
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BookIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Expenses</p>
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
+  const proMenuId = "primary-search-account-menu";
+  const renderproMenu = (
+    <Menu
+      anchorEl={proAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={proMenuId}
+      keepMounted
+      // transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isproOpen}
+      onClose={handleproMenuClose}
+    >
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BarChartIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Organic</p>
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BookIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Non Organic</p>
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
+
+  const invMenuId = "primary-search-account-menu";
+  const renderinvMenu = (
+    <Menu
+      anchorEl={invAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={invMenuId}
+      keepMounted
+      // transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isinvOpen}
+      onClose={handleinvMenuClose}
+    >
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BarChartIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Farm goods</p>
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BookIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Farm materials</p>
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
+
+  const repoMenuId = "primary-search-account-menu";
+  const renderrepoMenu = (
+    <Menu
+      anchorEl={repoAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={repoMenuId}
+      keepMounted
+      // transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isrepoOpen}
+      onClose={handlerepoMenuClose}
+    >
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BarChartIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Analytics</p>
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <IconButton style={navstyle}>
+          <Badge style={navstyle}>
+            <BookIcon />
+          </Badge>
+        </IconButton>
+        <Link style={navstyle} to="/analytics">
+          <p>Reports</p>
+        </Link>
       </MenuItem>
     </Menu>
   );
@@ -341,19 +476,9 @@ export default function PrimarySearchAppBar() {
               <AccountCircle />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -377,224 +502,177 @@ export default function PrimarySearchAppBar() {
 
         <List>
           <TextField
+            style={navstyle}
             id="standard-bare"
             placeholder="Search"
             margin="normal"
             InputProps={{
               endAdornment: (
                 <InputAdornment type="submit" position="start">
-                  <SearchIcon />
+                  <SearchIcon style={navstyle} />
                 </InputAdornment>
               ),
             }}
           />
 
+          <ListItem button style={navstyle}>
+            <div className={classes.sectionMobile}>
+              
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                onClose={handleClose}
+              ></IconButton>
+            </div>
+            <ListItemIcon
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+            >
+              <HomeIcon style={navstyle} />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+
+          <ListItem button style={navstyle}>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={refMenuId}
+                aria-haspopup="true"
+                onClick={handlerefMenuOpen}
+                onClose={handleClose}
+              ></IconButton>
+            </div>
+            <ListItemIcon
+              aria-label="show more"
+              aria-controls={proMenuId}
+              aria-haspopup="true"
+              onClick={handleproMenuOpen}
+            >
+              <TableChartIcon style={navstyle} />
+            </ListItemIcon>
+            <ListItemText primary="Farm Products" />
+          </ListItem>
+
+          <ListItem button style={navstyle}>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={refMenuId}
+                aria-haspopup="true"
+                onClick={handlerefMenuOpen}
+                onClose={handleClose}
+              ></IconButton>
+            </div>
+            <ListItemIcon
+              aria-label="show more"
+              aria-controls={refMenuId}
+              aria-haspopup="true"
+              onClick={handlerefMenuOpen}
+            >
+              <BookIcon style={navstyle} />
+            </ListItemIcon>
+            <ListItemText primary="Farm Economics" />
+          </ListItem>
+
+          <ListItem button style={navstyle}>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={invMenuId}
+                aria-haspopup="true"
+                onClick={handleinvMenuOpen}
+                onClose={handleClose}
+              ></IconButton>
+            </div>
+            <ListItemIcon
+              aria-label="show more"
+              aria-controls={invMenuId}
+              aria-haspopup="true"
+              onClick={handleinvMenuOpen}
+            >
+              <InboxIcon style={navstyle} />
+            </ListItemIcon>
+            <ListItemText primary="Farm Resources" />
+          </ListItem>
+
+          <ListItem button style={navstyle}>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={repoMenuId}
+                aria-haspopup="true"
+                onClick={handlerepoMenuOpen}
+                onClose={handleClose}
+              ></IconButton>
+            </div>
+            <ListItemIcon
+              aria-label="show more"
+              aria-controls={repoMenuId}
+              aria-haspopup="true"
+              onClick={handlerepoMenuOpen}
+            >
+              <ListIcon style={navstyle} />
+            </ListItemIcon>
+            <ListItemText primary="Farm Analytics" />
+          </ListItem>
+
           <ListItem button>
             <ListItemIcon>
-              <HomeIcon />
+              <BookIcon style={navstyle}/>
+            </ListItemIcon>
+            <Link style={navstyle} to="/requisitions">
+              <ListItemText primary="Requisitions" />
+            </Link>
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
+              <CalendarTodayIcon style={navstyle} />
             </ListItemIcon>
             <Link style={navstyle} to="/">
-            <ListItemText primary="Home"  />
-            </Link>
-          </ListItem>
-
-          <ListItem >
-          <Button aria-controls="simple-menu"  aria-haspopup="true" onClick={handleClick}>
-        Open Menu
-      </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-      
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-      </Menu>
-          </ListItem>
-
-          {/* <ListItem button color="green">
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" color="green" onClick={handleClick} />           
-            <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >          
-            <MenuItem onClick={handleClose}>
-            <ListItem >
-            <ListItemIcon>
-              <InboxIcon />  
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Inventory" />
-            </Link>
-          </ListItem>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-            <ListItem >
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/requisitions" >
-            <ListItemText primary="Requisitions"  />
-            </Link>
-          </ListItem>
-            </MenuItem>
-          </Menu>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <BookIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/requisitions" >
-            <ListItemText primary="Requisitions"  />
-            </Link>
-          </ListItem> */}
-
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon />  
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Inventory" />
+              <ListItemText primary="Calendar" />
             </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
-              <CalendarTodayIcon />
+              <GroupIcon style={navstyle}/>
             </ListItemIcon>
-            <Link style={navstyle} to="/">
-            <ListItemText primary="Calendar" />
+            <Link style={navstyle} to="/customer/:id">
+              <ListItemText primary="Customers" />
             </Link>
           </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <GroupIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to= "/customer/:id">
-            <ListItemText primary="Customers" />
-            </Link>
-          </ListItem>
-
         </List>
 
         <Divider />
 
-         <List>
-
-         {/* <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Open Menu
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem>
-      </StyledMenu> */}
-
-         {/* <ListItem button color="green">
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" color="green" onClick={handleClick} />           
-            <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >          
-            <MenuItem onClick={handleClose}>
-            <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/analytics">
-            <ListItemText primary="Analytics" />
-            </Link>
-          </ListItem>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-            <ListItem button>
-            <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/customers">
-            <ListItemText primary="Reports" />
-            </Link>
-          </ListItem>
-            </MenuItem>
-          </Menu>
-          </ListItem> */}
-
+        <List>
           <ListItem button>
             <ListItemIcon>
-              <ListIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/customers">
-            <ListItemText primary="Reports" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <Link style={navstyle} to="/analytics">
-            <ListItemText primary="Analytics" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon />
+              <CollectionsIcon style={navstyle}/>
             </ListItemIcon>
             <Link style={navstyle} to="/">
-            <ListItemText primary="Media" />
+              <ListItemText primary="Media" />
             </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
-              <SettingsIcon />
+              <SettingsIcon style={navstyle}/>
             </ListItemIcon>
             <Link style={navstyle} to="/">
-            <ListItemText primary="Settings" />
+              <ListItemText primary="Settings" />
             </Link>
           </ListItem>
         </List>
+
+            
+
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -603,6 +681,10 @@ export default function PrimarySearchAppBar() {
       >
         <div className={classes.drawerHeader} />
       </main>
+      {renderproMenu}
+      {renderrepoMenu}
+      {renderinvMenu}
+      {renderrefMenu}
       {renderMobileMenu}
       {renderMenu}
     </div>

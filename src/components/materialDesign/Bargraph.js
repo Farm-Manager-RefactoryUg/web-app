@@ -6,7 +6,11 @@ import HighchartsReact from "highcharts-react-official";
 const options = {
   chart: {
     type: "column",
+    
   },
+  credits: {
+    enabled: false,
+  }, 
 
   title: {
     text: "Sales Distribution",
