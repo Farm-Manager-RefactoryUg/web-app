@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -81,11 +83,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
-  const [[ emaile, passworde ], setErrors] = useState(["", ""])
+export default LogIn = () => {
+  const history = useHistory();
+  let [[ emaile, passworde ], setErrors] = useState(["", ""])
 
-  const handleSubmit = event => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
+    axios.get("/#", res)
+      .then(response => history.push("/dashboard"))
+      .catch(error => history.push("/error_file"))
+
+
+    try {
+      await Auth.logIn(email, password);
+      userHasAuthenticated(true);
+      history.push("/dashboard");
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   const handleChange = event => {
@@ -94,7 +110,7 @@ export default function SignIn() {
 
     switch (name) {
       case "email":
-        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
         exy = (!regex.test(value)) ? "Enter valid email e.g. abc@gmail.com" : ""
       break;
 
@@ -182,6 +198,7 @@ export default function SignIn() {
         </Container>
       </footer>
     </div >
+  
   );
 }
 
