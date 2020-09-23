@@ -107,9 +107,7 @@ export default function ExpenditurePieChart() {
     <div className={classes.root}>
       <React.Fragment>
         <ProjectAppBar />
-
-        <main className={classes.content}>
-         
+        <main className={classes.content}>         
           <HighchartsReact highcharts={Highcharts} options={options} />
         </main>
       </React.Fragment>
