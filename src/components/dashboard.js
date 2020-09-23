@@ -86,7 +86,7 @@ export default function Dashboard() {
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
   const theme = React.useMemo(
     () =>

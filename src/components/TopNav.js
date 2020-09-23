@@ -72,7 +72,7 @@ export default function TopNav() {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar className={classes.root}>
             <IconButton
               edge="start"

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import ExpenditurePieChart from "./ExpenditurePieChart";
 //import SalesBarGraph from "./SalesBarGraph";
 import ProjectAppBar from "./ProjectAppBar";
 //import Reports from "./Reports";
 
-import "../css/index.css";
+import "../css/workers.css";
 
 class Workers extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Workers extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://farmmanager-api.herokuapp.com/api/employee/")
       .then((response) => response.json())
       .then((json) => {
         this.setState({
@@ -34,10 +34,9 @@ class Workers extends Component {
       return <div>Loading Employees.....</div>;
     } else {
       return (
-        <>
+        <div className="root">
           <ProjectAppBar />
-          <br></br>
-          <div className="container-fluid">
+          <div className="container-fluid" id="roote">
             <div className="row">
               <div className="col-md-12">
                 <div className="text-left">
@@ -57,7 +56,7 @@ class Workers extends Component {
                     {items.map((item) => (
                       <tbody>
                         <tr>
-                          <td key={item.id}>{item.name}</td>
+                          <td key={item.id}>{item.fullname}</td>
                           <td>{item.email}</td>
                           <td>{item.phone} </td>
                           <td>{item.city}</td>
@@ -65,11 +64,9 @@ class Workers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            
-                              <Link to={`/customer/${item.id}`}>
-                                <Button variant="success">Details</Button>
-                              </Link>
-                            
+                            <Link to={`/customer/${item.id}`}>
+                              <Button variant="success">Details</Button>
+                            </Link>
                           </td>
                         </tr>
                       </tbody>
@@ -80,7 +77,7 @@ class Workers extends Component {
             </div>
           </div>
           <br></br>
-        </>
+        </div>
       );
     }
   }
