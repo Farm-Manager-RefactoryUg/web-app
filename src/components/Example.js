@@ -1,72 +1,57 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { withStyles } from "@material-ui/core/styles";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import { Table } from "react-bootstrap";
 
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
 
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+    width: "fit-content",
   },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
+  formControl: {
+    marginTop: theme.spacing(2),
+    minWidth: 120,
   },
-}))(MuiDialogActions);
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
+}));
 
 export default function Example() {
+  const [fullWidth, setFullWidth] = React.useState(true);
+  const [maxWidth, setMaxWidth] = React.useState("md");
   const [open, setOpen] = React.useState(false);
-
+  const [user, setuser] = useState({});
+  const [id, setId] = useState();
   const handleClickOpen = () => {
     setOpen(true);
+    setId(user.id);
   };
+   const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
-
-  const [user, setuser] = useState({});
-  const [id, setId] = useState(3);
+const handleFullWidthChange = (event) => {
+  setFullWidth(event.target.checked);
+};
+const handleMaxWidthChange = (event) => {
+  setMaxWidth(event.target.value);
+};
 
   useEffect(() => {
     axios
@@ -84,56 +69,102 @@ export default function Example() {
         Details
       </Button>
       <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        fullWidth={fullWidth}
+        maxWidth={maxWidth}
         open={open}
+        onClose={handleClose}
+        aria-labelledby="max-width-dialog-title"
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          <h5 className="card-heading">CUSTOMER DETAILS</h5>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="text-left">
-                    <Table striped bordered hover size="sm">
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Phone number</th>
-                          <th>Location</th>
-                          <th>Product purchased</th>
-                          <th>Amount</th>
-                          <th>Options</th>
-                        </tr>
-                      </thead>
+        <h5 className="card-heading">CUSTOMER DETAILS</h5>
+        <DialogContent>
+          <DialogContentText>
+            You can set my maximum width and whether to adapt or not.
+            <DialogTitle
+              id="customized-dialog-title"
+              onClose={handleClose}
+            ></DialogTitle>
+            <DialogContent dividers>
+              <Typography gutterBottom>
+                <div className="container-fluid">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <Form>
+                        <Form.Group controlId="formBasicEmail">
+                          <Form.Control
+                            value={id}
+                            onChange={(e) => setId(e.target.value)}
+                            type="text"
+                            placeholder="PLease Enter customer Id No"
+                          />
+                        </Form.Group>
+                      </Form>
+                      <Table striped bordered hover size="sm">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone number</th>
+                            <th>Location</th>
+                            <th>Product purchased</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            {/* <th>Options</th> */}
+                          </tr>
+                        </thead>
 
-                      <tbody>
-                        {/* <input
-                          value={id}
-                          onChange={(e) => setId(e.target.value)}
-                        ></input> */}
-                        <tr>
-                          <td key={user.id}>{user.name}</td>
-                          <td>{user.email}</td>
-                          <td>{user.phone}</td>
-                          <td>Kampala</td>
-                          <td>{user.website}</td>
-                          <td>Product</td>
-                          <td>Amount</td>
-                          <td>
-                            <Button variant="secondary">Options</Button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
+                        <tbody>
+                          <tr>
+                            <td key={user.id}>{user.name}</td>
+                            <td>
+                              <a href="emailto:{user.email} ">{user.email} </a>{" "}
+                            </td>
+                            <td>
+                              <a href="tel:{user.phone} ">{user.phone} </a>{" "}
+                            </td>
+                            <td>Kampala</td>
+                            <td>Product</td>
+                            <td>Amount</td>
+                            <td>Date</td>
+                            {/* <td>
+                              <Button variant="secondary">Options</Button>
+                            </td> */}
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </Typography>
+              </Typography>
+            </DialogContent>
+          </DialogContentText>
+
+          <form className={classes.form} noValidate>
+            <FormControl className={classes.formControl}>
+              <Select
+                autoFocus
+                value={maxWidth}
+                onChange={handleMaxWidthChange}
+                inputProps={{
+                  name: "max-width",
+                  id: "max-width",
+                }}
+              >
+                <MenuItem value={false}>false</MenuItem>
+                <MenuItem value="xs">xs</MenuItem>
+                <MenuItem value="sm">sm</MenuItem>
+                <MenuItem value="md">md</MenuItem>
+                <MenuItem value="lg">lg</MenuItem>
+                <MenuItem value="xl">xl</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControlLabel
+              className={classes.formControlLabel}
+              control={
+                <Switch checked={fullWidth} onChange={handleFullWidthChange} />
+              }
+              label="Full width"
+            />
+          </form>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} variant="danger">

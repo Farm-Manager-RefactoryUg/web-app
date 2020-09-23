@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import TopNav from "./TopNav";
 
 const Buttonn = withStyles({
   root: {
@@ -121,6 +122,7 @@ export default function SignIn() {
 
   return (
     <div className={classes.root}>
+      <TopNav />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -213,60 +215,3 @@ export default function SignIn() {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { Component } from 'react';
-// import { Link } from 'react-router-dom'
-// // import bg from '../css/bg6.jpg'
-// import '../css/signup.css'
-
-// class SignUp extends Component {
-//   state = {}
-//   render() {
-//     return (
-//       <div id="mainDiv">
-
-//         {/* <div id="images">
-//           <img src={bg} alt="_._._!" />
-//           <img src={bg} alt="_._._!" />
-//         </div> */}
-
-//         <h1>Sign up<span id="period">.</span></h1>
-
-//         <form>
-//           <label htmlFor="firstname">Full name*</label>
-//           <input type="text" name="firstname" id="firstname" />
-//           <label htmlFor="email">Email*</label>
-//           <input type="email" name="email" id="email" />
-//           <label htmlFor="password">Password*</label>
-//           <input type="password" name="password" id="password" />
-//           <label htmlFor="mobilenumber">Mobile number*</label>
-//           <input type="text" name="mobilenumber" id="mobilenumber" />
-//           <label htmlFor="farmname">Farm name*</label>
-//           <input type="text" name="farmname" id="farmname" />
-//           <label htmlFor="farmlocation">Farm location*</label>
-//           <input type="text" name="farmlocation" id="farmlocation" />
-//           <button>SIGN UP</button>
-//           <span id="loginText">Already have an account? <Link to="/login">Login!</Link></span>
-//         </form>
-
-//         <footer id="loginFooter">
-//           Refactory &copy; 2020. All rights reserved.
-//         </footer>
-
-//       </div>
-//     );
-//   }
-// }
-
-// export default SignUp;

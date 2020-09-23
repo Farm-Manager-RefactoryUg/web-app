@@ -1,34 +1,43 @@
 import React from "react";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {BrowserRouter as Router,  Link} from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
+//import { Switch } from "@material-ui/core";
 
 
 
 const useStyles = makeStyles({
   depositContext: {
     flex: 1,
+    paddingLeft: 0,
   },
-  amountStyles: {
-    paddingBottom: "10px"
+  amountStyles: {   
+    padding: "0px",    
   },
   titleStyles: {
-    textColor: "black"
+    color: "green"
+  },
+  typography: {    
+      color: "green"
   }
+  
 });
 
-export default function Deposits({title, amount,details,link}) {
+export default function Deposits({ title, amount, details, link="/" }) {
+  
   const classes = useStyles();
   return (
     <React.Fragment>
       <Title className={classes.titleStyles}>{title}</Title>
-      <Typography component="p" variant="h5" className={classes.amountStyles}>
+      <Typography component="span" variant="h6">
         UGX {amount}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         <Router>
-          <Link to={link}>{details}</Link>
+          
+            <Link to={link}>{details}</Link>
+          
         </Router>
       </Typography>
     </React.Fragment>

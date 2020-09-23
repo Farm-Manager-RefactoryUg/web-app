@@ -1,49 +1,52 @@
-import React,{useState} from "react";
-import "bootstrap/dist/css/bootstrap.css";
+import React from "react";
 import Login from "./components/login";
 import SignUp from "./components/signup";
-import Activities from "./components/Activities";
+//import Activities from "./components/Activities";
 import Customers from "./components/Customers";
-// import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Workers from "./components/Wokers";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
-import Customer from "./components/Customer";
 import Home from './components/Home';
-//import Example from "./components/Example";
-//import { Button } from "react-bootstrap";
+import Suppliers from "./components/Suppliers";
+
+//import Customer from "./components/Customer";
+import SalesDetails from "./components/SalesDetails";
+import Dashboard from "./components/dashboard";
+
+//import PieChart from "./components/materialDesign/PieChart";
 
 
-class App extends React.Component {
-  render() {
+
+function App (){
+  
     return (
-      <div className="App">
-        <React.Fragment>
-          <Router>
+      <Router>
+        <div className="App">
+          <>
             <Switch>
-              <Route path="//" component={Home} ></Route>
+              <Route path="//" component={Home} exact></Route>
               <Route path="/login" exact component={Login} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/requisitions" component={Requisitions} />
-              <Route path="/reports" component={Customers} axact></Route>
-              <Route path="/activities" component={Activities} exact></Route>
-              <Route path="/customers" component={Customer}></Route>
+              <Route path="/signup" exact component={SignUp} />
+              <Route path="/dashboard" exact component={Dashboard} />
+              <Route path="/requisitions" exact component={Requisitions} />
+              <Route path="/customers" component={Customers} exact></Route>
               <Route path="/customer/:id" component={CustomerDetails}></Route>
-              <Route path="/workers" component={Workers}></Route>
-              <Route
-                path="/expenditurechart"
-                component={ExpenditurePieChart}
-              ></Route>
+              <Route path="/workers" exact component={Workers}></Route>
+              <Route path="/suppliers" exact component={Suppliers}></Route>
               <Route path="/saleschart" component={SalesBarGraph}></Route>
-              <Route path="/analytics" component={ExpenditurePieChart} ></Route>
+              <Route path="/analytics" component={ExpenditurePieChart}></Route>
+              <Route path="/salesdetails" component={SalesDetails}></Route>
             </Switch>
-          </Router>
-        </React.Fragment>
-      </div>
+          </>
+        </div>
+      </Router>
     );
-  }
+  
 }
 export default App;
+
+
+

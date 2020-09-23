@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import axios from 'axios';
+//import { useHistory } from "react-router-dom";
+//import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-//import FormHelperText from '@material-ui/core/FormHelperText';
-//import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import  TopNav from "./TopNav"
 
 const Buttonn = withStyles({
   root: {
@@ -48,60 +47,69 @@ const CssTextField = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
+    flexGrow: 1,
+    //  backgroundColor: "green",
+    color: "white",
+  },
+  menuButton: {
+    marginRight: theme.spacing(1),
+    color: "white",
+  },
+  title: {
+    flexGrow: 1,
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#964c22',
+    backgroundColor: "#964c22",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'green',
-    color: 'white',
-    outline: 'none',
-    paddingTop: '10px',
-    paddingBottom: '10px',
+    backgroundColor: "green",
+    color: "white",
+    outline: "none",
+    paddingTop: "10px",
+    paddingBottom: "10px",
   },
   footer: {
     padding: theme.spacing(1, 2),
     paddingBottom: 60,
-    marginTop: 'auto',
-    backgroundColor: 'green',
-    color: 'white',
+    marginTop: "auto",
+    backgroundColor: "green",
+    color: "white",
+    position: "absolute",
+    bottom: "0",
+    width: "100%",
   },
 }));
 
-export default LogIn = () => {
-  const history = useHistory();
+export default function LogIn() {
+  //const history = useHistory();
   let [[ emaile, passworde ], setErrors] = useState(["", ""])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    axios.get("/#", res)
-      .then(response => history.push("/dashboard"))
-      .catch(error => history.push("/error_file"))
+    // axios.get("/#", res)
+    //   .then(response => history.push("/dashboard"))
+    //   .catch(error => history.push("/error_file"))
 
-
-    try {
-      await Auth.logIn(email, password);
-      userHasAuthenticated(true);
-      history.push("/dashboard");
-    } catch (e) {
-      alert(e.message);
-    }
+    // try {
+    //   await Auth.logIn(email, password);
+    //   userHasAuthenticated(true);
+    //   history.push("/dashboard");
+    // } catch (e) {
+    //   alert(e.message);
+    // }
   }
 
   const handleChange = event => {
@@ -128,7 +136,10 @@ export default LogIn = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} >
+  
+    <div className={classes.root}>
+      <TopNav />
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -151,7 +162,11 @@ export default LogIn = () => {
               autoComplete="email"
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{emaile}</small>
+            <small
+              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
+            >
+              {emaile}
+            </small>
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -165,7 +180,11 @@ export default LogIn = () => {
               error={passworde.length > 0}
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
+            <small
+              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
+            >
+              {passworde}
+            </small>
             <Buttonn
               type="submit"
               fullWidth
@@ -174,26 +193,33 @@ export default LogIn = () => {
             >
               Log In
             </Buttonn>
-            <Grid container >
+            <Grid container>
               <Grid item xs>
-                <Link to="/" variant="body2" style={{ color: 'green', cursor: 'pointer' }}>
+                <Link
+                  to="/"
+                  variant="body2"
+                  style={{ color: "green", cursor: "pointer" }}
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2" style={{ color: 'green', cursor: 'pointer' }}>
+                <Link
+                  href="/signup"
+                  variant="body2"
+                  style={{ color: "green", cursor: "pointer" }}
+                >
                   Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
           </form>
         </div>
-
       </Container>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body2" >
-            © {new Date().getFullYear()} Refactory
+          <Typography variant="body2">
+            © {new Date().getFullYear()} Refactory 
           </Typography>
         </Container>
       </footer>

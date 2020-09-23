@@ -6,54 +6,55 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-//import CssBaseline from "@material-ui/core/CssBaseline";
-import ProjectAppBar from "./ProjectAppBar"
+import Title from "./Title";
+import ProjectAppBar from "./ProjectAppBar";
+import Button from "@material-ui/core/Button";
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+function createData(id,name, companyName, email, address, terms) {
+  return { id, name, companyName, email, address, terms };
 }
 
 const rows = [
   createData(
     0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
+    "Malinga Daniel",
+    "Fine Millers",
+    "finemillers@gmail.com",
+    "Busia",
+    "Seedlings"
   ),
   createData(
     1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
+    "Wandira Elton",
+    "Simbwe Pharmacy",
+    "simbwe@gmail.com",
+    "Jinja",
+    "Vaccines"
   ),
   createData(
     2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
+    "Wamala Emma",
+    "Kaisal Vehicles",
+    "kaivehicles@gmail.com",
+    "Kampala",
+    "Hoes"
   ),
   createData(
     3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
+    "Edith Tess",
+    "Zedith Irrigators",
+    "zirrigators@gmail.com",
+    "Kasese",
+    "Irrigation materials"
   ),
   createData(
     4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
+    "Tusiime Godwin",
+    "Tutsi wears",
+    "tutsiwears@gmail.com",
+    "Kabale",
+    "Gumboots"
   ),
 ];
 
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    height: "40vh",
+    height: "100vh",
     overflow: "auto",
     marginTop: "60px",
   },
@@ -91,47 +92,48 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-     height: 150,
+    height: 150,
   },
 }));
-
-export default function Requisitions() {
+export default function Suppliers() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <React.Fragment>
-        {/* <CssBaseline/> */}
         <ProjectAppBar />
-
         <main className={classes.content}>
-          <h5 align="left" style={{ marginLeft: "0.5rem" }}>
-            Recent Orders
-          </h5>
+          <Title>Recent Orders</Title>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
                 <TableCell>Name</TableCell>
-                <TableCell>Ship To</TableCell>
-                <TableCell>Payment Method</TableCell>
-                <TableCell align="right">Sale Amount</TableCell>
+                <TableCell>Company Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Business Address</TableCell>
+                <TableCell>Terms</TableCell>
+                <TableCell> Details</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
                   <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.shipTo}</TableCell>
-                  <TableCell>{row.paymentMethod}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
+                  <TableCell>{row.companyName}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.address}</TableCell>
+                  <TableCell>{row.terms}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="primary">
+                      View
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <div className={classes.seeMore} style={{ marginLeft: "0.5rem" }}>
+          <div className={classes.seeMore}>
             <Link color="primary" href="#" onClick={preventDefault}>
-              See more orders
+              See more Suppliers
             </Link>
           </div>
         </main>
@@ -139,4 +141,3 @@ export default function Requisitions() {
     </div>
   );
 }
-
