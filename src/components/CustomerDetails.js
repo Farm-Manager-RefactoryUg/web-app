@@ -56,7 +56,9 @@ class CustomerDetails extends Component {
                       <tr>
                         <td key={item.id}>{item.name}</td>
                         <td>{item.email}</td>
-                        <td>{item.phone} </td>
+                        {/* <td>
+                          {item.phone}{" "}
+                        </td> */}
                         <td>{item.city}</td>
                         <td>
                           <Router>

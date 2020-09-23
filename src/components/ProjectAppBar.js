@@ -1,15 +1,11 @@
 import React from "react"
 import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
+//import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+//import useMediaQuery from "@material-ui/core/useMediaQuery";
 import clsx from "clsx";
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -18,7 +14,7 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems, secondaryListItems } from "./SideBar";
 
 
 
@@ -130,15 +126,16 @@ export default function ProjectAppBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Tele-Farmer Dashboard
+             <Typography variant="h6" href="/" className={classes.title}>
+              <a href="/" id="a">
+                Tele-Farmer
+              </a>
             </Typography>
+            <Typography variant="h6" href="/" className={classes.title}>
+              <a href="/" id="a">
+                Home
+              </a>
+              </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />

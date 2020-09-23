@@ -6,8 +6,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import ProjectAppBar from "./materialDesign/ProjectAppBar"
+//import CssBaseline from "@material-ui/core/CssBaseline";
+import ProjectAppBar from "./ProjectAppBar"
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    height: "100vh",
+    height: "40vh",
     overflow: "auto",
     marginTop: "60px",
   },
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-    height: 150,
+     height: 150,
   },
 }));
 

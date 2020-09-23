@@ -6,8 +6,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Title from "./materialDesign/Title";
-import Navbar from "./Navbar"
+import Title from "./Title";
+import ProjectAppBar from "./ProjectAppBar";
 import Button from "@material-ui/core/Button";
 
 // Generate Order Data
@@ -63,51 +63,81 @@ function preventDefault(event) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
+  root: {
+    display: "flex",
+  },
+  spacing: {
+    margin: 0,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  grid: {
+    margin: "0px !important",
+  },
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+    marginTop: "60px",
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
+    justifyContent: "space-evenly",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 150,
   },
 }));
-
 export default function Suppliers() {
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <Navbar />
-      <br />
-      <Title>Recent Suppliers</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Company Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Business Address</TableCell>
-            <TableCell>Terms</TableCell>
-            <TableCell> Details</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.companyName}</TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell>{row.address}</TableCell>
-              <TableCell>{row.terms}</TableCell>
-              <TableCell>
-                <Button variant="contained" color="primary">
-                  View
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more Suppliers
-        </Link>
-      </div>
-    </React.Fragment>
+    <div className={classes.root}>
+      <React.Fragment>
+        <ProjectAppBar />
+        <main className={classes.content}>
+          <Title>Recent Orders</Title>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Company Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Business Address</TableCell>
+                <TableCell>Terms</TableCell>
+                <TableCell> Details</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.companyName}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.address}</TableCell>
+                  <TableCell>{row.terms}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="primary">
+                      View
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <div className={classes.seeMore}>
+            <Link color="primary" href="#" onClick={preventDefault}>
+              See more Suppliers
+            </Link>
+          </div>
+        </main>
+      </React.Fragment>
+    </div>
   );
 }
