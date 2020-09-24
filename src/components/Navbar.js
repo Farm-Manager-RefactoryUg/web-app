@@ -5,36 +5,22 @@ import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListIcon from "@material-ui/icons/List";
-import InboxIcon from "@material-ui/icons/Inbox";
-import BookIcon from "@material-ui/icons/Book";
-import TableChartIcon from "@material-ui/icons/TableChart";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import GroupIcon from "@material-ui/icons/Group";
-import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import HomeIcon from "@material-ui/icons/Home";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
-import CollectionsIcon from "@material-ui/icons/Collections";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
-import { Link } from "react-router-dom";
+import Sidebar from "./sidebar";
 
 const drawerWidth = 240;
 
@@ -57,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  // menuButton: {
-  //   marginRight: theme.spacing(1),
-  // },
 
   hide: {
     display: "none",
@@ -139,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
-  sectionDesktop: {
+  sectionDesktop: { 
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
@@ -170,23 +153,17 @@ export default function PrimarySearchAppBar() {
   const navstyle = {
     color: "green",
   };
+  const serstyle = {
+    color: "white",
+  };
 
 
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [refAnchorEl, setrefAnchorEl] = React.useState(null);
-  const [invAnchorEl, setinvAnchorEl] = React.useState(null);
-  const [repoAnchorEl, setrepoAnchorEl] = React.useState(null);
-  const [proAnchorEl, setproAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const isrefOpen = Boolean(refAnchorEl);
-  const isinvOpen = Boolean(invAnchorEl);
-  const isrepoOpen = Boolean(repoAnchorEl);
-  const isproOpen = Boolean(proAnchorEl);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -196,49 +173,11 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+ 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const handlerefMenuOpen = (event) => {
-    setrefAnchorEl(event.currentTarget);
-  };
-
-  const handlerefMenuClose = () => {
-    setrefAnchorEl(null);
-  };
-
-  const handleinvMenuOpen = (event) => {
-    setinvAnchorEl(event.currentTarget);
-  };
-
-  const handleinvMenuClose = () => {
-    setinvAnchorEl(null);
-  };
-
-  const handlerepoMenuOpen = (event) => {
-    setrepoAnchorEl(event.currentTarget);
-  };
-
-  const handlerepoMenuClose = () => {
-    setrepoAnchorEl(null);
-  };
-
-  const handleproMenuOpen = (event) => {
-    setproAnchorEl(event.currentTarget);
-  };
-
-  const handleproMenuClose = () => {
-    setproAnchorEl(null);
-  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -295,141 +234,6 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  const refMenuId = "primary-search-account-menu";
-  const renderrefMenu = (
-    <Menu
-      anchorEl={refAnchorEl}
-      // anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      id={refMenuId}
-      keepMounted
-      // transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isrefOpen}
-      onClose={handlerefMenuClose}
-    >
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BarChartIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Sales</p>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BookIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Expenses</p>
-        </Link>
-      </MenuItem>
-    </Menu>
-  );
-  const proMenuId = "primary-search-account-menu";
-  const renderproMenu = (
-    <Menu
-      anchorEl={proAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={proMenuId}
-      keepMounted
-      // transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isproOpen}
-      onClose={handleproMenuClose}
-    >
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BarChartIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Organic</p>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BookIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Non Organic</p>
-        </Link>
-      </MenuItem>
-    </Menu>
-  );
-
-  const invMenuId = "primary-search-account-menu";
-  const renderinvMenu = (
-    <Menu
-      anchorEl={invAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={invMenuId}
-      keepMounted
-      // transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isinvOpen}
-      onClose={handleinvMenuClose}
-    >
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BarChartIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Farm goods</p>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BookIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Farm materials</p>
-        </Link>
-      </MenuItem>
-    </Menu>
-  );
-
-  const repoMenuId = "primary-search-account-menu";
-  const renderrepoMenu = (
-    <Menu
-      anchorEl={repoAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={repoMenuId}
-      keepMounted
-      // transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isrepoOpen}
-      onClose={handlerepoMenuClose}
-    >
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BarChartIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Analytics</p>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <IconButton style={navstyle}>
-          <Badge style={navstyle}>
-            <BookIcon />
-          </Badge>
-        </IconButton>
-        <Link style={navstyle} to="/analytics">
-          <p>Reports</p>
-        </Link>
-      </MenuItem>
-    </Menu>
-  );
-
   return (
     <div className={classes.grow}>
       <CssBaseline />
@@ -452,6 +256,25 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Tele Farmer
           </Typography>
+
+          {" "}
+          <Divider/>
+          {" "}
+          
+        <TextField
+            id="standard-bare"
+            placeholder="Search"
+            style={serstyle}
+            margin="normal"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment style={serstyle} type="submit" position="start">
+                  <SearchIcon style={serstyle} />
+                </InputAdornment>
+              ),
+            }}
+          />
+
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -500,179 +323,9 @@ export default function PrimarySearchAppBar() {
 
         <Divider />
 
-        <List>
-          <TextField
-            style={navstyle}
-            id="standard-bare"
-            placeholder="Search"
-            margin="normal"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment type="submit" position="start">
-                  <SearchIcon style={navstyle} />
-                </InputAdornment>
-              ),
-            }}
-          />
+         <Sidebar /> 
 
-          <ListItem button style={navstyle}>
-            <div className={classes.sectionMobile}>
-              
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                onClose={handleClose}
-              ></IconButton>
-            </div>
-            <ListItemIcon
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-            >
-              <HomeIcon style={navstyle} />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-
-          <ListItem button style={navstyle}>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={refMenuId}
-                aria-haspopup="true"
-                onClick={handlerefMenuOpen}
-                onClose={handleClose}
-              ></IconButton>
-            </div>
-            <ListItemIcon
-              aria-label="show more"
-              aria-controls={proMenuId}
-              aria-haspopup="true"
-              onClick={handleproMenuOpen}
-            >
-              <TableChartIcon style={navstyle} />
-            </ListItemIcon>
-            <ListItemText primary="Farm Products" />
-          </ListItem>
-
-          <ListItem button style={navstyle}>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={refMenuId}
-                aria-haspopup="true"
-                onClick={handlerefMenuOpen}
-                onClose={handleClose}
-              ></IconButton>
-            </div>
-            <ListItemIcon
-              aria-label="show more"
-              aria-controls={refMenuId}
-              aria-haspopup="true"
-              onClick={handlerefMenuOpen}
-            >
-              <BookIcon style={navstyle} />
-            </ListItemIcon>
-            <ListItemText primary="Farm Economics" />
-          </ListItem>
-
-          <ListItem button style={navstyle}>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={invMenuId}
-                aria-haspopup="true"
-                onClick={handleinvMenuOpen}
-                onClose={handleClose}
-              ></IconButton>
-            </div>
-            <ListItemIcon
-              aria-label="show more"
-              aria-controls={invMenuId}
-              aria-haspopup="true"
-              onClick={handleinvMenuOpen}
-            >
-              <InboxIcon style={navstyle} />
-            </ListItemIcon>
-            <ListItemText primary="Farm Resources" />
-          </ListItem>
-
-          <ListItem button style={navstyle}>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={repoMenuId}
-                aria-haspopup="true"
-                onClick={handlerepoMenuOpen}
-                onClose={handleClose}
-              ></IconButton>
-            </div>
-            <ListItemIcon
-              aria-label="show more"
-              aria-controls={repoMenuId}
-              aria-haspopup="true"
-              onClick={handlerepoMenuOpen}
-            >
-              <ListIcon style={navstyle} />
-            </ListItemIcon>
-            <ListItemText primary="Farm Analytics" />
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <BookIcon style={navstyle}/>
-            </ListItemIcon>
-            <Link style={navstyle} to="/requisitions">
-              <ListItemText primary="Requisitions" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <CalendarTodayIcon style={navstyle} />
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Calendar" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <GroupIcon style={navstyle}/>
-            </ListItemIcon>
-            <Link style={navstyle} to="/customer/:id">
-              <ListItemText primary="Customers" />
-            </Link>
-          </ListItem>
-        </List>
-
-        <Divider />
-
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <CollectionsIcon style={navstyle}/>
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Media" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon style={navstyle}/>
-            </ListItemIcon>
-            <Link style={navstyle} to="/">
-              <ListItemText primary="Settings" />
-            </Link>
-          </ListItem>
-        </List>
-
-            
-
+          
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -681,10 +334,6 @@ export default function PrimarySearchAppBar() {
       >
         <div className={classes.drawerHeader} />
       </main>
-      {renderproMenu}
-      {renderrepoMenu}
-      {renderinvMenu}
-      {renderrefMenu}
       {renderMobileMenu}
       {renderMenu}
     </div>
