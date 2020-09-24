@@ -20,7 +20,6 @@ import ProjectAppBar from "./ProjectAppBar";
 import Customers from "./Customers";
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
-//import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 function Copyright() {
@@ -54,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: "relative",
+    flexShrink: 0,
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -112,6 +112,7 @@ export default function Dashboard() {
         <div className={classes.root}>
           {/* <CssBaseline /> */}
           <ProjectAppBar />
+          
           <main className={classes.content}>
             <div
               className={classes.appBarSpacer}
@@ -173,9 +174,9 @@ export default function Dashboard() {
                         Total Earnings
                         <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Annualy" size="small"/>
                       </Typography>
-                      <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"45,000,000"}/=</Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>UGX{" 45,000,000"}</Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(244, 67, 54)", fontWeight: "700", }}>
-                        {"-14"}%
+                        {"-9"}%
                         <span style={{ fontFamily: "Segoe UI", marginLeft: "20px", color: "rgb(117, 117, 117)", fontSize: "1rem", fontWeight: "400" }}>Since last week</span>
                       </Typography>
                     </CardContent>
@@ -185,14 +186,14 @@ export default function Dashboard() {
 
               <Grid container spacing={2} style={{ marginBottom: "20px", }} >
 
-                <Grid item xs={12} sm={6} lg={8}>
-                  <Card>
+                <Grid item xs={12} sm={6} lg={7}>
+                  <Card style={{ backgroundColor: "white" }}>
                     <Bargraph />
                   </Card>
                 </Grid>
 
-                <Grid item xs={12} sm={6} lg={4}>
-                  <Card>
+                <Grid item xs={12} sm={6} lg={5}>
+                  <Card style={{ backgroundColor: "white" }}>
                     <PieChart />
                   </Card>
                 </Grid>
