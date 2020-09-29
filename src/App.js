@@ -11,12 +11,11 @@ import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Home from './components/Home';
 import Suppliers from "./components/Suppliers";
-
 //import Customer from "./components/Customer";
 import SalesDetails from "./components/SalesDetails";
 import Dashboard from "./components/dashboard";
-
-//import PieChart from "./components/materialDesign/PieChart";z
+import Expenditure from "./components/Expenditure"
+//import PieChart from "./components/materialDesign/PieChart";
 
 
 
@@ -27,6 +26,7 @@ function App (){
         <div className="App">
           <>
             <Switch>
+              <Route path="/expenditure" component={Expenditure} exact/>
               <Route path="//" component={Home} exact></Route>
               <Route path="/login" exact component={Login} />
               <Route path="/signup" exact component={SignUp} />

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+//import { useHistory } from "react-router-dom";
+//import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-//import FormHelperText from '@material-ui/core/FormHelperText';
-//import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -86,32 +86,51 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
     backgroundColor: "green",
     color: "white",
+    position: "absolute",
+    bottom: "0",
+    width: "100%",
   },
 }));
 
-export default function SignIn() {
-  var [[ emaile, passworde ], setErrors] = useState(["", ""])
+export default function LogIn() {
+  //const history = useHistory();
+  let [[ emaile, passworde ], setErrors] = useState(["", ""])
 
-  const handleSubmit = event => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+
+    // axios.get("/#", res)
+    //   .then(response => history.push("/dashboard"))
+    //   .catch(error => history.push("/error_file"))
+
+    // try {
+    //   await Auth.logIn(email, password);
+    //   userHasAuthenticated(true);
+    //   history.push("/dashboard");
+    // } catch (e) {
+    //   alert(e.message);
+    // }
   }
 
   const handleChange = event => {
     const { name, value } = event.target;
+    let exy
 
     switch (name) {
       case "email":
         const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-        emaile = (!regex.test(value)) ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde]) : setErrors(["", passworde])
+        exy = (!regex.test(value)) ? "Enter valid email e.g. abc@gmail.com" : ""
       break;
 
       case "password":
-        passworde = (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""])
+        exy = (value.length < 6) ? "Password should be more than 6 characters" : ""
       break;
 
       default:
         break;
     }
+
+    setErrors([name, exy])
   }
 
   const classes = useStyles();
@@ -200,12 +219,12 @@ export default function SignIn() {
       <footer className={classes.footer}>
         <Container maxWidth="sm">
           <Typography variant="body2">
-            © {new Date().getFullYear()} Refactory
+            © {new Date().getFullYear()} Refactory 
           </Typography>
         </Container>
       </footer>
     </div >
-    
+  
   );
 }
 

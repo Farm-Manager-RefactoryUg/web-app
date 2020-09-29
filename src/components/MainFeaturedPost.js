@@ -5,16 +5,14 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import farmImage from "./materialDesign/coffee-farm.jpg";
-
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
-        
-    // height: theme.spacing(10),
+        marginBottom: theme.spacing(4),
+    height: theme.spacing(10),
     backgroundImage: "",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -45,8 +43,16 @@ export default function MainFeaturedPost(props) {
   return (
     <Paper
       className={classes.mainFeaturedPost}
-        style={{ backgroundImage: `url(${farmImage})` }}
+      //   style={{ backgroundImage: `url(${post.image})` }}
     >
+      {/* Increase the priority of the hero background image */}
+      {
+        <img
+          src="../../public/farmlogo.jpg"
+          alt="logo"         
+          className="paper-three-image"
+        />
+      }
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>

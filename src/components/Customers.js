@@ -86,7 +86,8 @@ class Customers extends Component {
                           </td>
                         </tr>
                       </tbody>
-                    ))}
+                    ))
+                    }
                   </Table>
                 </div>
               </Grid>

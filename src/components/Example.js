@@ -108,7 +108,6 @@ const handleMaxWidthChange = (event) => {
                             <th>Product purchased</th>
                             <th>Amount</th>
                             <th>Date</th>
-                            {/* <th>Options</th> */}
                           </tr>
                         </thead>
 

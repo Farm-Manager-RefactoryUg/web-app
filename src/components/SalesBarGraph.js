@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -107,6 +107,24 @@ const options = {
 };
 
 export default function SalesBarGraph() {
+  const [data, dataSet] = useState(null);
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      try {
+        const [data1, data2] = await Promise.all([
+          fetch("https://farmmanager-api.herokuapp.com/api/expenditure/"),
+          fetch("https://farmmanager-api.herokuapp.com/api/payroll/"),
+        ]);
+        console.log(data1, data2);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchMyAPI();
+  }, []);
+
   return (
     <React.Fragment>
       <Navbar />

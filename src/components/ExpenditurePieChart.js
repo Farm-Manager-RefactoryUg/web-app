@@ -1,8 +1,7 @@
-import React from "react";
-// import { useTheme } from "@material-ui/core/styles";
+/* eslint-disable no-sparse-arrays */
+import React, {useState,useEffect} from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-//import Navbar from "./Navbar";
 import ProjectAppBar from "./ProjectAppBar";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -22,7 +21,6 @@ const options = {
     text: "Expenditure Distribution Last Planting Season",
   },
   subtitle: {
-    // text:(sum()),
     floating: true,
     y: 175,
   },
@@ -102,12 +100,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ExpenditurePieChart() {
+  const [data, setData] = useState(null);
+  const [labels, setLabels] = useState(null)
+
+  useEffect(() => {
+    
+          fetch("https://farmmanager-api.herokuapp.com/api/expenditure/")
+            .then((res) => res.json())
+            .then((result) => console.log(result))      
+            .catch((error) => {
+              console.log(error)
+            })
+    
+
+    
+  }, []);
+  
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <React.Fragment>
         <ProjectAppBar />
-        <main className={classes.content}>         
+
+        <main className={classes.content}>
+         
           <HighchartsReact highcharts={Highcharts} options={options} />
         </main>
       </React.Fragment>

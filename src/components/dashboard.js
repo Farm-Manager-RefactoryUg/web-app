@@ -18,6 +18,9 @@ import RequisitionsDashboard from "./RequisitionsDashboard";
 import Bargraph from "./Bargraph";
 import ProjectAppBar from "./ProjectAppBar";
 import Customers from "./Customers";
+import Chip from '@material-ui/core/Chip';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 function Copyright() {
   return (
@@ -36,6 +39,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    fontFamily: "Segoe UI",
+    backgroundColor: "rgb(247, 249, 252)",
   },
   spacing: {
     margin: 0,
@@ -48,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: "relative",
+    flexShrink: 0,
     whiteSpace: "nowrap",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -74,18 +80,15 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
+  label: {
+    fontSize: "0.7rem",
+    color: "white",
+  },
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
-  //const [open, setOpen] = React.useState(false);
-  //const [investment, setInvestment] = React.useState(3500000);
-  const [investment] = React.useState(3500000);
-  //const [sales, setSales] = React.useState(5000000);
-  const [sales] = React.useState(1000000);
-
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
@@ -109,62 +112,93 @@ export default function Dashboard() {
         <div className={classes.root}>
           {/* <CssBaseline /> */}
           <ProjectAppBar />
+          
           <main className={classes.content}>
             <div
               className={classes.appBarSpacer}
               style={{ minHeight: "3rem" }}
             />
             <Container maxWidth="lg" className={classes.container}>
-              <Grid container spacing={2} >
-                {/* <Grid
-                    container
-                    style={{ marginBottom: "0.3rem" }}
-                    spacing={2}
-                    classes={classes.paper}
-                  > */}
-                <Grid item xs={12} md={4} lg={4}>
-                  <Paper className={fixedHeightPaper}>
-                    <Deposits
-                      title="TOTAL INVESTMENT"
-                      amount={investment}
-                      details="Details"
-                      link="/analytics"
-                    />
-                  </Paper>
+              <h1 style={{ fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", fontSize: "2rem", }}>Project Z</h1>
+
+              <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }}>
+                <Grid item xs={12} md={3} lg={3}>
+                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                    <CardContent>
+                      <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                        Sales Today
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Today" size="small"/>
+                      </Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"2.532"}</Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(76, 175, 80)", fontWeight: "700", }}>
+                        {"+26"}%
+                        <span style={{ fontFamily: "Segoe UI", marginLeft: "20px", color: "rgb(117, 117, 117)", fontSize: "1rem", fontWeight: "400" }}>Since last week</span>
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
-                <Grid item xs={12} md={4} lg={4}>
-                  <Paper className={fixedHeightPaper}>
-                    <Deposits
-                      title="TOTAL SALES"
-                      amount={sales}
-                      details="Details"
-                      link="/salesChart"
-                    />
-                  </Paper>
+                <Grid item xs={12} md={3} lg={3}>
+                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                    <CardContent>
+                      <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                        Visitors
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Monthly" size="small"/>
+                      </Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"170.212"}</Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(244, 67, 54)", fontWeight: "700", }}>
+                        {"-14"}%
+                        <span style={{ fontFamily: "Segoe UI", marginLeft: "20px", color: "rgb(117, 117, 117)", fontSize: "1rem", fontWeight: "400" }}>Since last week</span>
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
-                <Grid item xs={12} md={4} lg={4}>
-                  <Paper className={fixedHeightPaper}>
-                    <Deposits
-                      title="TOTAL PROFIT"
-                      amount={sales - investment}
-                    />
-                  </Paper>
+                <Grid item xs={12} md={3} lg={3}>
+                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                    <CardContent>
+                      <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                        Pending Orders
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Weekly" size="small"/>
+                      </Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"33"}</Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(76, 175, 80)", fontWeight: "700", }}>
+                        {"+18"}%
+                        <span style={{ fontFamily: "Segoe UI", marginLeft: "20px", color: "rgb(117, 117, 117)", fontSize: "1rem", fontWeight: "400" }}>Since last week</span>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12} md={3} lg={3}>
+                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                    <CardContent>
+                      <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                        Total Earnings
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Annualy" size="small"/>
+                      </Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>UGX{" 45,000,000"}</Typography>
+                      <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(244, 67, 54)", fontWeight: "700", }}>
+                        {"-9"}%
+                        <span style={{ fontFamily: "Segoe UI", marginLeft: "20px", color: "rgb(117, 117, 117)", fontSize: "1rem", fontWeight: "400" }}>Since last week</span>
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
               </Grid>
-              <br></br>
-              <Grid container spacing={2} >
-                <Grid item xs={12} sm={6} lg={6}>
-                  <Paper style={{ borderRadius: "4px" }}>
-                    <PieChart />
-                  </Paper>
-                </Grid>
-                <Grid item xs={12} sm={6} lg={6}>
-                  <Paper>
+
+              <Grid container spacing={2} style={{ marginBottom: "20px", }} >
+
+                <Grid item xs={12} sm={6} lg={7}>
+                  <Card style={{ backgroundColor: "white" }}>
                     <Bargraph />
-                  </Paper>
+                  </Card>
                 </Grid>
+
+                <Grid item xs={12} sm={6} lg={5}>
+                  <Card style={{ backgroundColor: "white" }}>
+                    <PieChart />
+                  </Card>
+                </Grid>
+
               </Grid>
-              <br></br>
           
               <Grid item xs={12} sm={12}>
                 <Paper className={classes.paper}>
@@ -178,10 +212,11 @@ export default function Dashboard() {
                   <Customers />
                 </Paper>
               </Grid>
-              {/* </Grid> */}
+              
               <Box pt={4}>
                 <Copyright />
               </Box>
+
             </Container>
           </main>
         </div>

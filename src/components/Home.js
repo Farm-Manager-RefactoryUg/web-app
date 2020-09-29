@@ -21,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: "green",
     color: "white",
-    height: "2rem",
-    minHeight: "3rem",
   },
   
   menuButton: {
@@ -33,17 +31,13 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  title: {
+    flexGrow: 1,
+  },
   appBar: {
     height: "3.3rem",
   }
 }));
-
-// const mainFeaturedPost = {
-//   title: "Title of a longer featured blog post",
-//   description:
-//     "Multiple lines of text that form the lede, informing new readers quickly",
-//   linkText: "Continue reading…",
-// };
 
 export default function Home() {
   const classes = useStyles();

@@ -90,7 +90,7 @@ export default function SignIn() {
   }
   const handleChange = event => {
     const { name, value } = event.target
-    //let [fullNamee, emaile, passworde, mobilee] = [fullNamee, emaile, passworde, mobilee]
+    let [fullNamee, emaile, passworde, mobilee] = [fullNamee, emaile, passworde, mobilee]
     const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
     const mobileRegex = /^07[0-9]{8}$/
