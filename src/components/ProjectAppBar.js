@@ -18,6 +18,7 @@ import { mainListItems, secondaryListItems } from "./SideBar";
 
 
 
+//import {mainListItems, secondaryListItems, tertiaryListItems} from "./SideBar";
 
 const drawerWidth = 220;
 
@@ -40,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     minHeight: "48px",
+    backgroundColor: "green",
+    minHeight: "50px",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -66,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     position: "relative",
     whiteSpace: "nowrap",
+    backgroundColor: "rgb(27, 36, 48)",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -145,6 +149,7 @@ export default function ProjectAppBar() {
         </AppBar>
         <Drawer
           variant="permanent" 
+          // variant="permanent"
           classes={{
             paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
           }}
@@ -159,6 +164,10 @@ export default function ProjectAppBar() {
           <List>{mainListItems}</List>
           <Divider />
           <List>{secondaryListItems}</List>
+          <Divider style={{ marginTop: "25px", }} />
+          <List>{secondaryListItems}</List>
+          <Divider style={{ marginTop: "25px", }} />
+          {/* <List>{tertiaryListItems}</List> */}
         </Drawer>
       </>
     );

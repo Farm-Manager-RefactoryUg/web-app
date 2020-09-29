@@ -6,14 +6,18 @@ import HighchartsReact from "highcharts-react-official";
 const options = {
   chart: {
     type: "column",
-    
   },
   credits: {
     enabled: false,
   }, 
 
   title: {
-    text: "Sales Distribution",
+    text: "Sales Distribution for the Year 2020.",
+    align: "left",
+    margin: 50,
+    x: 10,
+    y: 28,
+    style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "rgba(0, 0, 0, 0.87)" },
   },
 
   // subtitle: {
@@ -27,16 +31,19 @@ const options = {
   },
 
   xAxis: {
-    categories: ["Jan 2020", "Feb2020", "Mar2020","Apr2020","May2020","Jun2020","Jul2020","Aug2020","Sep2020","Oct2020","Nov2020","Dec2020"],
+    categories: ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
     labels: {
       x: 0,
     },
+    title: {
+      text: "Months",
+    }
   },
 
   yAxis: {
     allowDecimals: false,
     title: {
-      text: "Amount(UGX)",
+      text: "Shillings",
     },
   },
 
@@ -67,7 +74,7 @@ const options = {
               y: -5,
             },
             title: {
-              text: "Amount",
+              text: "Shillings",
             },
           },
           subtitle: {

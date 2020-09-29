@@ -14,7 +14,7 @@ import Suppliers from "./components/Suppliers";
 
 //import Customer from "./components/Customer";
 import SalesDetails from "./components/SalesDetails";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard";
 
 //import PieChart from "./components/materialDesign/PieChart";
 

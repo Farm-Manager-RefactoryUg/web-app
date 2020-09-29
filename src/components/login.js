@@ -1,46 +1,45 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
 //import FormHelperText from '@material-ui/core/FormHelperText';
 //import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import  TopNav from "./TopNav"
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import TopNav from "./TopNav";
 
 const Buttonn = withStyles({
   root: {
-    '&:hover': {
-      backgroundColor: 'green',
-      opacity: '0.9'
+    "&:hover": {
+      backgroundColor: "green",
+      opacity: "0.9",
     },
-    '&:active , &:focus': {
-      outline: 'none',
+    "&:active , &:focus": {
+      outline: "none",
     },
   },
 })(Button);
 
 const CssTextField = withStyles({
   root: {
-    '& label.Mui-focused': {
-      color: 'green',
+    "& label.Mui-focused": {
+      color: "green",
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#964c22',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#964c22",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: '#964c22',
+      "&.Mui-focused fieldset": {
+        borderColor: "#964c22",
       },
-      '&.Mui-error fieldset': {
-        borderColor: 'red',
+      "&.Mui-error fieldset": {
+        borderColor: "red",
       },
-
     },
   },
 })(TextField);
@@ -90,34 +89,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  var [[ emaile, passworde ], setErrors] = useState(["", ""])
+  var [[emaile, passworde], setErrors] = useState(["", ""]);
 
-  const handleSubmit = event => {
-    event.preventDefault()
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
     switch (name) {
       case "email":
-        const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-        emaile = (!regex.test(value)) ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde]) : setErrors(["", passworde])
-      break;
+        const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        emaile = !regex.test(value)
+          ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde])
+          : setErrors(["", passworde]);
+        break;
 
       case "password":
-        passworde = (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""])
-      break;
+        passworde =
+          value.length < 6
+            ? setErrors([emaile, "Password should be more than 6 characters"])
+            : setErrors([emaile, ""]);
+        break;
 
       default:
         break;
     }
-  }
+  };
 
   const classes = useStyles();
 
   return (
-  
     <div className={classes.root}>
       <TopNav />
 
@@ -204,8 +207,6 @@ export default function SignIn() {
           </Typography>
         </Container>
       </footer>
-    </div >
-    
+    </div>
   );
 }
-
