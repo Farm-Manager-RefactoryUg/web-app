@@ -18,9 +18,11 @@ class Customers extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://farmmanager-api.herokuapp.com/api/customer/")
       .then((response) => response.json())
       .then((json) => {
+        // Object.entries(json)
+        console.log(json);
         this.setState({
           isLoaded: true,
           items: json,
@@ -86,8 +88,8 @@ class Customers extends Component {
                           </td>
                         </tr>
                       </tbody>
-                    ))
-                    }
+                    ))}
+                    
                   </Table>
                 </div>
               </Grid>
