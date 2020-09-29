@@ -14,7 +14,8 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems, tertiaryListItems } from "./SideBar";
+import MainListItems from "./SideBar";
+import MenuListComposition from "./Avatar";
 
 const drawerWidth = 220;
 
@@ -88,6 +89,10 @@ const useStyles = makeStyles((theme) => ({
 
     // theme.mixins.toolbar,
   },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
   // content: {
   //   flexGrow: 1,
   //   height: "100vh",
@@ -114,6 +119,7 @@ export default function ProjectAppBar() {
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
+          
           <IconButton
             edge="start"
             color="inherit"
@@ -123,24 +129,28 @@ export default function ProjectAppBar() {
               classes.menuButton,
               open && classes.menuButtonHidden
             )}
+            style={{ outline: "none" }}
           >
             <MenuIcon />
+            
           </IconButton>
-          <Typography variant="h6" href="/" className={classes.title}>
-            <a href="/" id="a">
-              Tele-Farmer
-              </a>
+
+          <Typography
+            variant="h6"
+            href="/"
+            className={classes.title}
+            style={{ color: "white", fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", }}
+          >
+            Tele-Farmer
           </Typography>
-          <Typography variant="h6" href="/" className={classes.title}>
-            <a href="/" id="a">
-              Home
-              </a>
-          </Typography>
-          <IconButton color="inherit">
+
+          <IconButton color="inherit" style={{ outline: "none" }}>
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          
+          <MenuListComposition />
         </Toolbar>
       </AppBar>
 
@@ -152,16 +162,12 @@ export default function ProjectAppBar() {
         open={open}
       >
         <div className={classes.toolbarIcon} style={{ minHeight: "48px" }}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} style={{ outline: "none" }}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
-        <Divider style={{ marginTop: "25px", }} />
-        <List>{secondaryListItems}</List>
-        <Divider style={{ marginTop: "25px", }} />
-        <List>{tertiaryListItems}</List>
+        <List><MainListItems /></List>
       </Drawer>
     </>
   );

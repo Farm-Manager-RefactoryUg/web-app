@@ -1,11 +1,7 @@
 import React from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import clsx from "clsx";
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+//import clsx from "clsx";
+import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -13,7 +9,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import PieChart from "./PieChart";
-import Deposits from "./Deposits";
 import RequisitionsDashboard from "./RequisitionsDashboard";
 import Bargraph from "./Bargraph";
 import ProjectAppBar from "./ProjectAppBar";
@@ -21,6 +16,7 @@ import Customers from "./Customers";
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Divider from "@material-ui/core/Divider";
 
 function Copyright() {
   return (
@@ -88,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
@@ -110,16 +106,25 @@ export default function Dashboard() {
     <>
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
-          {/* <CssBaseline /> */}
+
           <ProjectAppBar />
-          
+
           <main className={classes.content}>
             <div
               className={classes.appBarSpacer}
               style={{ minHeight: "3rem" }}
             />
-            <Container maxWidth="lg" className={classes.container}>
-              <h1 style={{ fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", fontSize: "2rem", }}>Project Z</h1>
+
+            <Container style={{ marginTop: "60px" }}>
+
+              <Typography
+                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.57)", }}
+                component="h1"
+              >
+                {"Biyinzika Mukono C"}
+              </Typography>
+
+              <Divider style={{ marginTop: "15px", backgroundColor: "orange" }} />
 
               <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }}>
                 <Grid item xs={12} md={3} lg={3}>
@@ -127,7 +132,7 @@ export default function Dashboard() {
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Sales Today
-                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Today" size="small"/>
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }} label="Today" size="small" />
                       </Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"2.532"}</Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(76, 175, 80)", fontWeight: "700", }}>
@@ -142,7 +147,7 @@ export default function Dashboard() {
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Visitors
-                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Monthly" size="small"/>
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }} label="Monthly" size="small" />
                       </Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"170.212"}</Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(244, 67, 54)", fontWeight: "700", }}>
@@ -157,7 +162,7 @@ export default function Dashboard() {
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Pending Orders
-                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Weekly" size="small"/>
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }} label="Weekly" size="small" />
                       </Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"33"}</Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(76, 175, 80)", fontWeight: "700", }}>
@@ -172,7 +177,7 @@ export default function Dashboard() {
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Total Earnings
-                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}label="Annualy" size="small"/>
+                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }} label="Annualy" size="small" />
                       </Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>UGX{" 45,000,000"}</Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgb(244, 67, 54)", fontWeight: "700", }}>
@@ -199,20 +204,20 @@ export default function Dashboard() {
                 </Grid>
 
               </Grid>
-          
+
               <Grid item xs={12} sm={12}>
                 <Paper className={classes.paper}>
                   <RequisitionsDashboard />
                 </Paper>
               </Grid>
               <br></br>
-              
+
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Customers />
                 </Paper>
               </Grid>
-              
+
               <Box pt={4}>
                 <Copyright />
               </Box>
