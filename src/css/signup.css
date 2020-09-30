@@ -69,13 +69,6 @@ form button{
     font-size: 0.9rem;
     color: rgba(0, 0, 0, 0.7);
 }
-<<<<<<< HEAD
-#navbar{
-width: 100%;
-background-color: green;
-height: 50px;
-}
-=======
 #loginFooter{
     position: relative;
     bottom: 0;
@@ -86,4 +79,3 @@ height: 50px;
     color: white;
     font-size: 0.9rem;
 } */
->>>>>>> 8ec243bf0727d6a6d2d241fc17da489b811a2a6c
