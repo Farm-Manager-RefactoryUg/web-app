@@ -9,24 +9,19 @@ const options = {
     plotBorderWidth: null,
     plotShadow: false,
     type: "pie",
-
+    
   },
 
   title: {
-    text: "Expenditure Distribution for the Month of August 2020.",
-    align: "left",
-    margin: 20,
-    x: 10,
-    y: 28,
-    style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "rgba(0, 0, 0, 0.87)" },
+    text: "Expenditure Distribution Last Planting Season",
   },
   subtitle: {
     // text:(sum()),
-    // floating: true,
-    // y: 175,
+    floating: true,
+    y: 175,
   },
   tooltip: {
-    pointFormat: "<b>{point.percentage:.1f}%</b>",
+    pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
   },
   accessibility: {
     point: {
@@ -35,25 +30,25 @@ const options = {
   },
   plotOptions: {
     pie: {
-      showInLegend: false,
-      innerSize: "0%",
+      showInLegend: true,
+      innerSize: "50%",
       dataLabels: {
         enabled: true,
-        distance: 5,
+        distance: 14,
 
         style: {
-          // fontweight: "thin",
+          fontweight: "bold",
           fontsize: 10,
         },
-        // formatter: function () {
-        //   return this.key + ": " + this.y + "/=";
-        // },
+        formatter: function () {
+          return this.key + ": " + this.y + "/=";
+        },
       },
     },
   },
   series: [
     {
-      // name: "Share",
+      name: "Share",
       data: [
         { name: "Planting", y: 2000 },
         { name: "Spraying", y: 1500 },
@@ -65,19 +60,19 @@ const options = {
     },
   ],
 };
-
+  
 
 
 export default function Chart() {
-
-
-  //   console.log(this.options.yData)
-
+    
+    
+//   console.log(this.options.yData)
+  
   return (
-    <React.Fragment>
-
-      <HighchartsReact highcharts={Highcharts} options={options} />
-
+    <React.Fragment>  
+      
+          <HighchartsReact highcharts={Highcharts} options={options} />  
+          
     </React.Fragment>
   );
 }
