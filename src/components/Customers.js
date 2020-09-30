@@ -1,16 +1,12 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-//import Popup from "reactjs-popup";
-import Modal from "react-bootstrap/Modal";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import ExpenditurePieChart from "./ExpenditurePieChart";
-import SalesBarGraph from "./SalesBarGraph"
+import Grid from "@material-ui/core/Grid";
+// import ProjectAppBar from "./ProjectAppBar";
+// import ExpenditurePieChart from "./ExpenditurePieChart";
+// import SalesBarGraph from "./SalesBarGraph"
 import Example from "./Example";
-//import PersistentDrawerLeft from "./Navbar";
-import Reports from "./Reports"
-
+// import Reports from "./Reports"
 import "../css/customer.css";
 
 class Customers extends Component {
@@ -39,27 +35,15 @@ class Customers extends Component {
     } else {
       return (
         <>
-          <Reports />
-          <div className="container-fluid">
+          <div className="container">
             <div className="row">
-              <div className="col-md-6">
-                <ExpenditurePieChart />
-              </div>
-
-              <div className="col-md-6">
-                <SalesBarGraph />
-              </div>
-            </div>
-          </div>
-
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-12">
+              <Grid item xs={12}>
                 <div className="text-left">
                   <h5 className="card-heading">RECENT CUSTOMERS</h5>
                   <Table striped bordered hover size="sm">
-                    <thead>
+                    <thead className="table-headings">
                       <tr>
+                        <th>No.</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone number</th>
@@ -69,30 +53,46 @@ class Customers extends Component {
                       </tr>
                     </thead>
                     {items.map((item) => (
-                      <tbody>
+                      <tbody key={item.id} className="table-headings">
                         <tr>
-                          <td key={item.id}>{item.name}</td>
-                          <td>{item.email}</td>
-                          <td>{item.phone} </td>
-                          <td>{item.city}</td>
+                          <td>{item.id}</td>
+                          <td>{item.name}</td>
+                          <td>
+                            {" "}
+                            <a
+                              href="emailto:{user.email} "
+                              className="table-headings"
+                            >
+                              {item.email}{" "}
+                            </a>{" "}
+                          </td>
+                          <td>
+                            <a
+                              href="tel:{item.phone} "
+                              className="table-headings"
+                            >
+                              {item.phone}{" "}
+                            </a>{" "}
+                          </td>
+                          <td>Location</td>
                           <td>
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            <Link to="/customer/:id">
-                              {/* <Example /> */}
-                              Details
-                            </Link>
+                            {/* <Link to="/customer/:id"> */}
+                            <Example />
+                            {/* Details */}
+                            {/* </Link> */}
                           </td>
                         </tr>
                       </tbody>
-                    ))}
+                    ))
+                    }
                   </Table>
                 </div>
-              </div>
+              </Grid>
             </div>
           </div>
-          <br></br>
         </>
       );
     }

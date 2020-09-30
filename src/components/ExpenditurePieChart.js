@@ -2,7 +2,9 @@ import React from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import Navbar from "./Navbar";
+//import Navbar from "./Navbar";
+import ProjectAppBar from "./ProjectAppBar";
+import { makeStyles } from "@material-ui/core/styles";
 
 const options = {
   chart: {
@@ -25,7 +27,7 @@ const options = {
     y: 175,
   },
   tooltip: {
-    pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+    pointFormat: "{series.name}: <b>{point.y:.1f}/=</b>",
   },
   accessibility: {
     point: {
@@ -45,7 +47,7 @@ const options = {
           fontsize: 10,
         },
         formatter: function () {
-          return this.key + ": " + this.y + "%";
+          return this.key + ": " + this.y + "/=";
         },
       },
     },
@@ -54,30 +56,66 @@ const options = {
     {
       name: "Share",
       data: [
-        { name: "Planting", y: 61.41 },
-        { name: "Spraying", y: 11.84 },
-        { name: "Weeding", y: 10.85 },
-        { name: "Harvesting", y: 4.67 },
-        { name: "Transportation", y: 4.18 },
-        { name: "Labour", y: 7.05 },
+        { name: "Planting", y: 2000 },
+        { name: "Spraying", y: 1000 },
+        { name: "Weeding", y: 1500 },
+        { name: "Harvesting", y: 700 },
+        { name: "Transportation", y: 2500 },
+        { name: "Labour", y: 1000 },
       ],
     },
   ],
 };
   
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  spacing: {
+    margin: 0,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  grid: {
+    margin: "0px !important",
+  },
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+    marginTop: "60px",
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
+    justifyContent: "space-evenly",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 150,
+  },
+}));
 
 export default function ExpenditurePieChart() {
-    
-    
-//   console.log(this.options.yData)
-  
+  const classes = useStyles();
   return (
-    <React.Fragment>  
-      <Navbar />
-    <br></br>  
-      <HighchartsReact highcharts={Highcharts} options={options} />  
-          
-    </React.Fragment>
+    <div className={classes.root}>
+      <React.Fragment>
+        <ProjectAppBar />
+
+        <main className={classes.content}>
+         
+          <HighchartsReact highcharts={Highcharts} options={options} />
+        </main>
+      </React.Fragment>
+    </div>
   );
+    
+
+
 }

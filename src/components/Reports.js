@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-// import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-// import Link from "@material-ui/core/Link";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+//import { Link } from "react-router-dom"
 import Navbar from "./Navbar";
-import Typography from "@material-ui/core/Typography";
 import Deposits from "./materialDesign/Deposits";
-// import Orders from "./materialDesign/Orders";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,20 +55,20 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing(7),
+    width: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9),
+      width: theme.spacing(7),
     },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: "29vh",
+    height: "30vh",
     // overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(0),
   },
   paper: {
     padding: theme.spacing(2),
@@ -85,20 +81,6 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
 }));
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Router>
-        <Link color="inherit" href="https://material-ui.com/">
-          Farm Manager
-        </Link>
-      </Router>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 function Reports() {
   const classes = useStyles();
@@ -112,7 +94,7 @@ function Reports() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className={classes.content}>
         {/* <div className={classes.appBarSpacer} /> */}
         <Container maxWidth="lg" className={classes.container}>
@@ -123,7 +105,7 @@ function Reports() {
                   title="Current Season Capital"
                   amount={totalCapital}
                   details="View details"
-                  link="./expenditurechart"
+                  link ="./expenditurechart"
                 />
               </Paper>
             </Grid>
@@ -142,16 +124,7 @@ function Reports() {
                 <Deposits title="Current Season Profits" amount={totalIncome} />
               </Paper>
             </Grid>
-
-            {/* <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid> */}
           </Grid>
-          {/* <Box pt={4}>
-            <Copyright />
-          </Box> */}
         </Container>
       </div>
     </>
