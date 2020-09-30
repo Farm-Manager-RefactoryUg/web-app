@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 
 const Buttonn = withStyles({
@@ -21,18 +20,20 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'green',
+      color: 'orange',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'rgba(0, 0, 0, 0.3)',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'green',
       },
       '&.Mui-error fieldset': {
         borderColor: 'red',
       },
+      width: "300px",
+      marginRight: "5px",
 
     },
   },
@@ -43,20 +44,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: "white",
-    paddingTop: "60px",
-    paddingBottom: "60px",
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingLeft: "40px",
+    paddingRight: "40px",
     marginBottom: theme.spacing(6),
   },
-  paper: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    width: '50%',
   },
   submit: {
     backgroundColor: 'green',
@@ -67,10 +62,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     textTransform: "initial",
     fontWeight: "600",
+    height: "40px",
+    width: "60px",
   },
 }));
 
-export default function AddFarmManager() {
+export default function AddTeleFarmer() {
   let [emaile, setErrors] = useState("")
 
   const handleSubmit = event => {
@@ -90,19 +87,23 @@ export default function AddFarmManager() {
 
   return (
     <Card className={classes.root}>
-      <Container component="main" maxWidth="xs">
+
+      <Typography
+        component="h6"
+        variant="h5"
+        style={{ fontWeight: "600", color: "green", fontSize: "1.2rem", fontFamily: "Segoe UI" }}>
+        REGISTER
+      </Typography>
+
+      <main maxWidth="xs">
 
         <div className={classes.paper}>
-
-          <Typography component="h6" variant="h5" style={{ marginBottom: "15px", fontWeight: "600", color: "#964c22", fontSize: "1.015rem" }}>
-            Add a tele-farmer to this project.
-          </Typography>
 
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
             <CssTextField
               variant="outlined"
-              fullWidth
+              
               required
               id="email"
               label="Email address"
@@ -113,22 +114,20 @@ export default function AddFarmManager() {
               margin="dense"
             />
 
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
-
-            
             <Buttonn
               type="submit"
-              fullWidth
               variant="contained"
               className={classes.submit}
             >
               Add
             </Buttonn>
 
+            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
+
           </form>
         </div>
 
-      </Container>
+      </main>
 
     </Card>
   );

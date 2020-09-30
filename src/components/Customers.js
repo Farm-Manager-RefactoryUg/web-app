@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 // import ProjectAppBar from "./ProjectAppBar";
 // import ExpenditurePieChart from "./ExpenditurePieChart";
 // import SalesBarGraph from "./SalesBarGraph"
-import Example from "./Example";
+import CustomersDetails from "./CustomersDetails";
 // import Reports from "./Reports"
 import "../css/customer.css";
 
@@ -69,27 +69,28 @@ class Customers extends Component {
                             </a>{" "}
                           </td>
                           <td>
+                            {" "}
                             <a
-                              href="tel:{item.phone} "
+                              href="tel:{user.telephone1} "
                               className="table-headings"
                             >
-                              {item.phone}{" "}
+                              {item.telephone1}{" "}
                             </a>{" "}
                           </td>
-                          <td>Location</td>
+                          <td>{item.billingaddress}</td>
+                          {/* <td>Location</td> */}
                           <td>
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
                             {/* <Link to="/customer/:id"> */}
-                            <Example />
+                            <CustomersDetails />
                             {/* Details */}
                             {/* </Link> */}
                           </td>
                         </tr>
                       </tbody>
                     ))}
-                    
                   </Table>
                 </div>
               </Grid>

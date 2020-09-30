@@ -27,15 +27,15 @@ const Buttonn = withStyles({
 
 const CssTextField = withStyles({
   root: {
-    "& label.Mui-focused": {
-      color: "green",
+    '& label.Mui-focused': {
+      color: 'orange',
     },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#964c22",
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'rgba(0, 0, 0, 0.3)',
       },
-      "&.Mui-focused fieldset": {
-        borderColor: "#964c22",
+      '&.Mui-focused fieldset': {
+        borderColor: 'green',
       },
       "&.Mui-error fieldset": {
         borderColor: "red",
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "#964c22",
+    backgroundColor: "orange",
   },
   form: {
     width: "100%", // Fix IE 11 issue.

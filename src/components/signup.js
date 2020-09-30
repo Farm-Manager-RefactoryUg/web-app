@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-//import FormHelperText from '@material-ui/core/FormHelperText';
-//import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -28,14 +26,14 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'green',
+      color: 'orange',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'rgba(0, 0, 0, 0.3)',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'green',
       },
       '&.Mui-error fieldset': {
         borderColor: 'red',
@@ -52,14 +50,13 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#964c22',
+    backgroundColor: 'orange',
   },
   form: {
     width: '100%', // Fix IE 11 issue.

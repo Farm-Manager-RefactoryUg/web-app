@@ -84,17 +84,17 @@ export default function TopNav() {
                 Tele-Farmer
               </a>
             </Typography>
-            <Typography variant="h6" href="/" className={classes.title}>
+            {/* <Typography variant="h6" href="/" className={classes.title}>
               <a href="/dashboard" id="a">
                 Dashboard
               </a>
-            </Typography>
+            </Typography> */}
             <Button
               variant="outlined"
               color="white"
               className={classes.menuButton}
               size="small"
-              href="/login"
+              href="/dashboard"
             >
               Login
             </Button>

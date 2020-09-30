@@ -59,7 +59,7 @@ export default function MainListItems() {
     <div>
       {/* <ListSubheader inset>Statistics</ListSubheader> */}
 
-      <ListItem button component={Link} to={"/requisitions"} className={classes.root} style={{ marginTop: "20px" }}>
+      <ListItem button component={Link} to={"/dashboard"} className={classes.root} style={{ marginTop: "20px" }}>
         <ListItemIcon>
           <DashboardIcon className={classes.mainIcons}/>
         </ListItemIcon>

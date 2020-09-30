@@ -48,8 +48,8 @@ class Workers extends Component {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone number</th>
-                        <th>Location</th>
-                        <th>Options</th>
+                        <th>Position</th>
+                        <th>Department</th>
                         <th>Details</th>
                       </tr>
                     </thead>
@@ -58,10 +58,10 @@ class Workers extends Component {
                         <tr>
                           <td key={item.id}>{item.fullname}</td>
                           <td>{item.email}</td>
-                          <td>{item.phone} </td>
-                          <td>{item.city}</td>
+                          <td>{item.phone1} </td>
+                          <td>{item.position}</td>
                           <td>
-                            <Button variant="secondary">Options</Button>
+                            {item.department}
                           </td>
                           <td>
                             <Link to={`/customer/${item.id}`}>
