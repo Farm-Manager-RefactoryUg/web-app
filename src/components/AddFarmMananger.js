@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 
 const Buttonn = withStyles({
@@ -21,14 +20,14 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'green',
+      color: 'orange',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'rgba(0, 0, 0, 0.3)',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'green',
       },
       '&.Mui-error fieldset': {
         borderColor: 'red',
@@ -43,21 +42,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: "white",
-    paddingTop: "60px",
-    paddingBottom: "60px",
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingLeft: "40px",
+    paddingRight: "40px",
     marginBottom: theme.spacing(6),
-    // minHeight: '100vh',
-  },
-  paper: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    //alignItems: 'center',
   },
   form: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    width: '100%', // Fix IE 11 issue.
+    width: '50%', // Fix IE 11 issue.
   },
   submit: {
     backgroundColor: 'green',
@@ -65,9 +57,12 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
+    //marginTop: theme.spacing(1),
     textTransform: "initial",
     fontWeight: "600",
+    height: "40px",
+    width: "120px",
+    marginTop: "35px",
   },
 }));
 
@@ -85,18 +80,18 @@ export default function AddFarmManager() {
 
     switch (name) {
       case "fullName":
-        (!nameRegex.test(value)) ? 
+        (!nameRegex.test(value)) ?
           setErrors(["Atleast two names e.g. John Doe", emaile, passworde, mobilee]) : setErrors(["", emaile, passworde, mobilee])
         break;
       case "email":
-        (!emailRegex.test(value)) ? 
+        (!emailRegex.test(value)) ?
           setErrors([fullNamee, "Enter valid email e.g. abc@gmail.com", passworde, mobilee]) : setErrors([fullNamee, "", passworde, mobilee])
         break;
       case "password":
-        (value.length < 6) ? 
-        setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee]) : setErrors([fullNamee, emaile, "", mobilee])
+        (value.length < 6) ?
+          setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee]) : setErrors([fullNamee, emaile, "", mobilee])
         break;
-        
+
       default:
         break;
     }
@@ -107,13 +102,17 @@ export default function AddFarmManager() {
 
   return (
     <Card className={classes.root}>
-      <Container component="main" maxWidth="xs">
-       
-        <div className={classes.paper}>
 
-          <Typography component="h6" variant="h5" style={{ marginBottom: "15px", fontWeight: "600", color: "#964c22", fontSize: "1.015rem" }}>
-            Add a farm manager to this project.
-          </Typography>
+      <Typography 
+      component="h6" 
+      variant="h5" 
+      style={{ fontWeight: "600", color: "green", fontSize: "1.2rem", fontFamily: "Segoe UI" }}>
+        REGISTER
+      </Typography>
+
+      <main maxWidth="xs">
+
+        <div className={classes.paper}>
 
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
@@ -128,7 +127,7 @@ export default function AddFarmManager() {
               error={fullNamee.length > 0}
               onChange={handleChange}
               size="small"
-              margin="dense"
+              margin="normal"
             />
             <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{fullNamee}</small>
 
@@ -142,7 +141,7 @@ export default function AddFarmManager() {
               error={emaile.length > 0}
               onChange={handleChange}
               size="small"
-              margin="dense"
+              margin="normal"
             />
             <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
 
@@ -159,10 +158,9 @@ export default function AddFarmManager() {
               error={passworde.length > 0}
               onChange={handleChange}
               size="small"
-              margin="dense"
             />
             <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
-            
+
             <Buttonn
               type="submit"
               variant="contained"
@@ -175,7 +173,7 @@ export default function AddFarmManager() {
           </form>
         </div>
 
-      </Container>
+      </main>
 
     </Card>
   );

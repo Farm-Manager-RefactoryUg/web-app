@@ -16,7 +16,7 @@ const useStyles = makeStyles({
         backgroundColor: "white",
     },
     headerFont: {
-        color: "white",
+        color: "black",
         fontWeight: "600",
         fontFamily: "Segoe UI",
         fontSize: "0.8125rem"
@@ -47,13 +47,13 @@ export default function BasicTable() {
 
     return (
         <>
-            <TableContainer component={Card} style={{ padding: "40px", }}>
+            <TableContainer component={Card} style={{ paddingTop: "15px", }}>
 
-                <div style={{ color: "#964c22", fontWeight: "600", marginBottom: "15px", }}>Table showing details of farm managers</div>
+                <div style={{ color: "green", fontWeight: "600", fontSize: "1.1rem", fontFamily: "Segoe UI", marginBottom: "30px", marginLeft: "15px" }}>Table showing details of farm managers</div>
 
                 <Table className={classes.table} aria-label="simple table">
 
-                    <TableHead style={{ background: "grey", }}>
+                    <TableHead>
 
                         <TableRow>
                             <TableCell className={classes.headerFont}>#</TableCell>
