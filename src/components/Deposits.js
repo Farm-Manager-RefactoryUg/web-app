@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
   typography: {    
       color: "green"
-  }
+  },
   
 });
 

@@ -81,10 +81,7 @@ class Customers extends Component {
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
-                            {/* <Link to="/customer/:id"> */}
                             <Example />
-                            {/* Details */}
-                            {/* </Link> */}
                           </td>
                         </tr>
                       </tbody>
