@@ -16,6 +16,7 @@ import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Analytics from "./components/Analytics"
 import Settings from "./components/Settings";
+import Expenditure from "./components/Expenditure"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <>
           <Switch>
             <Route path="//" component={Home} exact></Route>
+            <Route path="/expenditure" exact component={Expenditure}/>
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/dashboard" exact component={Dashboard} />
