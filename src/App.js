@@ -14,6 +14,7 @@ import SalesDetails from "./components/SalesDetails";
 import Dashboard from "./components/dashboard";
 import Project from "./components/Project";
 import Projects from "./components/Projects";
+import Analytics from "./components/Analytics"
 import Settings from "./components/Settings";
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             <Route path="/workers" exact component={Workers}></Route>
             <Route path="/suppliers" exact component={Suppliers}></Route>
             <Route path="/saleschart" component={SalesBarGraph}></Route>
-            <Route path="/analytics" component={ExpenditurePieChart}></Route>
+            <Route path="/analytics" component={Analytics}></Route>
             <Route path="/salesdetails" component={SalesDetails}></Route>
             <Route path="/project" component={Project}></Route>
             <Route path="/projects" component={Projects}></Route>
