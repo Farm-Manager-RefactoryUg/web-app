@@ -20,10 +20,10 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme) => ({
   root: {
     '&:hover': {
-      color: "white",
+      color: "red",
     },
     '&:active': {
-      backgroundColor: "black",
+      backgroundColor: "green",
     },
   },
   text: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: "0.7",
   },
   mainIcons: {
-    color: "orange",
+    color: "white",
   },
 })
 )
@@ -56,37 +56,77 @@ export default function MainListItems() {
   }
 
   return (
-    <div>
+    <div position="fixed">
       {/* <ListSubheader inset>Statistics</ListSubheader> */}
 
-      <ListItem button component={Link} to={"/dashboard"} className={classes.root} style={{ marginTop: "20px" }}>
+      <ListItem
+        button
+        component={Link}
+        to={"/dashboard"}
+        className={classes.root}
+        style={{ marginTop: "20px" }}
+      >
         <ListItemIcon>
-          <DashboardIcon className={classes.mainIcons}/>
+          <DashboardIcon className={classes.mainIcons} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Dashboard" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Dashboard"
+          className={classes.text}
+        />
       </ListItem>
 
       <ListItem button id="a" onClick={handleClick1}>
         <ListItemIcon>
-          <BarChartIcon className={classes.mainIcons}/>
+          <BarChartIcon className={classes.mainIcons} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Analytics" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Analytics"
+          className={classes.text}
+        />
         {open1 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Monthly" className={classes.text} />
+          <ListItem
+            button
+            component={Link}
+            to={"/login"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Monthly"
+              className={classes.text}
+            />
           </ListItem>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Quarterly" className={classes.text} />
+          <ListItem
+            button
+            component={Link}
+            to={"/login"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Quarterly"
+              className={classes.text}
+            />
           </ListItem>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Annual" className={classes.text} />
+          <ListItem
+            button
+            component={Link}
+            to={"/login"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Annual"
+              className={classes.text}
+            />
           </ListItem>
         </List>
       </Collapse>
-
 
       <ListItem button>
         <Link to="/customers">
@@ -94,53 +134,115 @@ export default function MainListItems() {
             <PeopleIcon className={classes.mainIcons} />
           </ListItemIcon>
         </Link>
-        <ListItemText disableTypography primary="Tables/Data" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Tools"
+          className={classes.text}
+        />
       </ListItem>
 
-      <ListItem button component={Link} to={"/analytics"} className={classes.root}>
+      <ListItem
+        button
+        component={Link}
+        to={"/analytics"}
+        className={classes.root}
+      >
         <ListItemIcon>
           <BarChartIcon className={classes.mainIcons} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Decision support" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Decision support"
+          className={classes.text}
+        />
       </ListItem>
 
-      <ListItem button id="b" onClick={handleClick2}>
+      <ListItem button id="a" onClick={handleClick2}>
         <ListItemIcon>
           <BarChartIcon className={classes.mainIcons} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Finances" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Finances"
+          className={classes.text}
+        />
         {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
       <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Requisitions" className={classes.text} />
+          <ListItem
+            button
+            component={Link}
+            to={"/requisitions"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Requisitions"
+              className={classes.text}
+            />
           </ListItem>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Balance sheets" className={classes.text} />
+          <ListItem
+            button
+            component={Link}
+            to={"/suppliers"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Suppliers"
+              className={classes.text}
+            />
           </ListItem>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Budget" className={classes.text} />
+          <ListItem
+            button
+            component={Link}
+            to={"/customers"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Customers"
+              className={classes.text}
+            />
           </ListItem>
         </List>
       </Collapse>
 
-      <ListItem button component={Link} to={"/projects"} className={classes.root}>
+      <ListItem
+        button
+        component={Link}
+        to={"/projects"}
+        className={classes.root}
+      >
         <ListItemIcon>
-          <LayersIcon  className={classes.mainIcons}/>
+          <LayersIcon className={classes.mainIcons} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Projects" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Projects"
+          className={classes.text}
+        />
       </ListItem>
 
-      <ListItem button component={Link} to={"/settings"} className={classes.root}>
+      <ListItem
+        button
+        component={Link}
+        to={"/settings"}
+        className={classes.root}
+      >
         <ListItemIcon>
           <DashboardIcon className={classes.mainIcons} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Settings" className={classes.text} />
+        <ListItemText
+          disableTypography
+          primary="Settings"
+          className={classes.text}
+        />
       </ListItem>
-
     </div>
-  )
+  );
 }
 
 

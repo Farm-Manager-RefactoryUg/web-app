@@ -77,6 +77,7 @@ export default function AddTeleFarmer() {
     const { value } = event.target
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
+      // eslint-disable-next-line no-use-before-define
       (!emailRegex.test(value))
       ? setErrors("Enter valid email e.g. abc@gmail.com")
       : null

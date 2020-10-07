@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddFarmManager() {
     let [[fullNamee, emaile, passworde], setErrors] = useState(["", "", ""])
-    let [profileImg, setImage] = useState(michael)
+    let [profileImg] = useState(michael)
 
     const handleSubmit = event => {
         event.preventDefault()

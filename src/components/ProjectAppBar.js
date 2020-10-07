@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 //import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
-    backgroundColor: "green",
     minHeight: "48px",
   },
   toolbarIcon: {
@@ -101,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-
 export default function ProjectAppBar() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -116,11 +114,10 @@ export default function ProjectAppBar() {
   return (
     <>
       <AppBar
-        position="absolute"
+        position="fixed"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
-          
           <IconButton
             edge="start"
             color="inherit"
@@ -133,14 +130,18 @@ export default function ProjectAppBar() {
             style={{ outline: "none" }}
           >
             <MenuIcon />
-            
           </IconButton>
 
           <Typography
             variant="h6"
             href="/"
             className={classes.title}
-            style={{ color: "white", fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", }}
+            style={{
+              color: "white",
+              fontSize: "1.0625rem",
+              fontWeight: "600",
+              fontFamily: "Segoe UI",
+            }}
           >
             Tele-Farmer
           </Typography>
@@ -150,7 +151,7 @@ export default function ProjectAppBar() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          
+
           <MenuListComposition />
         </Toolbar>
       </AppBar>
@@ -163,15 +164,15 @@ export default function ProjectAppBar() {
         open={open}
       >
         <div className={classes.toolbarIcon} style={{ minHeight: "48px" }}>
-          <IconButton onClick={handleDrawerClose} style={{ outline: "none" }}>
+          <IconButton onClick={handleDrawerClose} style={{ outline: "none", color:"white" }}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
-        <List><MainListItems /></List>
+        <List>
+          <MainListItems />
+        </List>
       </Drawer>
     </>
   );
 }
-
-

@@ -87,6 +87,7 @@ export default function SignIn() {
   }
   const handleChange = event => {
     const { name, value } = event.target
+    // eslint-disable-next-line no-use-before-define
     let [fullNamee, emaile, passworde, mobilee] = [fullNamee, emaile, passworde, mobilee]
     const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/

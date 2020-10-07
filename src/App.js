@@ -15,6 +15,8 @@ import Dashboard from "./components/Dashboard";
 import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Settings from "./components/Settings";
+import Tables from "./components/Tables"
+//mport CustomersDashboard from "./components/CustomersDashboard";
 
 function App() {
 
@@ -38,6 +40,7 @@ function App() {
             <Route path="/project" component={Project}></Route>
             <Route path="/projects" component={Projects}></Route>
             <Route path="/settings" component={Settings}></Route>
+            <Route path="/tables" component={Tables}></Route>
           </Switch>
         </>
       </div>

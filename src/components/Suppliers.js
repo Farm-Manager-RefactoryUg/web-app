@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,11 +10,28 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Link from "@material-ui/core/Link";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+//import CssBaseline from "@material-ui/core/CssBaseline";
+import ProjectAppBar from "./ProjectAppBar";
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Farm Manager!
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "green",
     color: theme.palette.common.white,
   },
   body: {
@@ -20,73 +39,172 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
+    display: "flex",
+    fontFamily: "Segoe UI",
+    backgroundColor: "rgb(247, 249, 252)",
   },
-}))
-// }))(TableRow);
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-
-// const rows = [
-//   createData({user.id}{item.fullname}, 159, 6.0, 24, 4.0),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
+  root2: {
+    width: "100%",
+    padding:20,
   },
-});
+  spacing: {
+    margin: 0,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  grid: {
+    margin: "0px !important",
+  },
+  drawerPaper: {
+    position: "relative",
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
+    justifyContent: "space-evenly",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 150,
+  },
+  label: {
+    fontSize: "0.7rem",
+    color: "white",
+  },
+}));
 
-export default function CustomizedTables() {
+export default function Requisitions() {
+  // let url = "/";
   const classes = useStyles();
   const [items, setItems] = useState("");
-useEffect(() => {
-  axios
-    .get("https://farmmanager-api.herokuapp.com/api/supplier")
-    .then((response) => {
-      setItems(response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-},[]);
-  return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center" component="th" scope="row">
-              Name
-            </StyledTableCell>
-            <StyledTableCell align="center">Company Name</StyledTableCell>
-            <StyledTableCell align="center">Telephone</StyledTableCell>
-            <StyledTableCell align="center">Business Address</StyledTableCell>
-            <StyledTableCell align="center">Category</StyledTableCell>
-          </TableRow>
-        </TableHead>
 
-        {items &&
-          items.map((item) => (
-            <TableBody key={item.id}>
-              <StyledTableCell align="left">{item.name}</StyledTableCell>
-              <StyledTableCell align="center">{item.companyname}</StyledTableCell>
-              <StyledTableCell align="center">{item.telephone1}</StyledTableCell>
-              <StyledTableCell align="center">{item.busaddress}</StyledTableCell>
-              <StyledTableCell align="center">{item.category}</StyledTableCell>
-            </TableBody>
-          ))}
-      </Table>
-    </TableContainer>
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+
+  useEffect(() => {
+    axios
+      .get("https://farmmanager-api.herokuapp.com/api/supplier")
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+   const theme = React.useMemo(
+     () =>
+       createMuiTheme({
+         overrides: {
+           MuiGrid: {
+             "spacing-xs-2": "-6px !important",
+           },
+         },
+         palette: {
+           type: prefersDarkMode ? "light" : "dark",
+         },
+       }),
+     [prefersDarkMode]
+   );
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <ProjectAppBar />
+
+          <main className={classes.content}>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Paper className={classes.root2}>
+              <h5 align="left" style={{ marginLeft: "0.5rem",color:"green" }}>
+                Recent Suppliers
+              </h5>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell align="left" component="th" scope="row">
+                        No.
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="center"
+                        component="th"
+                        scope="row"
+                      >
+                        Name
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Company Name
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Telephone
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Business Address
+                      </StyledTableCell>
+                      <StyledTableCell align="center">Category</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  {items &&
+                    items.map((item) => (
+                      <TableBody key={item.id}>
+                        <StyledTableCell align="left">
+                          {item.id}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.companyname}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.telephone1}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.busaddress}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.category}
+                        </StyledTableCell>
+                      </TableBody>
+                    ))}
+                </Table>
+              </TableContainer>
+              {/* <div className={classes.seeMore}>
+                
+                <a href={url} color="primary">
+                  See more
+                </a>
+               
+              </div> */}
+            </Paper>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </main>
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
