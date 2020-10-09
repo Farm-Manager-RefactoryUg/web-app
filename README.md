@@ -1,6 +1,5 @@
 # web-app
-
-## web-app is Tele-Farmer's front-end application developed by refactory bootcamp students using React and Material UI.
+Welcome to Tele-Farmer's front-end application developed by refactory bootcamp students using React and Material UI.
 
 ## Dependencies
     "react-router-dom": "^5.2.0",
