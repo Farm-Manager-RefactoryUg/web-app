@@ -5,10 +5,9 @@ import Grid from "@material-ui/core/Grid";
 // import ProjectAppBar from "./ProjectAppBar";
 // import ExpenditurePieChart from "./ExpenditurePieChart";
 // import SalesBarGraph from "./SalesBarGraph"
-import Example from "./Example";
+import CustomersDetails from "./CustomerDetails";
 // import Reports from "./Reports"
 import "../css/customer.css";
-
 class Customers extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +17,11 @@ class Customers extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://farmmanager-api.herokuapp.com/api/customer/")
       .then((response) => response.json())
       .then((json) => {
+        // Object.entries(json)
+        console.log(json);
         this.setState({
           isLoaded: true,
           items: json,
@@ -29,7 +30,6 @@ class Customers extends Component {
   }
   render() {
     let { isLoaded, items } = this.state;
-
     if (!isLoaded) {
       return <div>Loading Customers.....</div>;
     } else {
@@ -67,27 +67,28 @@ class Customers extends Component {
                             </a>{" "}
                           </td>
                           <td>
+                            {" "}
                             <a
-                              href="tel:{item.phone} "
+                              href="tel:{user.telephone1} "
                               className="table-headings"
                             >
-                              {item.phone}{" "}
+                              {item.telephone1}{" "}
                             </a>{" "}
                           </td>
-                          <td>Location</td>
+                          <td>{item.billingaddress}</td>
+                          {/* <td>Location</td> */}
                           <td>
                             <Button variant="secondary">Options</Button>
                           </td>
                           <td>
                             {/* <Link to="/customer/:id"> */}
-                            <Example />
+                            <CustomersDetails />
                             {/* Details */}
                             {/* </Link> */}
                           </td>
                         </tr>
                       </tbody>
-                    ))
-                    }
+                    ))}
                   </Table>
                 </div>
               </Grid>
@@ -98,5 +99,4 @@ class Customers extends Component {
     }
   }
 }
-
 export default Customers;

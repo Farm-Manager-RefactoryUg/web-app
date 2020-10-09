@@ -8,44 +8,41 @@ import CustomerDetails from "./components/CustomerDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
-import Home from './components/Home';
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 import Dashboard from "./components/Dashboard";
 import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Settings from "./components/Settings";
+import ForgotPassword from './components/ForgotPassword';
+import PageNotFound from './components/PageNotFound';
 
-function App() {
+
+export default function App() {
 
   return (
     <Router>
-      <div className="App">
-        <>
-          <Switch>
-            <Route path="//" component={Home} exact></Route>
-            <Route path="/login" exact component={Login} />
-            <Route path="/signup" exact component={SignUp} />
-            <Route path="/dashboard" exact component={Dashboard} />
-            <Route path="/requisitions" exact component={Requisitions} />
-            <Route path="/customers" component={Customers} exact></Route>
-            <Route path="/customer/:id" component={CustomerDetails}></Route>
-            <Route path="/workers" exact component={Workers}></Route>
-            <Route path="/suppliers" exact component={Suppliers}></Route>
-            <Route path="/saleschart" component={SalesBarGraph}></Route>
-            <Route path="/analytics" component={ExpenditurePieChart}></Route>
-            <Route path="/salesdetails" component={SalesDetails}></Route>
-            <Route path="/project" component={Project}></Route>
-            <Route path="/projects" component={Projects}></Route>
-            <Route path="/settings" component={Settings}></Route>
-          </Switch>
-        </>
-      </div>
+      <Switch>
+        <Route path="/" exact component={Login} />
+        <Route path="/signup" exact component={SignUp} />
+        <Route path="/project" component={Project} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/forgotpassword" component={ForgotPassword} />
+        <Route path="/pagenotfound" component={PageNotFound} />
+        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/requisitions" exact component={Requisitions} />
+        <Route path="/customers" component={Customers} exact />
+        <Route path="/customer/:id" component={CustomerDetails} />
+        <Route path="/workers" exact component={Workers} />
+        <Route path="/suppliers" exact component={Suppliers} />
+        <Route path="/saleschart" component={SalesBarGraph} />
+        <Route path="/analytics" component={ExpenditurePieChart} />
+        <Route path="/salesdetails" component={SalesDetails} />
+      </Switch>
     </Router>
   );
 }
-
-export default App;
 
 
 

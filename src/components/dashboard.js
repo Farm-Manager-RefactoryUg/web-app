@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-//import clsx from "clsx";
 import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+//import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import PieChart from "./PieChart";
-import RequisitionsDashboard from "./RequisitionsDashboard";
+//import RequisitionsDashboard from "./RequisitionsDashboard";
 import Bargraph from "./Bargraph";
 import ProjectAppBar from "./ProjectAppBar";
-import Customers from "./Customers";
+//import Customers from "./Customers";
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
+import BasicTable from "./BasicTable";
 
 function Copyright() {
   return (
@@ -30,6 +30,7 @@ function Copyright() {
     </Typography>
   );
 }
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -68,11 +69,11 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
     justifyContent: "space-evenly",
   },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-  },
+  // paper: {
+  //   padding: theme.spacing(2),
+  //   display: "flex",
+  //   flexDirection: "column",
+  // },
   fixedHeight: {
     height: 150,
   },
@@ -102,6 +103,10 @@ export default function Dashboard() {
     [prefersDarkMode]
   );
 
+  useEffect(() => {
+    document.title = "Dashboard"
+  }, []);
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -118,17 +123,17 @@ export default function Dashboard() {
             <Container style={{ marginTop: "60px" }}>
 
               <Typography
-                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.57)", }}
+                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                 component="h1"
               >
                 {"Biyinzika Mukono C"}
               </Typography>
 
-              <Divider style={{ marginTop: "15px", backgroundColor: "orange" }} />
+              <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-              <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }}>
+              <Grid container spacing={6} style={{ marginTop: "20px", marginBottom: "20px", }}>
                 <Grid item xs={12} md={3} lg={3}>
-                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                  <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Sales Today
@@ -143,10 +148,10 @@ export default function Dashboard() {
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={3} lg={3}>
-                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                  <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                        Visitors
+                        Share value
                         <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }} label="Monthly" size="small" />
                       </Typography>
                       <Typography style={{ fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem" }}>{"170.212"}</Typography>
@@ -158,7 +163,7 @@ export default function Dashboard() {
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={3} lg={3}>
-                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                  <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Pending Orders
@@ -173,7 +178,7 @@ export default function Dashboard() {
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={3} lg={3}>
-                  <Card style={{ width: "250px", backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                  <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                     <CardContent>
                       <Typography gutterBottom component="h6" style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                         Total Earnings
@@ -205,18 +210,18 @@ export default function Dashboard() {
 
               </Grid>
 
-              <Grid item xs={12} sm={12}>
-                <Paper className={classes.paper}>
-                  <RequisitionsDashboard />
-                </Paper>
+              <Grid component={Card} item xs={12} sm={12} style={{ backgroundColor: "white", padding: "0px 20px 30px 20px", }}>
+              
+                  <BasicTable />                  
+                
               </Grid>
               <br></br>
 
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Customers />
-                </Paper>
-              </Grid>
+              {/* <Grid item xs={12}>
+                <Card style={{ backgroundColor: "white", }}>
+                  <BasicTable />
+                </Card>
+              </Grid> */}
 
               <Box pt={4}>
                 <Copyright />

@@ -9,9 +9,8 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles, createMuiTheme, ThemeProvider, } from '@material-ui/core/styles';
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from '@material-ui/core/Avatar';
-import michael from "../static/images/2.jpg";
+import michael from "../static/images/2.jfif";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
 
 
 const useStyles = makeStyles((lightTheme) => ({

@@ -6,7 +6,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Avatar from '@material-ui/core/Avatar';
-import michael from "../static/images/2.jpg";
+import michael from "../static/images/2.jfif";
 import SaveIcon from '@material-ui/icons/Save';
 
 const Buttonn = withStyles({
@@ -24,7 +24,7 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
     root: {
         '& label.Mui-focused': {
-            color: 'orange',
+            color: 'rgba(0,0,0,0.87)',
         },
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
@@ -111,7 +111,13 @@ export default function AddFarmManager() {
 
     }
     const imageHandler = event => {
-
+        let reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setImage(reader.result);
+            }
+        }
+        reader.readAsDataURL(event.target.files[0])
     }
 
     const classes = useStyles();
@@ -122,7 +128,7 @@ export default function AddFarmManager() {
             <Typography
                 component="h6"
                 variant="h5"
-                style={{ fontWeight: "600", color: "green", fontSize: "1.2rem", fontFamily: "Segoe UI" }}>
+                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", fontFamily: "Segoe UI", marginBottom: "15px", }}>
                 PROFILE
             </Typography>
 
@@ -141,7 +147,7 @@ export default function AddFarmManager() {
                             label="Username"
                             error={fullNamee.length > 0}
                             onChange={handleChange}
-                            size="small"
+                            
                             margin="normal"
                             defaultValue="Wamala Emmanuel Nsubuga"
                         />
@@ -156,7 +162,7 @@ export default function AddFarmManager() {
                             name="email"
                             error={emaile.length > 0}
                             onChange={handleChange}
-                            size="small"
+                            
                             margin="normal"
                             defaultValue={"e.wamala@ciu.ac.ug"}
                         />
@@ -174,7 +180,7 @@ export default function AddFarmManager() {
                             autoComplete="current-password"
                             error={passworde.length > 0}
                             onChange={handleChange}
-                            size="small"
+                            
                             defaultValue={"Abc123%"}
                         />
                         <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
@@ -193,7 +199,7 @@ export default function AddFarmManager() {
                     </form>
                 </div>
 
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: "3" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: "3", marginLeft: "35px" }}>
 
                     <Avatar alt="Michael" src={profileImg} className={classes.large} />
 

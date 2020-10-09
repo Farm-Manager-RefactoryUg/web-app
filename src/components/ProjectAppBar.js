@@ -1,11 +1,12 @@
 import React from "react"
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
 //import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 //import useMediaQuery from "@material-ui/core/useMediaQuery";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -16,9 +17,10 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./SideBar";
 import MenuListComposition from "./Avatar";
+import Logo from '../static/images/tree.svg'
+
 
 const drawerWidth = 220;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -36,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
-    backgroundColor: "green",
-    minHeight: "50px",
+    backgroundColor: "white",
+    minHeight: "48px",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -54,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: 36,
+    color: "rgba(0,0,0,0.87)"
   },
   menuButtonHidden: {
     display: "none",
@@ -66,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     flexShrink: 0,
     overflow: "hidden",
-    backgroundColor: "rgb(27, 36, 48)",
+    backgroundColor: "rgba(27, 36, 48, 0.9)",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -86,7 +89,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarSpacer: {
     minHeight: "48px",
-
     // theme.mixins.toolbar,
   },
   small: {
@@ -102,8 +104,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ProjectAppBar() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -112,63 +116,80 @@ export default function ProjectAppBar() {
     setOpen(false);
   };
 
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        overrides: {
+          MuiGrid: {
+            "spacing-xs-2": "-6px !important",
+          },
+        },
+        palette: {
+          type: prefersDarkMode ? "light" : "dark",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
   return (
     <>
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
-          
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
-            style={{ outline: "none" }}
-          >
-            <MenuIcon />
-            
-          </IconButton>
+      <ThemeProvider theme={theme}>
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, open && classes.appBarShift)}
+        >
+          <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
 
-          <Typography
-            variant="h6"
-            href="/"
-            className={classes.title}
-            style={{ color: "white", fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", }}
-          >
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden
+              )}
+            >
+              <MenuIcon />
+
+            </IconButton>
+
+            <Typography
+              variant="h6"
+              href="/"
+              className={classes.title}
+              style={{ color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", }}
+            >
+              <img src={Logo} alt="logo" width="25px" height="25px" style={{ marginRight: "5px" }} />
             Tele-Farmer
           </Typography>
 
-          <IconButton color="inherit" style={{ outline: "none" }}>
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          
-          <MenuListComposition />
-        </Toolbar>
-      </AppBar>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon style={{ color: "rgba(0,0,0,0.87)" }} />
+              </Badge>
+            </IconButton>
 
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon} style={{ minHeight: "48px" }}>
-          <IconButton onClick={handleDrawerClose} style={{ outline: "none" }}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List><MainListItems /></List>
-      </Drawer>
+            <MenuListComposition />
+          </Toolbar>
+        </AppBar>
+
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon} style={{ minHeight: "48px" }}>
+            <IconButton onClick={handleDrawerClose} >
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List><MainListItems /></List>
+        </Drawer>
+      </ThemeProvider>
     </>
   );
 }

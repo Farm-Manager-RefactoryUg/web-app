@@ -10,7 +10,6 @@ import BasicTable from "./BasicTable";
 import AddFarmManager from "./AddFarmMananger";
 import Grid from "@material-ui/core/Grid";
 import AddTeleFarmer from "./AddTeleFarmer";
-import AppBar from "@material-ui/core/AppBar";
 import UpdateProfile from "./UpdateProfile";
 
 function TabPanel(props) {
@@ -23,7 +22,7 @@ function TabPanel(props) {
             id={`vertical-tabpanel-${index}`}
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
-            style={{ backgroundColor: "rgb(247, 249, 252)", width: "100%" }}
+            style={{ backgroundColor: "rgb(247, 249, 252)", }}
         >
             {value === index && (
                 <Box p={3}>
@@ -50,17 +49,18 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+        //backgroundColor: theme.palette.background.paper,
         marginTop: theme.spacing(12),
-        width: "80%",
+        width: "75%",
         margin: "auto",
-        boxShadow: "none"
+        boxShadow: "none",
     },
     tab: {
         fontSize: "0.8125rem",
         fontWeight: "600",
         fontFamily: "Segoe UI",
-        width: "300px"
+        width: "300px",
+        color: "rgba(0,0,0,0.87)",
     }
 }));
 
@@ -75,21 +75,21 @@ export default function VerticalTabs() {
     return (
         <Card className={classes.root}>
 
-            <AppBar position="static" style={{ backgroundColor: "grey", paddingLeft: "130px" }} >
                 <Tabs
                     value={value}
                     onChange={handleChange}
                     aria-label="Vertical tabs example"
+                    style={{  paddingLeft: "105px",}}
                 >
                     <Tab style={{ outline: "none", }} className={classes.tab} label="Profile" {...a11yProps(0)} />
                     <Tab style={{ outline: "none", }} className={classes.tab} label="Tele-farmers" {...a11yProps(1)} />
                     <Tab style={{ outline: "none", }} className={classes.tab} label="Farm Managers" {...a11yProps(2)} />
 
                 </Tabs>
-            </AppBar>
+            
 
             <TabPanel value={value} index={0}>
-                <Grid container spacing={2}>
+                <Grid container>
                     <Grid item xs={12} md={12} lg={12}>
                         <UpdateProfile />
                     </Grid>
