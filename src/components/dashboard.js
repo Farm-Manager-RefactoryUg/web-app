@@ -243,7 +243,7 @@ export default function Dashboard() {
                           fontSize: "1.0625rem",
                         }}
                       >
-                        Visitors
+                        Sales Reduction
                         <Chip
                           classes={{ label: classes.label }}
                           style={{
@@ -285,7 +285,7 @@ export default function Dashboard() {
                             fontWeight: "400",
                           }}
                         >
-                          Since last week
+                          Since Last season
                         </span>
                       </Typography>
                     </CardContent>

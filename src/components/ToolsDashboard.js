@@ -48,7 +48,7 @@ export default function Tools() {
   };
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/requisition/?_limit=1")
+      .get("https://farmmanager-api.herokuapp.com/api/tool/")
       .then((response) => {
         setItems(response.data);
       })

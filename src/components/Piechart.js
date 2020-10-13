@@ -9,11 +9,16 @@ const options = {
     plotBorderWidth: null,
     plotShadow: false,
     type: "pie",
-    
   },
 
   title: {
-    text: "Expenditure Distribution Last Planting Season",
+    text: "Expenditure Distribution for Last Season",
+    style: {
+      fontFamily: "Segoe UI",
+      fontWeight: "600",
+      fontSize: "1.0625rem",
+      color: "green",
+    },
   },
   subtitle: {
     // text:(sum()),

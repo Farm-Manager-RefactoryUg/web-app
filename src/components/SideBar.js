@@ -9,6 +9,9 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
+import BuildIcon from "@material-ui/icons/Build";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import SettingsIcon from "@material-ui/icons/Settings";
 import List from '@material-ui/core/List';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -48,12 +51,16 @@ export default function MainListItems() {
   const classes = useStyles();
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
   const handleClick1 = () => {
     setOpen1(!open1)
   }
   const handleClick2 = () => {
     setOpen2(!open2)
   }
+  const handleClick3 = () => {
+    setOpen3(!open3);
+  };
 
   return (
     <div position="fixed">
@@ -128,19 +135,59 @@ export default function MainListItems() {
         </List>
       </Collapse>
 
-      <ListItem button>
-        <Link to="/customers">
-          <ListItemIcon>
-            <PeopleIcon className={classes.mainIcons} />
-          </ListItemIcon>
-        </Link>
+      <ListItem button id="a" onClick={handleClick3}>
+        <ListItemIcon>
+          <PeopleIcon className={classes.mainIcons} />
+        </ListItemIcon>
         <ListItemText
           disableTypography
-          primary="Tools"
+          primary="Employees"
           className={classes.text}
         />
+        {open1 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Collapse in={open3} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem
+            button
+            component={Link}
+            to={"/workers"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Employees"
+              className={classes.text}
+            />
+          </ListItem>
+          <ListItem
+            button
+            component={Link}
+            to={"/workers"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Casual workers"
+              className={classes.text}
+            />
+          </ListItem>
+        </List>
+      </Collapse>
+      
+      <Link to="/tools">
+        <ListItem button>
+          <ListItemIcon>
+            <BuildIcon className={classes.mainIcons} />
+          </ListItemIcon>
 
+          <ListItemText
+            disableTypography
+            primary="Tools"
+            className={classes.text}
+          />
+        </ListItem>
+      </Link>
       <ListItem
         button
         component={Link}
@@ -159,7 +206,7 @@ export default function MainListItems() {
 
       <ListItem button id="a" onClick={handleClick2}>
         <ListItemIcon>
-          <BarChartIcon className={classes.mainIcons} />
+          <AttachMoneyIcon className={classes.mainIcons} />
         </ListItemIcon>
         <ListItemText
           disableTypography
@@ -233,7 +280,7 @@ export default function MainListItems() {
         className={classes.root}
       >
         <ListItemIcon>
-          <DashboardIcon className={classes.mainIcons} />
+          <SettingsIcon className={classes.mainIcons} />
         </ListItemIcon>
         <ListItemText
           disableTypography

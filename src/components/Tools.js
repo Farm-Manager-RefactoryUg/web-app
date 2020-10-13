@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root2: {
     width: "100%",
-    padding:20,
+    padding: 20,
   },
   spacing: {
     margin: 0,
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Suppliers() {
+export default function Tools() {
   // let url = "/";
   const classes = useStyles();
   const [items, setItems] = useState("");
@@ -104,7 +104,7 @@ export default function Suppliers() {
 
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/supplier")
+      .get("https://farmmanager-api.herokuapp.com/api/tool")
       .then((response) => {
         setItems(response.data);
       })
@@ -112,33 +112,32 @@ export default function Suppliers() {
         console.log(err);
       });
   }, []);
-   const theme = React.useMemo(
-     () =>
-       createMuiTheme({
-         overrides: {
-           MuiGrid: {
-             "spacing-xs-2": "-6px !important",
-           },
-         },
-         palette: {
-           type: prefersDarkMode ? "light" : "dark",
-         },
-       }),
-     [prefersDarkMode]
-   );
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        overrides: {
+          MuiGrid: {
+            "spacing-xs-2": "-6px !important",
+          },
+        },
+        palette: {
+          type: prefersDarkMode ? "light" : "dark",
+        },
+      }),
+    [prefersDarkMode]
+  );
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
           <ProjectAppBar />
-
           <main className={classes.content}>
             <br></br>
             <br></br>
             <br></br>
             <Paper className={classes.root2}>
-              <h5 align="left" style={{ marginLeft: "0.5rem",color:"green" }}>
-                Recent Suppliers
+              <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
+                Tools
               </h5>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
@@ -152,18 +151,18 @@ export default function Suppliers() {
                         component="th"
                         scope="row"
                       >
-                        Name
+                       Date
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        Company Name
+                        Tool name
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        Telephone
+                        Purpose
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        Business Address
+                        Main User
                       </StyledTableCell>
-                      <StyledTableCell align="center">Category</StyledTableCell>
+                      <StyledTableCell align="center">Condition</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   {items &&
@@ -173,31 +172,24 @@ export default function Suppliers() {
                           {item.id}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.name}
+                          {item.data}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.companyname}
+                          {item.toolname}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.telephone1}
+                          {item.purpose}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.busaddress}
+                          {item.mainuser}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.category}
+                          {item.codition}
                         </StyledTableCell>
                       </TableBody>
                     ))}
                 </Table>
               </TableContainer>
-              {/* <div className={classes.seeMore}>
-                
-                <a href={url} color="primary">
-                  See more
-                </a>
-               
-              </div> */}
             </Paper>
             <Box pt={4}>
               <Copyright />

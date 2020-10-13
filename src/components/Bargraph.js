@@ -17,7 +17,7 @@ const options = {
     margin: 50,
     x: 10,
     y: 28,
-    style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "rgba(0, 0, 0, 0.87)" },
+    style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "green" },
   },
 
   // subtitle: {

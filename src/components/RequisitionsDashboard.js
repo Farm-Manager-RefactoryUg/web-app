@@ -49,7 +49,7 @@ export default function Tables() {
   };
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/requisition/?_limit=1")
+      .get("https://farmmanager-api.herokuapp.com/api/requisition/")
       .then((response) => {
         setItems(response.data);
       })
