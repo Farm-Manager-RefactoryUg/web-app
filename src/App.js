@@ -5,7 +5,6 @@ import SignUp from "./components/signup";
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
-import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Home from './components/Home';

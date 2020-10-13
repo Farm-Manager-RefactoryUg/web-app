@@ -1,8 +1,24 @@
-import React, {useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Navbar from "./Navbar";
+import _ from "lodash";
+
+const ops = {
+  jan: [],
+  feb: [],
+  mar: [],
+  apr: [],
+  may: [],
+  jun: [],
+  jul: [],
+  aug: [],
+  sep: [],
+  oct: [],
+  nov: [],
+  dec: [],
+};
 
 const options = {
   chart: {
@@ -15,10 +31,6 @@ const options = {
   credits: {
     enabled: false,
   },
-  // subtitle: {
-  //   text: "Resize the frame or click buttons to change appearance",
-  // },
-
   legend: {
     align: "right",
     verticalAlign: "middle",
@@ -71,7 +83,6 @@ const options = {
       ],
     },
   ],
-
   responsive: {
     rules: [
       {
@@ -108,27 +119,65 @@ const options = {
 
 export default function SalesBarGraph() {
   const [data, dataSet] = useState(null);
+  const [items, setItems] = useState([]);
+  const [graphOptions, setGraphOptions] = useState({});
 
   useEffect(() => {
-    async function fetchMyAPI() {
-      try {
-        const [data1, data2] = await Promise.all([
-          fetch("https://farmmanager-api.herokuapp.com/api/expenditure/"),
-          fetch("https://farmmanager-api.herokuapp.com/api/payroll/"),
-        ]);
-        console.log(data1, data2);
-      } catch (err) {
-        console.log(err);
-      }
+    async function fetchData() {
+      const response = await fetch(
+        "https://farmmanager-api.herokuapp.com/api/income/"
+      );
+      const jsondata = await response.json();
+      const newArray = [...jsondata];
+      console.log(newArray);
+      setItems(newArray);
+
+      options.series[0].data = [
+        _.sum(ops.jan),
+        _.sum(ops.feb),
+        _.sum(ops.mar),
+        _.sum(ops.apr),
+        _.sum(ops.may),
+        _.sum(ops.jun),
+        _.sum(ops.jul),
+        _.sum(ops.aug),
+        _.sum(ops.sep),
+        _.sum(ops.oct),
+        _.sum(ops.nov),
+        _.sum(ops.dec),
+      ];
     }
 
-    fetchMyAPI();
+    fetchData();
+    items.map((item) => {
+      var date = item.date;
+      var amount = item.amountrecvd;
+      console.log(amount);
+      if (date.startsWith("9")) {
+        ops.sep.push(amount);
+      } else {
+      }
+    });
   }, []);
 
   return (
     <React.Fragment>
       <Navbar />
-      <br></br>
+      {items.map((item) => (
+        <div key={item.id}>
+          {/* {() => {
+            var date = item.date;
+            var amount = item.amountrecvd;
+            console.log(amount)
+            if (date.startsWith("9")) {
+              ops.sep.push(amount);
+            }             
+          }} */}
+          <span>{item.date}</span>
+          <span>{item.total}</span>
+        </div>
+      ))}
+
       <HighchartsReact highcharts={Highcharts} options={options} />
       <br></br>
     </React.Fragment>

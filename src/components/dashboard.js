@@ -8,7 +8,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
-import PieChart from "./PieChart";
+import Chart from "./Piechart";
 import RequisitionsDashboard from "./RequisitionsDashboard";
 import Bargraph from "./Bargraph";
 import ProjectAppBar from "./ProjectAppBar";
@@ -199,7 +199,7 @@ export default function Dashboard() {
 
                 <Grid item xs={12} sm={6} lg={5}>
                   <Card style={{ backgroundColor: "white" }}>
-                    <PieChart />
+                    <Chart />
                   </Card>
                 </Grid>
 
