@@ -107,6 +107,7 @@ const options = {
 };
 
 export default function SalesBarGraph() {
+  console.log(options.series[0].data[0])
   return (
     <React.Fragment>
       <Navbar />

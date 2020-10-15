@@ -36,9 +36,18 @@ const useStyles = makeStyles((theme) => ({
     opacity: "0.7",
   },
   highlight: {
-    borderLeft: "5px solid green",
-    paddingLeft: "11px",
-  }
+    //borderLeft: "5px solid green",
+    //paddingLeft: "11px",
+    '&:hover': {
+      backgroundColor: "white",
+      color: "rgba(0,0,0,0.87)",
+    },
+    backgroundColor: "white",
+    color: "rgba(0,0,0,0.87)",
+  },
+  highlightItems: {
+    color: "rgba(27, 36, 48, 0.9)",
+  },
 })
 )
 
@@ -51,8 +60,9 @@ export default function MainListItems(props) {
     projectsUrl: "/projects",
     settingsUrl: "/settings",
   }
-  const listItemRoot = classes.root;
-  const listItemHighlight = classes.highlight;
+  //const listItemRoot = classes.root;
+  //const listItemHighlight = classes.highlight;
+  const listItemHighlightItems = classes.highlightItems;
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -70,11 +80,11 @@ export default function MainListItems(props) {
     <div style={{ marginTop: "20px", }}>
       {/* <ListSubheader inset>Statistics</ListSubheader> */}
 
-      <ListItem button component={Link} to={"/dashboard"} className={clsx(listItemRoot, urls.dashboardUrl === currentUrl ? listItemHighlight : "")} >
+      <ListItem button component={Link} to={"/dashboard"} className={clsx(classes.root, urls.dashboardUrl === currentUrl ? classes.highlight : "")} >
         <ListItemIcon>
-          <DashboardIcon />
+          <DashboardIcon className={urls.dashboardUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Dashboard" className={classes.text} />
+        <ListItemText disableTypography primary="Dashboard" className={clsx(classes.text, urls.dashboardUrl === currentUrl ? listItemHighlightItems : "")}  />
       </ListItem>
 
       <ListItem button id="a" onClick={handleClick1}>
@@ -203,18 +213,18 @@ export default function MainListItems(props) {
         />
       </ListItem>
 
-      <ListItem button component={Link} to={"/projects"} className={clsx(listItemRoot, urls.projectsUrl === currentUrl ? listItemHighlight : "")}>
+      <ListItem button component={Link} to={"/projects"} className={clsx(classes.root, urls.projectsUrl === currentUrl ? classes.highlight : "")}>
         <ListItemIcon>
-          <LayersIcon />
+          <LayersIcon className={urls.projectsUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Projects" className={classes.text} />
+        <ListItemText disableTypography primary="Projects" className={clsx(classes.text, urls.projectsUrl === currentUrl ? listItemHighlightItems : "")} />
       </ListItem>
 
-      <ListItem button component={Link} to={"/settings"} className={clsx(listItemRoot, urls.settingsUrl === currentUrl ? listItemHighlight : "")}>
+      <ListItem button component={Link} to={"/settings"} className={clsx(classes.root, urls.settingsUrl === currentUrl ? classes.highlight : "")}>
         <ListItemIcon>
-          <SettingsIcon />
+          <SettingsIcon className={urls.settingsUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Settings" className={classes.text} />
+        <ListItemText disableTypography primary="Settings" className={clsx(classes.text, urls.settingsUrl === currentUrl ? listItemHighlightItems : "")} />
       </ListItem>
 
     </div>

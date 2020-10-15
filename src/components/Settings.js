@@ -11,7 +11,7 @@ import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
 import AddFarmManager from "./AddFarmManager";
 import AddTeleFarmer from "./AddTeleFarmer";
-import UpdateProfile from "./UpdateProfile";
+//import UpdateProfile from "./UpdateProfile";
 
 
 const drawerWidth = 240;
