@@ -7,6 +7,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import BasicTable from "./BasicTable";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
+import AddIcon from '@material-ui/icons/Add';
 
 const Buttonn = withStyles({
   root: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "initial",
     fontWeight: "600",
     marginTop: theme.spacing(2),
+    paddingRight: theme.spacing(3),
   },
 }));
 
@@ -177,6 +179,7 @@ export default function AddFarmManager() {
               type="submit"
               variant="contained"
               className={classes.submit}
+              startIcon={<AddIcon />}
             >
               Add
             </Buttonn>

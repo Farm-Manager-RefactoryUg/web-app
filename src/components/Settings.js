@@ -5,13 +5,10 @@ import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/st
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-//import Paper from "@material-ui/core/Paper";
 import ProjectAppBar from "./ProjectAppBar";
-//import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
 import AddFarmManager from "./AddFarmManager";
 import AddTeleFarmer from "./AddTeleFarmer";
-//import UpdateProfile from "./UpdateProfile";
 
 
 const drawerWidth = 240;

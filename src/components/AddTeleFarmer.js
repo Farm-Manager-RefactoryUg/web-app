@@ -7,6 +7,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import BasicTable from "./BasicTable";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
+import AddIcon from '@material-ui/icons/Add';
 
 const Buttonn = withStyles({
   root: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     textTransform: "initial",
     fontWeight: "600",
+    paddingRight: theme.spacing(3),
   },
 }));
 
@@ -107,9 +109,10 @@ export default function AddTeleFarmer() {
               type="submit"
               variant="contained"
               className={classes.submit}
+              startIcon={<AddIcon />}
             >
               Add
-                  </Buttonn>
+            </Buttonn>
             <br></br>
 
             {emaile && <small

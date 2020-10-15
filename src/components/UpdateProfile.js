@@ -121,12 +121,12 @@ export default function AddFarmManager() {
             <Typography
                 component="h6"
                 variant="h5"
-                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", marginBottom: "5px", }}>
+                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
                 Profile
             </Typography>
 
             <main maxWidth="xs" className={classes.container}>
-                
+
                 <div style={{ flex: "3" }}>
                     <form onSubmit={handleSubmit} className={classes.form} noValidate>
                         <CssTextField
