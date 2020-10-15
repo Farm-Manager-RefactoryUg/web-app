@@ -9,6 +9,7 @@ import ProjectAppBar from "./ProjectAppBar";
 import Divider from "@material-ui/core/Divider";
 import AddFarmManager from "./AddFarmManager";
 import AddTeleFarmer from "./AddTeleFarmer";
+import UpdateDashboard from "./UpdateDashboard";
 
 
 const drawerWidth = 240;
@@ -114,6 +115,10 @@ export default function Dashboard() {
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
               <Grid container spacing={6} style={{ marginBottom: "20px", }}>
+
+                <Grid item xs={12} sm={12} lg={7}>
+                  <UpdateDashboard />
+                </Grid>
 
                 <Grid item xs={12} sm={12} lg={12}>
                   <AddTeleFarmer />

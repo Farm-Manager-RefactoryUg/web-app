@@ -17,7 +17,6 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
-import BasicTable from "./BasicTable";
 
 function Copyright() {
   return (
@@ -212,11 +211,6 @@ export default function Dashboard() {
 
               </Grid>
 
-              <Grid component={Card} item xs={12} sm={12} style={{ backgroundColor: "white", padding: "0px 20px 30px 20px", }}>
-              
-                  <BasicTable />                  
-                
-              </Grid>
               <br></br>
 
               <Box pt={4}>

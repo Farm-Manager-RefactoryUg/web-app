@@ -14,6 +14,8 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const drawerWidth = 240;
 
@@ -123,7 +125,7 @@ export default function Dashboard() {
                                 style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                                 component="h1"
                             >
-                                {"Dashboards"}
+                                {"My Dashboards"}
                             </Typography>
 
                             <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
@@ -139,6 +141,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Biyinzika Mukono C
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
 
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
@@ -170,6 +175,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Galileo goat project I
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>                                 
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
@@ -196,6 +204,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Biyinzika Mukono C
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
@@ -222,6 +233,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Galileo goat project I
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
@@ -248,6 +262,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Biyinzika Mukono C
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
@@ -274,6 +291,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Galileo goat project I
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>

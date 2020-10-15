@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import BasicTable from "./BasicTable";
+import TeleFarmerTable from "./TeleFarmerTable";
 import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
@@ -74,15 +74,15 @@ export default function AddTeleFarmer() {
   }
 
   return (
-    <Grid container spacing={3} style={{ marginTop: "20px", }}>
+    <Grid container spacing={3} >
 
-      <Grid item xs={12} sm={12} lg={8}>
+      <Grid item xs={12} sm={12} lg={7}>
         <Card style={{ padding: "16px" }}>
-          <BasicTable />
+          <TeleFarmerTable />
         </Card>
       </Grid>
 
-      <Grid item xs={12} sm={12} lg={4}>
+      <Grid item xs={12} sm={12} lg={5}>
         <Card style={{ padding: "16px" }}>
 
           <Typography
@@ -104,6 +104,7 @@ export default function AddTeleFarmer() {
               onChange={handleChange}
               margin="normal"
             />
+            <br></br>
 
             <Buttonn
               type="submit"

@@ -1,5 +1,4 @@
 import React from "react";
-// import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
@@ -32,9 +31,6 @@ const options = {
 
   xAxis: {
     categories: ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-    labels: {
-      x: 0,
-    },
     title: {
       text: "Months",
     }
