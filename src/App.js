@@ -2,6 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import Settings from "./components/Settings";
+import ForgotPassword from './components/ForgotPassword';
+import PageNotFound from './components/PageNotFound';
+import UserProfile from "./components/UserProfile";
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
@@ -13,9 +17,6 @@ import SalesDetails from "./components/SalesDetails";
 import Dashboard from "./components/Dashboard";
 import Project from "./components/Project";
 import Projects from "./components/Projects";
-import Settings from "./components/Settings";
-import ForgotPassword from './components/ForgotPassword';
-import PageNotFound from './components/PageNotFound';
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/project" component={Project} />
         <Route path="/projects" component={Projects} />
         <Route path="/settings" component={Settings} />
+        <Route path="/userprofile" component={UserProfile} />
         <Route path="/forgotpassword" component={ForgotPassword} />
         <Route path="/pagenotfound" component={PageNotFound} />
         <Route path="/dashboard" exact component={Dashboard} />

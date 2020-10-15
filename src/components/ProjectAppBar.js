@@ -1,10 +1,8 @@
 import React from "react"
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
-//import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-//import useMediaQuery from "@material-ui/core/useMediaQuery";
 import clsx from "clsx";
 import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -16,8 +14,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./SideBar";
-import MenuListComposition from "./Avatar";
+import NavDropDown from "./NavDropDown";
 import Logo from '../static/images/tree.svg'
+import Avatar from '@material-ui/core/Avatar';
+import michael from "../static/images/2.jfif";
 
 
 const drawerWidth = 220;
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     backgroundColor: "white",
-    minHeight: "48px",
+    minHeight: "50px",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -94,27 +94,16 @@ const useStyles = makeStyles((theme) => ({
   small: {
     width: theme.spacing(4),
     height: theme.spacing(4),
+    marginLeft: theme.spacing(3),
   },
-  // content: {
-  //   flexGrow: 1,
-  //   height: "100vh",
-  //   overflow: "auto",
-  // },
 }));
 
 
-export default function ProjectAppBar() {
+export default function ProjectAppBar(props) {
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const theme = React.useMemo(
     () =>
@@ -130,6 +119,14 @@ export default function ProjectAppBar() {
       }),
     [prefersDarkMode]
   );
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
 
   return (
     <>
@@ -151,7 +148,6 @@ export default function ProjectAppBar() {
               )}
             >
               <MenuIcon />
-
             </IconButton>
 
             <Typography
@@ -161,16 +157,18 @@ export default function ProjectAppBar() {
               style={{ color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", }}
             >
               <img src={Logo} alt="logo" width="25px" height="25px" style={{ marginRight: "5px" }} />
-            Tele-Farmer
-          </Typography>
+              Tele-Farmer
+            </Typography>
 
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon style={{ color: "rgba(0,0,0,0.87)" }} />
               </Badge>
             </IconButton>
+            
+            <Avatar alt="Michael" src={michael} className={classes.small} />
+            <NavDropDown />
 
-            <MenuListComposition />
           </Toolbar>
         </AppBar>
 
@@ -187,7 +185,7 @@ export default function ProjectAppBar() {
             </IconButton>
           </div>
           <Divider />
-          <List><MainListItems /></List>
+          <List><MainListItems location={props.location} /></List>
         </Drawer>
       </ThemeProvider>
     </>

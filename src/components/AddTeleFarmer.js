@@ -91,18 +91,18 @@ export default function AddTeleFarmer() {
   return (
     <div className={classes.root}>
 
-      <Typography
+      {/* <Typography
         component="h6"
         variant="h5"
-        style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", fontFamily: "Segoe UI", marginBottom: "30px", }}>
+        style={{ fontWeight: "400", color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", fontFamily: "Segoe UI", marginBottom: "30px", }}>
         TELE-FARMERS
-      </Typography>
+      </Typography> */}
 
       <Typography
         component="h6"
         variant="h5"
-        style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI" }}>
-        Register
+        style={{ fontWeight: "400", color: "rgba(0,0,0,0.87)", fontSize: "1.0125rem", fontFamily: "Segoe UI" }}>
+        REGISTER TELE-FARMER
       </Typography>
 
       <main maxWidth="xs">

@@ -90,7 +90,7 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    document.title = "Dashboard"
+    document.title = "My Profile"
   }, []);
 
   return (
@@ -111,22 +111,16 @@ export default function Dashboard() {
                 style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                 component="h1"
               >
-                {"Dashboard Settings"}
+                {"User Settings"}
               </Typography>
 
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
               <Grid container spacing={6} style={{ marginTop: "20px", marginBottom: "20px", }}>
 
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ backgroundColor: "white" }}>
-                    <AddTeleFarmer />
-                  </Card>
-                </Grid>
-
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ backgroundColor: "white" }}>
-                    <AddFarmManager />
+                <Grid item xs={12} md={12} lg={12}>
+                  <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                    <UpdateProfile />
                   </Card>
                 </Grid>
 

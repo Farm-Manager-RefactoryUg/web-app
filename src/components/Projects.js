@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
     const classes = useStyles();
+    const currentUrl = useLocation();
     //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -107,7 +109,7 @@ export default function Dashboard() {
             <ThemeProvider theme={theme}>
                 <div className={classes.root}>
 
-                    <ProjectAppBar />
+                    <ProjectAppBar location={currentUrl} />
 
                     <main className={classes.content}>
                         <div

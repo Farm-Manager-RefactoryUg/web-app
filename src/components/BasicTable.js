@@ -51,8 +51,8 @@ export default function BasicTable() {
             <TableContainer component="div" style={{ marginTop: "20px", }}>
 
                 <div
-                    style={{ color: "rgba(0,0,0,0.87)", fontWeight: "600", fontSize: "1.0625rem", fontFamily: "Segoe UI", marginBottom: "10px", }}>
-                    Table showing details of farm managers
+                    style={{ color: "rgba(0,0,0,0.87)", fontWeight: "400", fontSize: "1.0125rem", fontFamily: "Segoe UI", marginBottom: "10px", }}>
+                    MANAGE TELE-FARMERS
                 </div>
 
                 <Table className={classes.table} aria-label="simple table">

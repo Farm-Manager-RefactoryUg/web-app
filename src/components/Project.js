@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import ProjectAppBar from "./ProjectAppBar";
+import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Toolbar from "@material-ui/core/Toolbar";
-import MenuListComposition from "./Avatar";
-import clsx from "clsx";
-import AppBar from "@material-ui/core/AppBar";
-//import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import Logo from '../static/images/tree.svg'
-import Card from '@material-ui/core/Card';
 
+
+const drawerWidth = 240;
 const Buttonn = withStyles({
   root: {
     '&:hover': {
@@ -46,22 +45,50 @@ const CssTextField = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    backgroundColor: "#fafafa",
+    display: "flex",
+    fontFamily: "Segoe UI",
+    backgroundColor: "rgb(247, 249, 252)",
+    minHeight: "100vh",
+  },
+  spacing: {
+    margin: 0,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  grid: {
+    margin: "0px !important",
+  },
+  drawerPaper: {
+    position: "relative",
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
   },
   paper: {
-    marginTop: theme.spacing(18),
-    padding: theme.spacing(5),
     width: "600px",
     margin: "auto",
+    marginTop: theme.spacing(8),
+    padding: theme.spacing(1, 5),
     display: 'flex',
     flexDirection: 'column',
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: '#964c22',
+  // fixedHeight: {
+  //   height: 150,
+  // },
+  label: {
+    fontSize: "0.7rem",
+    color: "white",
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -77,36 +104,29 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     textTransform: "initial",
   },
-  footer: {
-    padding: theme.spacing(1, 2),
-    paddingBottom: 60,
-    marginTop: '50px',
-    backgroundColor: 'green',
-    color: 'white',
-  },
-  appBar: {
-    backgroundColor: "white",
-    minHeight: "50px",
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-    minHeight: "48px",
-  },
-  title: {
-    flexGrow: 1,
-  },
 }));
 
-
-export default function SignIn() {
+export default function Dashboard() {
 
   const classes = useStyles();
+  const currentUrl = useLocation();
   //let [[fullNamee, desce], setErrors] = useState(["", ""])
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        overrides: {
+          MuiGrid: {
+            "spacing-xs-2": "-6px !important",
+          },
+        },
+        palette: {
+          type: prefersDarkMode ? "light" : "dark",
+        },
+      }),
+    [prefersDarkMode]
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -121,56 +141,38 @@ export default function SignIn() {
   }, []);
 
   return (
-    <div className={classes.root}>
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar)}
-      >
+    <>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
 
-        <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
+          <ProjectAppBar location={currentUrl} />
 
-          <Typography
-            variant="h6"
-            href="/"
-            className={classes.title}
-            style={{ color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", marginLeft: "30px" }}
-          >
-            <img src={Logo} alt="logo" width="25px" height="25px" style={{ marginRight: "5px" }} />
-            Tele-Farmer
-          </Typography>
+          <main maxWidth="xs" style={{ margin: "auto" }}>
+            <Card className={classes.paper}>
 
-          <MenuListComposition />
+              <Typography
+                style={{ fontSize: "1.2rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                component="h1"
+              >
+                {"Create dashboard"}
+              </Typography>
 
-        </Toolbar>
+              <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
-      </AppBar>
-
-      <main maxWidth="xs">
-        <Card className={classes.paper}>
-
-          <Typography
-            style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
-            component="h1"
-          >
-            {"Create dashboard"}
-          </Typography>
-
-          <form onSubmit={handleSubmit} className={classes.form} noValidate>
-
-            <CssTextField
-              autoComplete="title"
-              margin="normal"
-              autoFocus
-              name="title"
-              variant="outlined"
-              required
-              fullWidth
-              id="title"
-              label="Title"
-              //error={titlee.length > 0}
-              onChange={handleChange}
-            />
-            {/* {emaile && <small
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="title"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="title"
+                  label="Title"
+                  //error={titlee.length > 0}
+                  onChange={handleChange}
+                />
+                {/* {emaile && <small
               style={{
                 color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
               }}
@@ -179,21 +181,21 @@ export default function SignIn() {
               {emaile}
             </small>} */}
 
-            <CssTextField
-              autoComplete="fname"
-              margin="normal"
-              name="description"
-              variant="outlined"
-              required
-              fullWidth
-              multiline
-              rows={5}
-              id="fullName"
-              label="Description"
-              //error={desce.length > 0}
-              onChange={handleChange}
-            />
-            {/* {emaile && <small
+                <CssTextField
+                  autoComplete="fname"
+                  margin="normal"
+                  name="description"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  multiline
+                  rows={5}
+                  id="fullName"
+                  label="Description"
+                  //error={desce.length > 0}
+                  onChange={handleChange}
+                />
+                {/* {emaile && <small
               style={{
                 color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
               }}
@@ -203,22 +205,24 @@ export default function SignIn() {
             </small>} */}
 
 
-            <Buttonn
-              type="submit"
-              variant="contained"
-              className={classes.submit}
-              component='a'
-              href={"/projects"}
-            >
-              Complete Step I
+                <Buttonn
+                  type="submit"
+                  variant="contained"
+                  className={classes.submit}
+                  component='a'
+                  href={"/projects"}
+                >
+                  Complete Step I
           </Buttonn>
 
-          </form>
-        </Card>
+              </form>
+            </Card>
 
-      </main>
+          </main>
 
-    </div>
+
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
-

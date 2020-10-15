@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -85,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
+  const currentUrl = useLocation();
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -112,7 +114,7 @@ export default function Dashboard() {
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
 
-          <ProjectAppBar />
+          <ProjectAppBar location = {currentUrl} />
 
           <main className={classes.content}>
             <div
@@ -216,12 +218,6 @@ export default function Dashboard() {
                 
               </Grid>
               <br></br>
-
-              {/* <Grid item xs={12}>
-                <Card style={{ backgroundColor: "white", }}>
-                  <BasicTable />
-                </Card>
-              </Grid> */}
 
               <Box pt={4}>
                 <Copyright />

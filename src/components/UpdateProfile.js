@@ -128,7 +128,7 @@ export default function AddFarmManager() {
             <Typography
                 component="h6"
                 variant="h5"
-                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", fontFamily: "Segoe UI", marginBottom: "15px", }}>
+                style={{ color: "rgba(0,0,0,0.87)", fontSize: "1.0125rem", fontFamily: "Segoe UI", marginBottom: "15px", }}>
                 PROFILE
             </Typography>
 
