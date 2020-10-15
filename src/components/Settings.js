@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 //import Paper from "@material-ui/core/Paper";
 import ProjectAppBar from "./ProjectAppBar";
-import Card from '@material-ui/core/Card';
+//import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
 import AddFarmManager from "./AddFarmManager";
 import AddTeleFarmer from "./AddTeleFarmer";
@@ -90,7 +90,7 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    document.title = "Dashboard"
+    document.title = "Dashboard Settings"
   }, []);
 
   return (
@@ -116,18 +116,14 @@ export default function Dashboard() {
 
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-              <Grid container spacing={6} style={{ marginTop: "20px", marginBottom: "20px", }}>
+              <Grid container spacing={6} style={{ marginBottom: "20px", }}>
 
                 <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ backgroundColor: "white" }}>
-                    <AddTeleFarmer />
-                  </Card>
+                  <AddTeleFarmer />
                 </Grid>
 
                 <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ backgroundColor: "white" }}>
-                    <AddFarmManager />
-                  </Card>
+                  <AddFarmManager />
                 </Grid>
 
               </Grid>

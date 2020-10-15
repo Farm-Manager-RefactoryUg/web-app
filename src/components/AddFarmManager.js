@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import BasicTable from "./BasicTable";
+import Grid from "@material-ui/core/Grid";
+import Card from '@material-ui/core/Card';
 
 const Buttonn = withStyles({
   root: {
@@ -33,36 +35,19 @@ const CssTextField = withStyles({
       '&.Mui-error fieldset': {
         borderColor: 'red',
       },
-
+      width: "300px",
+      marginRight: "5px",
     },
   },
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: "white",
-    paddingTop: theme.spacing(3),
-    paddingLeft: "40px",
-    paddingRight: "40px",
-    marginBottom: theme.spacing(6),
-  },
-  form: {
-    width: '50%', // Fix IE 11 issue.
-  },
   submit: {
     backgroundColor: 'green',
     color: 'white',
-    outline: 'none',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    //marginTop: theme.spacing(1),
     textTransform: "initial",
     fontWeight: "600",
-    height: "55px",
-    width: "120px",
-    marginTop: "35px",
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -104,24 +89,24 @@ export default function AddFarmManager() {
 
 
   return (
-    <div className={classes.root}>
+    <Grid container spacing={3} style={{ marginBottom: "20px", }}>
 
-      {/* <Typography
-        component="h6"
-        variant="h5"
-        style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", fontFamily: "Segoe UI", marginBottom: "30px", }}>
-        FARM MANAGERS
-      </Typography> */}
+      <Grid item xs={12} sm={12} lg={8}>
+        <Card style={{ padding: "16px" }}>
+          <BasicTable />
+        </Card>
+      </Grid>
 
-      <Typography
-        component="h6"
-        variant="h5"
-        style={{ fontWeight: "400", color: "rgba(0,0,0,0.87)", fontSize: "1.0125rem", fontFamily: "Segoe UI", }}>
-        REGISTER FARM MANAGER
-      </Typography>
+      <Grid item xs={12} sm={12} lg={4}>
+        <Card style={{ padding: "16px" }}>
 
-      <main maxWidth="xs">
-        <div className={classes.paper}>
+          <Typography
+            component="h6"
+            variant="h5"
+            style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+            Register Farm Manager
+          </Typography>
+
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
             <CssTextField
@@ -129,7 +114,6 @@ export default function AddFarmManager() {
               name="fullName"
               variant="outlined"
               required
-              fullWidth
               id="fullName"
               label="Username"
               error={fullNamee.length > 0}
@@ -149,7 +133,6 @@ export default function AddFarmManager() {
             <CssTextField
               variant="outlined"
               required
-              fullWidth
               id="email"
               label="Email address"
               name="email"
@@ -171,7 +154,6 @@ export default function AddFarmManager() {
               variant="outlined"
               margin="normal"
               required
-              fullWidth
               name="password"
               label="Password"
               type="password"
@@ -194,19 +176,17 @@ export default function AddFarmManager() {
             <Buttonn
               type="submit"
               variant="contained"
-              fullWidth
               className={classes.submit}
             >
               Add
             </Buttonn>
 
           </form>
-        </div>
+        
+        </Card>
+      </Grid>
 
-      </main>
-
-      <BasicTable />
-    </div>
+    </Grid>
   );
 }
 

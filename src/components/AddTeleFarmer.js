@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import BasicTable from "./BasicTable";
+import Grid from "@material-ui/core/Grid";
+import Card from '@material-ui/core/Card';
 
 const Buttonn = withStyles({
   root: {
@@ -35,36 +37,17 @@ const CssTextField = withStyles({
       },
       width: "300px",
       marginRight: "5px",
-
     },
   },
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: "white",
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    paddingLeft: "40px",
-    paddingRight: "40px",
-    marginBottom: theme.spacing(1),
-  },
-  form: {
-    width: '50%',
-  },
   submit: {
     backgroundColor: 'green',
     color: 'white',
-    outline: 'none',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
     marginTop: theme.spacing(2),
     textTransform: "initial",
     fontWeight: "600",
-    height: "55px",
-    width: "70px",
   },
 }));
 
@@ -89,24 +72,24 @@ export default function AddTeleFarmer() {
   }
 
   return (
-    <div className={classes.root}>
+    <Grid container spacing={3} style={{ marginTop: "20px", }}>
 
-      {/* <Typography
-        component="h6"
-        variant="h5"
-        style={{ fontWeight: "400", color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", fontFamily: "Segoe UI", marginBottom: "30px", }}>
-        TELE-FARMERS
-      </Typography> */}
+      <Grid item xs={12} sm={12} lg={8}>
+        <Card style={{ padding: "16px" }}>
+          <BasicTable />
+        </Card>
+      </Grid>
 
-      <Typography
-        component="h6"
-        variant="h5"
-        style={{ fontWeight: "400", color: "rgba(0,0,0,0.87)", fontSize: "1.0125rem", fontFamily: "Segoe UI" }}>
-        REGISTER TELE-FARMER
-      </Typography>
+      <Grid item xs={12} sm={12} lg={4}>
+        <Card style={{ padding: "16px" }}>
 
-      <main maxWidth="xs">
-        <div className={classes.paper}>
+          <Typography
+            component="h6"
+            variant="h5"
+            style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+            Register Tele-Farmer
+              </Typography>
+
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
             <CssTextField
@@ -126,7 +109,7 @@ export default function AddTeleFarmer() {
               className={classes.submit}
             >
               Add
-            </Buttonn>
+                  </Buttonn>
             <br></br>
 
             {emaile && <small
@@ -139,11 +122,11 @@ export default function AddTeleFarmer() {
             </small>}
 
           </form>
-        </div>
-      </main>
 
-      <BasicTable />
-    </div>
+        </Card>
+      </Grid>
+
+    </Grid>
   );
 }
 

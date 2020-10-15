@@ -90,7 +90,7 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    document.title = "My Profile"
+    document.title = "User Settings"
   }, []);
 
   return (

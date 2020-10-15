@@ -45,17 +45,11 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: "white",
-        paddingTop: theme.spacing(3),
-        paddingLeft: "40px",
-        paddingRight: "40px",
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
+        padding: theme.spacing(2),
     },
     submit: {
         backgroundColor: 'green',
         color: 'white',
-        outline: 'none',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
         marginTop: theme.spacing(1),
@@ -67,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
     container: {
         display: "flex",
         flexDirection: "row",
-        paddingBottom: theme.spacing(3),
     },
     input: {
         display: "none",
@@ -128,14 +121,13 @@ export default function AddFarmManager() {
             <Typography
                 component="h6"
                 variant="h5"
-                style={{ color: "rgba(0,0,0,0.87)", fontSize: "1.0125rem", fontFamily: "Segoe UI", marginBottom: "15px", }}>
-                PROFILE
+                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", marginBottom: "5px", }}>
+                Profile
             </Typography>
 
             <main maxWidth="xs" className={classes.container}>
-
+                
                 <div style={{ flex: "3" }}>
-
                     <form onSubmit={handleSubmit} className={classes.form} noValidate>
                         <CssTextField
                             autoComplete="fname"

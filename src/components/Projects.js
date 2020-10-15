@@ -101,7 +101,7 @@ export default function Dashboard() {
     );
 
     useEffect(() => {
-        document.title = "Projects"
+        document.title = "Dasboards"
     }, []);
 
     return (
