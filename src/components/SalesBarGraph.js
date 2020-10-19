@@ -6,18 +6,18 @@ import Navbar from "./Navbar";
 import _ from "lodash";
 
 const ops = {
-  jan: [],
-  feb: [],
-  mar: [],
-  apr: [],
-  may: [],
-  jun: [],
-  jul: [],
-  aug: [],
-  sep: [],
-  oct: [],
-  nov: [],
-  dec: [],
+  jan: [0],
+  feb: [0],
+  mar: [0],
+  apr: [0],
+  may: [0],
+  jun: [0],
+  jul: [0],
+  aug: [0],
+  sep: [0],
+  oct: [0],
+  nov: [0],
+  dec: [0],
 };
 
 const options = {
@@ -67,20 +67,7 @@ const options = {
   series: [
     {
       name: "Sales",
-      data: [
-        670000,
-        2000000,
-        3600000,
-        150000,
-        400000,
-        320000,
-        1000000,
-        1200000,
-        700000,
-        550000,
-        1300000,
-        900000,
-      ],
+      
     },
   ],
   responsive: {
@@ -100,7 +87,7 @@ const options = {
               align: "left",
               x: 0,
               y: -5,
-            },
+            }, 
             title: {
               text: "Amount",
             },
@@ -130,7 +117,39 @@ export default function SalesBarGraph() {
       const jsondata = await response.json();
       const newArray = [...jsondata];
       console.log(newArray);
-      setItems(newArray);
+      // setItems(newArray);
+
+      newArray.map((item) => {
+        var date = item.date;
+        var amount = item.amountrecvd;
+        console.log(amount);
+        if (date.startsWith("1")) {
+          ops.jan.push(amount);
+        }if (date.startsWith("2")) {
+          ops.feb.push(amount);
+        } if (date.startsWith("3")) {
+          ops.mar.push(amount);
+        } if (date.startsWith("4")) {
+          ops.apr.push(amount);
+        } if (date.startsWith("5")) {
+          ops.may.push(amount);
+        } if (date.startsWith("6")) {
+          ops.jun.push(amount);
+        } if (date.startsWith("7")) {
+          ops.jul.push(amount);
+        } if (date.startsWith("8")) {
+          ops.aug.push(amount);
+        } if (date.startsWith("9")) {
+          ops.sep.push(amount);
+        } if (date.startsWith("10")) {
+          ops.oct.push(amount);
+        } if (date.startsWith("11")) {
+          ops.nov.push(amount);
+        } else {
+          ops.dec.push(amount)
+        }
+       
+      });
 
       options.series[0].data = [
         _.sum(ops.jan),
@@ -146,40 +165,20 @@ export default function SalesBarGraph() {
         _.sum(ops.nov),
         _.sum(ops.dec),
       ];
+      setGraphOptions(options)
+      console.log(options)
     }
-
-    fetchData();
-    items.map((item) => {
-      var date = item.date;
-      var amount = item.amountrecvd;
-      console.log(amount);
-      if (date.startsWith("9")) {
-        ops.sep.push(amount);
-      } else {
-      }
-    });
+    fetchData();   
   }, []);
+
+   
 
   return (
     <React.Fragment>
       <Navbar />
-      {items.map((item) => (
-        <div key={item.id}>
-          {/* {() => {
-            var date = item.date;
-            var amount = item.amountrecvd;
-            console.log(amount)
-            if (date.startsWith("9")) {
-              ops.sep.push(amount);
-            }             
-          }} */}
-          <span>{item.date}</span>
-          <span>{item.total}</span>
-        </div>
-      ))}
-
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={graphOptions} />
       <br></br>
     </React.Fragment>
   );
 }
+
