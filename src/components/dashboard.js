@@ -160,7 +160,7 @@ export default function Dashboard() {
                 <Grid item xs={12} md={3} lg={3}>
                   <Card
                     style={{
-                      width: "250px",
+                      // width: "250px",
                       backgroundColor: "rgb(255, 255, 255)",
                       color: "rgba(0, 0, 0, 0.87)",
                     }}
@@ -227,7 +227,7 @@ export default function Dashboard() {
                 <Grid item xs={12} md={3} lg={3}>
                   <Card
                     style={{
-                      width: "250px",
+                      // width: "250px",
                       backgroundColor: "rgb(255, 255, 255)",
                       color: "rgba(0, 0, 0, 0.87)",
                     }}
@@ -294,7 +294,7 @@ export default function Dashboard() {
                 <Grid item xs={12} md={3} lg={3}>
                   <Card
                     style={{
-                      width: "250px",
+                      // width: "250px",
                       backgroundColor: "rgb(255, 255, 255)",
                       color: "rgba(0, 0, 0, 0.87)",
                     }}
@@ -361,7 +361,7 @@ export default function Dashboard() {
                 <Grid item xs={12} md={3} lg={3}>
                   <Card
                     style={{
-                      width: "250px",
+                      // width: "250px",
                       backgroundColor: "rgb(255, 255, 255)",
                       color: "rgba(0, 0, 0, 0.87)",
                     }}

@@ -105,7 +105,7 @@ export default function Customers() {
 
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/customers")
+      .get("https://farmmanager-api.herokuapp.com/api/customer")
       .then((response) => {
         setItems(response.data);
       })

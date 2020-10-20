@@ -1,4 +1,5 @@
 import React from "react";
+//import axios from "axios";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -107,6 +108,7 @@ const options = {
 };
 
 export default function SalesBarGraph() {
+  
   return (
     <React.Fragment>
       <Navbar />

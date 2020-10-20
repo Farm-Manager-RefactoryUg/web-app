@@ -1,4 +1,5 @@
 import React from "react";
+//import axios from "axios";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -101,7 +102,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function ExpenditurePieChart() {
+  //  const [items, setItems] = useState("");
+  //  useEffect(() => {
+  //    axios
+  //      .get("https://farmmanager-api.herokuapp.com/api/income/")
+  //      .then((response) => {
+  //        setItems(response.data);
+  //      })
+  //      .catch((err) => {
+  //        console.log(err);
+  //      });
+  //  }, []);
+
   const classes = useStyles();
   return (
     <div className={classes.root}>

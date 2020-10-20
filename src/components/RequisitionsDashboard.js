@@ -11,18 +11,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
 
-// const rows = [
-  
-// ];
-// const StyledTableCell = withStyles((theme) => ({
-//   head: {
-//     backgroundColor: "green",
-//     color: theme.palette.common.white,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +26,7 @@ export default function Tables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [items, setItems] = useState("");
- const rows = [{ items }];
+  const rows = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -59,23 +47,23 @@ export default function Tables() {
   }, []);
   return (
     <Paper className={classes.root}>
-      <h5 align="left" style={{ marginLeft: "0.5rem",color:"green" }}>
-                Recent Orders/ Requisitions
-              </h5>
+      <h5 align="left" style={{ marginLeft: "0.5rem", color: "white" }}>
+        Recent Orders/ Requisitions
+      </h5>
       <TableContainer className={classes.container}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow
               position="static"
-              style={{ backgroundColor: "green", color: "white" }}
+              // style={{ backgroundColor: "red", color: "white" }}
             >
-              <TableCell style={{ color: "white" }}>Date</TableCell>
-              <TableCell style={{ color: "white" }}>
+              <TableCell style={{ color: "black" }}>Date</TableCell>
+              <TableCell style={{ color: "black" }}>
                 Requisition Number
               </TableCell>
-              <TableCell style={{ color: "white" }}>Purpose</TableCell>
-              <TableCell style={{ color: "white" }}>Quantity</TableCell>
-              <TableCell align="center" style={{ color: "white" }}>
+              <TableCell style={{ color: "black" }}>Purpose</TableCell>
+              <TableCell style={{ color: "black" }}>Quantity</TableCell>
+              <TableCell align="center" style={{ color: "black" }}>
                 Total Price
               </TableCell>
             </TableRow>

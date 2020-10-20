@@ -111,7 +111,7 @@ export default function Requisitions() {
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
-                  <TableRow>
+                  <TableRow style={{ backgroundColor: "red", color: "white" }}>
                     <TableCell>Date</TableCell>
                     <TableCell>Requisition Number</TableCell>
                     <TableCell>Purpose</TableCell>

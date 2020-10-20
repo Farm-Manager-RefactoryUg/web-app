@@ -10,18 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
-// const rows = [
 
-// ];
-// const StyledTableCell = withStyles((theme) => ({
-//   head: {
-//     backgroundColor: "green",
-//     color: theme.palette.common.white,
-//   },
-//   body: {
-//     fontSize: 14,
-//   },
-// }))(TableCell);
 
 const useStyles = makeStyles({
   root: {
@@ -66,15 +55,15 @@ export default function Tools() {
           <TableHead>
             <TableRow
               position="static"
-              style={{ backgroundColor: "green", color: "white" }}
+              // style={{ backgroundColor: "green", color: "white" }}
             >
-              <TableCell style={{ color: "white" }}>Date</TableCell>
-              <TableCell style={{ color: "white" }}>
+              <TableCell style={{ color: "black" }}>Date</TableCell>
+              <TableCell style={{ color: "black" }}>
                 Tool name
               </TableCell>
-              <TableCell style={{ color: "white" }}>Purpose</TableCell>
-              <TableCell style={{ color: "white" }}>Main User</TableCell>
-              <TableCell align="center" style={{ color: "white" }}>
+              <TableCell style={{ color: "black" }}>Purpose</TableCell>
+              <TableCell style={{ color: "black" }}>Main User</TableCell>
+              <TableCell align="center" style={{ color: "black" }}>
                 Condition
               </TableCell>
             </TableRow>
