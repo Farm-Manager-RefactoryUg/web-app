@@ -1,101 +1,94 @@
-import React, { Component } from "react";
-//import { Button } from "react-bootstrap";
-import { Table } from "react-bootstrap";
-import Grid from "@material-ui/core/Grid";
-// import ProjectAppBar from "./ProjectAppBar";
-// import ExpenditurePieChart from "./ExpenditurePieChart";
-// import SalesBarGraph from "./SalesBarGraph"
-import CustomersDetails from "./CustomersDetails";
-// import Reports from "./Reports"
-import "../css/customer.css";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
 
-class CustomersDashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      isLoaded: true,
-    };
-  }
-  componentDidMount() {
-    fetch("https://farmmanager-api.herokuapp.com/api/customer/")
-      .then((response) => response.json())
-      .then((json) => {
-        // Object.entries(json)
-        console.log(json);
-        this.setState({
-          isLoaded: true,
-          items: json,
-        });
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+  },
+  container: {
+    maxHeight: 440,
+  },
+});
+
+export default function CustomerDashboard() {
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [items, setItems] = useState("");
+  const rows = [{ items }];
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  useEffect(() => {
+    axios
+      .get("https://farmmanager-api.herokuapp.com/api/customer/")
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }
-  render() {
-    let { isLoaded, items } = this.state;
-
-    if (!isLoaded) {
-      return <div>Loading Customers.....</div>;
-    } else {
-      return (
-        <>
-          <div className="container">
-            <div className="row">
-              <Grid item xs={12}>
-                <div className="text-left">
-                  <h5 className="card-heading">RECENT CUSTOMERS</h5>
-                  <Table striped bordered hover size="sm">
-                    <thead className="table-headings">
-                      <tr>
-                        <th>No.</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone number</th>
-                        <th>Location</th>
-                        <th>Details</th>
-                      </tr>
-                    </thead>
-                    {items.map((item) => (
-                      <tbody key={item.id} className="table-headings">
-                        <tr>
-                          <td>{item.id}</td>
-                          <td>{item.name}</td>
-                          <td>
-                            {" "}
-                            <a
-                              href="emailto:{user.email} "
-                              className="table-headings"
-                            >
-                              {item.email}{" "}
-                            </a>{" "}
-                          </td>
-                          <td>
-                            {" "}
-                            <a
-                              href="tel:{user.telephone1} "
-                              className="table-headings"
-                            >
-                              {item.telephone1}{" "}
-                            </a>{" "}
-                          </td>
-                          <td>{item.billingaddress}</td>
-                          {/* <td>Location</td> */}
-                          <td>
-                            {/* <Link to="/customer/:id"> */}
-                            <CustomersDetails />
-                            {/* Details */}
-                            {/* </Link> */}
-                          </td>
-                        </tr>
-                      </tbody>
-                    ))}
-                  </Table>
-                </div>
-              </Grid>
-            </div>
-          </div>
-        </>
-      );
-    }
-  }
+  }, []);
+  return (
+    <Paper className={classes.root}>
+      <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
+        Recent Customers
+      </h5>
+      <TableContainer className={classes.container}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow position="static" style={{ backgroundColor: "#f7f9fc" }}>
+              <TableCell style={{ color: "black" }}>Name</TableCell>
+              <TableCell style={{ color: "black" }}>Email</TableCell>
+              <TableCell style={{ color: "black" }}>Telephone</TableCell>
+              <TableCell style={{ color: "black" }}>Location</TableCell>
+              <TableCell align="center" style={{ color: "black" }}>
+                Details
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {items &&
+              items.map((item) => (
+                <TableRow hover role="checkbox" tabIndex={-1}>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>
+                    <a href="emailto:{item.email} ">{item.email} </a>{" "}
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <a href="tel:{item.phone} ">{item.phone} </a>{" "}
+                  </TableCell>
+                  <TableCell>{item.location}</TableCell>
+                  <TableCell align="right">{item.total}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    </Paper>
+  );
 }
-
-export default CustomersDashboard;

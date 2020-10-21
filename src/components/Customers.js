@@ -186,13 +186,7 @@ export default function Customers() {
                     ))}
                 </Table>
               </TableContainer>
-              {/* <div className={classes.seeMore}>
-                
-                <a href={url} color="primary">
-                  See more
-                </a>
-               
-              </div> */}
+            
             </Paper>
             <Box pt={4}>
               <Copyright />

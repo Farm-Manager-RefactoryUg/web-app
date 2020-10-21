@@ -47,15 +47,22 @@ export default function Tables() {
   }, []);
   return (
     <Paper className={classes.root}>
-      <h5 align="left" style={{ marginLeft: "0.5rem", color: "white" }}>
-        Recent Orders/ Requisitions
+      <h5
+        align="left"
+        style={{
+          marginLeft: "0.5rem",
+          color: "green",
+          backgroundColor: "rgb(255, 255, 255)",
+        }}
+      >
+        Recent Orders/Requisitions
       </h5>
       <TableContainer className={classes.container}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow
               position="static"
-              // style={{ backgroundColor: "red", color: "white" }}
+              style={{ backgroundColor: "#f7f9fc", color: "white" }}
             >
               <TableCell style={{ color: "black" }}>Date</TableCell>
               <TableCell style={{ color: "black" }}>

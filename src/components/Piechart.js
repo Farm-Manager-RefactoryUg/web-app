@@ -75,7 +75,7 @@ export default function Chart() {
         {
           name: "Share",
           data: [
-            // items && items.map((item) => item.product),
+            //  items && items.map((item) => item.product),
             
             { name: items.product, y: 3000},
             { name: "Spraying", y: 1500 },

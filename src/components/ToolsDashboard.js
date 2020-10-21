@@ -55,12 +55,10 @@ export default function Tools() {
           <TableHead>
             <TableRow
               position="static"
-              // style={{ backgroundColor: "green", color: "white" }}
+              style={{ backgroundColor: "#f7f9fc", color: "white" }}
             >
               <TableCell style={{ color: "black" }}>Date</TableCell>
-              <TableCell style={{ color: "black" }}>
-                Tool name
-              </TableCell>
+              <TableCell style={{ color: "black" }}>Tool name</TableCell>
               <TableCell style={{ color: "black" }}>Purpose</TableCell>
               <TableCell style={{ color: "black" }}>Main User</TableCell>
               <TableCell align="center" style={{ color: "black" }}>
