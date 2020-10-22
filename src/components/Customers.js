@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import Reports from "./Reports"
-
+import Grid from "@material-ui/core/Grid";
+// import ProjectAppBar from "./ProjectAppBar";
+// import ExpenditurePieChart from "./ExpenditurePieChart";
+// import SalesBarGraph from "./SalesBarGraph"
+import CustomersDetails from "./CustomerDetails";
+// import Reports from "./Reports"
 import "../css/customer.css";
 class Customers extends Component {
   constructor(props) {
@@ -11,6 +15,7 @@ class Customers extends Component {
       items: [],
       isLoaded: true,
     };
+  }
   componentDidMount() {
     fetch("https://farmmanager-api.herokuapp.com/api/customer/")
       .then((response) => response.json())
