@@ -7,12 +7,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-//import Paper from '@material-ui/core/Paper';
-//import { Link } from "react-router-dom";
-//import Card from '@material-ui/core/Card';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
     table: {
@@ -38,11 +32,11 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-    createData(1, 'e.wamala@student.ciu.ac.ug', 'abcd123'),
-    createData(2, 'timo23@outlook.com', 'xyz123'),
-    createData(3, 'zizo@gmail.com', 'opqrst'),
-    createData(4, 'rowza@gmail.com', 'opera000'),
-    createData(5, 'sula44@yahoo.co', 'eplfpl'),
+    createData(1, 'harvesting', '06/08/2020'),
+    createData(2, 'spraying', '25/07/2020'),
+    createData(3, 'weeding', '17/07/2020'),
+    createData(4, 'prunning', '21/06/2020'),
+    createData(5, 'planting', '13/06/2020'),
 ];
 
 
@@ -58,7 +52,7 @@ export default function BasicTable() {
                     component="h6"
                     variant="h5"
                     style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
-                    Manage Farm Managers
+                    Table showing the start and end date of farm activities within different seasons.
                 </Typography>
 
                 <Table className={classes.table} aria-label="simple table">
@@ -67,9 +61,9 @@ export default function BasicTable() {
 
                         <TableRow>
                             <TableCell className={classes.headerFont}>#</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Email</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Password</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Actions</TableCell>
+                            <TableCell className={classes.headerFont} align="left">Activity</TableCell>
+                            <TableCell className={classes.headerFont} align="left">Start Date</TableCell>
+                            <TableCell className={classes.headerFont} align="left">End Date</TableCell>
                         </TableRow>
 
                     </TableHead>
@@ -89,14 +83,7 @@ export default function BasicTable() {
                                 </TableCell>
                                 <TableCell className={classes.tableFont} align="left">{row.calories}</TableCell>
                                 <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
-                                <TableCell className={classes.tableFont} align="left">
-                                    <IconButton color="primary" aria-label="upload picture" component="span" size="small" style={{ margin: "0", padding: "0", marginRight: "8px" }}>
-                                        <EditIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                    </IconButton>
-                                    <IconButton color="primary" aria-label="upload picture" component="span" size="small" style={{ margin: "0", padding: "0" }}>
-                                        <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                    </IconButton>
-                                </TableCell>
+                                <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
 
                             </TableRow>
                         ))}

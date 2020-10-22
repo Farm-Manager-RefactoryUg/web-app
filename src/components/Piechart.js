@@ -12,26 +12,24 @@ const options = {
   },
 
   title: {
-    text: "Expenditure Distribution for the Month of August 2020.",
+    text: "Expenditure Distribution for the Project.",
     align: "left",
     margin: 20,
     x: 10,
     y: 28,
     style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "rgba(0, 0, 0, 0.87)" },
   },
-  subtitle: {
-    // text:(sum()),
-    // floating: true,
-    // y: 175,
-  },
+
   tooltip: {
     pointFormat: "<b>{point.percentage:.1f}%</b>",
   },
+
   accessibility: {
     point: {
       valueSuffix: "*",
     },
   },
+
   plotOptions: {
     pie: {
       showInLegend: false,
@@ -39,20 +37,15 @@ const options = {
       dataLabels: {
         enabled: true,
         distance: 5,
-
         style: {
-          // fontweight: "thin",
           fontsize: 10,
         },
-        // formatter: function () {
-        //   return this.key + ": " + this.y + "/=";
-        // },
       },
     },
   },
+
   series: [
     {
-      // name: "Share",
       data: [
         { name: "Planting", y: 2000 },
         { name: "Spraying", y: 1500 },
@@ -63,20 +56,14 @@ const options = {
       ],
     },
   ],
-};
 
+}
 
 
 export default function Chart() {
-
-
-  //   console.log(this.options.yData)
-
   return (
     <React.Fragment>
-
       <HighchartsReact highcharts={Highcharts} options={options} />
-
     </React.Fragment>
-  );
+  )
 }

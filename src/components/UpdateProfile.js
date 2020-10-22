@@ -125,7 +125,7 @@ export default function AddFarmManager() {
                 Profile
             </Typography>
 
-            <main maxWidth="xs" className={classes.container}>
+            <main className={classes.container}>
 
                 <div style={{ flex: "3" }}>
                     <form onSubmit={handleSubmit} className={classes.form} noValidate>

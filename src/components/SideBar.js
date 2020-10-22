@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import SettingsIcon from '@material-ui/icons/Settings';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '&:hover': {
@@ -46,6 +47,15 @@ const useStyles = makeStyles((theme) => ({
   highlightItems: {
     color: "rgba(27, 36, 48, 0.9)",
   },
+  whiteIcon: {
+    color: "white",
+  },
+  blackIcon: {
+    color: "rgba(0,0,0,0.87)",
+  },
+  selectedItem: {
+    fontWeight: "900",
+  },
 })
 )
 
@@ -55,7 +65,9 @@ export default function MainListItems(props) {
   const urls = {
     dashboardUrl: "/dashboard",
     projectsUrl: "/projects",
-    settingsUrl: "/settings",
+    settingsUrl: "/settings",    
+    compareUrl: "/compare",
+    seasonsUrl: "/seasons",
   }
   const listItemHighlightItems = classes.highlightItems;
   const [open1, setOpen1] = useState(false);
@@ -80,23 +92,20 @@ export default function MainListItems(props) {
         <ListItemText disableTypography primary="Overview" className={clsx(classes.text, urls.dashboardUrl === currentUrl ? listItemHighlightItems : "")}  />
       </ListItem>
 
-      <ListItem button id="a" onClick={handleClick1}>
+      <ListItem button id="a" onClick={handleClick1} className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? classes.highlight : ""}>
         <ListItemIcon>
-          <BarChartIcon />
+          <BarChartIcon className={ urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Analytics" className={classes.text} />
-        {open1 ? <ExpandLess style={{ color: "white" }} /> : <ExpandMore style={{ color: "white" }} />}
+        <ListItemText disableTypography primary="Analytics" className={clsx(classes.text, urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? listItemHighlightItems : "")} />
+        {open1 ? <ExpandLess className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} /> : <ExpandMore className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} />}
       </ListItem>
       <Collapse in={open1} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Monthly" className={classes.text} />
+          <ListItem button component={Link} to={"/compare"} className={clsx(classes.root, classes.nested)}>
+            <ListItemText disableTypography primary="Decision Support" className={clsx(classes.text, urls.compareUrl === currentUrl ? classes.selectedItem : "")} />
           </ListItem>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Quarterly" className={classes.text} />
-          </ListItem>
-          <ListItem button component={Link} to={"/login"} className={clsx(classes.root, classes.nested)}>
-            <ListItemText disableTypography primary="Annual" className={classes.text} />
+          <ListItem button component={Link} to={"/seasons"} className={clsx(classes.root, classes.nested)}>
+            <ListItemText disableTypography primary="Seasons" className={clsx(classes.text, urls.seasonsUrl === currentUrl ? classes.selectedItem : "")} />
           </ListItem>
         </List>
       </Collapse>

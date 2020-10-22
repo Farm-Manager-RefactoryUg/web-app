@@ -158,7 +158,6 @@ export default function LogIn() {
   }
 
   const handleChange = (event) => {
-
     const { name, value } = event.target;
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
