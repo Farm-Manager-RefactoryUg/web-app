@@ -21,6 +21,7 @@ import SalesBarGraph from "./components/SalesBarGraph";
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 
+//comment
 
 export default function App() {
 
