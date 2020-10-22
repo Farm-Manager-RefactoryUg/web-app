@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import React, { useState, useEffect } from 'react';
+import { Link, } from "react-router-dom";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import TopNav from "./TopNav";
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import Divider from '@material-ui/core/Divider';
+import Logo from '../static/images/tree.svg'
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+//import axios from "axios";
 
 const Buttonn = withStyles({
   root: {
@@ -26,7 +28,7 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'orange',
+      color: 'rgba(0,0,0,0.87)',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -45,117 +47,222 @@ const CssTextField = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
   },
   paper: {
-    marginTop: theme.spacing(3),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
-  avatar: {
-    backgroundColor: 'orange',
+  navBrand: {
+    fontSize: "1.2rem",
+    color: "rgba(0,0,0,0.87)",
+    marginLeft: "5px",
+  },
+  titleDiv: {
+    display: "flex",
+  },
+  pageTitle: {
+    color: "rgba(0,0,0,0.87)",
+    fontFamily: "Segoe UI",
+    fontWeight: "900",
+    fontSize: "2.5rem",
+    marginBottom: theme.spacing(1),
+  },
+  pageSubTitle: {
+    color: "rgba(0,0,0,0.87)",
+    fontFamily: "Segoe UI",
+    fontSize: "1rem",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(2),
   },
   submit: {
+    '&:hover': {
+      color: "white",
+    },
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'green',
-    color: 'white',
-    outline: 'none',
-    paddingTop: '10px',
-    paddingBottom: '10px',
+    marginBottom: theme.spacing(6),
+    backgroundColor: "green",
+    color: "white",
+    outline: "none",
+    paddingTop: "10px",
+    paddingBottom: "10px",
+    fontFamily: "Segoe UI",
+    fontWeight: "600",
+    fontSize: "0.8rem",
+  },
+  links: {
+    '&:hover': {
+      color: "green",
+    },
+    color: "green",
+    fontFamily: "Segoe UI",
+    fontSize: "1rem",
   },
   footer: {
-    padding: theme.spacing(1, 2),
-    paddingBottom: 60,
-    marginTop: '50px',
-    backgroundColor: 'green',
-    color: 'white',
-  },
+    position: "relative",
+    bottom: "20px",
+    backgroundColor: "#fafafa",
+    color: "rgba(0,0,0, 0.3)",
+    fontFamily: "Segoe UI",
+    fontWeight: "800",
+    fontSize: "0.9rem",
+    marginTop: "100px",
+    textAlign: "center"
+  }
 }));
 
+
 export default function SignIn() {
+
+  //let history = useHistory();
+  const classes = useStyles();
   let [[fullNamee, emaile, passworde, mobilee], setErrors] = useState(["", "", "", ""])
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const handleSubmit = (event) => {
+    //const url = "http://www.something.com/login";
+    let { fullName, email, password, mobile } = event.target;
+
+    if (fullName.value !== "" && email.value !== "" && password.value !== "" && mobile.value !== "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+      // axios.post(url, { fullName, email, password, mobile })
+      //   .then(data => {
+      //     if (data.message === "true") {
+      //       history.pushState("/projects")
+      //     } else {
+      //       // Render error message on Login page
+      //     }
+      //   })
+      //   .catch(() => {
+      //     history.push("/pagenotfound");
+      //   })
+    } else {
+      if (fullName.value === "" && email.value === "" && password.value === "" && mobile.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors(["At least two names e.g. John Doe", "Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters", "Enter valid mobile E.g. 0773763258"])
+      }
+      else if (fullName.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors(["At least two names e.g. John Doe", emaile, passworde, mobilee])
+      }
+      else if (email.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors([fullNamee, "Enter valid email E.g: abc@gmail.com", passworde, mobilee])
+      }
+      else if (password.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
+      }
+      else if (mobile.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
+      }
+      event.preventDefault();
+    }
   }
-  const handleChange = event => {
-    const { name, value } = event.target
-    // eslint-disable-next-line no-use-before-define
-    let [fullNamee, emaile, passworde, mobilee] = [fullNamee, emaile, passworde, mobilee]
+
+  const handleChange = (event) => {
+
+    const { name, value } = event.target;
     const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
     const mobileRegex = /^07[0-9]{8}$/
 
     switch (name) {
       case "fullName":
-        (!nameRegex.test(value)) ? 
-          setErrors(["Atleast two names e.g. John Doe", emaile, passworde, mobilee]) : setErrors(["", emaile, passworde, mobilee])
+        (!nameRegex.test(value))
+          ? setErrors(["At least two names E.g. John Doe", emaile, passworde, mobilee])
+          : setErrors(["", emaile, passworde, mobilee]);
         break;
       case "email":
-        (!emailRegex.test(value)) ? 
-          setErrors([fullNamee, "Enter valid email e.g. abc@gmail.com", passworde, mobilee]) : setErrors([fullNamee, "", passworde, mobilee])
+        (!emailRegex.test(value))
+          ? setErrors([fullNamee, "Enter valid email E.g. abc@gmail.com", passworde, mobilee])
+          : setErrors([fullNamee, "", passworde, mobilee]);
         break;
       case "password":
-        (value.length < 6) ? 
-        setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee]) : setErrors([fullNamee, emaile, "", mobilee])
+        (value.length < 6)
+          ? setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
+          : setErrors([fullNamee, emaile, "", mobilee]);
         break;
       case "mobile":
-        (!mobileRegex.test(value)) ? 
-          setErrors([fullNamee, emaile, passworde, "Number should be 10 digits e.g. 0700123117"]) : setErrors([fullNamee, emaile, passworde, ""])
+        (!mobileRegex.test(value) && value.length !== 10)
+          ? setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
+          : setErrors([fullNamee, emaile, passworde, ""]);
         break;
+
       default:
         break;
     }
-
   }
 
-  const classes = useStyles();
+  useEffect(() => {
+    document.title = "Sign Up"
+  }, []);
 
   return (
     <div className={classes.root}>
-      <TopNav />
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5" style={{ color: "green" }}>
-            Sign up
+
+          <div className={classes.titleDiv}>
+            <img src={Logo} alt="logo" width="25px" height="25px" />
+            <h4 className={classes.navBrand}>Tele-Farmer</h4>
+          </div>
+
+          <Typography component="h1" variant="h5" className={classes.pageTitle}>
+            Sign Up
           </Typography>
+
+          <Typography component="h2" variant="h5" className={classes.pageSubTitle}>
+            Enter your information to stay connected and monitor your project(s) performance.
+          </Typography>
+
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
+
             <CssTextField
-              autoComplete="fname"
-              margin="normal"
-              name="fullName"
               variant="outlined"
+              margin="normal"
+              autoFocus
               required
               fullWidth
               id="fullName"
               label="Fullname"
+              name="fullName"
               error={fullNamee.length > 0}
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{fullNamee}</small>
+            {fullNamee && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {fullNamee}
+            </small>}
+
             <CssTextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email address"
+              label="Email Address"
               name="email"
               error={emaile.length > 0}
+              autoComplete="email"
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
+            {emaile && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {emaile}
+            </small>}
+
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -163,53 +270,78 @@ export default function SignIn() {
               fullWidth
               name="password"
               label="Password"
-              type="password"
               id="password"
               autoComplete="current-password"
               error={passworde.length > 0}
+              type="password"
               onChange={handleChange}
+
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
+            {passworde && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {passworde}
+            </small>}
+
             <CssTextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="mobile"
-              label="Mobile number"
               id="mobile"
+              label="Mobile"
+              name="mobile"
               error={mobilee.length > 0}
               onChange={handleChange}
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{mobilee}</small>
+            {mobilee && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {mobilee}
+            </small>}
 
             <Buttonn
               type="submit"
               fullWidth
               variant="contained"
               className={classes.submit}
+              endIcon={<ArrowRightAltIcon />}
             >
-              Sign up
+              create
             </Buttonn>
+
+            <Divider />
+
             <Grid container>
-              <Grid item>
-                <Link href="/login" variant="body2" style={{ color: 'green' }}>
-                  Already have an account? Log in
+              <Grid item xs={12} md={12} lg={12} style={{ textAlign: "center", marginTop: "8px", fontFamily: "Segoe UI", fontSize: "1rem" }}>
+                {"Already have an account? "}
+                <Link
+                  to={"/"}
+                  variant="body2"
+                  className={classes.links}
+                >
+                  Log In
                 </Link>
               </Grid>
             </Grid>
-          </form>
-        </div>
 
+          </form>
+
+        </div>
       </Container>
-      <footer className={classes.footer}>
-        <Container maxWidth="sm">
-          <Typography variant="body2" >
-            © {new Date().getFullYear()} Refactory
-          </Typography>
-        </Container>
-      </footer>
-    </div>
+
+      <Container maxWidth="sm">
+        <footer className={classes.footer}>
+          Copyright © {new Date().getFullYear()}&nbsp;| Refactory, Uganda.
+        </footer>
+      </Container>
+    </div >
+
   );
 }
-
