@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Login from "./components/login";
-import SignUp from "./components/signup";
+import Login from "./components/Login";
+import SignUp from "./components/Signup";
 import Settings from "./components/Settings";
 import ForgotPassword from './components/ForgotPassword';
 import PageNotFound from './components/PageNotFound';
 import UserProfile from "./components/UserProfile";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/Dashboard";
 import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Seasons from "./components/Seasons";
