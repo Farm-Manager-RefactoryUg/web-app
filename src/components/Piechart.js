@@ -8,7 +8,7 @@ import HighchartsReact from "highcharts-react-official";
   
 
 
-export default function Chart() {
+export default function PieChart() {
   
      const [items, setItems] = useState("");
     useEffect(() => {
@@ -91,10 +91,8 @@ export default function Chart() {
 //   console.log(this.options.yData)
   
   return (
-    <React.Fragment>  
-      
-          <HighchartsReact highcharts={Highcharts} options={options} />  
-          
+    <React.Fragment>
+      <HighchartsReact highcharts={Highcharts} options={options} />
     </React.Fragment>
-  );
+  )
 }

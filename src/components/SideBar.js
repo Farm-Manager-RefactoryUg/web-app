@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-//import Typography from '@material-ui/core/Typography';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-//import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
@@ -19,14 +16,13 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import { makeStyles, } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+// import SettingsIcon from '@material-ui/icons/Settings';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '&:hover': {
       color: "red",
-    },
-    '&:active': {
-      backgroundColor: "green",
     },
   },
   text: {
@@ -41,14 +37,40 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(9),
     opacity: "0.7",
   },
-  mainIcons: {
+  highlight: {
+    '&:hover': {
+      backgroundColor: "white",
+      color: "rgba(0,0,0,0.87)",
+    },
+    backgroundColor: "white",
+    color: "rgba(0,0,0,0.87)",
+  },
+  highlightItems: {
+    color: "rgba(27, 36, 48, 0.9)",
+  },
+  whiteIcon: {
     color: "white",
+  },
+  blackIcon: {
+    color: "rgba(0,0,0,0.87)",
+  },
+  selectedItem: {
+    fontWeight: "900",
   },
 })
 )
 
-export default function MainListItems() {
+export default function MainListItems(props) {
   const classes = useStyles();
+  //const currentUrl = props.location.pathname;
+  // const urls = {
+  //   dashboardUrl: "/dashboard",
+  //   projectsUrl: "/projects",
+  //   settingsUrl: "/settings",    
+  //   compareUrl: "/compare",
+  //   seasonsUrl: "/seasons",
+  // }
+  //const listItemHighlightItems = classes.highlightItems;
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -87,7 +109,7 @@ export default function MainListItems() {
         />
       </ListItem>
 
-      <ListItem button id="a" onClick={handleClick1}>
+      <ListItem button id="a" onClick={handleClick1} >
         <ListItemIcon>
           <BarChartIcon className={classes.mainIcons} />
         </ListItemIcon>
@@ -218,17 +240,7 @@ export default function MainListItems() {
           </ListItem>
         </List>
       </Collapse>
-      <ListItem button component={Link} to={"/tools"} className={classes.root}>
-        <ListItemIcon>
-          <BarChartIcon className={classes.mainIcons} />
-        </ListItemIcon>
-        <ListItemText
-          disableTypography
-          primary="Decision support"
-          className={classes.text}
-        />
-      </ListItem>
-
+  
       <ListItem button id="a" onClick={handleClick2}>
         <ListItemIcon>
           <AttachMoneyIcon className={classes.mainIcons} />

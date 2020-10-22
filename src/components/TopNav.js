@@ -1,27 +1,24 @@
-import React from 'react';
+import React from "react";
 //import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 //import CssBaseline from '@material-ui/core/CssBaseline';
 //import TextField from '@material-ui/core/TextField';
 //import FormHelperText from '@material-ui/core/FormHelperText';
 //import Checkbox from '@material-ui/core/Checkbox';
 //import Link from '@material-ui/core/Link';
 
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import "../topnav.css";
-
-
-
+//import "../topnav.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-     backgroundColor: "green",
+    backgroundColor: "green",
     color: "white",
   },
   menuButton: {
@@ -59,56 +56,55 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
     backgroundColor: "green",
     color: "white",
-    },
-  
-    // a: {
-    // color:"white"
-    // },
+  },
+
+  // a: {
+  // color:"white"
+  // },
 }));
 
 export default function TopNav() {
- 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-      <div className={classes.root}>
-        <AppBar position="fixed">
-          <Toolbar className={classes.root}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            ></IconButton>
-            <Typography variant="h6" href="/" className={classes.title}>
-              <a href="/" id="a">
-                Tele-Farmer
-              </a>
-            </Typography>
-            {/* <Typography variant="h6" href="/" className={classes.title}>
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed">
+        <Toolbar className={classes.root}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          ></IconButton>
+          <Typography variant="h6" href="/" className={classes.title}>
+            <a href="/" id="a">
+              Tele-Farmer
+            </a>
+          </Typography>
+          {/* <Typography variant="h6" href="/" className={classes.title}>
               <a href="/dashboard" id="a">
                 Dashboard
               </a>
             </Typography> */}
-            <Button
-              variant="outlined"
-              color="white"
-              className={classes.menuButton}
-              size="small"
-              href="/dashboard"
-            >
-              Login
-            </Button>
-            <Button
-              variant="outlined"
-              color="white"
-              className={classes.menuButton}
-              size="small"
-              href="/signup"
-            >
-              Sign Up
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
+          <Button
+            variant="outlined"
+            color="white"
+            className={classes.menuButton}
+            size="small"
+            href="/dashboard"
+          >
+            Login
+          </Button>
+          <Button
+            variant="outlined"
+            color="white"
+            className={classes.menuButton}
+            size="small"
+            href="/signup"
+          >
+            Sign Up
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }

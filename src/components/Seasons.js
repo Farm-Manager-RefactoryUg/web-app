@@ -6,10 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import ProjectAppBar from "./ProjectAppBar";
+import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
-import AddFarmManager from "./AddFarmManager";
-import AddTeleFarmer from "./AddTeleFarmer";
-import UpdateDashboard from "./UpdateDashboard";
+import SeasonsTable from './SeasonsTable';
 
 
 const drawerWidth = 240;
@@ -50,11 +49,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
     justifyContent: "space-evenly",
   },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-  },
   fixedHeight: {
     height: 150,
   },
@@ -62,12 +56,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.7rem",
     color: "white",
   },
+  tableCard: {
+      padding: theme.spacing(2),
+  },
 }));
 
 export default function Dashboard() {
+
   const classes = useStyles();
   const currentUrl = useLocation();
-  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
   const theme = React.useMemo(
@@ -85,10 +82,8 @@ export default function Dashboard() {
     [prefersDarkMode]
   );
 
-
-
   useEffect(() => {
-    document.title = "Dashboard Settings"
+    document.title = "Analysis Page"
   }, []);
 
   return (
@@ -96,39 +91,36 @@ export default function Dashboard() {
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
 
-          <ProjectAppBar location={currentUrl} />
+          <ProjectAppBar location = {currentUrl} />
+
           <main className={classes.content}>
             <div
               className={classes.appBarSpacer}
               style={{ minHeight: "3rem" }}
             />
 
-            <Container style={{ marginTop: "40px", paddingLeft: theme.spacing(3), }}>
+            <Container style={{ marginTop: "60px" }}>
 
               <Typography
                 style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                 component="h1"
               >
-                {"Dashboard Settings"}
+                {"Seasons Activities"}
               </Typography>
 
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-              <Grid container spacing={6} style={{ marginBottom: "20px", }}>
-
-                <Grid item xs={12} sm={12} lg={7}>
-                  <UpdateDashboard />
-                </Grid>
+              <Grid container spacing={2} style={{ marginTop: "40px", marginBottom: "20px", }} >
 
                 <Grid item xs={12} sm={12} lg={12}>
-                  <AddTeleFarmer />
-                </Grid>
-
-                <Grid item xs={12} sm={12} lg={12}>
-                  <AddFarmManager />
+                  <Card className={classes.tableCard}>
+                    <SeasonsTable />
+                  </Card>
                 </Grid>
 
               </Grid>
+
+              <br></br>
 
             </Container>
           </main>

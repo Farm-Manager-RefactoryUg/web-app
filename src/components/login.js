@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-//import FormHelperText from '@material-ui/core/FormHelperText';
-//import Checkbox from '@material-ui/core/Checkbox';
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import TopNav from "./TopNav";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import Divider from '@material-ui/core/Divider';
+import Logo from '../static/images/tree.svg'
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import axios from "axios";
+
 
 const Buttonn = withStyles({
   root: {
@@ -28,7 +29,7 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'orange',
+      color: 'rgba(0,0,0,0.87)',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -47,12 +48,6 @@ const CssTextField = withStyles({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    //  backgroundColor: "green",
-    color: "white",
-  },
-  menuButton: {
-    marginRight: theme.spacing(1),
-    color: "white",
   },
   title: {
     flexGrow: 1,
@@ -63,80 +58,153 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  titleDiv: {
+    display: "flex",
+  },
+  navBrand: {
+    fontSize: "1.2rem",
+    color: "rgba(0,0,0,0.87)",
+    marginLeft: "5px",
+  },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: "orange",
+    backgroundColor: "green",
+    verticalAlign: "super",
+  },
+  pageTitle: {
+    color: "rgba(0,0,0,0.87)",
+    fontFamily: "Segoe UI",
+    fontWeight: "900",
+    fontSize: "2.5rem",
+    marginBottom: theme.spacing(1),
+  },
+  pageSubTitle: {
+    color: "rgba(0,0,0,0.87)",
+    fontFamily: "Segoe UI",
+    fontSize: "1rem",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
   },
   submit: {
+    '&:hover': {
+      color: "white",
+    },
     margin: theme.spacing(3, 0, 2),
+    marginBottom: theme.spacing(6),
     backgroundColor: "green",
     color: "white",
     outline: "none",
     paddingTop: "10px",
     paddingBottom: "10px",
+    fontFamily: "Segoe UI",
+    fontWeight: "600",
+    fontSize: "1rem",
+  },
+  links: {
+    '&:hover': {
+      color: "green",
+    },
+    color: "green",
+    fontFamily: "Segoe UI",
+    fontSize: "1rem",
   },
   footer: {
-    padding: theme.spacing(1, 2),
-    paddingBottom: 60,
-    marginTop: "auto",
-    backgroundColor: "green",
-    color: "white",
-  },
+    position: "fixed",
+    bottom: "20px",
+    right: "40vw",
+    backgroundColor: "#fafafa",
+    color: "rgba(0,0,0, 0.3)",
+    fontFamily: "Segoe UI",
+    fontWeight: "800",
+    fontSize: "0.9rem",
+  }
 }));
 
-export default function SignIn() {
-  var [[emaile, passworde], setErrors] = useState(["", ""]);
+export default function LogIn() {
+  let history = useHistory();
+  const classes = useStyles();
+  let [[emaile, passworde], setErrors] = useState(["", ""])
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  const handleSubmit = event => {
+    const url = "http://www.something.com/login";
+    let { email, password } = event.target;
+
+    if (email.value !== "" && password.value !== "" && emaile === "" && passworde === "") {
+      axios.post(url, { email, password })
+        .then(data => {
+          if (data.message === "true") {
+            history.pushState("/projects")
+          } else {
+            // Render error message on Login page
+          }
+        })
+        .catch(() => {
+          history.push("/pagenotfound");
+        })
+    } else {
+      if (email.value === "" && password.value === "" && emaile === "" && passworde === "") {
+        setErrors(["Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters"])
+      }
+      else if (email.value === "" && emaile === "" && passworde === "") {
+        setErrors(["Enter valid email E.g: abc@gmail.com", passworde])
+      }
+      else if (password.value === "" && emaile === "" && passworde === "") {
+        setErrors([emaile, "Password should be more than 6 characters",])
+      }
+      event.preventDefault();
+    }
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
     switch (name) {
       case "email":
-        const regex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        emaile = !regex.test(value)
-          ? setErrors(["Enter valid email e.g. abc@gmail.com", passworde])
+        (!emailRegex.test(value))
+          ? setErrors(["Enter valid email E.g: abc@gmail.com", passworde])
           : setErrors(["", passworde]);
         break;
 
       case "password":
-        passworde =
-          value.length < 6
-            ? setErrors([emaile, "Password should be more than 6 characters"])
-            : setErrors([emaile, ""]);
+        (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""]);
         break;
 
       default:
         break;
     }
-  };
+  }
 
-  const classes = useStyles();
+  useEffect(() => {
+    document.title = "Log In"
+  }, []);
+
 
   return (
     <div className={classes.root}>
-      <TopNav />
-
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5" style={{ color: "green" }}>
-            Log in
+
+          <div className={classes.titleDiv}>
+            <img src={Logo} alt="logo" width="25px" height="25px" />
+            <h4 className={classes.navBrand}>Tele-Farmer</h4>
+          </div>
+
+          <Typography component="h1" variant="h5" className={classes.pageTitle}>
+            Log In
           </Typography>
+
+          <Typography component="h2" variant="h5" className={classes.pageSubTitle}>
+            Enter your information to stay connected and monitor your project(s) performance.
+          </Typography>
+
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
             <CssTextField
               variant="outlined"
               margin="normal"
+              autoFocus
               required
               fullWidth
               id="email"
@@ -146,11 +214,15 @@ export default function SignIn() {
               autoComplete="email"
               onChange={handleChange}
             />
-            <small
-              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
+            {emaile && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
             >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
               {emaile}
-            </small>
+            </small>}
+
             <CssTextField
               variant="outlined"
               margin="normal"
@@ -158,55 +230,75 @@ export default function SignIn() {
               fullWidth
               name="password"
               label="Password"
-              type="password"
               id="password"
               autoComplete="current-password"
               error={passworde.length > 0}
+              type="password"
               onChange={handleChange}
+
+
             />
-            <small
-              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
+            {passworde && <small
+              style={{ color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI" }}
             >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
               {passworde}
-            </small>
+            </small>}
+
+
+
+            <Link
+              to={"/forgotpassword"}
+              variant="body2"
+              className={classes.links}
+              style={{ float: "right" }}
+            >
+              Forgot password?
+              </Link>
+
+
+
             <Buttonn
               type="submit"
               fullWidth
               variant="contained"
               className={classes.submit}
+              endIcon={<ArrowRightAltIcon />}
+            component={Link}      // "Component" and "to" prop to be removed.
+            to={"/projects"}     //  Currently for demonstration purposes only.
             >
-              Log In
+              Login
             </Buttonn>
+
+            <Divider />
+
             <Grid container>
-              <Grid item xs>
+
+              <Grid item xs={12} md={12} lg={12} style={{ textAlign: "center", marginTop: "8px" }}>
+
                 <Link
-                  to="/"
+                  to={"/signup"}
                   variant="body2"
-                  style={{ color: "green", cursor: "pointer" }}
+                  className={classes.links}
                 >
-                  Forgot password?
+                  Create account
                 </Link>
+
               </Grid>
-              <Grid item>
-                <Link
-                  href="/signup"
-                  variant="body2"
-                  style={{ color: "green", cursor: "pointer" }}
-                >
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
+
             </Grid>
+
           </form>
+
         </div>
       </Container>
-      <footer className={classes.footer}>
-        <Container maxWidth="sm">
-          <Typography variant="body2">
-            © {new Date().getFullYear()} Refactory
-          </Typography>
-        </Container>
-      </footer>
-    </div>
+
+      <Container maxWidth="sm">
+        <footer className={classes.footer}>
+          Copyright © {new Date().getFullYear()}&nbsp;| Refactory, Uganda.
+        </footer>
+      </Container>
+    </div >
+
   );
 }

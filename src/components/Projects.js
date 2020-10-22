@@ -1,25 +1,21 @@
-import React from "react";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import clsx from "clsx";
-import {
-    makeStyles,
-    createMuiTheme,
-    ThemeProvider,
-} from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Chip from '@material-ui/core/Chip';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Divider from "@material-ui/core/Divider";
-import Toolbar from "@material-ui/core/Toolbar";
-import MenuListComposition from "./Avatar";
-import AppBar from "@material-ui/core/AppBar";
+import { useLocation } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import React, { useEffect } from "react";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import ProjectAppBar from "./ProjectAppBar";
+import Chip from '@material-ui/core/Chip';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Divider from "@material-ui/core/Divider";
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const drawerWidth = 240;
 
@@ -48,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
-    //appBarSpacer: theme.mixins.toolbar,
+    appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
         height: "100vh",
@@ -71,35 +67,24 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "0.7rem",
         color: "white",
     },
-    toolbar: {
-        paddingRight: 24, // keep right padding when drawer closed
-        minHeight: "48px",
-    },
-    appBarSpacer: {
-        minHeight: "48px",
-    },
-    appBar: {
-        backgroundColor: "green",
-        minHeight: "50px",
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
     marginFb: {
+        '&:hover': {
+            backgroundColor: "	rgba(0,128,0,0.9)",
+            color: "white",
+        },
+        backgroundColor: "green",
+        color: "white",
         margin: theme.spacing(1),
         position: "fixed",
         bottom: "25px",
         right: "40px",
-        '&:hover': {
-            color: "white",
-        },
     },
 }));
 
 export default function Dashboard() {
     const classes = useStyles();
+    const currentUrl = useLocation();
+    //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
     const theme = React.useMemo(
@@ -117,73 +102,67 @@ export default function Dashboard() {
         [prefersDarkMode]
     );
 
+    useEffect(() => {
+        document.title = "Dasboards"
+    }, []);
+
     return (
         <>
             <ThemeProvider theme={theme}>
                 <div className={classes.root}>
+
+                    <ProjectAppBar location={currentUrl} />
 
                     <main className={classes.content}>
                         <div
                             className={classes.appBarSpacer}
                             style={{ minHeight: "3rem" }}
                         />
-                        <AppBar
-                            position="absolute"
-                            className={clsx(classes.appBar)}
-                        >
-
-                            <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
-
-                                <Typography
-                                    variant="h6"
-                                    href="/"
-                                    className={classes.title}
-                                    style={{ color: "white", fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", }}
-                                >
-                                    Tele-Farmer
-                                </Typography>
-
-                                <MenuListComposition />
-
-                            </Toolbar>
-
-                        </AppBar>
 
                         <Container style={{ marginTop: "60px", }}>
 
                             <Typography
-                                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.57)", }}
+                                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                                 component="h1"
                             >
-                                {"Dashboards"}
+                                {"My Projects"}
                             </Typography>
 
-                            <Divider style={{ marginTop: "15px", backgroundColor: "orange" }} />
+                            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
                             <Grid container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
 
                                 <Grid item xs={12} md={6} lg={6}>
                                     <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                                         <CardContent style={{ paddingBottom: "8px", }}>
+
                                             <Typography
                                                 gutterBottom
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Biyinzika Mukono C
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
+
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
+
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
                                                 {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
                                             </Typography>
+
                                             <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
+
                                             <Button
                                                 color="primary"
-                                                style={{ fontSize: "0.8125rem", fontWeight: "600", textTransform: "lowercase", width: "100%", }}
+                                                style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                 component={Link}
                                                 to={"/dashboard"}
                                             >
                                                 View
                                             </Button>
+
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -196,6 +175,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Galileo goat project I
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>                                 
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
@@ -203,12 +185,13 @@ export default function Dashboard() {
                                                 <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
                                                 <Button
                                                     color="primary"
-                                                    style={{ fontSize: "0.8125rem", fontWeight: "600", textTransform: "lowercase", width: "100%", }}
+                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                     component={Link}
                                                     to={"/dashboard"}
                                                 >
                                                     View
-                                            </Button>    </Typography>
+                                                </Button>
+                                            </Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -221,6 +204,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Biyinzika Mukono C
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
@@ -228,12 +214,13 @@ export default function Dashboard() {
                                                 <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
                                                 <Button
                                                     color="primary"
-                                                    style={{ fontSize: "0.8125rem", fontWeight: "600", textTransform: "lowercase", width: "100%", }}
+                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                     component={Link}
                                                     to={"/dashboard"}
                                                 >
                                                     View
-                                            </Button>    </Typography>
+                                                </Button>
+                                            </Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -246,6 +233,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Galileo goat project I
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
@@ -253,12 +243,13 @@ export default function Dashboard() {
                                                 <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
                                                 <Button
                                                     color="primary"
-                                                    style={{ fontSize: "0.8125rem", fontWeight: "600", textTransform: "lowercase", width: "100%", }}
+                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                     component={Link}
                                                     to={"/dashboard"}
                                                 >
                                                     View
-                                            </Button>    </Typography>
+                                                </Button>
+                                            </Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -271,6 +262,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Biyinzika Mukono C
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
@@ -278,12 +272,13 @@ export default function Dashboard() {
                                                 <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
                                                 <Button
                                                     color="primary"
-                                                    style={{ fontSize: "0.8125rem", fontWeight: "600", textTransform: "lowercase", width: "100%", }}
+                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                     component={Link}
                                                     to={"/dashboard"}
                                                 >
                                                     View
-                                            </Button>    </Typography>
+                                                </Button>
+                                            </Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -296,6 +291,9 @@ export default function Dashboard() {
                                                 component="h6"
                                                 style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                 Galileo goat project I
+                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
@@ -303,12 +301,13 @@ export default function Dashboard() {
                                                 <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
                                                 <Button
                                                     color="primary"
-                                                    style={{ fontSize: "0.8125rem", fontWeight: "600", textTransform: "lowercase", width: "100%", }}
+                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                     component={Link}
                                                     to={"/dashboard"}
                                                 >
                                                     View
-                                            </Button>    </Typography>
+                                                </Button>
+                                            </Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -318,19 +317,16 @@ export default function Dashboard() {
                         </Container>
 
                         <Fab
-                            color="secondary"
                             aria-label="add"
                             className={classes.marginFb}
-                            style={{ outline: "none", }}
                             title="Create project"
                             component={Link}
                             to={"/project"}
                         >
                             <AddIcon />
                         </Fab>
-                    
-                    </main>
 
+                    </main>
                 </div>
             </ThemeProvider>
         </>

@@ -2,28 +2,38 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import Settings from "./components/Settings";
+// import ForgotPassword from './components/ForgotPassword';
+// import PageNotFound from './components/PageNotFound';
+// import UserProfile from "./components/UserProfile";
+import Dashboard from "./components/Dashboard";
+import Project from "./components/Project";
+import Projects from "./components/Projects";
+// import Seasons from "./components/Seasons";
+// import Analytics from "./components/Analytics";
+import Home from "./components/Home";
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomerDetails from "./components/CustomerDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
-import Home from './components/Home';
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
-import Dashboard from "./components/Dashboard";
-import Project from "./components/Project";
-import Projects from "./components/Projects";
-import Settings from "./components/Settings";
+//import Dashboard from "./components/Dashboard";
+//import Project from "./components/Project";
+//import Projects from "./components/Projects";
+//import Settings from "./components/Settings";
 import Tables from "./components/Tables"
 import Tools from "./components/Tools";
 //mport CustomersDashboard from "./components/CustomersDashboard";
 
-function App() {
+
+export default function App() {
 
   return (
     <Router>
-      <div className="App">
+      
         <>
           <Switch>
             <Route path="//" component={Home} exact></Route>
@@ -45,12 +55,9 @@ function App() {
             <Route path="/tools" component={Tools}></Route>
           </Switch>
         </>
-      </div>
     </Router>
   );
 }
-
-export default App;
 
 
 

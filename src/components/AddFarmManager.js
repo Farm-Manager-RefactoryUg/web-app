@@ -3,7 +3,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import FarmManagerTable from "./FarmManagerTable";
+import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
+import AddIcon from '@material-ui/icons/Add';
 
 const Buttonn = withStyles({
   root: {
@@ -20,7 +24,7 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'orange',
+      color: 'rgba(0,0,0,0.87)',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -32,65 +36,51 @@ const CssTextField = withStyles({
       '&.Mui-error fieldset': {
         borderColor: 'red',
       },
-
+      width: "300px",
+      marginRight: "5px",
     },
   },
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: "white",
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    paddingLeft: "40px",
-    paddingRight: "40px",
-    marginBottom: theme.spacing(6),
-  },
-  form: {
-    width: '50%', // Fix IE 11 issue.
-  },
   submit: {
     backgroundColor: 'green',
     color: 'white',
-    outline: 'none',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    //marginTop: theme.spacing(1),
     textTransform: "initial",
     fontWeight: "600",
-    height: "40px",
-    width: "120px",
-    marginTop: "35px",
+    marginTop: theme.spacing(2),
+    paddingRight: theme.spacing(3),
   },
 }));
 
 export default function AddFarmManager() {
+
+  const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
+  const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
+  const classes = useStyles();
   let [[fullNamee, emaile, passworde], setErrors] = useState(["", "", ""])
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const handleSubmit = (event) => {
+    if (fullNamee || emaile || passworde) {
+      event.preventDefault()
+    }
   }
-  const handleChange = event => {
+
+  const handleChange = (event) => {
     const { name, value } = event.target
-    // eslint-disable-next-line no-use-before-define
-    let [fullNamee, emaile, passworde, mobilee] = [fullNamee, emaile, passworde, mobilee]
-    const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
-    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
     switch (name) {
       case "fullName":
         (!nameRegex.test(value)) ?
-          setErrors(["Atleast two names e.g. John Doe", emaile, passworde, mobilee]) : setErrors(["", emaile, passworde, mobilee])
+          setErrors(["Atleast two names E.g: John Doe", emaile, passworde]) : setErrors(["", emaile, passworde])
         break;
       case "email":
         (!emailRegex.test(value)) ?
-          setErrors([fullNamee, "Enter valid email e.g. abc@gmail.com", passworde, mobilee]) : setErrors([fullNamee, "", passworde, mobilee])
+          setErrors([fullNamee, "Enter valid email E.g: abc@gmail.com", passworde]) : setErrors([fullNamee, "", passworde])
         break;
       case "password":
         (value.length < 6) ?
-          setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee]) : setErrors([fullNamee, emaile, "", mobilee])
+          setErrors([fullNamee, emaile, "Password should be more than 6 characters"]) : setErrors([fullNamee, emaile, ""])
         break;
 
       default:
@@ -99,21 +89,25 @@ export default function AddFarmManager() {
 
   }
 
-  const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Grid container spacing={3} style={{ marginBottom: "20px", }}>
 
-      <Typography 
-      component="h6" 
-      variant="h5" 
-      style={{ fontWeight: "600", color: "green", fontSize: "1.2rem", fontFamily: "Segoe UI" }}>
-        REGISTER
-      </Typography>
+      <Grid item xs={12} sm={12} lg={7}>
+        <Card style={{ padding: "16px" }}>
+          <FarmManagerTable />
+        </Card>
+      </Grid>
 
-      <main maxWidth="xs">
+      <Grid item xs={12} sm={12} lg={5}>
+        <Card style={{ padding: "16px" }}>
 
-        <div className={classes.paper}>
+          <Typography
+            component="h6"
+            variant="h5"
+            style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+            Register Farm Manager
+          </Typography>
 
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
@@ -122,35 +116,46 @@ export default function AddFarmManager() {
               name="fullName"
               variant="outlined"
               required
-              fullWidth
               id="fullName"
               label="Username"
               error={fullNamee.length > 0}
               onChange={handleChange}
-              size="small"
+
               margin="normal"
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{fullNamee}</small>
+            {fullNamee && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {fullNamee}
+            </small>}
 
             <CssTextField
               variant="outlined"
               required
-              fullWidth
               id="email"
               label="Email address"
               name="email"
               error={emaile.length > 0}
               onChange={handleChange}
-              size="small"
+
               margin="normal"
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
+            {emaile && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {emaile}
+            </small>}
 
             <CssTextField
               variant="outlined"
               margin="normal"
               required
-              fullWidth
               name="password"
               label="Password"
               type="password"
@@ -158,25 +163,33 @@ export default function AddFarmManager() {
               autoComplete="current-password"
               error={passworde.length > 0}
               onChange={handleChange}
-              size="small"
+
             />
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
+            {passworde && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {passworde}
+            </small>}
+            <br></br>
 
             <Buttonn
               type="submit"
               variant="contained"
-              fullWidth
               className={classes.submit}
+              startIcon={<AddIcon />}
             >
               Add
             </Buttonn>
 
           </form>
-        </div>
+        
+        </Card>
+      </Grid>
 
-      </main>
-
-    </Card>
+    </Grid>
   );
 }
 

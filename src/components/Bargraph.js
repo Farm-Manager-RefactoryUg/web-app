@@ -109,12 +109,13 @@ const options = {
   chart: {
     type: "column",
   },
+
   credits: {
     enabled: false,
   },
 
   title: {
-    text: "Sales Distribution for the Year 2020.",
+    text: "Sales Distribution for the Project.",
     align: "left",
     margin: 50,
     x: 10,
@@ -126,10 +127,6 @@ const options = {
       color: "green",
     },
   },
-
-  // subtitle: {
-  //   text: "Resize the frame or click buttons to change appearance",
-  // },
 
   legend: {
     align: "right",
@@ -186,29 +183,35 @@ const options = {
         condition: {
           maxWidth: 500,
         },
+
         chartOptions: {
           legend: {
             align: "center",
             verticalAlign: "bottom",
             layout: "horizontal",
           },
+
           yAxis: {
             labels: {
               align: "left",
               x: 0,
               y: -5,
             },
+
             title: {
               text: "Shillings",
             },
           },
+
           subtitle: {
             text: null,
           },
+
           credits: {
             enabled: false,
           },
         },
+
       },
     ],
   },

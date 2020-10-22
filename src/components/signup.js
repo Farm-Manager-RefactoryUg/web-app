@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SignIn() {
+export default function SignUp() {
 
   //let history = useHistory();
   const classes = useStyles();
