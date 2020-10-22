@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-//import Login from "./components/Login";
+import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import Settings from "./components/Settings";
 import ForgotPassword from './components/ForgotPassword';
@@ -27,7 +27,7 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        {/* <Route path="/" exact component={Login} /> */}
+        <Route path="/" exact component={Login} />
         <Route path="/signup" exact component={SignUp} />
         <Route path="/project" component={Project} />
         <Route path="/projects" component={Projects} />
