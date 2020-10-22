@@ -20,8 +20,9 @@ import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
+import Tools from "./components/Tools";
+import Tables from "./components/Tables"
 
-//comment
 
 export default function App() {
 
@@ -39,7 +40,9 @@ export default function App() {
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/seasons" component={Seasons} />
         <Route path="/compare" component={Analytics} />
-
+        
+        <Route path="/tables" component={Tables}></Route>
+        <Route path="/tools" component={Tools}></Route>
         <Route path="/requisitions" exact component={Requisitions} />
         <Route path="/customers" component={Customers} exact />
         <Route path="/customer/:id" component={CustomerDetails} />

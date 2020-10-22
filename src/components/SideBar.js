@@ -65,14 +65,21 @@ export default function MainListItems(props) {
   const urls = {
     dashboardUrl: "/dashboard",
     projectsUrl: "/projects",
-    settingsUrl: "/settings",    
+    settingsUrl: "/settings",
     compareUrl: "/compare",
     seasonsUrl: "/seasons",
+    toolsUrl: "/tools",
+    consumableUrl: "/consumable",
+    requisitionsUrl: "/requisitions",
+    suppliers: "/suppliers",
+    customersUrl: "/customers",
+    workersUrl: "/workers",
   }
   const listItemHighlightItems = classes.highlightItems;
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
   const handleClick1 = () => {
     setOpen1(!open1)
   }
@@ -82,6 +89,9 @@ export default function MainListItems(props) {
   const handleClick3 = () => {
     setOpen3(!open3)
   }
+  const handleClick4 = () => {
+    setOpen4(!open4)
+  }
 
   return (
     <div style={{ marginTop: "20px", }}>
@@ -89,12 +99,12 @@ export default function MainListItems(props) {
         <ListItemIcon>
           <DashboardIcon className={urls.dashboardUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Overview" className={clsx(classes.text, urls.dashboardUrl === currentUrl ? listItemHighlightItems : "")}  />
+        <ListItemText disableTypography primary="Overview" className={clsx(classes.text, urls.dashboardUrl === currentUrl ? listItemHighlightItems : "")} />
       </ListItem>
 
       <ListItem button id="a" onClick={handleClick1} className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? classes.highlight : ""}>
         <ListItemIcon>
-          <BarChartIcon className={ urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? listItemHighlightItems : ""} />
+          <BarChartIcon className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
         <ListItemText disableTypography primary="Analytics" className={clsx(classes.text, urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? listItemHighlightItems : "")} />
         {open1 ? <ExpandLess className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} /> : <ExpandMore className={urls.compareUrl === currentUrl || urls.seasonsUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} />}
@@ -110,16 +120,16 @@ export default function MainListItems(props) {
         </List>
       </Collapse>
 
-      <ListItem button id="a" onClick={handleClick2}>
+      <ListItem button id="a" onClick={handleClick2} className={urls.requisitionsUrl === currentUrl || urls.suppliersUrl === currentUrl || urls.customersUrl === currentUrl ? classes.highlight : ""}>
         <ListItemIcon>
-          <AttachMoneyIcon className={classes.mainIcons} />
+          <AttachMoneyIcon className={urls.requisitionsUrl === currentUrl || urls.suppliersUrl === currentUrl || urls.customersUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
         <ListItemText
           disableTypography
           primary="Finances"
-          className={classes.text}
+          className={clsx(classes.text, urls.requisitionsUrl === currentUrl || urls.suppliersUrl === currentUrl || urls.customersUrl === currentUrl ? listItemHighlightItems : "")}
         />
-        {open2 ? <ExpandLess /> : <ExpandMore />}
+        {open2 ? <ExpandLess className={urls.requisitionsUrl === currentUrl || urls.suppliersUrl === currentUrl || urls.customersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} /> : <ExpandMore className={urls.requisitionsUrl === currentUrl || urls.suppliersUrl === currentUrl || urls.customersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} />}
       </ListItem>
 
       <Collapse in={open2} timeout="auto" unmountOnExit>
@@ -133,7 +143,7 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Requisitions"
-              className={classes.text}
+              className={clsx(classes.text, urls.requisitionsUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
           <ListItem
@@ -145,7 +155,7 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Suppliers"
-              className={classes.text}
+              className={clsx(classes.text, urls.suppliersUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
           <ListItem
@@ -157,22 +167,22 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Customers"
-              className={classes.text}
+              className={clsx(classes.text, urls.customersUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
         </List>
       </Collapse>
 
-      <ListItem button id="a" onClick={handleClick3}>
+      <ListItem button id="a" onClick={handleClick3} className={urls.workersUrl === currentUrl ? classes.highlight : ""}>
         <ListItemIcon>
-          <PeopleIcon className={classes.mainIcons} />
+          <PeopleIcon className={urls.workersUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
         <ListItemText
           disableTypography
           primary="Employees"
-          className={classes.text}
+          className={clsx(classes.text, urls.workersUrl === currentUrl ? listItemHighlightItems : "")}
         />
-        {open1 ? <ExpandLess /> : <ExpandMore />}
+        {open1 ? <ExpandLess className={urls.workersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} /> : <ExpandMore className={urls.workersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} />}
       </ListItem>
       <Collapse in={open3} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
@@ -185,7 +195,7 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Employees"
-              className={classes.text}
+              className={clsx(classes.text, urls.workersUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
           <ListItem
@@ -197,29 +207,60 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Casual workers"
-              className={classes.text}
+              className={clsx(classes.text, urls.workersUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
         </List>
       </Collapse>
 
-      <ListItem button component={Link} to={"/tools"}>
+      <ListItem button onClick={handleClick4} className={urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? classes.highlight : ""}>
         <ListItemIcon>
-          <BuildIcon className={classes.mainIcons} />
+          <BuildIcon className={urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? listItemHighlightItems : ""}/>
         </ListItemIcon>
 
         <ListItemText
           disableTypography
           primary="Tools"
-          className={classes.text}
+          className={clsx(classes.text, urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? listItemHighlightItems : "")}
+          component={Link}
+          to={"/tools"}
         />
+        {open4 ? <ExpandLess className={urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} /> : <ExpandMore className={urls.consumableUrl === currentUrl || urls.toolsUrl === currentUrl ? classes.blackIcon : classes.whiteIcon} />}
       </ListItem>
+      <Collapse in={open4} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem
+            button
+            component={Link}
+            to={"/tools"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Tools"
+             className={clsx(classes.text, urls.toolsUrl === currentUrl ? classes.selectedItem : "")}
+            />
+          </ListItem>
+          <ListItem
+            button
+            component={Link}
+            to={"/consumable"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Consumable"
+             className={clsx(classes.text, urls.consumableUrl === currentUrl ? classes.selectedItem : "")}
+            />
+          </ListItem>
+        </List>
+      </Collapse>
 
       <ListItem button component={Link} to={"/projects"} className={clsx(classes.root, urls.projectsUrl === currentUrl ? classes.highlight : "")}>
         <ListItemIcon>
           <LayersIcon className={urls.projectsUrl === currentUrl ? listItemHighlightItems : ""} />
         </ListItemIcon>
-        <ListItemText disableTypography primary="Dashboards" className={clsx(classes.text, urls.projectsUrl === currentUrl ? listItemHighlightItems : "")} />
+        <ListItemText disableTypography primary="Projects" className={clsx(classes.text, urls.projectsUrl === currentUrl ? listItemHighlightItems : "")} />
       </ListItem>
 
       <ListItem button component={Link} to={"/settings"} className={clsx(classes.root, urls.settingsUrl === currentUrl ? classes.highlight : "")}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -97,11 +98,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Requisitions() {
   const classes = useStyles();
+  const currentUrl = useLocation();
+
   return (
     <div className={classes.root}>
       <React.Fragment>
         {/* <CssBaseline/> */}
-        <ProjectAppBar />
+        <ProjectAppBar location={currentUrl} />
 
         <main className={classes.content}>
           <h5 align="left" style={{ marginLeft: "0.5rem" }}>

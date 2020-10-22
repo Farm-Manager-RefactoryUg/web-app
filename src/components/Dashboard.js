@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
@@ -12,6 +12,11 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
+import axios from "axios";
+import RequisitionsDashboard from "./RequisitionsDashboard";
+import ToolsDashboard from "./ToolsDashboard";
+import Paper from "@material-ui/core/Paper";
+import CustomersDashboard from "./CustomersDashboard";
 
 
 const drawerWidth = 240;
@@ -65,6 +70,8 @@ export default function Dashboard() {
   const classes = useStyles();
   const currentUrl = useLocation();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const [item, setItems] = useState("");
+  const [id, setId] = useState();
 
   const theme = React.useMemo(
     () =>
@@ -84,6 +91,18 @@ export default function Dashboard() {
   useEffect(() => {
     document.title = "Dashboard"
   }, []);
+
+  useEffect(() => {
+    setId(item.id);
+    axios
+      .get(`https://farmmanager-api.herokuapp.com/api/income/${id}`)
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [item.id, id]);
 
   return (
     <>
@@ -109,7 +128,7 @@ export default function Dashboard() {
 
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-              <Grid container spacing={6} style={{ marginTop: "10px", marginBottom: "20px", }}>
+              <Grid container spacing={2} style={{ marginTop: "10px", marginBottom: "20px", }}>
 
                 <Grid item xs={12} md={3} lg={3}>
                   <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
@@ -247,6 +266,28 @@ export default function Dashboard() {
                   </Card>
                 </Grid>
 
+              </Grid>
+
+              <Grid container spacing={2} style={{ marginBottom: "20px", }} >
+                <Grid item xs={12} sm={12}>
+                  <Paper className={classes.paper}>
+                    <RequisitionsDashboard />
+                  </Paper>
+                </Grid>
+                <br></br>
+
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <CustomersDashboard />
+                  </Paper>
+                </Grid>
+                <br></br>
+                <Grid item xs={12} sm={12}>
+                  <Paper className={classes.paper}>
+                    <ToolsDashboard />
+                  </Paper>
+                </Grid>
+                <br></br>
               </Grid>
 
             </Container>
