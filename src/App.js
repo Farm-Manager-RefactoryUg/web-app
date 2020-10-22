@@ -6,7 +6,7 @@ import Settings from "./components/Settings";
 import ForgotPassword from './components/ForgotPassword';
 import PageNotFound from './components/PageNotFound';
 import UserProfile from "./components/UserProfile";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard";
 import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Seasons from "./components/Seasons";
