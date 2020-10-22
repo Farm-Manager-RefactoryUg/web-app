@@ -52,6 +52,7 @@ export default function MainListItems() {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
   const handleClick1 = () => {
     setOpen1(!open1)
   }
@@ -61,6 +62,9 @@ export default function MainListItems() {
   const handleClick3 = () => {
     setOpen3(!open3);
   };
+   const handleClick4 = () => {
+     setOpen4(!open4);
+   };
 
   return (
     <div position="fixed">
@@ -144,7 +148,7 @@ export default function MainListItems() {
           primary="Employees"
           className={classes.text}
         />
-        {open1 ? <ExpandLess /> : <ExpandMore />}
+        {open3 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open3} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
@@ -174,26 +178,47 @@ export default function MainListItems() {
           </ListItem>
         </List>
       </Collapse>
-      
-      <Link to="/tools">
-        <ListItem button>
-          <ListItemIcon>
-            <BuildIcon className={classes.mainIcons} />
-          </ListItemIcon>
 
-          <ListItemText
-            disableTypography
-            primary="Tools"
-            className={classes.text}
-          />
-        </ListItem>
-      </Link>
-      <ListItem
-        button
-        component={Link}
-        to={"/analytics"}
-        className={classes.root}
-      >
+      <ListItem button id="a" onClick={handleClick4}>
+        <ListItemIcon>
+          <BuildIcon className={classes.mainIcons} />
+        </ListItemIcon>
+        <ListItemText
+          disableTypography
+          primary="Tools"
+          className={classes.text}
+        />
+        {open4 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open4} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem
+            button
+            component={Link}
+            to={"/tools"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Tools"
+              className={classes.text}
+            />
+          </ListItem>
+          <ListItem
+            button
+            component={Link}
+            to={"/consumable"}
+            className={clsx(classes.root, classes.nested)}
+          >
+            <ListItemText
+              disableTypography
+              primary="Consumable"
+              className={classes.text}
+            />
+          </ListItem>
+        </List>
+      </Collapse>
+      <ListItem button component={Link} to={"/tools"} className={classes.root}>
         <ListItemIcon>
           <BarChartIcon className={classes.mainIcons} />
         </ListItemIcon>
