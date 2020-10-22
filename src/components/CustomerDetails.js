@@ -14,8 +14,8 @@ class CustomerDetails extends Component {
       isLoaded: true,
     };
   }
-  componentDidMount(item) {
-    fetch(`https://jsonplaceholder.typicode.com/users?id=${item}`)
+  componentDidMount(id) {
+    fetch(`https://jsonplaceholder.typicode.com/users?id=${id}`)
       .then((response) => response.json())
       .then((json) => {
         this.setState({
@@ -23,7 +23,7 @@ class CustomerDetails extends Component {
           item: json,
         });
       });
-      console.log(item);
+      //console.log(item);
   }
   render() {
     let { isLoaded, item } = this.state;
@@ -61,11 +61,11 @@ class CustomerDetails extends Component {
                         </td> */}
                         <td>{item.city}</td>
                         <td>
-                          <Router>
+                          
                             <Link>
                               <Button variant="secondary">Options</Button>
                             </Link>
-                          </Router>
+                         
                         </td>
                       </tr>
                     </tbody>
