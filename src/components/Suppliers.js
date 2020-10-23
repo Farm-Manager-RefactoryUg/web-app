@@ -1,71 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Link from "@material-ui/core/Link";
-import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Title from "./Title";
+import Paper from "@material-ui/core/Paper";
+import Link from "@material-ui/core/Link";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+//import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
-import Button from "@material-ui/core/Button";
 
-// Generate Order Data
-function createData(id,name, companyName, email, address, terms) {
-  return { id, name, companyName, email, address, terms };
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Farm Manager!
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
 }
 
-const rows = [
-  createData(
-    0,
-    "Malinga Daniel",
-    "Fine Millers",
-    "finemillers@gmail.com",
-    "Busia",
-    "Seedlings"
-  ),
-  createData(
-    1,
-    "Wandira Elton",
-    "Simbwe Pharmacy",
-    "simbwe@gmail.com",
-    "Jinja",
-    "Vaccines"
-  ),
-  createData(
-    2,
-    "Wamala Emma",
-    "Kaisal Vehicles",
-    "kaivehicles@gmail.com",
-    "Kampala",
-    "Hoes"
-  ),
-  createData(
-    3,
-    "Edith Tess",
-    "Zedith Irrigators",
-    "zirrigators@gmail.com",
-    "Kasese",
-    "Irrigation materials"
-  ),
-  createData(
-    4,
-    "Tusiime Godwin",
-    "Tutsi wears",
-    "tutsiwears@gmail.com",
-    "Kabale",
-    "Gumboots"
-  ),
-];
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: "green",
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    fontFamily: "Segoe UI",
+    backgroundColor: "rgb(247, 249, 252)",
+  },
+  root2: {
+    width: "100%",
+    padding:20,
   },
   spacing: {
     margin: 0,
@@ -76,11 +61,21 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     margin: "0px !important",
   },
+  drawerPaper: {
+    position: "relative",
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: "100vh",
     overflow: "auto",
-    marginTop: "60px",
   },
   container: {
     paddingTop: theme.spacing(2),
@@ -95,53 +90,123 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
+  label: {
+    fontSize: "0.7rem",
+    color: "white",
+  },
 }));
 
 export default function Suppliers() {
+  // let url = "/";
   const classes = useStyles();
   const currentUrl = useLocation();
+  const [items, setItems] = useState("");
 
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+
+  useEffect(() => {
+    axios
+      .get("https://farmmanager-api.herokuapp.com/api/supplier")
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+   const theme = React.useMemo(
+     () =>
+       createMuiTheme({
+         overrides: {
+           MuiGrid: {
+             "spacing-xs-2": "-6px !important",
+           },
+         },
+         palette: {
+           type: prefersDarkMode ? "light" : "dark",
+         },
+       }),
+     [prefersDarkMode]
+   );
   return (
-    <div className={classes.root}>
-      <React.Fragment>
-        <ProjectAppBar location={currentUrl} />
-        <main className={classes.content}>
-          <Title>Recent Orders</Title>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Company Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Business Address</TableCell>
-                <TableCell>Terms</TableCell>
-                <TableCell> Details</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.companyName}</TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.terms}</TableCell>
-                  <TableCell>
-                    <Button variant="contained" color="primary">
-                      View
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <div className={classes.seeMore}>
-            <Link color="primary" href="#" onClick={preventDefault}>
-              See more Suppliers
-            </Link>
-          </div>
-        </main>
-      </React.Fragment>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <ProjectAppBar location={currentUrl} />
+
+          <main className={classes.content}>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Paper className={classes.root2}>
+              <h5 align="left" style={{ marginLeft: "0.5rem",color:"green" }}>
+                Recent Suppliers
+              </h5>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell align="left" component="th" scope="row">
+                        No.
+                      </StyledTableCell>
+                      <StyledTableCell
+                        align="center"
+                        component="th"
+                        scope="row"
+                      >
+                        Name
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Company Name
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Telephone
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Business Address
+                      </StyledTableCell>
+                      <StyledTableCell align="center">Category</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  {items &&
+                    items.map((item) => (
+                      <TableBody key={item.id}>
+                        <StyledTableCell align="left">
+                          {item.id}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.companyname}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.telephone1}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.busaddress}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {item.category}
+                        </StyledTableCell>
+                      </TableBody>
+                    ))}
+                </Table>
+              </TableContainer>
+              {/* <div className={classes.seeMore}>
+                
+                <a href={url} color="primary">
+                  See more
+                </a>
+               
+              </div> */}
+            </Paper>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </main>
+        </div>
+      </ThemeProvider>
+    </>
   );
 }

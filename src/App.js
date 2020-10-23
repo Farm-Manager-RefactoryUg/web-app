@@ -14,7 +14,7 @@ import Analytics from "./components/Analytics";
 
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
-import CustomerDetails from "./components/CustomerDetails";
+import CustomersDetails from "./components/CustomersDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
 import SalesBarGraph from "./components/SalesBarGraph";
@@ -45,7 +45,7 @@ export default function App() {
         <Route path="/tools" component={Tools}></Route>
         <Route path="/requisitions" exact component={Requisitions} />
         <Route path="/customers" component={Customers} exact />
-        <Route path="/customer/:id" component={CustomerDetails} />
+        <Route path="/customer/:id" component={CustomersDetails} />
         <Route path="/analytics" component={ExpenditurePieChart} />
         <Route path="/workers" exact component={Workers} />
         <Route path="/suppliers" exact component={Suppliers} />
