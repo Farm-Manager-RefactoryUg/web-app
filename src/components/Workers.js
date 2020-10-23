@@ -1,4 +1,5 @@
 import React, { useEffect,useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -89,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Workers() {
   // let url = "/";
   const classes = useStyles();
+  const currentUrl = useLocation();
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
   // const [isLoaded, setIsLoaded] = useState(false);
@@ -121,7 +123,7 @@ export default function Workers() {
     <>
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
-          <ProjectAppBar />
+          <ProjectAppBar location={currentUrl} />
           <main className={classes.content}>
             {/* <br></br> */}
             <Paper className={classes.root2}>
