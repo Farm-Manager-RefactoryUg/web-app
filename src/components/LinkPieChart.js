@@ -14,7 +14,7 @@ const options = {
     },
 
     title: {
-        text: "Expenditure Distribution for the Project.",
+        text: "Expenditure Distribution",
         align: "left",
         margin: 20,
         x: 10,
