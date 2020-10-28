@@ -437,10 +437,11 @@ export default function Dashboard() {
               <Card
                 style={{
                   color: "white",
+                  //color: "rgba(0, 0, 0, 0.87)",
                   marginBottom: "20px",
                   textAlign: "center",
                   padding: theme.spacing(2, 2, 2, 0),
-                  backgroundColor: "rgba(27, 36, 48, 0.9)"
+                  backgroundColor: "rgba(27, 36, 48, 0.5)",
                 }}
               >
                 <Typography
@@ -452,7 +453,8 @@ export default function Dashboard() {
                     fontWeight: "600",
                     fontSize: "1.0625rem",
                     marginBottom: "20px",
-                  }}>
+                  }}
+                >
                   Score Card
                 </Typography>
 
@@ -462,7 +464,7 @@ export default function Dashboard() {
                     justifyContent: "center",
                   }}
                 >
-                  <span
+                  <Grid item xs={12} sm={3} lg={2}
                     style={{
                       padding: "0 20px"
                     }}
@@ -506,9 +508,9 @@ export default function Dashboard() {
                       }}>
                       Expenditure
                       </Typography>
-                  </span>
+                  </Grid>
 
-                  <span
+                  <Grid item xs={12} sm={3} lg={2}
                     style={{
                       padding: "0 20px"
                     }}
@@ -552,9 +554,9 @@ export default function Dashboard() {
                       }}>
                       Return on Investment
                       </Typography>
-                  </span>
+                  </Grid>
 
-                  <span
+                  <Grid item xs={12} sm={3} lg={2}
                     style={{
                       padding: "0 20px"
                     }}
@@ -598,7 +600,91 @@ export default function Dashboard() {
                       }}>
                       Revenue
                       </Typography>
-                  </span>
+                  </Grid>
+
+                  <Grid item xs={12} sm={3} lg={2}
+                    style={{
+                      padding: "0 20px"
+                    }}
+                  >
+                    <MoneyIcon
+                      style={{
+                        transform: "scale(1.5)",
+                        marginBottom: "20px",
+                      }}
+                    />
+
+                    <Typography
+                      style={{
+                        borderRadius: "10px",
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        fontSize: "1.5rem",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {"11,650"}
+                      <sub
+                        style={{
+                          fontWeight: "600",
+                          fontSize: "0.8125rem"
+                        }}
+                      >
+                        {" KG"}
+                      </sub>
+                    </Typography>
+
+                    <Typography
+                      gutterBottom
+                      component="h6"
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        fontSize: "0.8125rem",
+                        fontWeight: "400",
+                        textTransform: "uppercase"
+                      }}>
+                      Sales
+                      </Typography>
+                  </Grid>
+
+                  <Grid item xs={12} sm={3} lg={2}
+                    style={{
+                      padding: "0 20px"
+                    }}
+                  >
+                    <MoneyIcon
+                      style={{
+                        transform: "scale(1.5)",
+                        marginBottom: "20px",
+                      }}
+                    />
+
+                    <Typography
+                      style={{
+                        borderRadius: "10px",
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        fontSize: "1.5rem",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {"11"}
+                    </Typography>
+
+                    <Typography
+                      gutterBottom
+                      component="h6"
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        fontSize: "0.8125rem",
+                        fontWeight: "400",
+                        textTransform: "uppercase"
+                      }}>
+                      Users
+                      </Typography>
+                  </Grid>
                 </div>
               </Card>
 
