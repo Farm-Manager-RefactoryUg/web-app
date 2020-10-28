@@ -4,7 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 
 const options = {
   chart: {
-    type: "column",
+    type: "line",
   },
 
   credits: {

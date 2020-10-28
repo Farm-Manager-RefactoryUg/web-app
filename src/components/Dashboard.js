@@ -22,6 +22,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 const drawerWidth = 240;
 
@@ -436,11 +438,12 @@ export default function Dashboard() {
 
               <Card
                 style={{
-                  color: "white",
+                  //color: "white",
+                  color: "rgba(0, 0, 0, 0.87)",
                   marginBottom: "20px",
                   textAlign: "center",
                   padding: theme.spacing(2, 2, 2, 0),
-                  backgroundColor: "rgba(27, 36, 48, 0.9)"
+                  //backgroundColor: "rgba(27, 36, 48, 0.5)",
                 }}
               >
                 <Typography
@@ -452,7 +455,8 @@ export default function Dashboard() {
                     fontWeight: "600",
                     fontSize: "1.0625rem",
                     marginBottom: "20px",
-                  }}>
+                  }}
+                >
                   Score Card
                 </Typography>
 
@@ -462,7 +466,7 @@ export default function Dashboard() {
                     justifyContent: "center",
                   }}
                 >
-                  <span
+                  <Grid item xs={12} sm={3} lg={2}
                     style={{
                       padding: "0 20px"
                     }}
@@ -471,6 +475,7 @@ export default function Dashboard() {
                       style={{
                         transform: "scale(1.5)",
                         marginBottom: "20px",
+                        color: "rgba(27, 36, 48, 0.5)"
                       }}
                     />
 
@@ -502,13 +507,62 @@ export default function Dashboard() {
                         padding: "0",
                         fontSize: "0.8125rem",
                         fontWeight: "400",
-                        textTransform: "uppercase"
+                        textTransform: "uppercase",
+                        color: "rgba(27, 36, 48, 0.5)"
                       }}>
                       Expenditure
                       </Typography>
-                  </span>
+                  </Grid>
 
-                  <span
+                  <Grid item xs={12} sm={3} lg={2}
+                    style={{
+                      padding: "0 20px"
+                    }}
+                  >
+                    <AssessmentIcon
+                      style={{
+                        transform: "scale(1.5)",
+                        marginBottom: "20px",
+                        color: "rgba(27, 36, 48, 0.5)"
+                      }}
+                    />
+
+                    <Typography
+                      style={{
+                        borderRadius: "10px",
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        fontSize: "1.5rem",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {"11,650"}
+                      <sub
+                        style={{
+                          fontWeight: "600",
+                          fontSize: "0.8125rem"
+                        }}
+                      >
+                        {" KG"}
+                      </sub>
+                    </Typography>
+
+                    <Typography
+                      gutterBottom
+                      component="h6"
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        fontSize: "0.8125rem",
+                        fontWeight: "400",
+                        textTransform: "uppercase",
+                        color: "rgba(27, 36, 48, 0.5)"
+                      }}>
+                      Sales
+                      </Typography>
+                  </Grid>
+
+                  <Grid item xs={12} sm={3} lg={2}
                     style={{
                       padding: "0 20px"
                     }}
@@ -517,6 +571,7 @@ export default function Dashboard() {
                       style={{
                         transform: "scale(1.5)",
                         marginBottom: "20px",
+                        color: "rgba(27, 36, 48, 0.5)"
                       }}
                     />
 
@@ -548,13 +603,54 @@ export default function Dashboard() {
                         padding: "0",
                         fontSize: "0.8125rem",
                         fontWeight: "400",
-                        textTransform: "uppercase"
+                        textTransform: "uppercase",
+                        color: "rgba(27, 36, 48, 0.5)"
                       }}>
                       Return on Investment
                       </Typography>
-                  </span>
+                  </Grid>
 
-                  <span
+                  <Grid item xs={12} sm={3} lg={2}
+                    style={{
+                      padding: "0 20px"
+                    }}
+                  >
+                    <SupervisorAccountIcon
+                      style={{
+                        transform: "scale(1.5)",
+                        marginBottom: "20px",
+                        color: "rgba(27, 36, 48, 0.5)"
+                      }}
+                    />
+
+                    <Typography
+                      style={{
+                        borderRadius: "10px",
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        fontSize: "1.5rem",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      {"11"}
+                    </Typography>
+
+                    <Typography
+                      gutterBottom
+                      component="h6"
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        fontSize: "0.8125rem",
+                        fontWeight: "400",
+                        textTransform: "uppercase",
+                        color: "rgba(27, 36, 48, 0.5)"
+                      }}>
+                      Users
+                      </Typography>
+                  </Grid>
+
+                  <Grid item xs={12} sm={3} lg={2}
                     style={{
                       padding: "0 20px"
                     }}
@@ -563,6 +659,7 @@ export default function Dashboard() {
                       style={{
                         transform: "scale(1.5)",
                         marginBottom: "20px",
+                        color: "rgba(27, 36, 48, 0.5)"
                       }}
                     />
 
@@ -594,11 +691,12 @@ export default function Dashboard() {
                         padding: "0",
                         fontSize: "0.8125rem",
                         fontWeight: "400",
-                        textTransform: "uppercase"
+                        textTransform: "uppercase",
+                        color: "rgba(27, 36, 48, 0.5)"
                       }}>
                       Revenue
                       </Typography>
-                  </span>
+                  </Grid>
                 </div>
               </Card>
 
