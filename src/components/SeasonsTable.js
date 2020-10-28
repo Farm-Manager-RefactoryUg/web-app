@@ -45,55 +45,52 @@ export default function BasicTable() {
     const classes = useStyles();
 
     return (
-        <>
-            <TableContainer component="div" >
+        <TableContainer component="div" >
 
-                <Typography
-                    component="h6"
-                    variant="h5"
-                    style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
-                    Table showing the start and end date of farm activities within different seasons.
+            <Typography
+                component="h6"
+                variant="h5"
+                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+                Table showing the start and end date of farm activities within different seasons.
                 </Typography>
 
-                <Table className={classes.table} aria-label="simple table">
+            <Table className={classes.table} aria-label="simple table">
 
-                    <TableHead>
+                <TableHead>
 
-                        <TableRow>
-                            <TableCell className={classes.headerFont}>#</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Activity</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Start Date</TableCell>
-                            <TableCell className={classes.headerFont} align="left">End Date</TableCell>
+                    <TableRow>
+                        <TableCell className={classes.headerFont}>#</TableCell>
+                        <TableCell className={classes.headerFont} align="left">Activity</TableCell>
+                        <TableCell className={classes.headerFont} align="left">Start Date</TableCell>
+                        <TableCell className={classes.headerFont} align="left">End Date</TableCell>
+                    </TableRow>
+
+                </TableHead>
+
+                <TableBody>
+
+                    {rows.map((row) => (
+                        <TableRow key={row.name} hover>
+
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                className={classes.tableFont}
+                                style={{ fontWeight: "700" }}
+                            >
+                                {row.name}
+                            </TableCell>
+                            <TableCell className={classes.tableFont} align="left">{row.calories}</TableCell>
+                            <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
+                            <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
+
                         </TableRow>
+                    ))}
 
-                    </TableHead>
+                </TableBody>
 
-                    <TableBody>
+            </Table>
 
-                        {rows.map((row) => (
-                            <TableRow key={row.name} hover>
-
-                                <TableCell
-                                    component="th"
-                                    scope="row"
-                                    className={classes.tableFont}
-                                    style={{ fontWeight: "700" }}
-                                >
-                                    {row.name}
-                                </TableCell>
-                                <TableCell className={classes.tableFont} align="left">{row.calories}</TableCell>
-                                <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
-                                <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
-
-                            </TableRow>
-                        ))}
-
-                    </TableBody>
-
-                </Table>
-
-            </TableContainer>
-        
-        </>
+        </TableContainer>
     );
 }
