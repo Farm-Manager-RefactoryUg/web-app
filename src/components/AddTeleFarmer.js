@@ -3,8 +3,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import TeleFarmerTable from "./TeleFarmerTable";
+import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
+import AddIcon from '@material-ui/icons/Add';
 
 const Buttonn = withStyles({
   root: {
@@ -21,116 +24,113 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'green',
+      color: 'rgba(0,0,0,0.87)',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'rgba(0, 0, 0, 0.3)',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#964c22',
+        borderColor: 'green',
       },
       '&.Mui-error fieldset': {
         borderColor: 'red',
       },
-
+      width: "300px",
+      marginRight: "5px",
     },
   },
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: "white",
-    paddingTop: "60px",
-    paddingBottom: "60px",
-    marginBottom: theme.spacing(6),
-  },
-  paper: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   submit: {
     backgroundColor: 'green',
     color: 'white',
-    outline: 'none',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
     textTransform: "initial",
     fontWeight: "600",
+    paddingRight: theme.spacing(3),
   },
 }));
 
-export default function AddFarmManager() {
+
+export default function AddTeleFarmer() {
+  const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
+  const classes = useStyles();
   let [emaile, setErrors] = useState("")
 
   const handleSubmit = event => {
-    event.preventDefault()
-  }
-  const handleChange = event => {
-    const { value } = event.target
-    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-
-      (!emailRegex.test(value))
-      ? setErrors("Enter valid email e.g. abc@gmail.com")
-      : null
-
+    if (emaile) {
+      event.preventDefault();
+    }
   }
 
-  const classes = useStyles();
+  const handleChange = (event) => {
+    const { value } = event.target;
+
+    (!emailRegex.test(value))
+      ? setErrors("Enter valid email E.g: abc@gmail.com")
+      : setErrors("");
+  }
 
   return (
-    <Card className={classes.root}>
-      <Container component="main" maxWidth="xs">
+    <Grid container spacing={3} >
 
-        <div className={classes.paper}>
+      <Grid item xs={12} sm={12} lg={7}>
+        <Card style={{ padding: "16px" }}>
+          <TeleFarmerTable />
+        </Card>
+      </Grid>
 
-          <Typography component="h6" variant="h5" style={{ marginBottom: "15px", fontWeight: "600", color: "#964c22", fontSize: "1.015rem" }}>
-            Add a tele-farmer to this project.
-          </Typography>
+      <Grid item xs={12} sm={12} lg={5}>
+        <Card style={{ padding: "16px" }}>
+
+          <Typography
+            component="h6"
+            variant="h5"
+            style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+            Register Tele-Farmer
+              </Typography>
 
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
             <CssTextField
               variant="outlined"
-              fullWidth
               required
               id="email"
               label="Email address"
               name="email"
               error={emaile.length > 0}
               onChange={handleChange}
-              size="small"
-              margin="dense"
+              margin="normal"
             />
+            <br></br>
 
-            <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
-
-            
             <Buttonn
               type="submit"
-              fullWidth
               variant="contained"
               className={classes.submit}
+              startIcon={<AddIcon />}
             >
               Add
             </Buttonn>
+            <br></br>
+
+            {emaile && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {emaile}
+            </small>}
 
           </form>
-        </div>
 
-      </Container>
+        </Card>
+      </Grid>
 
-    </Card>
+    </Grid>
   );
 }
 

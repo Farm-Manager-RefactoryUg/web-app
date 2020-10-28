@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import LinkPieChart from './LinkPieChart';
 
-it("Component App renders without crashing", () => {
+
+it("Component LinkPieChart renders without crashing", () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div)
+  ReactDOM.render(<LinkPieChart />, div)
   ReactDOM.unmountComponentAtNode(div)
 });
+

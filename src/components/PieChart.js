@@ -4,10 +4,6 @@ import axios from "axios";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-
-  
-
-
 export default function PieChart() {
   
      const [items, setItems] = useState("");

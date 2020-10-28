@@ -3,8 +3,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Avatar from '@material-ui/core/Avatar';
+import michael from "../static/images/2.jfif";
+import SaveIcon from '@material-ui/icons/Save';
 
 const Buttonn = withStyles({
     root: {
@@ -21,14 +24,14 @@ const Buttonn = withStyles({
 const CssTextField = withStyles({
     root: {
         '& label.Mui-focused': {
-            color: 'green',
+            color: 'rgba(0,0,0,0.87)',
         },
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#964c22',
+                borderColor: 'rgba(0, 0, 0, 0.3)',
             },
             '&.Mui-focused fieldset': {
-                borderColor: '#964c22',
+                borderColor: 'green',
             },
             '&.Mui-error fieldset': {
                 borderColor: 'red',
@@ -42,53 +45,42 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: "white",
-        paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        paddingLeft: "0",
-        marginLeft: "0",
-        // minHeight: '100vh',
-    },
-    paper: {
-        paddingLeft: "0",
-        marginLeft: "0",
-        // display: 'flex',
-        // flexDirection: 'column',
-        //alignItems: 'center',
-    },
-    form: {
-        // display: 'flex',
-        // flexDirection: 'column',
-        // alignItems: 'center',
-        //width: '100%', // Fix IE 11 issue.
+        padding: theme.spacing(2),
     },
     submit: {
         backgroundColor: 'green',
         color: 'white',
-        outline: 'none',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
         marginTop: theme.spacing(1),
         textTransform: "initial",
         fontWeight: "600",
+        height: "40px",
+        width: "120px",
     },
     container: {
         display: "flex",
         flexDirection: "row",
-        paddingTop: "40px",
-        paddingBottom: "40px",
+    },
+    input: {
+        display: "none",
+    },
+    large: {
+        width: theme.spacing(15),
+        height: theme.spacing(16),
     }
 }));
 
 export default function AddFarmManager() {
     let [[fullNamee, emaile, passworde], setErrors] = useState(["", "", ""])
+    let [profileImg, setImage] = useState(michael)
 
     const handleSubmit = event => {
         event.preventDefault()
     }
     const handleChange = event => {
         const { name, value } = event.target
-        let [fullNamee, emaile, passworde, mobilee] = [fullNamee, emaile, passworde, mobilee]
+        let [fullNamee, emaile, passworde, mobilee] = []
         const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
         const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
@@ -111,20 +103,31 @@ export default function AddFarmManager() {
         }
 
     }
+    const imageHandler = event => {
+        let reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setImage(reader.result);
+            }
+        }
+        reader.readAsDataURL(event.target.files[0])
+    }
 
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
 
-            <Container component="main" maxWidth="xs" className={classes.container}>
+            <Typography
+                component="h6"
+                variant="h5"
+                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+                Profile
+            </Typography>
 
-                <div >
+            <main className={classes.container}>
 
-                    <Typography component="h6" variant="h5" style={{ marginBottom: "15px", fontWeight: "600", color: "#964c22", fontSize: "1.015rem" }}>
-                        Add a farm manager to this project.
-                    </Typography>
-
+                <div style={{ flex: "3" }}>
                     <form onSubmit={handleSubmit} className={classes.form} noValidate>
                         <CssTextField
                             autoComplete="fname"
@@ -136,8 +139,8 @@ export default function AddFarmManager() {
                             label="Username"
                             error={fullNamee.length > 0}
                             onChange={handleChange}
-                            size="small"
-                            margin="dense"
+                            
+                            margin="normal"
                             defaultValue="Wamala Emmanuel Nsubuga"
                         />
                         <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{fullNamee}</small>
@@ -151,16 +154,16 @@ export default function AddFarmManager() {
                             name="email"
                             error={emaile.length > 0}
                             onChange={handleChange}
-                            size="small"
-                            margin="dense"
+                            
+                            margin="normal"
                             defaultValue={"e.wamala@ciu.ac.ug"}
                         />
                         <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
 
                         <CssTextField
                             variant="outlined"
-                            margin="normal"
                             required
+                            margin="normal"
                             fullWidth
                             name="password"
                             label="Password"
@@ -169,8 +172,7 @@ export default function AddFarmManager() {
                             autoComplete="current-password"
                             error={passworde.length > 0}
                             onChange={handleChange}
-                            size="small"
-                            margin="dense"
+                            
                             defaultValue={"Abc123%"}
                         />
                         <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem" }}>{passworde}</small>
@@ -180,29 +182,43 @@ export default function AddFarmManager() {
                             variant="contained"
                             fullWidth
                             className={classes.submit}
+                            startIcon={<SaveIcon />}
+                            style={{ width: "160px", marginTop: "35px" }}
                         >
                             Save changes
-            </Buttonn>
+                        </Buttonn>
 
                     </form>
                 </div>
 
-                {/* <div>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: "3", marginLeft: "35px" }}>
 
-                    <Buttonn
-                        type="submit"
-                        variant="contained"
-                        className={classes.submit}
-                        style={{ height: "40px", width: "280px" }}
-                    >
-                        Upload
-                    </Buttonn>
+                    <Avatar alt="Michael" src={profileImg} className={classes.large} />
 
-                    <small>For best results, use an image at least 128px by 128px in .jpg format</small>
+                    <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="contained-button-file"
+                        type="file"
+                        onChange={imageHandler}
+                    />
 
-                </div> */}
+                    <label htmlFor="contained-button-file">
+                        <Buttonn
+                            variant="contained"
+                            className={classes.submit}
+                            startIcon={<CloudUploadIcon />}
+                            component="span"
+                        >
+                            Upload
+                        </Buttonn>
+                    </label>
 
-            </Container>
+                    <small style={{ fontFamily: "Segoe UI", fontSize: "0.8125rem", color: "rgba(0, 0, 0, 0.87)" }}>For best results, use an image at least 128px by 128px in .jpg format</small>
+
+                </div>
+
+            </main>
         </Card>
     );
 }

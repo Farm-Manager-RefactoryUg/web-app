@@ -6,9 +6,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 //import Paper from '@material-ui/core/Paper';
-import { Link } from "react-router-dom";
-import Card from '@material-ui/core/Card';
+//import { Link } from "react-router-dom";
+//import Card from '@material-ui/core/Card';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
     table: {
@@ -16,12 +20,13 @@ const useStyles = makeStyles({
         backgroundColor: "white",
     },
     headerFont: {
-        color: "white",
+        color: "rgba(0,0,0,0.87)",
         fontWeight: "600",
         fontFamily: "Segoe UI",
         fontSize: "0.8125rem"
     },
     tableFont: {
+        color: "rgba(0,0,0,0.87)",
         fontWeight: "400",
         fontFamily: "Segoe UI",
         fontSize: "0.8125rem"
@@ -47,13 +52,18 @@ export default function BasicTable() {
 
     return (
         <>
-            <TableContainer component={Card} style={{ padding: "40px", }}>
+            <TableContainer component="div" >
 
-                <div style={{ color: "#964c22", fontWeight: "600", marginBottom: "15px", }}>Table showing details of farm managers</div>
+                <Typography
+                    component="h6"
+                    variant="h5"
+                    style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+                    Manage Farm Managers
+                </Typography>
 
                 <Table className={classes.table} aria-label="simple table">
 
-                    <TableHead style={{ background: "grey", }}>
+                    <TableHead>
 
                         <TableRow>
                             <TableCell className={classes.headerFont}>#</TableCell>
@@ -80,8 +90,12 @@ export default function BasicTable() {
                                 <TableCell className={classes.tableFont} align="left">{row.calories}</TableCell>
                                 <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
                                 <TableCell className={classes.tableFont} align="left">
-                                    <Link to={"/"} style={{ marginRight: "5px" }}>Update</Link>
-                                    <Link to={"/"}>Delete</Link>
+                                    <IconButton color="primary" aria-label="upload picture" component="span" size="small" style={{ margin: "0", padding: "0", marginRight: "8px" }}>
+                                        <EditIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                    </IconButton>
+                                    <IconButton color="primary" aria-label="upload picture" component="span" size="small" style={{ margin: "0", padding: "0" }}>
+                                        <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                    </IconButton>
                                 </TableCell>
 
                             </TableRow>
@@ -92,6 +106,7 @@ export default function BasicTable() {
                 </Table>
 
             </TableContainer>
+        
         </>
     );
 }

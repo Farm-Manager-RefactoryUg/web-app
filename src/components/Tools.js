@@ -16,7 +16,6 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
-import CustomersDetails from "./CustomersDetails";
 
 function Copyright() {
   return (
@@ -97,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Customers() {
+export default function Tools() {
   // let url = "/";
   const classes = useStyles();
   const currentUrl = useLocation();
@@ -107,7 +106,7 @@ export default function Customers() {
 
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/customer")
+      .get("https://farmmanager-api.herokuapp.com/api/tool")
       .then((response) => {
         setItems(response.data);
       })
@@ -134,14 +133,13 @@ export default function Customers() {
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
           <ProjectAppBar location={currentUrl} />
-
           <main className={classes.content}>
             <br></br>
             <br></br>
             <br></br>
             <Paper className={classes.root2}>
               <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
-                Recent Customers
+                Tools
               </h5>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
@@ -155,14 +153,18 @@ export default function Customers() {
                         component="th"
                         scope="row"
                       >
-                        Name
+                       Date
                       </StyledTableCell>
-                      <StyledTableCell align="center">Email</StyledTableCell>
                       <StyledTableCell align="center">
-                        Telephone
+                        Tool name
                       </StyledTableCell>
-                      <StyledTableCell align="center">Location</StyledTableCell>
-                      <StyledTableCell align="center">Details</StyledTableCell>
+                      <StyledTableCell align="center">
+                        Purpose
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Main User
+                      </StyledTableCell>
+                      <StyledTableCell align="center">Condition</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   {items &&
@@ -172,23 +174,24 @@ export default function Customers() {
                           {item.id}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.name}
+                          {item.data}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.email}
+                          {item.toolname}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.telephone1}
+                          {item.purpose}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.location}
+                          {item.mainuser}
                         </StyledTableCell>
-                        <CustomersDetails />
+                        <StyledTableCell align="center">
+                          {item.codition}
+                        </StyledTableCell>
                       </TableBody>
                     ))}
                 </Table>
               </TableContainer>
-            
             </Paper>
             <Box pt={4}>
               <Copyright />
