@@ -39,8 +39,7 @@ export default function App() {
         <Route path="/pagenotfound" component={PageNotFound} />
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/seasons" component={Seasons} />
-        <Route path="/compare" component={Analytics} />
-        
+        <Route path="/compare" component={Analytics} />        
         <Route path="/tables" component={Tables}></Route>
         <Route path="/tools" component={Tools}></Route>
         <Route path="/requisitions" exact component={Requisitions} />
