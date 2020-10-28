@@ -12,12 +12,17 @@ const options = {
   }, 
 
   title: {
-    text: "Sales Distribution for the Project.",
+    text: "Sales Distribution",
     align: "left",
     margin: 50,
     x: 10,
     y: 28,
-    style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "rgba(0, 0, 0, 0.87)" },
+    style: { 
+      fontFamily: "Segoe UI", 
+      fontWeight: "600", 
+      fontSize: "1.0625rem", 
+      color: "rgba(0, 0, 0, 0.87)" 
+    },
   },
 
   legend: {
