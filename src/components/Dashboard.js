@@ -583,7 +583,7 @@ export default function Dashboard() {
                           fontSize: "0.8125rem"
                         }}
                       >
-                        {" UGX"}
+                        {"UGX"}
                       </sub>
                     </Typography>
 
