@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,12 +8,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
   container: {
+    width: "100%",
+    padding: "16px",
+    fontFamily: "Segoe UI",
+    fontSize: "0.8125rem",
     maxHeight: 440,
   },
 });
@@ -44,23 +45,43 @@ export default function CustomerDashboard() {
       });
   }, []);
   return (
-    <Paper className={classes.root}>
-      <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
-        Recent Customers
-      </h5>
+    <>
       <TableContainer className={classes.container}>
-        <Table className={classes.table}>
+
+        <Typography
+          component="h6"
+          variant="h5"
+          style={{
+            fontWeight: "600",
+            color: "rgba(0,0,0,0.87)",
+            fontSize: "1.0625rem",
+            fontFamily: "Segoe UI",
+            marginBottom: "16px",
+          }}
+        >
+          Recent customers
+        </Typography>
+
+        <Table>
           <TableHead>
-            <TableRow position="static" style={{ backgroundColor: "#f7f9fc" }}>
-              <TableCell style={{ color: "black" }}>Name</TableCell>
-              <TableCell style={{ color: "black" }}>Email</TableCell>
-              <TableCell style={{ color: "black" }}>Telephone</TableCell>
-              <TableCell style={{ color: "black" }}>Location</TableCell>
-              <TableCell align="center" style={{ color: "black" }}>
+            <TableRow
+              position="static"
+              style={{
+                backgroundColor: "#f7f9fc",
+              }}
+            >
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Telephone</TableCell>
+              <TableCell>Location</TableCell>
+              <TableCell
+                align="center"
+              >
                 Details
               </TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {items &&
               items.map((item) => (
@@ -78,8 +99,10 @@ export default function CustomerDashboard() {
                 </TableRow>
               ))}
           </TableBody>
+          
         </Table>
       </TableContainer>
+
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
@@ -89,6 +112,7 @@ export default function CustomerDashboard() {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+
+    </>
   );
 }
