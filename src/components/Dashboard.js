@@ -15,6 +15,7 @@ import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 import RequisitionsDashboard from "./RequisitionsDashboard";
 import ToolsDashboard from "./ToolsDashboard";
+import Expenditure from "./ExpenditureDashboard"
 import Paper from "@material-ui/core/Paper";
 import CustomersDashboard from "./CustomersDashboard";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
@@ -622,6 +623,11 @@ export default function Dashboard() {
                   </Paper>
                 </Grid>
                 <br></br>
+                <Grid item xs={12} sm={12}>
+                  <Paper className={classes.paper}>
+                    <Expenditure />
+                  </Paper>
+                </Grid>
               </Grid>
 
             </Container>

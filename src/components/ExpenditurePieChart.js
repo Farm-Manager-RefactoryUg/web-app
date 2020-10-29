@@ -1,5 +1,5 @@
-/* eslint-disable no-sparse-arrays */
-import React, {useState,useEffect} from "react";
+
+import React, {useEffect} from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import ProjectAppBar from "./ProjectAppBar";
@@ -13,10 +13,7 @@ const options = {
     type: "pie",
     
   },
-  credits: {
-    enabled: false,
-  },
-
+  
   title: {
     text: "Expenditure Distribution Last Planting Season",
   },
@@ -100,9 +97,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ExpenditurePieChart() {
-  const [data, setData] = useState(null);
-  const [labels, setLabels] = useState(null)
-
+ 
   useEffect(() => {
     
           fetch("https://farmmanager-api.herokuapp.com/api/expenditure/")

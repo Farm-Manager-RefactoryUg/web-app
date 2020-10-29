@@ -105,9 +105,7 @@ const options = {
 };
 
 export default function SalesBarGraph() {
-  const [data, dataSet] = useState(null);
-  const [items, setItems] = useState([]);
-  const [graphOptions, setGraphOptions] = useState({});
+ const [graphOptions, setGraphOptions] = useState({});
 
   useEffect(() => {
     async function fetchData() {

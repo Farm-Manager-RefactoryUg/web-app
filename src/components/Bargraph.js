@@ -1,30 +1,42 @@
-import React, {useState, useEffect} from "react";
+/* eslint-disable array-callback-return*/
+import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import _ from "lodash";
+
+const ops = {
+  jan: [0],
+  feb: [0],
+  mar: [0],
+  apr: [0],
+  may: [0],
+  jun: [0],
+  jul: [0],
+  aug: [0],
+  sep: [0],
+  oct: [0],
+  nov: [0],
+  dec: [0],
+};
 
 const options = {
   chart: {
-    type: "column",
+    type: "line",
   },
-
-  credits: {
-    enabled: false,
-  }, 
 
   title: {
-    text: "Sales Distribution",
-    align: "left",
-    margin: 50,
-    x: 10,
-    y: 28,
-    style: { 
-      fontFamily: "Segoe UI", 
-      fontWeight: "600", 
-      fontSize: "1.0625rem", 
-      color: "rgba(0, 0, 0, 0.87)" 
-    },
-  },
-
+    text: 'Monthly Expenditure',
+    style: {
+        display: 'none'
+    }
+},
+subtitle: {
+    text: '',
+    style: {
+        display: 'none'
+    }
+},
+ 
   legend: {
     align: "right",
     verticalAlign: "middle",
@@ -32,90 +44,142 @@ const options = {
   },
 
   xAxis: {
-    categories: ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-    title: {
-      text: "Months",
-    }
+    categories: [
+      "Jan 2020",
+      "Feb2020",
+      "Mar2020",
+      "Apr2020",
+      "May2020",
+      "Jun2020",
+      "Jul2020",
+      "Aug2020",
+      "Sep2020",
+      "Oct2020",
+      "Nov2020",
+      "Dec2020",
+    ],
+    labels: {
+      x: 0,
+    },
   },
 
   yAxis: {
     allowDecimals: false,
     title: {
-      text: "Shillings",
+      text: "Amount(UGX)",
     },
   },
 
   series: [
     {
       name: "Sales",
-      data: [670000, 2000000, 3600000,150000, 400000, 320000, 1000000, 1200000, 700000, 550000, 1300000,900000],
+      
     },
   ],
-
   responsive: {
     rules: [
       {
         condition: {
           maxWidth: 500,
         },
-
         chartOptions: {
           legend: {
             align: "center",
             verticalAlign: "bottom",
             layout: "horizontal",
           },
-
           yAxis: {
             labels: {
               align: "left",
               x: 0,
               y: -5,
-            },
-
+            }, 
             title: {
-              text: "Shillings",
+              text: "Amount",
             },
           },
-
           subtitle: {
             text: null,
           },
-
-          credits: {
-            enabled: false,
-          },
+          
         },
-
       },
     ],
   },
 };
 
-export default function Bargraph() {
-
-  const [data, dataSet] = useState(null);
+export default function SalesBarGraph() {
+  const [graphOptions, setGraphOptions] = useState({});
 
   useEffect(() => {
-    async function fetchMyAPI() {
-     try {
-       const [data1, data2] = await Promise.all([
-         fetch("https://farmmanager-api.herokuapp.com/api/expenditure/"),
-         fetch("https://farmmanager-api.herokuapp.com/api/payroll/"),
-       ]);
-       console.log(data1.json());      
-       console.log(data2.json());
+    async function fetchData() {
+      const response = await fetch(
+        "https://farmmanager-api.herokuapp.com/api/income/"
+      );
+      const jsondata = await response.json();
+      const newArray = [...jsondata];
+      console.log(newArray);
 
-     } catch (err) {
-       console.log(err);
-     }
+      
+      newArray.map((item) => {
+        var date = item.date;
+        var amount = item.amountrecvd;
+        console.log(amount);
+        if (date.startsWith("1")) {
+          ops.jan.push(amount);
+        }if (date.startsWith("2")) {
+          ops.feb.push(amount);
+        } if (date.startsWith("3")) {
+          ops.mar.push(amount);
+        } if (date.startsWith("4")) {
+          ops.apr.push(amount);
+        } if (date.startsWith("5")) {
+          ops.may.push(amount);
+        } if (date.startsWith("6")) {
+          ops.jun.push(amount);
+        } if (date.startsWith("7")) {
+          ops.jul.push(amount);
+        } if (date.startsWith("8")) {
+          ops.aug.push(amount);
+        } if (date.startsWith("9")) {
+          ops.sep.push(amount);
+        } if (date.startsWith("10")) {
+          ops.oct.push(amount);
+        } if (date.startsWith("11")) {
+          ops.nov.push(amount);
+        } else {
+          ops.dec.push(amount)
+        }
+               
+      });
+
+      options.series[0].data = [
+        _.sum(ops.jan),
+        _.sum(ops.feb),
+        _.sum(ops.mar),
+        _.sum(ops.apr),
+        _.sum(ops.may),
+        _.sum(ops.jun),
+        _.sum(ops.jul),
+        _.sum(ops.aug),
+        _.sum(ops.sep),
+        _.sum(ops.oct),
+        _.sum(ops.nov),
+        _.sum(ops.dec),
+      ];
+      setGraphOptions(options)
+      console.log(options)
     }
-
-    fetchMyAPI();
+    fetchData();   
   }, []);
+
+   
+
   return (
     <React.Fragment>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={graphOptions} />
+      <br></br>
     </React.Fragment>
   );
 }
+
