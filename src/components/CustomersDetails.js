@@ -37,10 +37,10 @@ export default function CustomersDetails() {
   const [maxWidth, setMaxWidth] = React.useState("md");
   const [open, setOpen] = React.useState(false);
   const [user, setuser] = useState({});
-  const [id, setId] = useState();
+  const [email, setId] = useState();
   const handleClickOpen = () => {
     setOpen(true);
-    setId(user.id);
+    setId(user.email);
   };
    const classes = useStyles();
   const handleClose = () => {
@@ -55,14 +55,14 @@ const handleMaxWidthChange = (event) => {
 
   useEffect(() => {
     axios
-      .get(`https://farmmanager-api.herokuapp.com/api/customer/${id}`)
+      .get(`https://farmmanager-api.herokuapp.com/api/customer/${email}`)
       .then((response) => {
         setuser(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [email]);
   return (
     <div>
       <Button variant="success" color="primary" onClick={handleClickOpen}>
@@ -91,7 +91,7 @@ const handleMaxWidthChange = (event) => {
                       <Form>
                         <Form.Group controlId="formBasicEmail">
                           <Form.Control
-                            value={id}
+                            value={email}
                             onChange={(e) => setId(e.target.value)}
                             type="text"
                             placeholder="PLease Enter customer Id No"
@@ -104,7 +104,7 @@ const handleMaxWidthChange = (event) => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone number</th>
-                            <th>Location</th>
+                            <th>Delivery Address</th>
                             <th>Product purchased</th>
                             <th>Amount</th>
                             <th>Date</th>
@@ -119,9 +119,9 @@ const handleMaxWidthChange = (event) => {
                               <a href="emailto:{user.email} ">{user.email} </a>{" "}
                             </td>
                             <td>
-                              <a href="tel:{user.phone} ">{user.phone} </a>{" "}
+                              <a href="tel:{user.phone} ">{user.telephone1} </a>{" "}
                             </td>
-                            <td>Kampala</td>
+                            <td>{user.deliveryaddress}</td>
                             <td>Product</td>
                             <td>Amount</td>
                             <td>Date</td>

@@ -25,8 +25,8 @@ export default function Tools() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [items, setItems] = useState("");
-  const rows = [{ items }];
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -68,22 +68,24 @@ export default function Tools() {
           </TableHead>
           <TableBody>
             {items &&
-              items.map((item) => (
-                <TableRow hover role="checkbox" tabIndex={-1}>
-                  <TableCell>{item.date}</TableCell>
-                  <TableCell>{item.reqno}</TableCell>
-                  <TableCell>{item.purpose}</TableCell>
-                  <TableCell>{item.qty}</TableCell>
-                  <TableCell align="right">{item.total}</TableCell>
-                </TableRow>
-              ))}
+              items
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((item) => (
+                  <TableRow hover role="checkbox" tabIndex={-1}>
+                    <TableCell>{item.date}</TableCell>
+                    <TableCell>{item.reqno}</TableCell>
+                    <TableCell>{item.purpose}</TableCell>
+                    <TableCell>{item.qty}</TableCell>
+                    <TableCell align="right">{item.total}</TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={items.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

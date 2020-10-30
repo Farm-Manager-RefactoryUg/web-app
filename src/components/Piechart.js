@@ -9,8 +9,23 @@ import HighchartsReact from "highcharts-react-official";
 
 
 export default function PieChart() {
+    // const items2 = {
+    //   product: "cocacola",
+    //   y2: 4000,
+  //   // };
+  const myDummy = [
+    { product: "cocacola", amount: 2000 },
+    { product: "mangoes", amount: 1500 },
+    { product: "oranges", amount: 2000 },
+    { product: "apples", amount: 3000 },
+    { product: "pears", amount: 800 },
+    {product: null , amount: null}
+  ];
+  const [items, setItems] = useState([]);
+  const [itemOne, setitem2] = useState(myDummy)
+
+  // const myfinalArray = myDummy.map((item) => ({name: item.product, y: item.amount}))
   
-     const [items, setItems] = useState("");
     useEffect(() => {
       axios
         .get("https://farmmanager-api.herokuapp.com/api/expenditure/")
@@ -21,7 +36,7 @@ export default function PieChart() {
           console.log(err);
         });
     }, []);
-  
+    console.log(items)
     const options = {
       chart: {
         plotBackgroundColor: null,
@@ -71,20 +86,22 @@ export default function PieChart() {
         },
       },
       // items && items.map((item) => item.product)
+    
       series: [
         {
           name: "Share",
-          data: [
-            //  items && items.map((item) => item.product),
+          data: 
+          //   [
+          itemOne && itemOne.map((item) => ({name: item.product || null, y: item.amount || null}))
             
-            { name: items.product, y: 3000},
-            { name: "Spraying", y: 1500 },
-            { name: "Weeding", y: 3000 },
-            { name: "Harvesting", y: 1000 },
-            { name: "Transportation", y: 2500 },
-            { name: "Labour", y: 3000 },
+          //   { name: itemOne.product, y: itemOne.y2},
+          //   { name: "Spraying", y: 1500 },
+          //   { name: "Weeding", y: 3000 },
+          //   { name: "Harvesting", y: 1000 },
+          //   { name: "Transportation", y: 2500 },
+          //   { name: "Labour", y: 3000 },
             
-          ],
+          // ],
         },
       ],
     };

@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import TablePagination from "@material-ui/core/TablePagination";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
 
@@ -98,7 +99,18 @@ const useStyles = makeStyles((theme) => ({
 export default function Suppliers() {
   // let url = "/";
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [items, setItems] = useState("");
+  const rows = [{ items }];
+  
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
@@ -191,14 +203,16 @@ export default function Suppliers() {
                     ))}
                 </Table>
               </TableContainer>
-              {/* <div className={classes.seeMore}>
-                
-                <a href={url} color="primary">
-                  See more
-                </a>
-               
-              </div> */}
-            </Paper>
+             <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+              </Paper>
             <Box pt={4}>
               <Copyright />
             </Box>

@@ -189,7 +189,7 @@ export default function MainListItems(props) {
           <ListItem
             button
             component={Link}
-            to={"/workers"}
+            to={"/casual"}
             className={clsx(classes.root, classes.nested)}
           >
             <ListItemText
@@ -229,7 +229,7 @@ export default function MainListItems(props) {
           <ListItem
             button
             component={Link}
-            to={"/consumable"}
+            to={"/consumables"}
             className={clsx(classes.root, classes.nested)}
           >
             <ListItemText

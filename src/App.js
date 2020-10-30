@@ -26,6 +26,9 @@ import SalesDetails from "./components/SalesDetails";
 //import Settings from "./components/Settings";
 import Tables from "./components/Tables"
 import Tools from "./components/Tools";
+import CasualWorkers from "./components/CasualWorkers";
+import Consumables from "./components/Consumables"
+//import NewTable from "./components/NewTable";
 //mport CustomersDashboard from "./components/CustomersDashboard";
 
 
@@ -36,7 +39,7 @@ export default function App() {
       
         <>
           <Switch>
-            <Route path="//" component={Home} exact></Route>
+          <Route path="//" component={Home} exact></Route>
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/dashboard" exact component={Dashboard} />
@@ -52,7 +55,9 @@ export default function App() {
             <Route path="/projects" component={Projects}></Route>
             <Route path="/settings" component={Settings}></Route>
             <Route path="/tables" component={Tables}></Route>
-            <Route path="/tools" component={Tools}></Route>
+          <Route path="/tools" component={Tools}></Route>
+          <Route path="/casual" component={CasualWorkers} ></Route>
+          <Route path="/consumables" component={Consumables} ></Route>
           </Switch>
         </>
     </Router>

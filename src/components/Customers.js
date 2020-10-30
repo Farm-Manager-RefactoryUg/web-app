@@ -159,7 +159,7 @@ export default function Customers() {
                       <StyledTableCell align="center">
                         Telephone
                       </StyledTableCell>
-                      <StyledTableCell align="center">Location</StyledTableCell>
+                      <StyledTableCell align="center">Delivery Address</StyledTableCell>
                       <StyledTableCell align="center">Details</StyledTableCell>
                     </TableRow>
                   </TableHead>
@@ -179,14 +179,13 @@ export default function Customers() {
                           {item.telephone1}
                         </StyledTableCell>
                         <StyledTableCell align="center">
-                          {item.location}
+                          {item.deliveryaddress}
                         </StyledTableCell>
                         <CustomersDetails />
                       </TableBody>
                     ))}
                 </Table>
               </TableContainer>
-            
             </Paper>
             <Box pt={4}>
               <Copyright />

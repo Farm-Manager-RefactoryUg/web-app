@@ -9,6 +9,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import CustomersDetails from "./CustomersDetails";
 
 const useStyles = makeStyles({
   root: {
@@ -23,8 +26,8 @@ export default function CustomerDashboard() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [items, setItems] = useState("");
-  const rows = [{ items }];
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -55,7 +58,7 @@ export default function CustomerDashboard() {
               <TableCell style={{ color: "black" }}>Name</TableCell>
               <TableCell style={{ color: "black" }}>Email</TableCell>
               <TableCell style={{ color: "black" }}>Telephone</TableCell>
-              <TableCell style={{ color: "black" }}>Location</TableCell>
+              <TableCell style={{ color: "black" }}>Delivery Address</TableCell>
               <TableCell align="center" style={{ color: "black" }}>
                 Details
               </TableCell>
@@ -63,27 +66,31 @@ export default function CustomerDashboard() {
           </TableHead>
           <TableBody>
             {items &&
-              items.map((item) => (
-                <TableRow hover role="checkbox" tabIndex={-1}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>
-                    <a href="emailto:{item.email} ">{item.email} </a>{" "}
-                  </TableCell>
-                  <TableCell>
-                    {" "}
-                    <a href="tel:{item.phone} ">{item.phone} </a>{" "}
-                  </TableCell>
-                  <TableCell>{item.location}</TableCell>
-                  <TableCell align="right">{item.total}</TableCell>
-                </TableRow>
-              ))}
+              items
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((item) => (
+                  <TableRow hover role="checkbox" tabIndex={-1}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>
+                      <a href="emailto:{item.email} ">{item.email} </a>{" "}
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <a href="tel:{item.phone} ">{item.telephone1} </a>{" "}
+                    </TableCell>
+                    <TableCell>{item.deliveryaddress}</TableCell>
+                    <TableCell align="center">
+                      <CustomersDetails />
+                    </TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={items.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

@@ -1,56 +1,33 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+//import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableContainer from "@material-ui/core/TableContainer";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Farm Manager!
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: "green",
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     fontFamily: "Segoe UI",
-    backgroundColor: "rgb(247, 249, 252)",
+    backgroundColor: "#f7f9fc",
   },
-  root2: {
+  root1: {
     width: "100%",
     padding: 20,
+    backgroundColor: "white",
+    color: "black",
   },
+  // container: {
+  //   maxHeight: 440,
+  // },
   spacing: {
     margin: 0,
   },
@@ -60,26 +37,17 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     margin: "0px !important",
   },
-  drawerPaper: {
-    position: "relative",
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: "100vh",
     overflow: "auto",
+    marginTop: "60px",
   },
   container: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(4),
     justifyContent: "space-evenly",
+    maxHeight: 440,
   },
   paper: {
     padding: theme.spacing(2),
@@ -89,18 +57,31 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
-  label: {
-    fontSize: "0.7rem",
-    color: "white",
-  },
 }));
+// const useStyles = makeStyles({
+//   root: {
+//     display: "flex",
+//     width: "90%",
+//   },
+//   container: {
+//     maxHeight: 440,
+//   },
+// });
 
 export default function Tools() {
-  // let url = "/";
+  // let url = "/requisition";
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [items, setItems] = useState("");
-
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  // const rows = [{ items }];
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   useEffect(() => {
     axios
@@ -112,91 +93,60 @@ export default function Tools() {
         console.log(err);
       });
   }, []);
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        overrides: {
-          MuiGrid: {
-            "spacing-xs-2": "-6px !important",
-          },
-        },
-        palette: {
-          type: prefersDarkMode ? "light" : "dark",
-        },
-      }),
-    [prefersDarkMode]
-  );
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <ProjectAppBar />
-          <main className={classes.content}>
-            <br></br>
-            <br></br>
-            <br></br>
-            <Paper className={classes.root2}>
-              <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
-                Tools
-              </h5>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell align="left" component="th" scope="row">
-                        No.
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
-                        component="th"
-                        scope="row"
-                      >
-                       Date
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        Tool name
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        Purpose
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        Main User
-                      </StyledTableCell>
-                      <StyledTableCell align="center">Condition</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
+    <div className={classes.root}>
+      <React.Fragment>
+        {/* <CssBaseline/> */}
+        <ProjectAppBar />
+
+        <main className={classes.content}>
+          <Paper className={classes.root1}>
+            <h5>Tools</h5>
+            <TableContainer className={classes.container}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow
+                    position="static"
+                    style={{ backgroundColor: "#dff8fa;", fontWeight: "bold" }}
+                  >
+                    <TableCell>No.</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Tool Name</TableCell>
+                    <TableCell>Purpose</TableCell>
+                    <TableCell>Main User</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                   {items &&
-                    items.map((item) => (
-                      <TableBody key={item.id}>
-                        <StyledTableCell align="left">
-                          {item.id}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.data}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.toolname}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.purpose}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.mainuser}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.codition}
-                        </StyledTableCell>
-                      </TableBody>
-                    ))}
-                </Table>
-              </TableContainer>
-            </Paper>
-            <Box pt={4}>
-              <Copyright />
-            </Box>
-          </main>
-        </div>
-      </ThemeProvider>
-    </>
+                    items
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item) => (
+                        <TableRow hover role="checkbox" tabIndex={-1}>
+                          <TableCell>{item.id}</TableCell>
+                          <TableCell>{item.date}</TableCell>
+                          <TableCell>{item.toolname}</TableCell>
+                          <TableCell>{item.purpose}</TableCell>
+                          <TableCell>{item.mainuser}</TableCell>
+                        </TableRow>
+                      ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={items.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </main>
+      </React.Fragment>
+    </div>
   );
 }

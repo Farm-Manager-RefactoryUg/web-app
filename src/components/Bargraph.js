@@ -165,7 +165,7 @@ const options = {
   },
 
   series: [{
-    name: "Sales",
+    name: "Income",
     data: items && items.map((item) => item.total)
   }
   

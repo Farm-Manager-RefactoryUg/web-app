@@ -13,13 +13,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     fontFamily: "Segoe UI",
-    backgroundColor: "rgb(247, 249, 252)",
+    backgroundColor: "#f7f9fc",
   },
   root1: {
     width: "100%",
@@ -70,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 //   },
 // });
 
-export default function Workers() {
+export default function Consumables() {
   // let url = "/requisition";
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -87,7 +85,7 @@ export default function Workers() {
 
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/employee")
+      .get("https://farmmanager-api.herokuapp.com/api/consumable")
       .then((response) => {
         setItems(response.data);
       })
@@ -103,16 +101,19 @@ export default function Workers() {
 
         <main className={classes.content}>
           <Paper className={classes.root1}>
-            <h5>Employee Details</h5>
+            <h5>Consumables</h5>
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
-                  <TableRow style={{ backgroundColor: "green", color: "white" }}>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Position</TableCell>
-                    <TableCell>Department</TableCell>
-                    <TableCell>Details</TableCell>
+                  <TableRow
+                    position="static"
+                    style={{ backgroundColor: "#dff8fa;", fontWeight: "bold" }}
+                  >
+                    <TableCell>No.</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Tool Name</TableCell>
+                    <TableCell>Purpose</TableCell>
+                    <TableCell>Main User</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -124,11 +125,11 @@ export default function Workers() {
                       )
                       .map((item) => (
                         <TableRow hover role="checkbox" tabIndex={-1}>
-                          <TableCell>{item.name}</TableCell>
-                          <TableCell>{item.phone1}</TableCell>
-                          <TableCell>{item.postion}</TableCell>
-                          <TableCell>{item.department}</TableCell>
-                          <TableCell>{item.department}</TableCell>
+                          <TableCell>{item.id}</TableCell>
+                          <TableCell>{item.date}</TableCell>
+                          <TableCell>{item.toolname}</TableCell>
+                          <TableCell>{item.purpose}</TableCell>
+                          <TableCell>{item.mainuser}</TableCell>
                         </TableRow>
                       ))}
                 </TableBody>
