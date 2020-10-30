@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import Navbar from "./Navbar";
 import _ from "lodash";
 
 const ops = {
@@ -22,15 +20,15 @@ const ops = {
 
 const options = {
   chart: {
-    type: "column",
+    type: "line",
   },
+  
+  alignTicks: false,
 
   title: {
     text: "Sales Distribution",
   },
-  credits: {
-    enabled: false,
-  },
+  
   legend: {
     align: "right",
     verticalAlign: "middle",
@@ -62,6 +60,8 @@ const options = {
     title: {
       text: "Amount(UGX)",
     },
+    tickInterval: 15000000,
+    
   },
 
   series: [
@@ -92,21 +92,18 @@ const options = {
               text: "Amount",
             },
           },
-          subtitle: {
-            text: null,
-          },
-          credits: {
-            enabled: false,
-          },
+          
+          
         },
       },
     ],
   },
 };
 
-export default function SalesBarGraph() {
- const [graphOptions, setGraphOptions] = useState({});
 
+
+function SalesBarGraph() {
+ const [graphOptions, setGraphOptions] = useState({});
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -115,7 +112,6 @@ export default function SalesBarGraph() {
       const jsondata = await response.json();
       const newArray = [...jsondata];
       console.log(newArray);
-      // setItems(newArray);
 
       newArray.map((item) => {
         var date = item.date;
@@ -164,19 +160,22 @@ export default function SalesBarGraph() {
         _.sum(ops.dec),
       ];
       setGraphOptions(options)
-      console.log(options)
+      
     }
     fetchData();   
   }, []);
 
-   
 
+  
   return (
     <React.Fragment>
-      <Navbar />
       <HighchartsReact highcharts={Highcharts} options={graphOptions} />
       <br></br>
     </React.Fragment>
   );
 }
 
+export {
+  SalesBarGraph,
+    
+} 

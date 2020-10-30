@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import LinkPieChart from "./LinkPieChart";
-import Bargraph from "./Bargraph";
 import ProjectAppBar from "./ProjectAppBar";
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
@@ -25,6 +24,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import {SalesBarGraph} from './SalesBarGraph'
 
 const drawerWidth = 240;
 
@@ -425,7 +425,7 @@ export default function Dashboard() {
 
                 <Grid item xs={12} sm={6} lg={7}>
                   <Card style={{ backgroundColor: "white" }}>
-                    <Bargraph />
+                    <SalesBarGraph />
                   </Card>
                 </Grid>
 

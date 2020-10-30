@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
-import SignUp from "./components/Signup";
+import SignUp from "./components/signup";
 import Settings from "./components/Settings";
 import ForgotPassword from './components/ForgotPassword';
 import PageNotFound from './components/PageNotFound';
@@ -11,13 +11,12 @@ import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Seasons from "./components/Seasons";
 import Analytics from "./components/Analytics";
-
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomersDetails from "./components/CustomersDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
-import SalesBarGraph from "./components/SalesBarGraph";
+import {SalesBarGraph} from "./components/SalesBarGraph";
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 import Tools from "./components/Tools";
