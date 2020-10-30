@@ -10,3 +10,5 @@
 [1019/121908.332:ERROR:exception_snapshot_win.cc(99)] thread ID 11508 not found in process
 [1027/091412.945:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1027/191849.669:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1030/030643.174:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1030/034934.061:ERROR:file_io.cc(90)] ReadExactly: expected 36, observed 0

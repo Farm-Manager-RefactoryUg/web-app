@@ -55,7 +55,7 @@ const handleMaxWidthChange = (event) => {
 
   useEffect(() => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .get(`https://farmmanager-api.herokuapp.com/api/customer/${id}`)
       .then((response) => {
         setuser(response.data);
       })
@@ -108,7 +108,6 @@ const handleMaxWidthChange = (event) => {
                             <th>Product purchased</th>
                             <th>Amount</th>
                             <th>Date</th>
-                            {/* <th>Options</th> */}
                           </tr>
                         </thead>
 

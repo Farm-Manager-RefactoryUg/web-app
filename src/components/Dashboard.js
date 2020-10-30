@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import LinkPieChart from "./LinkPieChart";
-import Bargraph from "./Bargraph";
 import ProjectAppBar from "./ProjectAppBar";
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
@@ -15,6 +14,7 @@ import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 import RequisitionsDashboard from "./RequisitionsDashboard";
 import ToolsDashboard from "./ToolsDashboard";
+import Expenditure from "./ExpenditureDashboard"
 import Paper from "@material-ui/core/Paper";
 import CustomersDashboard from "./CustomersDashboard";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
@@ -24,6 +24,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import {SalesBarGraph} from './SalesBarGraph'
 
 const drawerWidth = 240;
 
@@ -424,7 +425,7 @@ export default function Dashboard() {
 
                 <Grid item xs={12} sm={6} lg={7}>
                   <Card style={{ backgroundColor: "white" }}>
-                    <Bargraph />
+                    <SalesBarGraph />
                   </Card>
                 </Grid>
 
@@ -679,7 +680,7 @@ export default function Dashboard() {
                           fontSize: "0.8125rem"
                         }}
                       >
-                        {" UGX"}
+                        {"UGX"}
                       </sub>
                     </Typography>
 
@@ -720,6 +721,11 @@ export default function Dashboard() {
                   </Paper>
                 </Grid>
                 <br></br>
+                <Grid item xs={12} sm={12}>
+                  <Paper className={classes.paper}>
+                    <Expenditure />
+                  </Paper>
+                </Grid>
               </Grid>
 
             </Container>
