@@ -1,29 +1,15 @@
-<<<<<<< HEAD
 #div {
   display: flex;
 }
 label {
   color: rgba(0, 0, 0, 0.5);
   margin-top: 25px;
-=======
-body{
-    background-color: rgb(255, 237, 220);
-}
-label{
-    color: rgba(0, 0, 0, 0.5);
-    margin-top: 25px;
-    margin-left: -237px;
-}
-#emailLabel{
-    margin-left: -265px;
->>>>>>> 8ec243bf0727d6a6d2d241fc17da489b811a2a6c
 }
 #loginImg {
   margin-top: 3rem;
   height: 90vh;
   width: 50vw;
 }
-<<<<<<< HEAD
 #loginForm {
   margin-top: 100px;
   width: 50vw;
@@ -46,20 +32,6 @@ label{
   margin-bottom: 25px;
   color: green;
   font-size: 2.65rem;
-=======
-#loginForm{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    border-radius: 2px;
-}
-h1{
-    color: green;
-    font-size: 2.3rem;
-    text-align: center;
-    font-weight: bolder;
->>>>>>> 8ec243bf0727d6a6d2d241fc17da489b811a2a6c
 }
 #period {
   color: saddlebrown;
@@ -99,18 +71,6 @@ h1{
   margin-bottom: 15px;
   outline: 0;
 }
-<<<<<<< HEAD
-#loginFooter {
-  color: white;
-  padding: 5px;
-  background-color: green;
-  border-radius: 3px;
-  font-size: 0.9rem;
-}
-#navbar {
-  width: 100%;
-  background-color: green;
-=======
 #forgotPasswordText{
     font-size: 0.9rem;
     margin-left: 190px;
@@ -123,6 +83,49 @@ h1{
     font-size: 0.9rem;
     color: rgba(0, 0, 0, 0.7);
 }
+#loginForm h1{
+    margin-bottom: 25px;
+    color: green;
+    font-size: 2.65rem;
+}
+#period{
+    color: saddlebrown;
+    transform: scale(10);
+}
+#loginForm input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    border-radius: 0;
+}
+:any-link{
+    color: green;
+}
+#loginForm input:focus{
+    border-bottom: 1px solid green;
+    transition-delay: 70ms;
+    transform-origin: left;
+    transition-timing-function: ease;
+}
+#loginForm button{
+    background-color: green;
+    border-color: green;
+    box-shadow: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+    width: 300px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    outline: 0;
+}
 #loginFooter{
     position: absolute;
     bottom: 0;
@@ -133,5 +136,4 @@ h1{
     color: white;
     text-align: center;
     font-size: 0.9rem;
->>>>>>> 8ec243bf0727d6a6d2d241fc17da489b811a2a6c
 }

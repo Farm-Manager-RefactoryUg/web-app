@@ -15,7 +15,6 @@ import ProjectAppBar from "./ProjectAppBar";
 import { motion } from "framer-motion";
 
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -102,7 +101,7 @@ export default function Requisitions() {
     <div className={classes.root}>
       <React.Fragment>
         {/* <CssBaseline/> */}
-        <ProjectAppBar />
+        <ProjectAppBar  />
 
         <main className={classes.content}>
           <Paper className={classes.root1}>
@@ -157,4 +156,3 @@ export default function Requisitions() {
     </div>
   );
 }
-

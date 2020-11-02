@@ -1,13 +1,3 @@
-
-// {
-//     name: 'Expenditure',
-//     data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-// },
-// {
-//     name: 'Revenue',
-//     data: [3.4, 9.8, 3.7, 5.5, 1.9, 12.2, 11.0, 3.6, 4.2, 0.3, 9.6, 14.8]
-// }
-
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -27,7 +17,12 @@ const options = {
         margin: 50,
         x: 10,
         y: 28,
-        style: { fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", color: "rgba(0, 0, 0, 0.87)" },
+        style: { 
+            fontFamily: "Segoe UI", 
+            fontWeight: "600", 
+            fontSize: "1.0625rem", 
+            color: "rgba(0, 0, 0, 0.87)"
+         },
     },
 
     legend: {
@@ -52,8 +47,12 @@ const options = {
 
     series: [
         {
-            name: "Sales",
-            data: [670000, 2000000, 3600000, 150000, 400000, 320000, 1000000, 1200000, 700000, 550000, 1300000, 900000],
+            name: "Income",
+            
+        },
+        {
+            name: "Expenditure",
+            data: [270000, 400000, 2600000, 150000, 400000, 320000, 1000000, 1200000, 700000, 550000, 1300000, 900000],
         },
     ],
 

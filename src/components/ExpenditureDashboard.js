@@ -11,6 +11,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
 
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -20,12 +21,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Tools() {
+export default function Expenditure() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [items, setItems] = useState([]);
-  // const rows = [{ items }];
+  const [items, setItems] = useState("");
+  const rows = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -36,7 +37,7 @@ export default function Tools() {
   };
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/tool/")
+      .get("https://farmmanager-api.herokuapp.com/api/expenditure/")
       .then((response) => {
         setItems(response.data);
       })
@@ -47,7 +48,7 @@ export default function Tools() {
   return (
     <Paper className={classes.root}>
       <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
-        Tools
+        Recent Expenditure
       </h5>
       <TableContainer className={classes.container}>
         <Table className={classes.table}>
@@ -57,34 +58,36 @@ export default function Tools() {
               style={{ backgroundColor: "#f7f9fc", color: "white" }}
             >
               <TableCell style={{ color: "black" }}>Date</TableCell>
-              <TableCell style={{ color: "black" }}>Tool name</TableCell>
-              <TableCell style={{ color: "black" }}>Purpose</TableCell>
-              <TableCell style={{ color: "black" }}>Main User</TableCell>
+              <TableCell style={{ color: "black" }}>Product</TableCell>
+              <TableCell style={{ color: "black" }}>Unit</TableCell>
+              <TableCell style={{ color: "black" }}>Quantity</TableCell>
+              <TableCell style={{ color: "black" }}>Total Amount</TableCell>
+              <TableCell style={{ color: "black" }}>Amount Paid</TableCell>
               <TableCell align="center" style={{ color: "black" }}>
-                Condition
+                Balance Due
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {items &&
-              items
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((item) => (
-                  <TableRow hover role="checkbox" tabIndex={-1}>
-                    <TableCell>{item.date}</TableCell>
-                    <TableCell>{item.toolname}</TableCell>
-                    <TableCell>{item.purpose}</TableCell>
-                    <TableCell>{item.mainuser}</TableCell>
-                    <TableCell align="center">{item.condition}</TableCell>
-                  </TableRow>
-                ))}
+              items.map((item) => (
+                <TableRow hover role="checkbox" tabIndex={-1}>
+                  <TableCell>{item.date}</TableCell>
+                  <TableCell>{item.product}</TableCell>
+                  <TableCell>{item.unit}</TableCell>
+                  <TableCell>{item.quantity}</TableCell>
+                  <TableCell>{item.total}</TableCell>
+                  <TableCell>{item.amountpaid}</TableCell>                  
+                  <TableCell align="right">{item.baldue}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={items.length}
+        count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

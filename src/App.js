@@ -12,12 +12,14 @@ import Projects from "./components/Projects";
 // import Seasons from "./components/Seasons";
 // import Analytics from "./components/Analytics";
 import Home from "./components/Home";
+// import Seasons from "./components/Seasons";
+// import Analytics from "./components/Analytics";
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
-import CustomerDetails from "./components/CustomerDetails";
+import CustomerDetails from "./components/CustomersDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
-import SalesBarGraph from "./components/SalesBarGraph";
+import {SalesBarGraph} from "./components/SalesBarGraph";
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 //import Dashboard from "./components/Dashboard";
@@ -30,6 +32,7 @@ import CasualWorkers from "./components/CasualWorkers";
 import Consumables from "./components/Consumables"
 //import NewTable from "./components/NewTable";
 //mport CustomersDashboard from "./components/CustomersDashboard";
+
 
 
 export default function App() {

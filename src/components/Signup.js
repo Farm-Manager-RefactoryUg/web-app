@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -11,17 +11,16 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import Divider from '@material-ui/core/Divider';
 import Logo from '../static/images/tree.svg'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import axios from "axios";
-
+//import axios from "axios";
 
 const Buttonn = withStyles({
   root: {
-    "&:hover": {
-      backgroundColor: "green",
-      opacity: "0.9",
+    '&:hover': {
+      backgroundColor: 'green',
+      opacity: '0.9'
     },
-    "&:active , &:focus": {
-      outline: "none",
+    '&:active , &:focus': {
+      outline: 'none',
     },
   },
 })(Button);
@@ -38,9 +37,10 @@ const CssTextField = withStyles({
       '&.Mui-focused fieldset': {
         borderColor: 'green',
       },
-      "&.Mui-error fieldset": {
-        borderColor: "red",
+      '&.Mui-error fieldset': {
+        borderColor: 'red',
       },
+
     },
   },
 })(TextField);
@@ -58,17 +58,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  titleDiv: {
-    display: "flex",
-  },
   navBrand: {
     fontSize: "1.2rem",
     color: "rgba(0,0,0,0.87)",
     marginLeft: "5px",
   },
-  avatar: {
-    backgroundColor: "green",
-    verticalAlign: "super",
+  titleDiv: {
+    display: "flex",
   },
   pageTitle: {
     color: "rgba(0,0,0,0.87)",
@@ -99,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "10px",
     fontFamily: "Segoe UI",
     fontWeight: "600",
-    fontSize: "1rem",
+    fontSize: "0.8rem",
   },
   links: {
     '&:hover': {
@@ -110,65 +106,88 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
   },
   footer: {
-    position: "fixed",
+    position: "relative",
     bottom: "20px",
-    right: "40vw",
     backgroundColor: "#fafafa",
     color: "rgba(0,0,0, 0.3)",
     fontFamily: "Segoe UI",
     fontWeight: "800",
     fontSize: "0.9rem",
+    marginTop: "100px",
+    textAlign: "center"
   }
 }));
 
-export default function Login() {
-  let history = useHistory();
+
+export default function SignUp() {
+
+  //let history = useHistory();
   const classes = useStyles();
-  let [[emaile, passworde], setErrors] = useState(["", ""])
+  let [[fullNamee, emaile, passworde, mobilee], setErrors] = useState(["", "", "", ""])
 
-  const handleSubmit = event => {
-    const url = "http://www.something.com/login";
-    let { email, password } = event.target;
+  const handleSubmit = (event) => {
+    //const url = "http://www.something.com/login";
+    let { fullName, email, password, mobile } = event.target;
 
-    if (email.value !== "" && password.value !== "" && emaile === "" && passworde === "") {
-      axios.post(url, { email, password })
-        .then(data => {
-          if (data.message === "true") {
-            history.pushState("/projects")
-          } else {
-            // Render error message on Login page
-          }
-        })
-        .catch(() => {
-          history.push("/pagenotfound");
-        })
+    if (fullName.value !== "" && email.value !== "" && password.value !== "" && mobile.value !== "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+      // axios.post(url, { fullName, email, password, mobile })
+      //   .then(data => {
+      //     if (data.message === "true") {
+      //       history.pushState("/projects")
+      //     } else {
+      //       // Render error message on Login page
+      //     }
+      //   })
+      //   .catch(() => {
+      //     history.push("/pagenotfound");
+      //   })
     } else {
-      if (email.value === "" && password.value === "" && emaile === "" && passworde === "") {
-        setErrors(["Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters"])
+      if (fullName.value === "" && email.value === "" && password.value === "" && mobile.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors(["At least two names e.g. John Doe", "Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters", "Enter valid mobile E.g. 0773763258"])
       }
-      else if (email.value === "" && emaile === "" && passworde === "") {
-        setErrors(["Enter valid email E.g: abc@gmail.com", passworde])
+      else if (fullName.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors(["At least two names e.g. John Doe", emaile, passworde, mobilee])
       }
-      else if (password.value === "" && emaile === "" && passworde === "") {
-        setErrors([emaile, "Password should be more than 6 characters",])
+      else if (email.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors([fullNamee, "Enter valid email E.g: abc@gmail.com", passworde, mobilee])
+      }
+      else if (password.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
+      }
+      else if (mobile.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+        setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
       }
       event.preventDefault();
     }
   }
 
   const handleChange = (event) => {
+
     const { name, value } = event.target;
+    const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
+    const mobileRegex = /^07[0-9]{8}$/
 
     switch (name) {
+      case "fullName":
+        (!nameRegex.test(value))
+          ? setErrors(["At least two names E.g. John Doe", emaile, passworde, mobilee])
+          : setErrors(["", emaile, passworde, mobilee]);
+        break;
       case "email":
         (!emailRegex.test(value))
-          ? setErrors(["Enter valid email E.g: abc@gmail.com", passworde])
-          : setErrors(["", passworde]);
+          ? setErrors([fullNamee, "Enter valid email E.g. abc@gmail.com", passworde, mobilee])
+          : setErrors([fullNamee, "", passworde, mobilee]);
         break;
-
       case "password":
-        (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""]);
+        (value.length < 6)
+          ? setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
+          : setErrors([fullNamee, emaile, "", mobilee]);
+        break;
+      case "mobile":
+        (!mobileRegex.test(value) && value.length !== 10)
+          ? setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
+          : setErrors([fullNamee, emaile, passworde, ""]);
         break;
 
       default:
@@ -177,12 +196,12 @@ export default function Login() {
   }
 
   useEffect(() => {
-    document.title = "Log In"
+    document.title = "Sign Up"
   }, []);
-
 
   return (
     <div className={classes.root}>
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -193,7 +212,7 @@ export default function Login() {
           </div>
 
           <Typography component="h1" variant="h5" className={classes.pageTitle}>
-            Log In
+            Sign Up
           </Typography>
 
           <Typography component="h2" variant="h5" className={classes.pageSubTitle}>
@@ -201,10 +220,31 @@ export default function Login() {
           </Typography>
 
           <form onSubmit={handleSubmit} className={classes.form} noValidate>
+
             <CssTextField
               variant="outlined"
               margin="normal"
               autoFocus
+              required
+              fullWidth
+              id="fullName"
+              label="Fullname"
+              name="fullName"
+              error={fullNamee.length > 0}
+              onChange={handleChange}
+            />
+            {fullNamee && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
+            >
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {fullNamee}
+            </small>}
+
+            <CssTextField
+              variant="outlined"
+              margin="normal"
               required
               fullWidth
               id="email"
@@ -236,27 +276,35 @@ export default function Login() {
               type="password"
               onChange={handleChange}
 
-
             />
             {passworde && <small
-              style={{ color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI" }}
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
             >
               <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
               {passworde}
             </small>}
 
-
-
-            <Link
-              to={"/forgotpassword"}
-              variant="body2"
-              className={classes.links}
-              style={{ float: "right" }}
+            <CssTextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="mobile"
+              label="Mobile"
+              name="mobile"
+              error={mobilee.length > 0}
+              onChange={handleChange}
+            />
+            {mobilee && <small
+              style={{
+                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+              }}
             >
-              Forgot password?
-              </Link>
-
-
+              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              {mobilee}
+            </small>}
 
             <Buttonn
               type="submit"
@@ -264,28 +312,23 @@ export default function Login() {
               variant="contained"
               className={classes.submit}
               endIcon={<ArrowRightAltIcon />}
-            component={Link}      // "Component" and "to" prop to be removed.
-            to={"/projects"}     //  Currently for demonstration purposes only.
             >
-              Login
+              create
             </Buttonn>
 
             <Divider />
 
             <Grid container>
-
-              <Grid item xs={12} md={12} lg={12} style={{ textAlign: "center", marginTop: "8px" }}>
-
+              <Grid item xs={12} md={12} lg={12} style={{ textAlign: "center", marginTop: "8px", fontFamily: "Segoe UI", fontSize: "1rem" }}>
+                {"Already have an account? "}
                 <Link
-                  to={"/signup"}
+                  to={"/"}
                   variant="body2"
                   className={classes.links}
                 >
-                  Create account
+                  Log In
                 </Link>
-
               </Grid>
-
             </Grid>
 
           </form>

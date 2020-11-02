@@ -15,7 +15,6 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import { Table } from "react-bootstrap";
 
-
 const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
@@ -42,16 +41,16 @@ export default function CustomersDetails() {
     setOpen(true);
     setId(user.email);
   };
-   const classes = useStyles();
+  const classes = useStyles();
   const handleClose = () => {
     setOpen(false);
   };
-const handleFullWidthChange = (event) => {
-  setFullWidth(event.target.checked);
-};
-const handleMaxWidthChange = (event) => {
-  setMaxWidth(event.target.value);
-};
+  const handleFullWidthChange = (event) => {
+    setFullWidth(event.target.checked);
+  };
+  const handleMaxWidthChange = (event) => {
+    setMaxWidth(event.target.value);
+  };
 
   useEffect(() => {
     axios

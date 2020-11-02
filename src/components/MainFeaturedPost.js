@@ -5,14 +5,22 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
+<<<<<<< HEAD
+=======
+import farmImage from "./coffee-farm.jpg";
+
+>>>>>>> 98d4ced37cef489d03527c385c2c25a7d41d01e8
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: "relative",
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
+<<<<<<< HEAD
         
     // height: theme.spacing(10),
+=======
+>>>>>>> 98d4ced37cef489d03527c385c2c25a7d41d01e8
         marginBottom: theme.spacing(4),
     height: theme.spacing(10),
     backgroundImage: "",

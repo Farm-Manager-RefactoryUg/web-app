@@ -13,8 +13,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -107,7 +105,9 @@ export default function Workers() {
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
-                  <TableRow style={{ backgroundColor: "green", color: "white" }}>
+                  <TableRow
+                    style={{ backgroundColor: "green", color: "white" }}
+                  >
                     <TableCell>Name</TableCell>
                     <TableCell>Email</TableCell>
                     <TableCell>Position</TableCell>

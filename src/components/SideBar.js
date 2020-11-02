@@ -9,19 +9,18 @@ import LayersIcon from "@material-ui/icons/Layers";
 import BuildIcon from "@material-ui/icons/Build";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SettingsIcon from "@material-ui/icons/Settings";
-import List from '@material-ui/core/List';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import { makeStyles, } from '@material-ui/core/styles';
+import List from "@material-ui/core/List";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 // import SettingsIcon from '@material-ui/icons/Settings';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    '&:hover': {
+    "&:hover": {
       color: "red",
     },
   },
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: "0.7",
   },
   highlight: {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "white",
       color: "rgba(0,0,0,0.87)",
     },
@@ -57,8 +56,7 @@ const useStyles = makeStyles((theme) => ({
   selectedItem: {
     fontWeight: "900",
   },
-})
-)
+}));
 
 export default function MainListItems(props) {
   const classes = useStyles();
@@ -66,7 +64,7 @@ export default function MainListItems(props) {
   // const urls = {
   //   dashboardUrl: "/dashboard",
   //   projectsUrl: "/projects",
-  //   settingsUrl: "/settings",    
+  //   settingsUrl: "/settings",
   //   compareUrl: "/compare",
   //   seasonsUrl: "/seasons",
   // }
@@ -76,17 +74,17 @@ export default function MainListItems(props) {
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
   const handleClick1 = () => {
-    setOpen1(!open1)
-  }
+    setOpen1(!open1);
+  };
   const handleClick2 = () => {
-    setOpen2(!open2)
-  }
+    setOpen2(!open2);
+  };
   const handleClick3 = () => {
     setOpen3(!open3);
   };
-   const handleClick4 = () => {
-     setOpen4(!open4);
-   };
+  const handleClick4 = () => {
+    setOpen4(!open4);
+  };
 
   return (
     <div position="fixed">
@@ -109,7 +107,7 @@ export default function MainListItems(props) {
         />
       </ListItem>
 
-      <ListItem button id="a" onClick={handleClick1} >
+      <ListItem button id="a" onClick={handleClick1}>
         <ListItemIcon>
           <BarChartIcon className={classes.mainIcons} />
         </ListItemIcon>
@@ -240,7 +238,7 @@ export default function MainListItems(props) {
           </ListItem>
         </List>
       </Collapse>
-  
+
       <ListItem button id="a" onClick={handleClick2}>
         <ListItemIcon>
           <AttachMoneyIcon className={classes.mainIcons} />
@@ -328,5 +326,3 @@ export default function MainListItems(props) {
     </div>
   );
 }
-
-

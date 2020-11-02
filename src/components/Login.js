@@ -16,12 +16,12 @@ import axios from "axios";
 
 const Buttonn = withStyles({
   root: {
-    "&:hover": {
-      backgroundColor: "green",
-      opacity: "0.9",
+    '&:hover': {
+      backgroundColor: 'green',
+      opacity: '0.9'
     },
-    "&:active , &:focus": {
-      outline: "none",
+    '&:active , &:focus': {
+      outline: 'none',
     },
   },
 })(Button);
@@ -38,9 +38,10 @@ const CssTextField = withStyles({
       '&.Mui-focused fieldset': {
         borderColor: 'green',
       },
-      "&.Mui-error fieldset": {
-        borderColor: "red",
+      '&.Mui-error fieldset': {
+        borderColor: 'red',
       },
+
     },
   },
 })(TextField);
@@ -121,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Login() {
+export default function LogIn() {
   let history = useHistory();
   const classes = useStyles();
   let [[emaile, passworde], setErrors] = useState(["", ""])
