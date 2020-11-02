@@ -22,7 +22,7 @@ export default function PieChart() {
     {product: null , amount: null}
   ];
   const [items, setItems] = useState([]);
-  const [itemOne, setitem2] = useState(myDummy)
+  const [itemOne] = useState(myDummy)
 
   // const myfinalArray = myDummy.map((item) => ({name: item.product, y: item.amount}))
   

@@ -101,8 +101,8 @@ export default function Suppliers() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState("");
-  const rows = [{ items }];
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
   
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -149,7 +149,7 @@ export default function Suppliers() {
             <br></br>
             <br></br>
             <Paper className={classes.root2}>
-              <h5 align="left" style={{ marginLeft: "0.5rem",color:"green" }}>
+              <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
                 Recent Suppliers
               </h5>
               <TableContainer component={Paper}>
@@ -179,40 +179,45 @@ export default function Suppliers() {
                     </TableRow>
                   </TableHead>
                   {items &&
-                    items.map((item) => (
-                      <TableBody key={item.id}>
-                        <StyledTableCell align="left">
-                          {item.id}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.companyname}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.telephone1}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.busaddress}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.category}
-                        </StyledTableCell>
-                      </TableBody>
-                    ))}
+                    items
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item) => (
+                        <TableBody key={item.id}>
+                          <StyledTableCell align="left">
+                            {item.id}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.companyname}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.telephone1}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.busaddress}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.category}
+                          </StyledTableCell>
+                        </TableBody>
+                      ))}
                 </Table>
               </TableContainer>
-             <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={items.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
               />
-              </Paper>
+            </Paper>
             <Box pt={4}>
               <Copyright />
             </Box>

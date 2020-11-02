@@ -21,8 +21,8 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
-import { InstantSearch } from "react-instantsearch-dom";
-import { SearchBox } from "react-instantsearch-dom";
+//import { InstantSearch } from "react-instantsearch-dom";
+//import { SearchBox } from "react-instantsearch-dom";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 

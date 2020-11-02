@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import {  makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import TablePagination from "@material-ui/core/TablePagination";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
 import CustomersDetails from "./CustomersDetails";
@@ -30,15 +31,15 @@ function Copyright() {
   );
 }
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: "green",
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+// const StyledTableCell = withStyles((theme) => ({
+//   head: {
+//     backgroundColor: "green",
+//     color: theme.palette.common.white,
+//   },
+//   body: {
+//     fontSize: 14,
+//   },
+// }))(TableCell);
 
 const drawerWidth = 240;
 
@@ -96,10 +97,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Customers() {
+export default function Suppliers() {
   // let url = "/";
   const classes = useStyles();
-  const [items, setItems] = useState("");
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
@@ -141,51 +153,63 @@ export default function Customers() {
               <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
                 Recent Customers
               </h5>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="customized table">
+              <TableContainer className={classes.container}>
+                <Table className={classes.table}>
                   <TableHead>
-                    <TableRow>
-                      <StyledTableCell align="left" component="th" scope="row">
-                        No.
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
-                        component="th"
-                        scope="row"
-                      >
-                        Name
-                      </StyledTableCell>
-                      <StyledTableCell align="center">Email</StyledTableCell>
-                      <StyledTableCell align="center">
+                    <TableRow
+                      position="static"
+                      style={{ backgroundColor: "#f7f9fc" }}
+                    >
+                      <TableCell style={{ color: "black" }}>Name</TableCell>
+                      <TableCell style={{ color: "black" }}>Email</TableCell>
+                      <TableCell style={{ color: "black" }}>
                         Telephone
-                      </StyledTableCell>
-                      <StyledTableCell align="center">Delivery Address</StyledTableCell>
-                      <StyledTableCell align="center">Details</StyledTableCell>
+                      </TableCell>
+                      <TableCell style={{ color: "black" }}>
+                        Delivery Address
+                      </TableCell>
+                      <TableCell align="center" style={{ color: "black" }}>
+                        Details
+                      </TableCell>
                     </TableRow>
                   </TableHead>
-                  {items &&
-                    items.map((item) => (
-                      <TableBody key={item.id}>
-                        <StyledTableCell align="left">
-                          {item.id}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.email}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.telephone1}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.deliveryaddress}
-                        </StyledTableCell>
-                        <CustomersDetails />
-                      </TableBody>
-                    ))}
+                  <TableBody>
+                    {items &&
+                      items
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((item) => (
+                          <TableRow hover role="checkbox" tabIndex={-1}>
+                            <TableCell>{item.name}</TableCell>
+                            <TableCell>
+                              <a href="emailto:{item.email} ">{item.email} </a>{" "}
+                            </TableCell>
+                            <TableCell>
+                              {" "}
+                              <a href="tel:{item.phone} ">
+                                {item.telephone1}{" "}
+                              </a>{" "}
+                            </TableCell>
+                            <TableCell>{item.deliveryaddress}</TableCell>
+                            <TableCell align="center">
+                              <CustomersDetails />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                  </TableBody>
                 </Table>
               </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, 100]}
+                component="div"
+                count={items.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
             </Paper>
             <Box pt={4}>
               <Copyright />

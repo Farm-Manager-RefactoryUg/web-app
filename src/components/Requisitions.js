@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TablePagination from "@material-ui/core/TablePagination";
-import TableContainer from "@material-ui/core/TableContainer";
+//import TableContainer from "@material-ui/core/TableContainer";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
 import { motion } from "framer-motion";
@@ -77,8 +77,9 @@ export default function Requisitions() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState("");
-  const rows = [{items}];
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
+  
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -124,22 +125,27 @@ export default function Requisitions() {
                 </TableHead>
                 <TableBody>
                   {items &&
-                    items.map((item) => (
-                      <TableRow hover role="checkbox" tabIndex={-1}>
-                        <TableCell>{item.date}</TableCell>
-                        <TableCell>{item.reqno}</TableCell>
-                        <TableCell>{item.purpose}</TableCell>
-                        <TableCell>{item.qty}</TableCell>
-                        <TableCell align="right">{item.total}</TableCell>
-                      </TableRow>
-                    ))}
+                    items
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item) => (
+                        <TableRow hover role="checkbox" tabIndex={-1}>
+                          <TableCell>{item.date}</TableCell>
+                          <TableCell>{item.reqno}</TableCell>
+                          <TableCell>{item.purpose}</TableCell>
+                          <TableCell>{item.qty}</TableCell>
+                          <TableCell align="right">{item.total}</TableCell>
+                        </TableRow>
+                      ))}
                 </TableBody>
               </Table>
             </motion.TableContainer>
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              count={rows.length}
+              count={items.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}

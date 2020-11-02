@@ -73,10 +73,10 @@ export default function Tools() {
                 .map((item) => (
                   <TableRow hover role="checkbox" tabIndex={-1}>
                     <TableCell>{item.date}</TableCell>
-                    <TableCell>{item.reqno}</TableCell>
+                    <TableCell>{item.toolname}</TableCell>
                     <TableCell>{item.purpose}</TableCell>
-                    <TableCell>{item.qty}</TableCell>
-                    <TableCell align="right">{item.total}</TableCell>
+                    <TableCell>{item.mainuser}</TableCell>
+                    <TableCell align="center">{item.condition}</TableCell>
                   </TableRow>
                 ))}
           </TableBody>

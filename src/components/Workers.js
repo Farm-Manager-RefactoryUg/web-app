@@ -75,7 +75,7 @@ export default function Workers() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState("");
+  const [items, setItems] = useState([]);
   // const rows = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -124,9 +124,9 @@ export default function Workers() {
                       )
                       .map((item) => (
                         <TableRow hover role="checkbox" tabIndex={-1}>
-                          <TableCell>{item.name}</TableCell>
-                          <TableCell>{item.phone1}</TableCell>
-                          <TableCell>{item.postion}</TableCell>
+                          <TableCell>{item.fullname}</TableCell>
+                          <TableCell>{item.email}</TableCell>
+                          <TableCell>{item.position}</TableCell>
                           <TableCell>{item.department}</TableCell>
                           <TableCell>{item.department}</TableCell>
                         </TableRow>

@@ -12,6 +12,23 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableContainer from "@material-ui/core/TableContainer";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Link from "@material-ui/core/Link";
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Farm Manager!
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -145,6 +162,9 @@ export default function Tools() {
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
           </Paper>
+           <Box pt={4}>
+              <Copyright />
+            </Box>
         </main>
       </React.Fragment>
     </div>
