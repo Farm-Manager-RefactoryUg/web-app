@@ -1,10 +1,14 @@
-import React from "react"
+import React from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
-import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -15,10 +19,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainListItems from "./SideBar";
 import NavDropDown from "./NavDropDown";
-import Logo from '../static/images/tree.svg'
-import Avatar from '@material-ui/core/Avatar';
+import Logo from "../static/images/tree.svg";
+import Avatar from "@material-ui/core/Avatar";
 import michael from "../static/images/2.jfif";
-
 
 const drawerWidth = 220;
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: 36,
-    color: "rgba(0,0,0,0.87)"
+    color: "rgba(0,0,0,0.87)",
   },
   menuButtonHidden: {
     display: "none",
@@ -98,9 +101,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function ProjectAppBar(props) {
-
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -126,7 +127,6 @@ export default function ProjectAppBar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
 
   return (
     <ThemeProvider
@@ -226,5 +226,3 @@ export default function ProjectAppBar(props) {
     </ThemeProvider>
   );
 }
-
-

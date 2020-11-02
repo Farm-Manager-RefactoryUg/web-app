@@ -71,18 +71,6 @@ label {
   margin-bottom: 15px;
   outline: 0;
 }
-<<<<<<< HEAD
-#loginFooter {
-  color: white;
-  padding: 5px;
-  background-color: green;
-  border-radius: 3px;
-  font-size: 0.9rem;
-}
-#navbar {
-  width: 100%;
-  background-color: green;
-=======
 #forgotPasswordText{
     font-size: 0.9rem;
     margin-left: 190px;
@@ -95,8 +83,6 @@ label {
     font-size: 0.9rem;
     color: rgba(0, 0, 0, 0.7);
 }
-<<<<<<< HEAD
-=======
 #loginForm h1{
     margin-bottom: 25px;
     color: green;
@@ -140,7 +126,6 @@ label {
     margin-bottom: 15px;
     outline: 0;
 }
->>>>>>> 4e1269e93fd59e1d8551ed306477b0585b647921
 #loginFooter{
     position: absolute;
     bottom: 0;
@@ -151,5 +136,4 @@ label {
     color: white;
     text-align: center;
     font-size: 0.9rem;
->>>>>>> 8ec243bf0727d6a6d2d241fc17da489b811a2a6c
 }

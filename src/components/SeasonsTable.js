@@ -21,7 +21,6 @@ const useStyles = makeStyles({
     },
     tableFont: {
         color: "rgba(0,0,0,0.87)",
-        fontWeight: "400",
         fontFamily: "Segoe UI",
         fontSize: "0.8125rem"
     }
@@ -50,7 +49,14 @@ export default function BasicTable() {
             <Typography
                 component="h6"
                 variant="h5"
-                style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+                style={{
+                    fontWeight: "600",
+                    color: "rgba(0,0,0,0.87)",
+                    fontSize: "1.0625rem",
+                    fontFamily: "Segoe UI",
+                    marginBottom: "10px"
+                }}
+            >
                 Table showing the start and end date of farm activities within different seasons.
                 </Typography>
 
@@ -58,7 +64,11 @@ export default function BasicTable() {
 
                 <TableHead>
 
-                    <TableRow>
+                    <TableRow
+                        style={{
+                            backgroundColor: "#f7f9fc",
+                        }}
+                    >
                         <TableCell className={classes.headerFont}>#</TableCell>
                         <TableCell className={classes.headerFont} align="left">Activity</TableCell>
                         <TableCell className={classes.headerFont} align="left">Start Date</TableCell>

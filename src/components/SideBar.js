@@ -6,21 +6,20 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
-import BuildIcon from "@material-ui/icons/Build";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import List from '@material-ui/core/List';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import { makeStyles, } from '@material-ui/core/styles';
+import BuildIcon from "@material-ui/icons/Build";
+import SettingsIcon from "@material-ui/icons/Settings";
+import List from "@material-ui/core/List";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-import SettingsIcon from '@material-ui/icons/Settings';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '&:hover': {
+    "&:hover": {
       color: "white",
     },
   },
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: "0.7",
   },
   highlight: {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "white",
       color: "rgba(0,0,0,0.87)",
     },
@@ -74,7 +73,7 @@ export default function MainListItems(props) {
     toolsUrl: "/tools",
     consumableUrl: "/consumable",
     requisitionsUrl: "/requisitions",
-    suppliers: "/suppliers",
+    suppliersUrl: "/suppliers",
     customersUrl: "/customers",
     workersUrl: "/workers",
   }
@@ -82,19 +81,19 @@ export default function MainListItems(props) {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-  const [open4, setOpen4] = useState(false);  
+  const [open4, setOpen4] = useState(false);
   const handleClick1 = () => {
-    setOpen1(!open1)
-  }
+    setOpen1(!open1);
+  };
   const handleClick2 = () => {
-    setOpen2(!open2)
-  }
+    setOpen2(!open2);
+  };
   const handleClick3 = () => {
-    setOpen3(!open3)
-  }
+    setOpen3(!open3);
+  };
   const handleClick4 = () => {
-    setOpen4(!open4)
-  }
+    setOpen4(!open4);
+  };
 
   return (
     <div style={{ marginTop: "20px", }}>
@@ -207,10 +206,12 @@ export default function MainListItems(props) {
       <Collapse
         in={open2}
         timeout="auto"
-        unmountOnExit>
+        unmountOnExit
+      >
         <List
           component="div"
-          disablePadding>
+          disablePadding
+        >
           <ListItem
             button
             component={Link}
@@ -223,6 +224,7 @@ export default function MainListItems(props) {
               className={clsx(classes.text, urls.requisitionsUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
+
           <ListItem
             button
             component={Link}
@@ -235,6 +237,7 @@ export default function MainListItems(props) {
               className={clsx(classes.text, urls.suppliersUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
+
           <ListItem
             button
             component={Link}
@@ -264,7 +267,7 @@ export default function MainListItems(props) {
         <ListItemText
           disableTypography
           primary="Employees"
-          className={clsx(classes.text, urls.workersUrl === currentUrl ? listItemHighlightItems : "")}
+          className={classes.text}
         />
         {open1
           ? <ExpandLess
@@ -274,7 +277,7 @@ export default function MainListItems(props) {
             className={urls.workersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon}
           />}
       </ListItem>
-      
+
       <Collapse
         in={open3}
         timeout="auto"
@@ -293,19 +296,19 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Employees"
-              className={clsx(classes.text, urls.workersUrl === currentUrl ? classes.selectedItem : "")}
+              className={classes.text}
             />
           </ListItem>
           <ListItem
             button
             component={Link}
-            to={"/workers"}
+            to={"/casual"}
             className={clsx(classes.root, classes.nested)}
           >
             <ListItemText
               disableTypography
               primary="Casual workers"
-              className={clsx(classes.text, urls.workersUrl === currentUrl ? classes.selectedItem : "")}
+              className={classes.text}
             />
           </ListItem>
         </List>
@@ -321,13 +324,10 @@ export default function MainListItems(props) {
             className={urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? listItemHighlightItems : ""}
           />
         </ListItemIcon>
-
         <ListItemText
           disableTypography
           primary="Tools"
-          className={clsx(classes.text, urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? listItemHighlightItems : "")}
-          component={Link}
-          to={"/tools"}
+          className={classes.text}
         />
         {open4
           ? <ExpandLess
@@ -338,7 +338,7 @@ export default function MainListItems(props) {
           />
         }
       </ListItem>
-      
+
       <Collapse
         in={open4}
         timeout="auto"
@@ -363,7 +363,7 @@ export default function MainListItems(props) {
           <ListItem
             button
             component={Link}
-            to={"/consumable"}
+            to={"/consumables"}
             className={clsx(classes.root, classes.nested)}
           >
             <ListItemText
@@ -411,7 +411,5 @@ export default function MainListItems(props) {
       </ListItem>
 
     </div>
-  )
+  );
 }
-
-

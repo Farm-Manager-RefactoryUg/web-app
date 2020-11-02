@@ -2,7 +2,6 @@ import React from "react";
 // import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import Navbar from "./Navbar";
 
 const values = [
   670000,
@@ -21,11 +20,21 @@ const values = [
 
 const options = {
   chart: {
-    type: "column",
+    type: "line",
   },
 
   title: {
     text: "Sales Distribution",
+    align: "left",
+    margin: 20,
+    x: 10,
+    y: 28,
+    style: {
+        fontFamily: "Segoe UI",
+        fontWeight: "600",
+        fontSize: "1.0625rem",
+        color: "rgba(0, 0, 0, 0.87)"
+    },
   },
   credits: {
     enabled: false,
@@ -109,13 +118,9 @@ const options = {
 };
 
 export default function SalesBarGraph() {
-  console.log(options.series[0].data[0])
   return (
     <React.Fragment>
-      <Navbar />
-      <br></br>
       <HighchartsReact highcharts={Highcharts} options={options} />
-      <br></br>
     </React.Fragment>
   );
 }
