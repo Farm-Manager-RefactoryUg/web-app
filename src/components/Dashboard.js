@@ -14,9 +14,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 import RequisitionsDashboard from "./RequisitionsDashboard";
-import ToolsDashboard from "./ToolsDashboard";
 import Paper from "@material-ui/core/Paper";
-import CustomersDashboard from "./CustomersDashboard";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
@@ -706,20 +704,6 @@ export default function Dashboard() {
                     <RequisitionsDashboard />
                   </Paper>
                 </Grid>
-                <br></br>
-
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
-                    <CustomersDashboard />
-                  </Paper>
-                </Grid>
-                <br></br>
-                <Grid item xs={12} sm={12}>
-                  <Paper className={classes.paper}>
-                    <ToolsDashboard />
-                  </Paper>
-                </Grid>
-                <br></br>
               </Grid>
 
             </Container>

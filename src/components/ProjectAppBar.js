@@ -129,66 +129,101 @@ export default function ProjectAppBar(props) {
 
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <AppBar
-          position="absolute"
-          className={clsx(classes.appBar, open && classes.appBarShift)}
-        >
-          <Toolbar style={{ minHeight: "48px" }} className={classes.toolbar}>
+    <ThemeProvider
+      theme={theme}
+    >
 
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
+        <Toolbar
+          style={{
+            minHeight: "48px"
+          }}
+          className={classes.toolbar}>
 
-            <Typography
-              variant="h6"
-              href="/"
-              className={classes.title}
-              style={{ color: "rgba(0,0,0,0.87)", fontSize: "1.2rem", }}
-            >
-              <img src={Logo} alt="logo" width="25px" height="25px" style={{ marginRight: "5px" }} />
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <Typography
+            variant="h6"
+            href="/"
+            className={classes.title}
+            style={{
+              color: "rgba(0,0,0,0.87)",
+              fontSize: "1.2rem",
+            }}
+          >
+            <img
+              src={Logo}
+              alt="logo"
+              width="25px"
+              height="25px"
+              style={{ marginRight: "5px" }}
+            />
               Tele-Farmer
             </Typography>
 
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon style={{ color: "rgba(0,0,0,0.87)" }} />
-              </Badge>
-            </IconButton>
-            
-            <Avatar alt="Michael" src={michael} className={classes.small} />
-            <NavDropDown />
+          <IconButton
+            color="inherit">
+            <Badge
+              badgeContent={4}
+              color="secondary"
+            >
+              <NotificationsIcon
+                style={{ color: "rgba(0,0,0,0.87)" }}
+              />
+            </Badge>
+          </IconButton>
 
-          </Toolbar>
-        </AppBar>
+          <Avatar
+            alt="Michael"
+            src={michael}
+            className={classes.small}
+          />
+          <NavDropDown />
 
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
+        </Toolbar>
+      </AppBar>
+
+      <Drawer
+        variant="permanent"
+        classes={{paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)}}
+        open={open}
+      >
+        <div
+          className={classes.toolbarIcon}
+          style={{ minHeight: "48px" }}
         >
-          <div className={classes.toolbarIcon} style={{ minHeight: "48px" }}>
-            <IconButton onClick={handleDrawerClose} >
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List><MainListItems location={props.location} /></List>
-        </Drawer>
-      </ThemeProvider>
-    </>
+          <IconButton
+            onClick={handleDrawerClose}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+
+        <Divider />
+
+        <List>
+          <MainListItems
+            location={props.location}
+          />
+        </List>
+
+      </Drawer>
+
+    </ThemeProvider>
   );
 }
 

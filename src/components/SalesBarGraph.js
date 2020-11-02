@@ -4,6 +4,21 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Navbar from "./Navbar";
 
+const values = [
+  670000,
+  2000000,
+  3600000,
+  150000,
+  400000,
+  320000,
+  1000000,
+  1200000,
+  700000,
+  550000,
+  1300000,
+  900000,
+];
+
 const options = {
   chart: {
     type: "column",
@@ -55,20 +70,7 @@ const options = {
   series: [
     {
       name: "Sales",
-      data: [
-        670000,
-        2000000,
-        3600000,
-        150000,
-        400000,
-        320000,
-        1000000,
-        1200000,
-        700000,
-        550000,
-        1300000,
-        900000,
-      ],
+      data: values,
     },
   ],
 
