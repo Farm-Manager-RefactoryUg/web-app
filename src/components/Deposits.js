@@ -3,9 +3,6 @@ import {BrowserRouter as Router,  Link} from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
-//import { Switch } from "@material-ui/core";
-
-
 
 const useStyles = makeStyles({
   depositContext: {
@@ -20,7 +17,7 @@ const useStyles = makeStyles({
   },
   typography: {    
       color: "green"
-  }
+  },
   
 });
 
