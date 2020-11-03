@@ -56,7 +56,7 @@ export default function Expenditure() {
             <TableRow
               position="static"
               style={{ backgroundColor: "#f7f9fc", color: "white" }}
-            >
+            >                                
               <TableCell style={{ color: "black" }}>Date</TableCell>
               <TableCell style={{ color: "black" }}>Product</TableCell>
               <TableCell style={{ color: "black" }}>Unit</TableCell>

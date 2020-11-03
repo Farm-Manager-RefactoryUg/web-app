@@ -124,7 +124,7 @@ export default function SalesBarGraph() {
       newArray.map((item) => {
         var date = item.date;
         var amount = item.amountrecvd;
-        console.log(amount);
+      
         if (date.startsWith("1")) {
           ops.jan.push(amount);
         }if (date.startsWith("2")) {
