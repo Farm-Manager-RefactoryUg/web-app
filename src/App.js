@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
-import SignUp from "./components/signup";
+import SignUp from "./components/Signup";
 import Settings from "./components/Settings";
 import ForgotPassword from './components/ForgotPassword';
 import PageNotFound from './components/PageNotFound';
@@ -11,16 +11,19 @@ import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Seasons from "./components/Seasons";
 import Analytics from "./components/Analytics";
+
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomersDetails from "./components/CustomersDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
-import {SalesBarGraph} from "./components/SalesBarGraph";
+import SalesBarGraph from "./components/SalesBarGraph";
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 import Tools from "./components/Tools";
 import Tables from "./components/Tables"
+import CasualWorkers from "./components/CasualWorkers";
+import Consumables from "./components/Consumables"
 
 
 export default function App() {
@@ -38,7 +41,8 @@ export default function App() {
         <Route path="/pagenotfound" component={PageNotFound} />
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/seasons" component={Seasons} />
-        <Route path="/compare" component={Analytics} />        
+        <Route path="/compare" component={Analytics} />
+
         <Route path="/tables" component={Tables}></Route>
         <Route path="/tools" component={Tools}></Route>
         <Route path="/requisitions" exact component={Requisitions} />
@@ -49,6 +53,8 @@ export default function App() {
         <Route path="/suppliers" exact component={Suppliers} />
         <Route path="/saleschart" component={SalesBarGraph} />
         <Route path="/salesdetails" component={SalesDetails} />
+        <Route path="/casual" component={CasualWorkers} ></Route>
+        <Route path="/consumables" component={Consumables} ></Route>
       </Switch>
     </Router>
   );

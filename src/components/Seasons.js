@@ -57,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   tableCard: {
-      padding: theme.spacing(2),
+    padding: theme.spacing(2),
+    marginTop: "0",
   },
 }));
 
@@ -91,7 +92,7 @@ export default function Dashboard() {
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
 
-          <ProjectAppBar location = {currentUrl} />
+          <ProjectAppBar location={currentUrl} />
 
           <main className={classes.content}>
             <div
@@ -99,28 +100,52 @@ export default function Dashboard() {
               style={{ minHeight: "3rem" }}
             />
 
-            <Container style={{ marginTop: "60px" }}>
-
+            <Container
+              style={{
+                marginTop: "40px"
+              }}
+            >
               <Typography
-                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: "600",
+                  fontFamily: "Segoe UI",
+                  color: "rgba(0, 0, 0, 0.87)",
+                }}
                 component="h1"
               >
                 {"Seasons Activities"}
               </Typography>
 
-              <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+              <Divider
+                style={{
+                  marginTop: "15px",
+                  backgroundColor: "rgba(0,0,0,0.2)"
+                }}
+              />
 
-              <Grid container spacing={2} style={{ marginTop: "40px", marginBottom: "20px", }} >
+              <Grid
+                container
+                style={{
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              >
 
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card className={classes.tableCard}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  lg={12}
+                >
+                  <Card
+                    className={classes.tableCard}
+                  >
                     <SeasonsTable />
                   </Card>
                 </Grid>
 
               </Grid>
-
-              <br></br>
 
             </Container>
           </main>

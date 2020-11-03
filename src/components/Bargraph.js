@@ -176,6 +176,7 @@ export default function SalesBarGraph() {
    
 
   return (
+    
     <React.Fragment>
       <HighchartsReact highcharts={Highcharts} options={graphOptions} />
       <br></br>

@@ -38,9 +38,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  title: {
-    flexGrow: 1,
-  },
   appBar: {
     height: "3.3rem",
   },

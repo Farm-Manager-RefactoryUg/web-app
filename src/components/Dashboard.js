@@ -13,10 +13,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 import RequisitionsDashboard from "./RequisitionsDashboard";
-import ToolsDashboard from "./ToolsDashboard";
-import Expenditure from "./ExpenditureDashboard"
-import Paper from "@material-ui/core/Paper";
-import CustomersDashboard from "./CustomersDashboard";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
@@ -24,7 +20,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
-import {SalesBarGraph} from './SalesBarGraph'
+import SalesBarGraph from './SalesBarGraph'
 
 const drawerWidth = 240;
 
@@ -71,6 +67,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.7rem",
     color: "white",
   },
+  table: {
+    padding: "20px",
+    paddingBottom: "0",
+  }
 }));
 
 export default function Dashboard() {
@@ -112,384 +112,69 @@ export default function Dashboard() {
   }, [item.id, id]);
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <div className={classes.root}>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
 
-          <ProjectAppBar location={currentUrl} />
+        <ProjectAppBar location={currentUrl} />
 
-          <main className={classes.content}>
-            <div
-              className={classes.appBarSpacer}
-              style={{ minHeight: "3rem" }}
-            />
+        <main className={classes.content}>
+          <div
+            className={classes.appBarSpacer}
+            style={{ minHeight: "3rem" }}
+          />
 
-            <Container style={{ marginTop: "40px" }}>
+          <Container style={{ marginTop: "40px" }}>
 
-              <Typography
-                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
-                component="h1"
-              >
-                {"Biyinzika Mukono C"}
-              </Typography>
+            <Typography
+              style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+              component="h1"
+            >
+              {"Biyinzika Mukono C"}
+            </Typography>
 
-              <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-              <Grid container spacing={2} style={{ marginTop: "10px", marginBottom: "20px", }}>
+            <Grid container spacing={2} style={{ marginTop: "10px", marginBottom: "20px", }}>
 
-                <Grid item xs={12} md={3} lg={3}>
-                  <Card
-                    style={{
-                      backgroundColor: "rgb(255, 255, 255)",
-                      color: "rgba(0, 0, 0, 0.87)",
-                    }}>
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        component="h6"
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem"
-                        }}>
-                        Expenditure
-                        <Chip
-                          classes={{ label: classes.label, }}
-                          style={{
-                            fontFamily: "Segoe UI",
-                            float: "right",
-                            backgroundColor: "purple",
-                          }}
-                          label="Average"
-                          size="small"
-                        />
-                      </Typography>
-
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          paddingTop: "3px",
-                          fontWeight: "400",
-                          fontSize: "1.5rem"
-                        }}
-                      >
-                        {"2.532"}
-                        <sub
-                          style={{
-                            fontWeight: "600",
-                            fontSize: "0.8125rem"
-                          }}
-                        >
-                          {" UGX"}
-                        </sub>
-                      </Typography>
-
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0px",
-                          paddingTop: "10px",
-                          color: "rgb(76, 175, 80)",
-                          fontWeight: "700",
-                        }}
-                      >
-                        {"+26"}%
-                        <ArrowDropUpIcon />
-                        <span
-                          style={{
-                            fontFamily: "Segoe UI",
-                            marginLeft: "20px",
-                            color: "rgb(117, 117, 117)",
-                            fontSize: "1rem",
-                            fontWeight: "400"
-                          }}
-                        >
-                          Since last week
-                        </span>
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                <Grid item xs={12} md={3} lg={3}>
-                  <Card
-                    style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        component="h6"
-                        style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                        Sales Revenue
-                        <Chip
-                          classes={{ label: classes.label, }}
-                          style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
-                          label="Low"
-                          size="small"
-                        />
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem"
-                        }}
-                      >
-                        {"170.212"}
-                        <sub
-                          style={{
-                            fontWeight: "600",
-                            fontSize: "0.8125rem"
-                          }}
-                        >
-                          UGX
-                        </sub>
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0px",
-                          paddingTop: "10px",
-                          color: "rgb(244, 67, 54)",
-                          fontWeight: "700",
-                        }}
-                      >
-                        {"-14"}%
-                        <ArrowDropDownIcon />
-                        <span
-                          style={{
-                            fontFamily: "Segoe UI",
-                            marginLeft: "20px",
-                            color: "rgb(117, 117, 117)",
-                            fontSize: "1rem",
-                            fontWeight: "400"
-                          }}
-                        >
-                          Since last week
-                            </span>
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                <Grid item xs={12} md={3} lg={3}>
-                  <Card
-                    style={{
-                      backgroundColor: "rgb(255, 255, 255)",
-                      color: "rgba(0, 0, 0, 0.87)",
-                    }}
-                  >
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        component="h6"
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem"
-                        }}
-                      >
-                        Sales Quantity
-                        <Chip
-                          classes={{ label: classes.label, }}
-                          style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
-                          label="Average"
-                          size="small"
-                        />
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          paddingTop: "3px",
-                          fontWeight: "400",
-                          fontSize: "1.5rem"
-                        }}
-                      >
-                        {"33"}
-                        <sub
-                          style={{
-                            fontWeight: "600",
-                            fontSize: "0.8125rem"
-                          }}
-                        >
-                          {" KG"}
-                        </sub>
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0px",
-                          paddingTop: "10px",
-                          color: "rgb(76, 175, 80)",
-                          fontWeight: "700",
-                        }}
-                      >
-                        {"+18"}%
-                        <ArrowDropUpIcon />
-                        <span
-                          style={{
-                            fontFamily: "Segoe UI",
-                            marginLeft: "20px",
-                            color: "rgb(117, 117, 117)",
-                            fontSize: "1rem",
-                            fontWeight: "400"
-                          }}
-                        >
-                          Since last week
-                        </span>
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                <Grid item xs={12} md={3} lg={3}>
-                  <Card
-                    style={{
-                      backgroundColor: "rgb(255, 255, 255)",
-                      color: "rgba(0, 0, 0, 0.87)",
-                    }}
-                  >
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        component="h6"
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem"
-                        }}
-                      >
-                        Earnings
-                        <Chip
-                          classes={{ label: classes.label, }}
-                          style={{
-                            fontFamily: "Segoe UI",
-                            float: "right",
-                            backgroundColor: "purple",
-                          }}
-                          label="High"
-                          size="small"
-                        />
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          paddingTop: "3px",
-                          fontWeight: "400",
-                          fontSize: "1.5rem"
-                        }}
-                      >
-                        {" 45,000,000"}
-                        <sub
-                          style={{
-                            fontWeight: "600",
-                            fontSize: "0.8125rem"
-                          }}
-                        >
-                          {" UGX"}
-                        </sub>
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0px",
-                          paddingTop: "10px",
-                          color: "rgb(244, 67, 54)",
-                          fontWeight: "700",
-                        }}
-                      >
-                        {"-9"}%
-                        <ArrowDropDownIcon />
-                        <span
-                          style={{
-                            fontFamily: "Segoe UI",
-                            marginLeft: "20px",
-                            color: "rgb(117, 117, 117)",
-                            fontSize: "1rem",
-                            fontWeight: "400"
-                          }}
-                        >
-                          Since last week
-                        </span>
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-              </Grid>
-
-              <Grid container spacing={2} style={{ marginBottom: "20px", }} >
-
-                <Grid item xs={12} sm={6} lg={7}>
-                  <Card style={{ backgroundColor: "white" }}>
-                    <SalesBarGraph />
-                  </Card>
-                </Grid>
-
-                <Grid item xs={12} sm={6} lg={5}>
-                  <Card style={{ backgroundColor: "white" }}>
-                    <LinkPieChart />
-                  </Card>
-                </Grid>
-
-              </Grid>
-
-              <Card
-                style={{
-                  //color: "white",
-                  color: "rgba(0, 0, 0, 0.87)",
-                  marginBottom: "20px",
-                  textAlign: "center",
-                  padding: theme.spacing(2, 2, 2, 0),
-                  //backgroundColor: "rgba(27, 36, 48, 0.5)",
-                }}
-              >
-                <Typography
-                  gutterBottom
-                  component="h6"
+              <Grid item xs={12} md={3} lg={3}>
+                <Card
                   style={{
-                    fontFamily: "Segoe UI",
-                    padding: "0,0,30px,0",
-                    fontWeight: "600",
-                    fontSize: "1.0625rem",
-                    marginBottom: "20px",
-                  }}
-                >
-                  Score Card
-                </Typography>
-
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Grid item xs={12} sm={3} lg={2}
-                    style={{
-                      padding: "0 20px"
-                    }}
-                  >
-                    <CreditCardIcon
+                    backgroundColor: "rgb(255, 255, 255)",
+                    color: "rgba(0, 0, 0, 0.87)",
+                  }}>
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      component="h6"
                       style={{
-                        transform: "scale(1.5)",
-                        marginBottom: "20px",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}
-                    />
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        fontWeight: "600",
+                        fontSize: "1.0625rem"
+                      }}>
+                      Expenditure
+                        <Chip
+                        classes={{ label: classes.label, }}
+                        style={{
+                          fontFamily: "Segoe UI",
+                          float: "right",
+                          backgroundColor: "purple",
+                        }}
+                        label="Average"
+                        size="small"
+                      />
+                    </Typography>
 
                     <Typography
                       style={{
-                        borderRadius: "10px",
                         fontFamily: "Segoe UI",
-                        padding: "0px",
-                        fontSize: "1.5rem",
-                        marginBottom: "20px",
+                        padding: "0",
+                        paddingTop: "3px",
+                        fontWeight: "400",
+                        fontSize: "1.5rem"
                       }}
                     >
-                      {"765.43"}
+                      {"2.532"}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -501,43 +186,126 @@ export default function Dashboard() {
                     </Typography>
 
                     <Typography
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        paddingTop: "10px",
+                        color: "rgb(76, 175, 80)",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {"+26"}%
+                        <ArrowDropUpIcon />
+                      <span
+                        style={{
+                          fontFamily: "Segoe UI",
+                          marginLeft: "20px",
+                          color: "rgb(117, 117, 117)",
+                          fontSize: "1rem",
+                          fontWeight: "400"
+                        }}
+                      >
+                        Since last week
+                        </span>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+
+              <Grid item xs={12} md={3} lg={3}>
+                <Card
+                  style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      component="h6"
+                      style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                      Sales Revenue
+                        <Chip
+                        classes={{ label: classes.label, }}
+                        style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
+                        label="Low"
+                        size="small"
+                      />
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem"
+                      }}
+                    >
+                      {"170.212"}
+                      <sub
+                        style={{
+                          fontWeight: "600",
+                          fontSize: "0.8125rem"
+                        }}
+                      >
+                        UGX
+                        </sub>
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        paddingTop: "10px",
+                        color: "rgb(244, 67, 54)",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {"-14"}%
+                        <ArrowDropDownIcon />
+                      <span
+                        style={{
+                          fontFamily: "Segoe UI",
+                          marginLeft: "20px",
+                          color: "rgb(117, 117, 117)",
+                          fontSize: "1rem",
+                          fontWeight: "400"
+                        }}
+                      >
+                        Since last week
+                            </span>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+
+              <Grid item xs={12} md={3} lg={3}>
+                <Card
+                  style={{
+                    backgroundColor: "rgb(255, 255, 255)",
+                    color: "rgba(0, 0, 0, 0.87)",
+                  }}
+                >
+                  <CardContent>
+                    <Typography
                       gutterBottom
                       component="h6"
                       style={{
                         fontFamily: "Segoe UI",
                         padding: "0",
-                        fontSize: "0.8125rem",
-                        fontWeight: "400",
-                        textTransform: "uppercase",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}>
-                      Expenditure
-                      </Typography>
-                  </Grid>
-
-                  <Grid item xs={12} sm={3} lg={2}
-                    style={{
-                      padding: "0 20px"
-                    }}
-                  >
-                    <AssessmentIcon
-                      style={{
-                        transform: "scale(1.5)",
-                        marginBottom: "20px",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}
-                    />
-
-                    <Typography
-                      style={{
-                        borderRadius: "10px",
-                        fontFamily: "Segoe UI",
-                        padding: "0px",
-                        fontSize: "1.5rem",
-                        marginBottom: "20px",
+                        fontWeight: "600",
+                        fontSize: "1.0625rem"
                       }}
                     >
-                      {"11,650"}
+                      Sales Quantity
+                        <Chip
+                        classes={{ label: classes.label, }}
+                        style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
+                        label="Average"
+                        size="small"
+                      />
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        paddingTop: "3px",
+                        fontWeight: "400",
+                        fontSize: "1.5rem"
+                      }}
+                    >
+                      {"33"}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -547,45 +315,73 @@ export default function Dashboard() {
                         {" KG"}
                       </sub>
                     </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0px",
+                        paddingTop: "10px",
+                        color: "rgb(76, 175, 80)",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {"+18"}%
+                        <ArrowDropUpIcon />
+                      <span
+                        style={{
+                          fontFamily: "Segoe UI",
+                          marginLeft: "20px",
+                          color: "rgb(117, 117, 117)",
+                          fontSize: "1rem",
+                          fontWeight: "400"
+                        }}
+                      >
+                        Since last week
+                        </span>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
 
+              <Grid item xs={12} md={3} lg={3}>
+                <Card
+                  style={{
+                    backgroundColor: "rgb(255, 255, 255)",
+                    color: "rgba(0, 0, 0, 0.87)",
+                  }}
+                >
+                  <CardContent>
                     <Typography
                       gutterBottom
                       component="h6"
                       style={{
                         fontFamily: "Segoe UI",
                         padding: "0",
-                        fontSize: "0.8125rem",
-                        fontWeight: "400",
-                        textTransform: "uppercase",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}>
-                      Sales
-                      </Typography>
-                  </Grid>
-
-                  <Grid item xs={12} sm={3} lg={2}
-                    style={{
-                      padding: "0 20px"
-                    }}
-                  >
-                    <MonetizationOnIcon
-                      style={{
-                        transform: "scale(1.5)",
-                        marginBottom: "20px",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}
-                    />
-
-                    <Typography
-                      style={{
-                        borderRadius: "10px",
-                        fontFamily: "Segoe UI",
-                        padding: "0px",
-                        fontSize: "1.5rem",
-                        marginBottom: "20px",
+                        fontWeight: "600",
+                        fontSize: "1.0625rem"
                       }}
                     >
-                      {"765.43"}
+                      Earnings
+                        <Chip
+                        classes={{ label: classes.label, }}
+                        style={{
+                          fontFamily: "Segoe UI",
+                          float: "right",
+                          backgroundColor: "purple",
+                        }}
+                        label="High"
+                        size="small"
+                      />
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "Segoe UI",
+                        padding: "0",
+                        paddingTop: "3px",
+                        fontWeight: "400",
+                        fontSize: "1.5rem"
+                      }}
+                    >
+                      {" 45,000,000"}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -595,143 +391,377 @@ export default function Dashboard() {
                         {" UGX"}
                       </sub>
                     </Typography>
-
-                    <Typography
-                      gutterBottom
-                      component="h6"
-                      style={{
-                        fontFamily: "Segoe UI",
-                        padding: "0",
-                        fontSize: "0.8125rem",
-                        fontWeight: "400",
-                        textTransform: "uppercase",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}>
-                      Return on Investment
-                      </Typography>
-                  </Grid>
-
-                  <Grid item xs={12} sm={3} lg={2}
-                    style={{
-                      padding: "0 20px"
-                    }}
-                  >
-                    <SupervisorAccountIcon
-                      style={{
-                        transform: "scale(1.5)",
-                        marginBottom: "20px",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}
-                    />
-
                     <Typography
                       style={{
-                        borderRadius: "10px",
                         fontFamily: "Segoe UI",
                         padding: "0px",
-                        fontSize: "1.5rem",
-                        marginBottom: "20px",
+                        paddingTop: "10px",
+                        color: "rgb(244, 67, 54)",
+                        fontWeight: "700",
                       }}
                     >
-                      {"11"}
-                    </Typography>
-
-                    <Typography
-                      gutterBottom
-                      component="h6"
-                      style={{
-                        fontFamily: "Segoe UI",
-                        padding: "0",
-                        fontSize: "0.8125rem",
-                        fontWeight: "400",
-                        textTransform: "uppercase",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}>
-                      Users
-                      </Typography>
-                  </Grid>
-
-                  <Grid item xs={12} sm={3} lg={2}
-                    style={{
-                      padding: "0 20px"
-                    }}
-                  >
-                    <MoneyIcon
-                      style={{
-                        transform: "scale(1.5)",
-                        marginBottom: "20px",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}
-                    />
-
-                    <Typography
-                      style={{
-                        borderRadius: "10px",
-                        fontFamily: "Segoe UI",
-                        padding: "0px",
-                        fontSize: "1.5rem",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      {"765.43"}
-                      <sub
+                      {"-9"}%
+                        <ArrowDropDownIcon />
+                      <span
                         style={{
-                          fontWeight: "600",
-                          fontSize: "0.8125rem"
+                          fontFamily: "Segoe UI",
+                          marginLeft: "20px",
+                          color: "rgb(117, 117, 117)",
+                          fontSize: "1rem",
+                          fontWeight: "400"
                         }}
                       >
-                        {"UGX"}
-                      </sub>
+                        Since last week
+                        </span>
                     </Typography>
-
-                    <Typography
-                      gutterBottom
-                      component="h6"
-                      style={{
-                        fontFamily: "Segoe UI",
-                        padding: "0",
-                        fontSize: "0.8125rem",
-                        fontWeight: "400",
-                        textTransform: "uppercase",
-                        color: "rgba(27, 36, 48, 0.5)"
-                      }}>
-                      Revenue
-                      </Typography>
-                  </Grid>
-                </div>
-              </Card>
-
-              <Grid container spacing={2} style={{ marginBottom: "20px", }} >
-                <Grid item xs={12} sm={12}>
-                  <Paper className={classes.paper}>
-                    <RequisitionsDashboard />
-                  </Paper>
-                </Grid>
-                <br></br>
-
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
-                    <CustomersDashboard />
-                  </Paper>
-                </Grid>
-                <br></br>
-                <Grid item xs={12} sm={12}>
-                  <Paper className={classes.paper}>
-                    <ToolsDashboard />
-                  </Paper>
-                </Grid>
-                <br></br>
-                <Grid item xs={12} sm={12}>
-                  <Paper className={classes.paper}>
-                    <Expenditure />
-                  </Paper>
-                </Grid>
+                  </CardContent>
+                </Card>
               </Grid>
 
-            </Container>
-          </main>
-        </div>
-      </ThemeProvider>
-    </>
+            </Grid>
+
+            <Grid
+              container
+              spacing={2}
+              style={{
+                marginBottom: "20px",
+              }}
+            >
+
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                lg={7}>
+                <Card
+                  style={{
+                    backgroundColor: "white"
+                  }}
+                >
+                  <SalesBarGraph />
+                </Card>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                lg={5}>
+                <Card
+                  style={{
+                    backgroundColor: "white"
+                  }}
+                >
+                  <LinkPieChart />
+                </Card>
+              </Grid>
+
+            </Grid>
+
+            <Card
+              style={{
+                color: "rgba(0, 0, 0, 0.87)",
+                marginBottom: "20px",
+                textAlign: "center",
+                padding: theme.spacing(2, 2, 2, 0),
+              }}
+            >
+              <Typography
+                gutterBottom
+                component="h6"
+                style={{
+                  fontFamily: "Segoe UI",
+                  padding: "0,0,30px,0",
+                  fontWeight: "600",
+                  fontSize: "1.0625rem",
+                  marginBottom: "20px",
+                }}
+              >
+                Score Card
+                </Typography>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  lg={2}
+                  style={{
+                    padding: "0 20px"
+                  }}
+                >
+                  <CreditCardIcon
+                    style={{
+                      transform: "scale(1.5)",
+                      marginBottom: "20px",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}
+                  />
+
+                  <Typography
+                    style={{
+                      borderRadius: "10px",
+                      fontFamily: "Segoe UI",
+                      padding: "0px",
+                      fontSize: "1.5rem",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {"765.43"}
+                    <sub
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "0.8125rem"
+                      }}
+                    >
+                      {" UGX"}
+                    </sub>
+                  </Typography>
+
+                  <Typography
+                    gutterBottom
+                    component="h6"
+                    style={{
+                      fontFamily: "Segoe UI",
+                      padding: "0",
+                      fontSize: "0.8125rem",
+                      fontWeight: "400",
+                      textTransform: "uppercase",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}>
+                    Expenditure
+                      </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  lg={2}
+                  style={{
+                    padding: "0 20px"
+                  }}
+                >
+                  <AssessmentIcon
+                    style={{
+                      transform: "scale(1.5)",
+                      marginBottom: "20px",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}
+                  />
+
+                  <Typography
+                    style={{
+                      borderRadius: "10px",
+                      fontFamily: "Segoe UI",
+                      padding: "0px",
+                      fontSize: "1.5rem",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {"11,650"}
+                    <sub
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "0.8125rem"
+                      }}
+                    >
+                      {" KG"}
+                    </sub>
+                  </Typography>
+
+                  <Typography
+                    gutterBottom
+                    component="h6"
+                    style={{
+                      fontFamily: "Segoe UI",
+                      padding: "0",
+                      fontSize: "0.8125rem",
+                      fontWeight: "400",
+                      textTransform: "uppercase",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}>
+                    Sales
+                      </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  lg={2}
+                  style={{
+                    padding: "0 20px"
+                  }}
+                >
+                  <MonetizationOnIcon
+                    style={{
+                      transform: "scale(1.5)",
+                      marginBottom: "20px",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}
+                  />
+
+                  <Typography
+                    style={{
+                      borderRadius: "10px",
+                      fontFamily: "Segoe UI",
+                      padding: "0px",
+                      fontSize: "1.5rem",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {"765.43"}
+                    <sub
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "0.8125rem"
+                      }}
+                    >
+                      {" UGX"}
+                    </sub>
+                  </Typography>
+
+                  <Typography
+                    gutterBottom
+                    component="h6"
+                    style={{
+                      fontFamily: "Segoe UI",
+                      padding: "0",
+                      fontSize: "0.8125rem",
+                      fontWeight: "400",
+                      textTransform: "uppercase",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}>
+                    Return on Investment
+                      </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  lg={2}
+                  style={{
+                    padding: "0 20px"
+                  }}
+                >
+                  <SupervisorAccountIcon
+                    style={{
+                      transform: "scale(1.5)",
+                      marginBottom: "20px",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}
+                  />
+
+                  <Typography
+                    style={{
+                      borderRadius: "10px",
+                      fontFamily: "Segoe UI",
+                      padding: "0px",
+                      fontSize: "1.5rem",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {"11"}
+                  </Typography>
+
+                  <Typography
+                    gutterBottom
+                    component="h6"
+                    style={{
+                      fontFamily: "Segoe UI",
+                      padding: "0",
+                      fontSize: "0.8125rem",
+                      fontWeight: "400",
+                      textTransform: "uppercase",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}>
+                    Users
+                      </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  lg={2}
+                  style={{
+                    padding: "0 20px"
+                  }}
+                >
+                  <MoneyIcon
+                    style={{
+                      transform: "scale(1.5)",
+                      marginBottom: "20px",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}
+                  />
+
+                  <Typography
+                    style={{
+                      borderRadius: "10px",
+                      fontFamily: "Segoe UI",
+                      padding: "0px",
+                      fontSize: "1.5rem",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {"765.43"}
+                    <sub
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "0.8125rem"
+                      }}
+                    >
+                      {"UGX"}
+                    </sub>
+                  </Typography>
+
+                  <Typography
+                    gutterBottom
+                    component="h6"
+                    style={{
+                      fontFamily: "Segoe UI",
+                      padding: "0",
+                      fontSize: "0.8125rem",
+                      fontWeight: "400",
+                      textTransform: "uppercase",
+                      color: "rgba(27, 36, 48, 0.5)"
+                    }}
+                  >
+                    Revenue
+                      </Typography>
+                </Grid>
+              </div>
+            </Card>
+
+            <Grid
+              container
+              style={{
+                marginBottom: "20px",
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={12}
+              >
+                <Card className={classes.table}>
+                  <RequisitionsDashboard />
+                </Card>
+
+              </Grid>
+            </Grid>
+
+          </Container>
+        </main>
+      </div>
+    </ThemeProvider>
   );
 }
