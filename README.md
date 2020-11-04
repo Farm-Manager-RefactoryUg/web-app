@@ -2,9 +2,6 @@
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Code Climate		| [![Code Climate](https://codeclimate.com/github/scottohara/loot/badges/gpa.svg)](https://codeclimate.com/github/scottohara/loot)																								|
 | Code Climate		| [![Test Coverage](https://codeclimate.com/github/scottohara/loot/badges/coverage.svg)](https://codeclimate.com/github/scottohara/loot)																					|
-| Snyk (npm)			| [![Known Vulnerabilities](https://snyk.io/test/github/scottohara/loot/badge.svg)](https://snyk.io/test/github/scottohara/loot)																									|
-| Snyk (Gemfile)	| [![Known Vulnerabilities](https://snyk.io/test/github/scottohara/loot/badge.svg?targetFile=Gemfile.lock)](https://snyk.io/test/github/scottohara/loot?targetFile=Gemfile.lock)	|
-
 # web-app
 Welcome to Tele-Farmer's front-end application developed by refactory bootcamp 4 students using React and Material UI.
 

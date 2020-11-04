@@ -12,9 +12,19 @@ width: fit-content;
 .container-fluid1{
 margin-top: -55px;
 }
-.table-headings{
+<<<<<<< HEAD
+th{
+color: black;
+background-color: rgb(247, 249, 252);
+}
+.container{
+    color: black;
+}
+=======
+/* .table-headings{
 color: white;
 }
 .container{
     color: black;
 }
+>>>>>>> 98d4ced37cef489d03527c385c2c25a7d41d01e8

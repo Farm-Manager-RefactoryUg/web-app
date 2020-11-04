@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Tables() {
+export default function Expenditure() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -37,7 +37,7 @@ export default function Tables() {
   };
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/requisition/")
+      .get("https://farmmanager-api.herokuapp.com/api/expenditure/")
       .then((response) => {
         setItems(response.data);
       })
@@ -47,15 +47,8 @@ export default function Tables() {
   }, []);
   return (
     <Paper className={classes.root}>
-      <h5
-        align="left"
-        style={{
-          marginLeft: "0.5rem",
-          color: "green",
-          backgroundColor: "rgb(255, 255, 255)",
-        }}
-      >
-        Recent Orders/Requisitions
+      <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
+        Recent Expenditure
       </h5>
       <TableContainer className={classes.container}>
         <Table className={classes.table}>
@@ -65,13 +58,13 @@ export default function Tables() {
               style={{ backgroundColor: "#f7f9fc", color: "white" }}
             >
               <TableCell style={{ color: "black" }}>Date</TableCell>
-              <TableCell style={{ color: "black" }}>
-                Requisition Number
-              </TableCell>
-              <TableCell style={{ color: "black" }}>Purpose</TableCell>
+              <TableCell style={{ color: "black" }}>Product</TableCell>
+              <TableCell style={{ color: "black" }}>Unit</TableCell>
               <TableCell style={{ color: "black" }}>Quantity</TableCell>
+              <TableCell style={{ color: "black" }}>Total Amount</TableCell>
+              <TableCell style={{ color: "black" }}>Amount Paid</TableCell>
               <TableCell align="center" style={{ color: "black" }}>
-                Total Price
+                Balance Due
               </TableCell>
             </TableRow>
           </TableHead>
@@ -80,10 +73,12 @@ export default function Tables() {
               items.map((item) => (
                 <TableRow hover role="checkbox" tabIndex={-1}>
                   <TableCell>{item.date}</TableCell>
-                  <TableCell>{item.reqno}</TableCell>
-                  <TableCell>{item.purpose}</TableCell>
-                  <TableCell>{item.qty}</TableCell>
-                  <TableCell align="right">{item.total}</TableCell>
+                  <TableCell>{item.product}</TableCell>
+                  <TableCell>{item.unit}</TableCell>
+                  <TableCell>{item.quantity}</TableCell>
+                  <TableCell>{item.total}</TableCell>
+                  <TableCell>{item.amountpaid}</TableCell>                  
+                  <TableCell align="right">{item.baldue}</TableCell>
                 </TableRow>
               ))}
           </TableBody>

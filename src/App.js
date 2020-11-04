@@ -22,6 +22,8 @@ import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 import Tools from "./components/Tools";
 import Tables from "./components/Tables"
+import CasualWorkers from "./components/CasualWorkers";
+import Consumables from "./components/Consumables"
 
 
 export default function App() {
@@ -39,7 +41,8 @@ export default function App() {
         <Route path="/pagenotfound" component={PageNotFound} />
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/seasons" component={Seasons} />
-        <Route path="/compare" component={Analytics} />        
+        <Route path="/compare" component={Analytics} />
+
         <Route path="/tables" component={Tables}></Route>
         <Route path="/tools" component={Tools}></Route>
         <Route path="/requisitions" exact component={Requisitions} />
@@ -50,6 +53,8 @@ export default function App() {
         <Route path="/suppliers" exact component={Suppliers} />
         <Route path="/saleschart" component={SalesBarGraph} />
         <Route path="/salesdetails" component={SalesDetails} />
+        <Route path="/casual" component={CasualWorkers} ></Route>
+        <Route path="/consumables" component={Consumables} ></Route>
       </Switch>
     </Router>
   );

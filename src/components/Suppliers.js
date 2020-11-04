@@ -14,6 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import TablePagination from "@material-ui/core/TablePagination";
 //import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "./ProjectAppBar";
 
@@ -97,10 +98,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Suppliers() {
-  // let url = "/";
-  const classes = useStyles();
   const currentUrl = useLocation();
-  const [items, setItems] = useState("");
+  const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
+  
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
@@ -114,7 +125,8 @@ export default function Suppliers() {
         console.log(err);
       });
   }, []);
-   const theme = React.useMemo(
+   
+  const theme = React.useMemo(
      () =>
        createMuiTheme({
          overrides: {
@@ -139,7 +151,7 @@ export default function Suppliers() {
             <br></br>
             <br></br>
             <Paper className={classes.root2}>
-              <h5 align="left" style={{ marginLeft: "0.5rem",color:"green" }}>
+              <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
                 Recent Suppliers
               </h5>
               <TableContainer component={Paper}>
@@ -169,37 +181,44 @@ export default function Suppliers() {
                     </TableRow>
                   </TableHead>
                   {items &&
-                    items.map((item) => (
-                      <TableBody key={item.id}>
-                        <StyledTableCell align="left">
-                          {item.id}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.companyname}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.telephone1}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.busaddress}
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                          {item.category}
-                        </StyledTableCell>
-                      </TableBody>
-                    ))}
+                    items
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item) => (
+                        <TableBody key={item.id}>
+                          <StyledTableCell align="left">
+                            {item.id}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.name}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.companyname}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.telephone1}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.busaddress}
+                          </StyledTableCell>
+                          <StyledTableCell align="center">
+                            {item.category}
+                          </StyledTableCell>
+                        </TableBody>
+                      ))}
                 </Table>
               </TableContainer>
-              {/* <div className={classes.seeMore}>
-                
-                <a href={url} color="primary">
-                  See more
-                </a>
-               
-              </div> */}
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={items.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
             </Paper>
             <Box pt={4}>
               <Copyright />

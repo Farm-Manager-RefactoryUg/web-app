@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     fontFamily: "Segoe UI",
-    backgroundColor: "rgb(247, 249, 252)",
+    backgroundColor: "#f7f9fc",
   },
   root1: {
     width: "100%",
@@ -69,13 +69,12 @@ const useStyles = makeStyles((theme) => ({
 //   },
 // });
 
-export default function Workers() {
-  
+export default function CasualWorkers() {
   const currentUrl = useLocation();
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState("");
   // const rows = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -87,7 +86,7 @@ export default function Workers() {
 
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/employee")
+      .get("https://farmmanager-api.herokuapp.com/api/casual")
       .then((response) => {
         setItems(response.data);
       })
@@ -103,12 +102,13 @@ export default function Workers() {
 
         <main className={classes.content}>
           <Paper className={classes.root1}>
-            <h5>Employee Details</h5>
+            <h5>Casual Workers Details</h5>
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow
-                    style={{ backgroundColor: "green", color: "white" }}
+                    position="static"
+                    style={{ backgroundColor: "#dff8fa;", fontWeight:"bold" }}
                   >
                     <TableCell>Name</TableCell>
                     <TableCell>Email</TableCell>
@@ -126,9 +126,9 @@ export default function Workers() {
                       )
                       .map((item) => (
                         <TableRow hover role="checkbox" tabIndex={-1}>
-                          <TableCell>{item.fullname}</TableCell>
-                          <TableCell>{item.email}</TableCell>
-                          <TableCell>{item.position}</TableCell>
+                          <TableCell>{item.name}</TableCell>
+                          <TableCell>{item.phone1}</TableCell>
+                          <TableCell>{item.postion}</TableCell>
                           <TableCell>{item.department}</TableCell>
                           <TableCell>{item.department}</TableCell>
                         </TableRow>
