@@ -1,7 +1,8 @@
-/* eslint-disable array-callback-return*/
 import React, { useEffect, useState } from "react";
+// import { useTheme } from "@material-ui/core/styles";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import Navbar from "./Navbar";
 import _ from "lodash";
 
 const ops = {
@@ -21,22 +22,15 @@ const ops = {
 
 const options = {
   chart: {
-    type: "line",
+    type: "column",
   },
 
   title: {
-    text: 'Monthly Expenditure',
-    style: {
-        display: 'none'
-    }
-},
-subtitle: {
-    text: '',
-    style: {
-        display: 'none'
-    }
-},
- 
+    text: "Sales Distribution",
+  },
+  credits: {
+    enabled: false,
+  },
   legend: {
     align: "right",
     verticalAlign: "middle",
@@ -101,7 +95,9 @@ subtitle: {
           subtitle: {
             text: null,
           },
-          
+          credits: {
+            enabled: false,
+          },
         },
       },
     ],
@@ -109,7 +105,7 @@ subtitle: {
 };
 
 export default function SalesBarGraph() {
-  const [graphOptions, setGraphOptions] = useState({});
+ const [graphOptions, setGraphOptions] = useState({});
 
   useEffect(() => {
     async function fetchData() {
@@ -119,8 +115,8 @@ export default function SalesBarGraph() {
       const jsondata = await response.json();
       const newArray = [...jsondata];
       console.log(newArray);
+      // setItems(newArray);
 
-      
       newArray.map((item) => {
         var date = item.date;
         var amount = item.amountrecvd;
@@ -150,7 +146,7 @@ export default function SalesBarGraph() {
         } else {
           ops.dec.push(amount)
         }
-               
+       
       });
 
       options.series[0].data = [
@@ -176,8 +172,8 @@ export default function SalesBarGraph() {
    
 
   return (
-    
     <React.Fragment>
+      <Navbar />
       <HighchartsReact highcharts={Highcharts} options={graphOptions} />
       <br></br>
     </React.Fragment>
