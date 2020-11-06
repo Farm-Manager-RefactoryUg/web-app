@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
@@ -7,6 +7,9 @@ import ProjectAppBar from "./ProjectAppBar";
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 const drawerWidth = 240;
@@ -106,12 +109,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function Alert(props) {
+  return <MuiAlert elevation={1} variant="filled" {...props} />;
+}
+
 export default function Dashboard() {
 
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+   
   const currentUrl = useLocation();
-  //let [[fullNamee, desce], setErrors] = useState(["", ""])
+  
+  const [form, setForm] = useState({
+    name: "",
+    location: "",
+    address: "",
+    contactperson: "",
+    phone: "",
+    tin: "",
+  })
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    
+    axios.post('https://farmmanager-api.herokuapp.com/api/farm/', form)
+      .then((response) => setOpen(!open))
+
+      .catch((error) => {
+        console.error('There was an error!', error);
+      });    
+  }
+   
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(!open);
+  };  
 
   const theme = React.useMemo(
     () =>
@@ -120,25 +162,50 @@ export default function Dashboard() {
           MuiGrid: {
             "spacing-xs-2": "-6px !important",
           },
-        },
-        palette: {
+        },    
+         palette: {
           type: prefersDarkMode ? "light" : "dark",
         },
       }),
     [prefersDarkMode]
   );
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-  }
-
+      
   const handleChange = (event) => {
-    //const { value } = event.target
+    const { name, value } = event.target;
+   
+        switch (name) {
+          case "name":
+            setForm({...form, name: value})
+            break;
+
+          case "location":
+           setForm({...form, location: value})
+            break;
+          case "address":
+           setForm({...form, address: value})
+            break;
+        case "contactperson":
+           setForm({...form, contactperson: value})
+            break;
+        case "phone":
+           setForm({...form, phone: value})
+            break;
+        case "tin":
+           setForm({...form, tin: value})
+            break;
+
+          default:
+            break;
+        }
+   
   }
 
   useEffect(() => {
     document.title = "Create a Project"
   }, []);
+  const { vertical, horizontal } = state;
+  
 
   return (
     <>
@@ -146,6 +213,11 @@ export default function Dashboard() {
         <div className={classes.root}>
 
           <ProjectAppBar location={currentUrl} />
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:"top", horizontal:"center" }}>
+            <Alert onClose={handleClose} severity="success">
+              Your Project Has been successfully created!
+            </Alert>
+          </Snackbar>
 
           <main maxWidth="xs" style={{ margin: "auto" }}>
             <Card className={classes.paper}>
@@ -154,65 +226,97 @@ export default function Dashboard() {
                 style={{ fontSize: "1.2rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                 component="h1"
               >
-                {"Create dashboard"}
+                {"Create Project"}
               </Typography>
 
-              <form onSubmit={handleSubmit} className={classes.form} noValidate>
+              <form className={classes.form} href="" onSubmit={handleFormSubmit} noValidate>
 
                 <CssTextField
                   autoComplete="title"
                   margin="normal"
                   autoFocus
-                  name="title"
+                  name="name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="title"
-                  label="Title"
-                  //error={titlee.length > 0}
+                  value={form.name}
+                  id="name"
+                  label="Name"
                   onChange={handleChange}
                 />
-                {/* {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {emaile}
-            </small>} */}
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="location"
+                  variant="outlined"
+                  required
+                  value={form.location}
+                  fullWidth
+                  id="location"
+                  label="Location"
+                  onChange={handleChange}
+                />
 
                 <CssTextField
-                  autoComplete="fname"
+                  autoComplete="title"
                   margin="normal"
-                  name="description"
+                  autoFocus
+                  name="address"
                   variant="outlined"
                   required
+                  value={form.address}
                   fullWidth
-                  multiline
-                  rows={5}
-                  id="fullName"
-                  label="Description"
-                  //error={desce.length > 0}
+                  id="address"
+                  label="Address"
                   onChange={handleChange}
                 />
-                {/* {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {emaile}
-            </small>} */}
-
-
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="contactperson"
+                  variant="outlined"
+                  required
+                  value={form.contactperson}
+                  fullWidth
+                  id="contactPerson"
+                  label="Contact Person"
+                  onChange={handleChange}
+                />
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="phone"
+                  variant="outlined"
+                  required
+                  value={form.phone}
+                  fullWidth
+                  id="phone"
+                  label="Phone"
+                  onChange={handleChange}
+                />
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  name="tin"
+                  variant="outlined"
+                  required
+                  value={form.tin}
+                  fullWidth
+                  id="tin"
+                  label="TIN"
+                  onChange={handleChange}
+                />
+               
                 <Buttonn
-                  type="submit"
+                  type="Submit"
                   variant="contained"
-                  className={classes.submit}
-                  component='a'
-                  href={"/projects"}
+                  className={classes.submit}     
+                  
                 >
-                  Complete Step I
+                  CREATE
           </Buttonn>
 
               </form>
