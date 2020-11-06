@@ -130,66 +130,65 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   let [[fullNamee, emaile, passworde, mobilee], setErrors] = useState(["", "", "", ""])
+  const errorText = {
+    fullName: "At least two names e.g. John Doe",
+    email: "Enter valid email E.g: abc@gmail.com",
+    password: "Password should be more than 6 characters",
+    mobile: "Enter valid mobile E.g. 0773763258"
+  }
 
   const handleSubmit = (event) => {
     let { fullName, email, password, mobile } = event.target;
 
-    // if (fullName.value !== ""
-    //   && email.value !== ""
-    //   && password.value !== ""
-    //   && mobile.value !== ""
-    //   && fullNamee === ""
-    //   && emaile === ""
-    //   && passworde === ""
-    //   && mobilee === "") { }
-    // else {
-      if (fullName.value === ""
-        && email.value === ""
-        && password.value === ""
-        && mobile.value === ""
-        && fullNamee === ""
-        && emaile === ""
-        && passworde === ""
-        && mobilee === "") {
-        setErrors(["At least two names e.g. John Doe",
-          "Enter valid email E.g: abc@gmail.com",
-          "Password should be more than 6 characters",
-          "Enter valid mobile E.g. 0773763258"])
-          event.preventDefault();
-      }
-      else if (fullName.value === ""
-        && fullNamee === ""
-        && emaile === ""
-        && passworde === ""
-        && mobilee === "") {
-        setErrors(["At least two names e.g. John Doe", emaile, passworde, mobilee])
-        event.preventDefault();
-      }
-      else if (email.value === ""
-        && fullNamee === ""
-        && emaile === ""
-        && passworde === ""
-        && mobilee === "") {
-        setErrors([fullNamee, "Enter valid email E.g: abc@gmail.com", passworde, mobilee])
-        event.preventDefault();
-      }
-      else if (password.value === ""
-        && fullNamee === ""
-        && emaile === ""
-        && passworde === ""
-        && mobilee === "") {
-        setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
-        event.preventDefault();
-      }
-      else if (mobile.value === ""
-        && fullNamee === ""
-        && emaile === ""
-        && passworde === ""
-        && mobilee === "") {
-        setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
-        event.preventDefault();
-      }
-      // event.preventDefault();
+    if (fullName.value === ""
+      && email.value === ""
+      && password.value === ""
+      && mobile.value === ""
+      && fullNamee === ""
+      && emaile === ""
+      && passworde === ""
+      && mobilee === "") {
+      setErrors([
+        errorText.fullName,
+        errorText.email,
+        errorText.password,
+        errorText.mobile
+      ])
+      event.preventDefault();
+    }
+    else if (fullName.value === ""
+      && fullNamee === ""
+      && emaile === ""
+      && passworde === ""
+      && mobilee === "") {
+      setErrors([errorText.fullName, emaile, passworde, mobilee])
+      event.preventDefault();
+    }
+    else if (email.value === ""
+      && fullNamee === ""
+      && emaile === ""
+      && passworde === ""
+      && mobilee === "") {
+      setErrors([fullNamee, errorText.email, passworde, mobilee])
+      event.preventDefault();
+    }
+    else if (password.value === ""
+      && fullNamee === ""
+      && emaile === ""
+      && passworde === ""
+      && mobilee === "") {
+      setErrors([fullNamee, emaile, errorText.password, mobilee])
+      event.preventDefault();
+    }
+    else if (mobile.value === ""
+      && fullNamee === ""
+      && emaile === ""
+      && passworde === ""
+      && mobilee === "") {
+      setErrors([fullNamee, emaile, passworde, errorText.mobile])
+      event.preventDefault();
+    }
+    // event.preventDefault();
     // }
   }
 
@@ -201,23 +200,23 @@ export default function SignUp() {
 
     switch (name) {
       case "fullName":
-        (!nameRegex.test(value))
-          ? setErrors(["At least two names E.g. John Doe", emaile, passworde, mobilee])
+        (!nameRegex.test(value) && value.length > 30)
+          ? setErrors([errorText.fullName, emaile, passworde, mobilee])
           : setErrors(["", emaile, passworde, mobilee]);
         break;
       case "email":
-        (!emailRegex.test(value))
-          ? setErrors([fullNamee, "Enter valid email E.g. abc@gmail.com", passworde, mobilee])
+        (!emailRegex.test(value) && value.length > 100)
+          ? setErrors([fullNamee, errorText.email, passworde, mobilee])
           : setErrors([fullNamee, "", passworde, mobilee]);
         break;
       case "password":
-        (value.length < 6)
-          ? setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
+        (value.length < 6 || value.length > 100)
+          ? setErrors([fullNamee, emaile, errorText.password, mobilee])
           : setErrors([fullNamee, emaile, "", mobilee]);
         break;
       case "mobile":
-        (!mobileRegex.test(value))
-          ? setErrors([fullNamee, emaile, passworde, "Enter valid number E.g. 0773763258"])
+        (!mobileRegex.test(value) && value.length !== 10)
+          ? setErrors([fullNamee, emaile, passworde, errorText.mobile])
           : setErrors([fullNamee, emaile, passworde, ""]);
         break;
 
@@ -231,26 +230,55 @@ export default function SignUp() {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}>
 
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+      >
         <CssBaseline />
-        <div className={classes.paper}>
+        <div
+          className={classes.paper}
+        >
 
-          <div className={classes.titleDiv}>
-            <img src={Logo} alt="logo" width="25px" height="25px" />
-            <h4 className={classes.navBrand}>Tele-Farmer</h4>
+          <div
+            className={classes.titleDiv}
+          >
+            <img
+              src={Logo}
+              alt="logo"
+              width="25px"
+              height="25px"
+            />
+            <h4
+              className={classes.navBrand}
+            >
+              Tele-Farmer
+            </h4>
           </div>
 
-          <Typography component="h1" variant="h5" className={classes.pageTitle}>
+          <Typography
+            component="h1"
+            variant="h5"
+            className={classes.pageTitle}
+          >
             Sign Up
           </Typography>
 
-          <Typography component="h2" variant="h5" className={classes.pageSubTitle}>
+          <Typography
+            component="h2"
+            variant="h5"
+            className={classes.pageSubTitle}
+          >
             Enter your information to stay connected and monitor your project(s) performance.
           </Typography>
 
-          <form onSubmit={handleSubmit} className={classes.form} noValidate>
+          <form
+            onSubmit={handleSubmit}
+            className={classes.form}
+            noValidate
+          >
 
             <CssTextField
               variant="outlined"

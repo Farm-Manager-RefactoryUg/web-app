@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import API from "../endPoints"
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const drawerWidth = 240;
 const Buttonn = withStyles({
@@ -127,10 +129,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Dashboard() {
+export default function Project() {
   const classes = useStyles();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
   const currentUrl = useLocation();
+  //const { vertical, horizontal } = state;
+  const [open, setOpen] = useState(false);
+
+  // const [state, setState] = useState({
+  //   open: false,
+  //   vertical: 'top',
+  //   horizontal: 'center',
+  // });
   const [form, setForm] = useState({
     name: "",
     location: "",
@@ -139,7 +149,7 @@ export default function Dashboard() {
     phone: "",
     tin: "",
   })
-  const [errorMessages, setErrors] = useState({
+  const [error, setErrors] = useState({
     name: "",
     location: "",
     address: "",
@@ -147,15 +157,51 @@ export default function Dashboard() {
     phone: "",
     tin: "",
   })
+  const errorText = {
+    name: "Only letters and numbers allowed E.g. BIyinizika 2",
+    location: "Enter valid address E.g. Muyenga, Bukasa",
+    address: "Enter valid address E.g. Muyenga, Bukasa",
+    contactperson: "At least two names E.g. John Doe",
+    phone: "Enter valid number E.g. 0773763258",
+    tin: "Enter valid tin"
+  }
+
+  function Alert(props) {
+    return <MuiAlert elevation={1} variant="filled" {...props} />;
+  }
 
   const handleFormSubmit = (event) => {
-    axios.post(API.farm, form)
-      .then((response) => console.log(response))
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });
-    event.preventDefault();
+    let preventSubmit = false
+    const formArray = Object.entries(form)
+    const errorArray = Object.values(error)
+
+    formArray.forEach(([key, value]) => {
+      if (value === "") {
+        setErrors({ ...error, [key]: errorText.key })
+        preventSubmit = true
+      }
+    });
+
+    errorArray.forEach((value) => preventSubmit = (value !== "") ? true : preventSubmit);
+
+    if (!preventSubmit) {
+      axios.post(API.farm, form)
+        .then(() => setOpen(!open) )
+        .catch((error) => {
+          console.error('There was an error!', error);
+        });
+    }
+
+    event.preventDefault()
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(!open);
+  };
+
 
   const theme = React.useMemo(
     () =>
@@ -174,47 +220,46 @@ export default function Dashboard() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    const nameRegex = /^[a-zA-Z]+[ a-zA-Z]*$/
+    const alphaNumRegex = /^[0-9a-zA-Z\s]*$/
     const contactPersonRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const mobileRegex = /^07[0-9]{8}$/
-    const alphaNumRegex = nameRegex
-    //const numberRegex = /^[0-9]*$/
+    const numberRegex = /^[0-9]*$/
 
     switch (name) {
       case "name":
-        (!nameRegex.test(value))
-          ? setErrors({ ...errorMessages, name: "Only letters and numbers allowed E.g. BIyinizika 2" })
-          : setErrors({ ...errorMessages, name: "" });
+        ((!alphaNumRegex.test(value)) && value.length > 30)
+          ? setErrors({ ...error, name: errorText.name })
+          : setErrors({ ...error, name: "" });
         setForm({ ...form, name: value })
         break;
       case "location":
-        (!alphaNumRegex.test(value))
-          ? setErrors({ ...errorMessages, location: "Enter valid address E.g. Muyenga, Bukasa" })
-          : setErrors({ ...errorMessages, location: "" });
+        ((!alphaNumRegex.test(value)) && value.length > 25)
+          ? setErrors({ ...error, location: errorText.location })
+          : setErrors({ ...error, location: "" });
         setForm({ ...form, location: value })
         break;
       case "address":
-        (!alphaNumRegex.test(value))
-          ? setErrors({ ...errorMessages, address: "Enter valid address E.g. Muyenga, Bukasa" })
-          : setErrors({ ...errorMessages, address: "" });
+        ((!alphaNumRegex.test(value)) && value.length > 20)
+          ? setErrors({ ...error, address: errorText.address })
+          : setErrors({ ...error, address: "" });
         setForm({ ...form, address: value })
         break;
       case "contactperson":
         (!contactPersonRegex.test(value))
-          ? setErrors({ ...errorMessages, contactperson: "At least two names E.g. John Doe" })
-          : setErrors({ ...errorMessages, contactperson: "" });
+          ? setErrors({ ...error, contactperson: errorText.contactperson })
+          : setErrors({ ...error, contactperson: "" });
         setForm({ ...form, contactperson: value })
         break;
       case "phone":
         (!mobileRegex.test(value))
-          ? setErrors({ ...errorMessages, phone: "Enter valid number E.g. 0773763258" })
-          : setErrors({ ...errorMessages, phone: "" });
+          ? setErrors({ ...error, phone: errorText.phone })
+          : setErrors({ ...error, phone: "" });
         setForm({ ...form, phone: value })
         break;
       case "tin":
-        (value.length !== 10)
-          ? setErrors({ ...errorMessages, tin: "Enter valid tin" })
-          : setErrors({ ...errorMessages, tin: "" });
+        ((!numberRegex.test(value)) && value.length !== 10)
+          ? setErrors({ ...error, tin: errorText.tin })
+          : setErrors({ ...error, tin: "" });
         setForm({ ...form, tin: value })
         break;
 
@@ -239,6 +284,12 @@ export default function Dashboard() {
           <ProjectAppBar
             location={currentUrl}
           />
+
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+            <Alert onClose={handleClose} severity="success">
+              Your Project Has been successfully created!
+            </Alert>
+          </Snackbar>
 
           <main
             maxWidth="xs"
@@ -274,14 +325,14 @@ export default function Dashboard() {
                   onChange={handleChange}
                 />
 
-                {errorMessages.name &&
+                {error.name &&
                   <small
                     className={classes.errorText}
                   >
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
-                    {errorMessages.name}
+                    {error.name}
                   </small>
                 }
 
@@ -298,14 +349,14 @@ export default function Dashboard() {
                   onChange={handleChange}
                 />
 
-                {errorMessages.location &&
+                {error.location &&
                   <small
                     className={classes.errorText}
                   >
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
-                    {errorMessages.location}
+                    {error.location}
                   </small>
                 }
 
@@ -322,14 +373,14 @@ export default function Dashboard() {
                   onChange={handleChange}
                 />
 
-                {errorMessages.address &&
+                {error.address &&
                   <small
                     className={classes.errorText}
                   >
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
-                    {errorMessages.address}
+                    {error.address}
                   </small>
                 }
 
@@ -346,14 +397,14 @@ export default function Dashboard() {
                   onChange={handleChange}
                 />
 
-                {errorMessages.contactperson &&
+                {error.contactperson &&
                   <small
                     className={classes.errorText}
                   >
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
-                    {errorMessages.contactperson}
+                    {error.contactperson}
                   </small>
                 }
 
@@ -370,14 +421,14 @@ export default function Dashboard() {
                   onChange={handleChange}
                 />
 
-                {errorMessages.phone &&
+                {error.phone &&
                   <small
                     className={classes.errorText}
                   >
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
-                    {errorMessages.phone}
+                    {error.phone}
                   </small>
                 }
 
@@ -394,14 +445,14 @@ export default function Dashboard() {
                   onChange={handleChange}
                 />
 
-                {errorMessages.tin &&
+                {error.tin &&
                   <small
                     className={classes.errorText}
                   >
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
-                    {errorMessages.tin}
+                    {error.tin}
                   </small>
                 }
 
@@ -414,6 +465,7 @@ export default function Dashboard() {
                 </Buttonn>
 
               </form>
+
             </Card>
 
           </main>
