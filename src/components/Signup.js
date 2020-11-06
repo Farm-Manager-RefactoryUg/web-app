@@ -115,54 +115,85 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.9rem",
     marginTop: "100px",
     textAlign: "center"
+  },
+  errorText: {
+    color: "red",
+    fontSize: "0.8rem",
+    fontFamily: "Segoe UI"
+  },
+  errorIcon: {
+    transform: "scale(0.7)",
   }
 }));
 
 
 export default function SignUp() {
-
-  //let history = useHistory();
   const classes = useStyles();
   let [[fullNamee, emaile, passworde, mobilee], setErrors] = useState(["", "", "", ""])
 
   const handleSubmit = (event) => {
-    //const url = "http://www.something.com/login";
     let { fullName, email, password, mobile } = event.target;
 
-    if (fullName.value !== "" && email.value !== "" && password.value !== "" && mobile.value !== "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
-      // axios.post(url, { fullName, email, password, mobile })
-      //   .then(data => {
-      //     if (data.message === "true") {
-      //       history.pushState("/projects")
-      //     } else {
-      //       // Render error message on Login page
-      //     }
-      //   })
-      //   .catch(() => {
-      //     history.push("/pagenotfound");
-      //   })
-    } else {
-      if (fullName.value === "" && email.value === "" && password.value === "" && mobile.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
-        setErrors(["At least two names e.g. John Doe", "Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters", "Enter valid mobile E.g. 0773763258"])
+    // if (fullName.value !== ""
+    //   && email.value !== ""
+    //   && password.value !== ""
+    //   && mobile.value !== ""
+    //   && fullNamee === ""
+    //   && emaile === ""
+    //   && passworde === ""
+    //   && mobilee === "") { }
+    // else {
+      if (fullName.value === ""
+        && email.value === ""
+        && password.value === ""
+        && mobile.value === ""
+        && fullNamee === ""
+        && emaile === ""
+        && passworde === ""
+        && mobilee === "") {
+        setErrors(["At least two names e.g. John Doe",
+          "Enter valid email E.g: abc@gmail.com",
+          "Password should be more than 6 characters",
+          "Enter valid mobile E.g. 0773763258"])
+          event.preventDefault();
       }
-      else if (fullName.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+      else if (fullName.value === ""
+        && fullNamee === ""
+        && emaile === ""
+        && passworde === ""
+        && mobilee === "") {
         setErrors(["At least two names e.g. John Doe", emaile, passworde, mobilee])
+        event.preventDefault();
       }
-      else if (email.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+      else if (email.value === ""
+        && fullNamee === ""
+        && emaile === ""
+        && passworde === ""
+        && mobilee === "") {
         setErrors([fullNamee, "Enter valid email E.g: abc@gmail.com", passworde, mobilee])
+        event.preventDefault();
       }
-      else if (password.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+      else if (password.value === ""
+        && fullNamee === ""
+        && emaile === ""
+        && passworde === ""
+        && mobilee === "") {
         setErrors([fullNamee, emaile, "Password should be more than 6 characters", mobilee])
+        event.preventDefault();
       }
-      else if (mobile.value === "" && fullNamee === "" && emaile === "" && passworde === "" && mobilee === "") {
+      else if (mobile.value === ""
+        && fullNamee === ""
+        && emaile === ""
+        && passworde === ""
+        && mobilee === "") {
         setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
+        event.preventDefault();
       }
-      event.preventDefault();
-    }
+      // event.preventDefault();
+    // }
   }
 
   const handleChange = (event) => {
-
     const { name, value } = event.target;
     const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
@@ -185,8 +216,8 @@ export default function SignUp() {
           : setErrors([fullNamee, emaile, "", mobilee]);
         break;
       case "mobile":
-        (!mobileRegex.test(value) && value.length !== 10)
-          ? setErrors([fullNamee, emaile, passworde, "Enter valid mobile E.g. 0773763258"])
+        (!mobileRegex.test(value))
+          ? setErrors([fullNamee, emaile, passworde, "Enter valid number E.g. 0773763258"])
           : setErrors([fullNamee, emaile, passworde, ""]);
         break;
 
@@ -233,14 +264,15 @@ export default function SignUp() {
               error={fullNamee.length > 0}
               onChange={handleChange}
             />
-            {fullNamee && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {fullNamee}
-            </small>}
+            {fullNamee &&
+              <small
+                className={classes.errorText}
+              >
+                <ErrorOutlineIcon
+                  className={classes.errorIcon}
+                />
+                {fullNamee}
+              </small>}
 
             <CssTextField
               variant="outlined"
@@ -255,11 +287,11 @@ export default function SignUp() {
               onChange={handleChange}
             />
             {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
+              className={classes.errorText}
             >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              <ErrorOutlineIcon
+                className={classes.errorIcon}
+              />
               {emaile}
             </small>}
 
@@ -278,11 +310,11 @@ export default function SignUp() {
 
             />
             {passworde && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
+              className={classes.errorText}
             >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              <ErrorOutlineIcon
+                className={classes.errorIcon}
+              />
               {passworde}
             </small>}
 
@@ -298,11 +330,11 @@ export default function SignUp() {
               onChange={handleChange}
             />
             {mobilee && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
+              className={classes.errorText}
             >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+              <ErrorOutlineIcon
+                className={classes.errorIcon}
+              />
               {mobilee}
             </small>}
 
