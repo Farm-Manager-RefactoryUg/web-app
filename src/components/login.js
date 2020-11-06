@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -119,11 +119,18 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Segoe UI",
     fontWeight: "800",
     fontSize: "0.9rem",
+  },  
+  errorText: {
+    color: "red",
+    fontSize: "0.8rem",
+    fontFamily: "Segoe UI"
+  },
+  errorIcon: {
+    transform: "scale(0.7)",
   }
 }));
 
-export default function Login() {
-  let history = useHistory();
+export default function LogIn() {
   const classes = useStyles();
   let [[emaile, passworde], setErrors] = useState(["", ""])
 
@@ -135,13 +142,13 @@ export default function Login() {
       axios.post(url, { email, password })
         .then(data => {
           if (data.message === "true") {
-            history.pushState("/projects")
+            //history.pushState("/projects")
           } else {
             // Render error message on Login page
           }
         })
         .catch(() => {
-          history.push("/pagenotfound");
+          //history.push("/pagenotfound");
         })
     } else {
       if (email.value === "" && password.value === "" && emaile === "" && passworde === "") {
@@ -215,14 +222,15 @@ export default function Login() {
               autoComplete="email"
               onChange={handleChange}
             />
-            {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {emaile}
-            </small>}
+            {emaile &&
+              <small
+                className={classes.errorText}
+              >
+                <ErrorOutlineIcon
+                  className={classes.errorIcon}
+                />
+                {emaile}
+              </small>}
 
             <CssTextField
               variant="outlined"
@@ -239,12 +247,15 @@ export default function Login() {
 
 
             />
-            {passworde && <small
-              style={{ color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI" }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {passworde}
-            </small>}
+            {passworde &&
+              <small
+                className={classes.errorText}
+              >
+                <ErrorOutlineIcon
+                  className={classes.errorIcon}
+                />
+                {passworde}
+              </small>}
 
 
 
@@ -265,8 +276,8 @@ export default function Login() {
               variant="contained"
               className={classes.submit}
               endIcon={<ArrowRightAltIcon />}
-            component={Link}      // "Component" and "to" prop to be removed.
-            to={"/projects"}     //  Currently for demonstration purposes only.
+              component={Link}      // "Component" and "to" prop to be removed.
+              to={"/projects"}     //  Currently for demonstration purposes only.
             >
               Login
             </Buttonn>
