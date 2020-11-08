@@ -21,6 +21,7 @@
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "date-fns": "^2.16.1",
+    "formik": "^2.2.3",
     "framer-motion": "^2.9.4",
     "highcharts": "^8.1.2",
     "highcharts-react-official": "^3.0.0",
@@ -43,7 +44,8 @@
     "react-search-field": "^1.1.0",
     "react-test-renderer": "^17.0.0",
     "reactjs-popup": "^1.5.0",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",

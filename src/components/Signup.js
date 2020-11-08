@@ -119,7 +119,8 @@ const useStyles = makeStyles((theme) => ({
   errorText: {
     color: "red",
     fontSize: "0.8rem",
-    fontFamily: "Segoe UI"
+    fontFamily: "Segoe UI",
+    display: "block",
   },
   errorIcon: {
     transform: "scale(0.7)",

@@ -11,7 +11,6 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import Divider from '@material-ui/core/Divider';
 import Logo from '../static/images/tree.svg'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import axios from "axios";
 
 
 const Buttonn = withStyles({
@@ -119,11 +118,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Segoe UI",
     fontWeight: "800",
     fontSize: "0.9rem",
-  },  
+  },
   errorText: {
     color: "red",
     fontSize: "0.8rem",
-    fontFamily: "Segoe UI"
+    fontFamily: "Segoe UI",
+    display: "block",
   },
   errorIcon: {
     transform: "scale(0.7)",
@@ -134,23 +134,11 @@ export default function LogIn() {
   const classes = useStyles();
   let [[emaile, passworde], setErrors] = useState(["", ""])
 
-  const handleSubmit = event => {
-    const url = "http://www.something.com/login";
+  const handleSubmit = (event) => {
     let { email, password } = event.target;
 
-    if (email.value !== "" && password.value !== "" && emaile === "" && passworde === "") {
-      axios.post(url, { email, password })
-        .then(data => {
-          if (data.message === "true") {
-            //history.pushState("/projects")
-          } else {
-            // Render error message on Login page
-          }
-        })
-        .catch(() => {
-          //history.push("/pagenotfound");
-        })
-    } else {
+    if (email.value !== "" && password.value !== "" && emaile === "" && passworde === "") { }
+    else {
       if (email.value === "" && password.value === "" && emaile === "" && passworde === "") {
         setErrors(["Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters"])
       }
@@ -176,7 +164,9 @@ export default function LogIn() {
         break;
 
       case "password":
-        (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""]);
+        (value.length < 6)
+          ? setErrors([emaile, "Password should be more than 6 characters"])
+          : setErrors([emaile, ""]);
         break;
 
       default:
@@ -276,8 +266,6 @@ export default function LogIn() {
               variant="contained"
               className={classes.submit}
               endIcon={<ArrowRightAltIcon />}
-              component={Link}      // "Component" and "to" prop to be removed.
-              to={"/projects"}     //  Currently for demonstration purposes only.
             >
               Login
             </Buttonn>

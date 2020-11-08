@@ -118,7 +118,8 @@ const useStyles = makeStyles((theme) => ({
   errorText: {
     color: "red",
     fontSize: "0.8rem",
-    fontFamily: "Segoe UI"
+    fontFamily: "Segoe UI",
+    display: "block",
   },
   errorIcon: {
     transform: "scale(0.7)",
@@ -158,12 +159,12 @@ export default function Project() {
     tin: "",
   })
   const errorText = {
-    name: "Only letters and numbers allowed E.g. BIyinizika 2",
-    location: "Enter valid address E.g. Muyenga, Bukasa",
-    address: "Enter valid address E.g. Muyenga, Bukasa",
-    contactperson: "At least two names E.g. John Doe",
-    phone: "Enter valid number E.g. 0773763258",
-    tin: "Enter valid tin"
+    name: "Only letters and numbers allowed E.g: BIyinizika 2",
+    location: "Enter a valid location E.g: Muyenga, Bukasa",
+    address: "Enter a valid address E.g: 24 Wamala Lane",
+    contactperson: "At least two names E.g: John Doe",
+    phone: "Enter a valid number E.g: 0773763258",
+    tin: "Enter a valid TIN E.g: 1283587938"
   }
 
   function Alert(props) {
@@ -172,21 +173,15 @@ export default function Project() {
 
   const handleFormSubmit = (event) => {
     let preventSubmit = false
-    const formArray = Object.entries(form)
     const errorArray = Object.values(error)
 
-    formArray.forEach(([key, value]) => {
-      if (value === "") {
-        setErrors({ ...error, [key]: errorText.key })
-        preventSubmit = true
-      }
-    });
+
 
     errorArray.forEach((value) => preventSubmit = (value !== "") ? true : preventSubmit);
 
     if (!preventSubmit) {
       axios.post(API.farm, form)
-        .then(() => setOpen(!open) )
+        .then(() => setOpen(!open))
         .catch((error) => {
           console.error('There was an error!', error);
         });
@@ -223,23 +218,25 @@ export default function Project() {
     const alphaNumRegex = /^[0-9a-zA-Z\s]*$/
     const contactPersonRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
     const mobileRegex = /^07[0-9]{8}$/
-    const numberRegex = /^[0-9]*$/
+    const numericRegex = /^[0-9]*$/
+    const spaceRegex = /^[\s]*$/
+
 
     switch (name) {
       case "name":
-        ((!alphaNumRegex.test(value)) && value.length > 30)
+        (!alphaNumRegex.test(value) || value.length > 30 || spaceRegex.test(value))
           ? setErrors({ ...error, name: errorText.name })
           : setErrors({ ...error, name: "" });
         setForm({ ...form, name: value })
         break;
       case "location":
-        ((!alphaNumRegex.test(value)) && value.length > 25)
+        (!alphaNumRegex.test(value) || value.length > 25 || spaceRegex.test(value))
           ? setErrors({ ...error, location: errorText.location })
           : setErrors({ ...error, location: "" });
         setForm({ ...form, location: value })
         break;
       case "address":
-        ((!alphaNumRegex.test(value)) && value.length > 20)
+        (!alphaNumRegex.test(value) || value.length > 20 || spaceRegex.test(value))
           ? setErrors({ ...error, address: errorText.address })
           : setErrors({ ...error, address: "" });
         setForm({ ...form, address: value })
@@ -251,13 +248,13 @@ export default function Project() {
         setForm({ ...form, contactperson: value })
         break;
       case "phone":
-        (!mobileRegex.test(value))
+        (!mobileRegex.test(value) || value.length !== 10)
           ? setErrors({ ...error, phone: errorText.phone })
           : setErrors({ ...error, phone: "" });
         setForm({ ...form, phone: value })
         break;
       case "tin":
-        ((!numberRegex.test(value)) && value.length !== 10)
+        (!numericRegex.test(value) || value.length !== 10)
           ? setErrors({ ...error, tin: errorText.tin })
           : setErrors({ ...error, tin: "" });
         setForm({ ...form, tin: value })

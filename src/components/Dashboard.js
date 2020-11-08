@@ -21,6 +21,7 @@ import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import SalesBarGraph from './SalesBarGraph'
+import API from "../endPoints"
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ export default function Dashboard() {
   useEffect(() => {
     setId(item.id);
     axios
-      .get(`https://farmmanager-api.herokuapp.com/api/income/${id}`)
+      .get(API.income + id)
       .then((response) => {
         setItems(response.data);
       })
