@@ -247,7 +247,7 @@ export default function Dashboard() {
                                                 {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
                                                 <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
                                                 <Button
-                     fatal: cannot do a partial commit during a merge.                               color="primary"
+                                                    color="primary"
                                                     style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
                                                     component={Link}
                                                     to={"/dashboard"}
