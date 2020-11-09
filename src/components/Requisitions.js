@@ -1,111 +1,159 @@
-import React from "react";
-import Link from "@material-ui/core/Link";
+import React, {useEffect, useState} from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+//import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Navbar from "./Navbar";
+import Paper from "@material-ui/core/Paper";
+import TablePagination from "@material-ui/core/TablePagination";
+//import TableContainer from "@material-ui/core/TableContainer";
+//import CssBaseline from "@material-ui/core/CssBaseline";
+import ProjectAppBar from "./ProjectAppBar";
+import { motion } from "framer-motion";
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
-  ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
-  ),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
-  ),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
+  root: {
+    display: "flex",
+    fontFamily: "Segoe UI",
+    backgroundColor: "rgb(247, 249, 252)",
+    
+  },
+  root1: {
+    width: "100%",
+    backgroundColor: "white",
+    padding:"2rem"
+  },
+  // container: {
+  //   maxHeight: 440,
+  // },
+  spacing: {
+    margin: 0,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  grid: {
+    margin: "0px !important",
+  },
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+    marginTop: "60px",
+  },
+  container: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
+    justifyContent: "space-evenly",
+    maxHeight: 440,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+  },
+  fixedHeight: {
+    height: 150,
   },
 }));
+// const useStyles = makeStyles({
+//   root: {
+//     display: "flex",
+//     width: "90%",
+//   },
+//   container: {
+//     maxHeight: 440,
+//   },
+// });
+
 
 export default function Requisitions() {
+  const currentUrl = useLocation();
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [items, setItems] = useState([]);
+  // const rows = [{ items }];
+  
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+    useEffect(() => {
+      axios
+        .get("https://farmmanager-api.herokuapp.com/api/requisition")
+        .then((response) => {
+         setItems(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
   return (
-    <React.Fragment>
-      <Navbar />
-      <br></br>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <h5 align="left">Recent Orders</h5>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Ship To</TableCell>
-                  <TableCell>Payment Method</TableCell>
-                  <TableCell align="right">Sale Amount</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.date}</TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.shipTo}</TableCell>
-                    <TableCell>{row.paymentMethod}</TableCell>
-                    <TableCell align="right">{row.amount}</TableCell>
+    <div className={classes.root}>
+      <React.Fragment>
+        {/* <CssBaseline/> */}
+        <ProjectAppBar location={currentUrl} />
+
+        <main className={classes.content}>
+          <Paper className={classes.root1}>
+            <h5 align="left" style={{ marginLeft: "0.5rem", color: "black" }}>
+              Recent Orders
+            </h5>
+            <motion.TableContainer
+              className={classes.container}
+              whileHover={{ scale: 1.2 }}
+            >
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow style={{ backgroundColor: "red", color: "white" }}>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Requisition Number</TableCell>
+                    <TableCell>Purpose</TableCell>
+                    <TableCell>Quantity</TableCell>
+                    <TableCell align="right">Total Price</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div className={classes.seeMore}>
-              <Link color="primary" href="#" onClick={preventDefault}>
-                See more orders
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
+                </TableHead>
+                <TableBody>
+                  {items &&
+                    items
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((item) => (
+                        <TableRow hover role="checkbox" tabIndex={-1}>
+                          <TableCell>{item.date}</TableCell>
+                          <TableCell>{item.reqno}</TableCell>
+                          <TableCell>{item.purpose}</TableCell>
+                          <TableCell>{item.qty}</TableCell>
+                          <TableCell align="right">{item.total}</TableCell>
+                        </TableRow>
+                      ))}
+                </TableBody>
+              </Table>
+            </motion.TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={items.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </main>
+      </React.Fragment>
+    </div>
   );
 }
