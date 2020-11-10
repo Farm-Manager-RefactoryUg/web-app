@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function LogIn() {
+export default function Login() {
   const classes = useStyles();
   let [[emaile, passworde], setErrors] = useState(["", ""])
 
