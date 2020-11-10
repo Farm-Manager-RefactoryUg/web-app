@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
@@ -82,72 +82,73 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const projects = [{
-    id:1,
-    name:"diciri",
-    location:"Muyenga",
-    address:"Nakabugo-Bbira",
-    contactsperson:"Seth",
-    phone: 734567332,
-    tin: 12345,
-},
-{
-    id:2,
-    name:"diciri",
-    location:"Muyenga",
-    address:"Nakabugo-Bbira",
-    contactsperson:"Seth",
-    phone: 734567332,
-    tin: 12345,
-},
+// const projects = [{
+//     id: 1,
+//     name: "diciri",
+//     location: "Muyenga",
+//     address: "Nakabugo-Bbira",
+//     contactsperson: "Seth",
+//     phone: 734567332,
+//     tin: 12345,
+// },
+// {
+//     id: 2,
+//     name: "diciri",
+//     location: "Muyenga",
+//     address: "Nakabugo-Bbira",
+//     contactsperson: "Seth",
+//     phone: 734567332,
+//     tin: 12345,
+// },
 
-{
-    id:3,
-    name:"diciri",
-    location:"Muyenga",
-    address:"Nakabugo-Bbira",
-    contactsperson:"Seth",
-    phone: 734567332,
-    tin: 12345,
-},
-{
-    id:4,
-    name:"diciri",
-    location:"Muyenga",
-    address:"Nakabugo-Bbira",
-    contactsperson:"Seth",
-    phone: 734567332,
-    tin: 12345,
-},
-{
-    id:5,
-    name:"diciri",
-    location:"Muyenga",
-    address:"Nakabugo-Bbira",
-    contactsperson:"Seth",
-    phone: 734567332,
-    tin: 12345,
-},
-];
+// {
+//     id: 3,
+//     name: "diciri",
+//     location: "Muyenga",
+//     address: "Nakabugo-Bbira",
+//     contactsperson: "Seth",
+//     phone: 734567332,
+//     tin: 12345,
+// },
+// {
+//     id: 4,
+//     name: "diciri",
+//     location: "Muyenga",
+//     address: "Nakabugo-Bbira",
+//     contactsperson: "Seth",
+//     phone: 734567332,
+//     tin: 12345,
+// },
+// {
+//     id: 5,
+//     name: "diciri",
+//     location: "Muyenga",
+//     address: "Nakabugo-Bbira",
+//     contactsperson: "Seth",
+//     phone: 734567332,
+//     tin: 12345,
+// },
+// ];
 
-let swapper ;
+// let swapper = [];
 
-if ( projects.length > 2 && projects.length %2 === 1) {swapper = projects.slice(1) }
-else {swapper = projects }
+// if (projects.length > 2 && projects.length % 2 === 1) { swapper = projects.slice(1) }
+// else { swapper = [...projects] }
 
-let pairedprojects = [];
+// let pairedprojects = [];
 
-for (let step =0; step <= swapper.length; step =+ 2) { 
-    pairedprojects.push([swapper[step],swapper[step+1]])
-}
+// for (let step =0; step <= swapper.length; step =+ 2) { 
+//     pairedprojects.push([swapper[step],swapper[step+1]])
+// }
 
 
 
 export default function Dashboard() {
     const classes = useStyles();
     const currentUrl = useLocation();
-    const [ setItems] = useState([]);
-    //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    const [projects, setProjects] = useState([]);
+    const [swapper, setSwapper] = useState([]);
+    const [pairedProjects, setPairedProjects] = useState([]);
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
     const theme = React.useMemo(
@@ -168,79 +169,93 @@ export default function Dashboard() {
     useEffect(() => {
         document.title = "Create a project"
         axios
-      .get("https://farmmanager-api.herokuapp.com/api/farm/")
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }, );
+            .get("https://farmmanager-api.herokuapp.com/api/farm/")
+            .then((response) => {
+                let projects = response.data
+                setProjects(projects);
+                return projects
+            })
+            .then((projects) => {
+                if (projects.length > 2 && projects.length % 2 === 1) {
+                    setSwapper(projects.slice(1));
+                }
+                else {
+                    setSwapper(projects);
+                }
+                return swapper
+            })
+            .then((swapper) => {
+                // console.log(projects);
+                console.log(swapper);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     return (
-        <>
-            <ThemeProvider theme={theme}>
-                <div className={classes.root}>
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
 
-                    <ProjectAppBar location={currentUrl} />
+                <ProjectAppBar location={currentUrl} />
 
-                    <main className={classes.content}>
-                        <div
-                            className={classes.appBarSpacer}
-                            style={{ minHeight: "3rem" }}
-                        />
+                <main className={classes.content}>
+                    <div
+                        className={classes.appBarSpacer}
+                        style={{ minHeight: "3rem" }}
+                    />
 
-                        <Container style={{ marginTop: "60px", }}>
+                    <Container style={{ marginTop: "60px", }}>
 
-                            <Typography
-                                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
-                                component="h1"
-                            >
-                                {"My Projects"}
-                            </Typography>
+                        <Typography
+                            style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                            component="h1"
+                        >
+                            {"My Projects"}
+                        </Typography>
 
-                            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+                        <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-                            {(projects.length === 1 || ( projects.length > 2 && projects.length % 2 === 1 ))? (
+                        {(projects.length === 1 || (projects.length > 2 && projects.length % 2 === 1)) ? (
 
-                                <Grid item xs={12} md={12} lg={12}>
-                                
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
+                            <Grid item xs={12} md={12} lg={12}>
 
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Biyinzika Mukono C
+                                <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                                    <CardContent style={{ paddingBottom: "8px", }}>
+
+                                        <Typography
+                                            gutterBottom
+                                            component="h6"
+                                            style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                                            Biyinzika Mukono C
                                                 <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
+                                                <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                            </IconButton>
+                                        </Typography>
 
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
+                                        <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
 
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                            </Typography>
+                                        <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
+                                            {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
+                                        </Typography>
 
-                                            <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
+                                        <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
 
-                                            <Button
-                                                color="primary"
-                                                style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                component={Link}
-                                                to={"/dashboard"}
-                                            >
-                                                View
+                                        <Button
+                                            color="primary"
+                                            style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
+                                            component={Link}
+                                            to={"/dashboard"}
+                                        >
+                                            View
                                             </Button>
 
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ) : projects.length === 2 ? (
-                                
-                                <Grid container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ) : projects.length === 2 ? (
+
+                            <Grid container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
 
                                 <Grid item xs={12} md={6} lg={6}>
                                     <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
@@ -252,7 +267,7 @@ export default function Dashboard() {
                                                 Galileo goat project I
                                                 <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
                                                     <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>                                 
+                                                </IconButton>
                                             </Typography>
                                             <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
                                             <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
@@ -269,7 +284,7 @@ export default function Dashboard() {
                                             </Typography>
                                         </CardContent>
                                     </Card>
-                                </Grid> 
+                                </Grid>
 
                                 <Grid item xs={12} md={6} lg={6}>
                                     <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
@@ -299,104 +314,103 @@ export default function Dashboard() {
                                         </CardContent>
                                     </Card>
                                 </Grid>
-                            
-                            </Grid>
-                            
-                            ) 
-                            :( swapper && swapper.length >2  ) ? ( 
-                                pairedprojects.map(
-                                    (projectpair)=>{
-                                        
-                               return <Grid key={new Date()} container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
 
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                {projectpair[0]['name']}
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>                                 
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-                                                <Button
-                                                    color="primary"
-                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                    component={Link}
-                                                    to={"/dashboard"}
-                                                >
-                                                    View
-                                                </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid> 
-
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                {projectpair[1]['name']}
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-                                                <Button
-                                                    color="primary"
-                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                    component={Link}
-                                                    to={"/dashboard"}
-                                                >
-                                                    View
-                                                </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            
                             </Grid>
 
-                                    }
-                                ) 
-                            )
+                        )
+                                : (swapper && swapper.length > 2) ? (
+                                    pairedProjects.map(
+                                        (projectpair) => {
 
-                    
+                                            return <Grid key={new Date()} container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
+
+                                                <Grid item xs={12} md={6} lg={6}>
+                                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                                                        <CardContent style={{ paddingBottom: "8px", }}>
+                                                            <Typography
+                                                                gutterBottom
+                                                                component="h6"
+                                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                                                                {"projectpair[0]['name']"}
+                                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                                </IconButton>
+                                                            </Typography>
+                                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
+                                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
+                                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
+                                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
+                                                                <Button
+                                                                    color="primary"
+                                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
+                                                                    component={Link}
+                                                                    to={"/dashboard"}
+                                                                >
+                                                                    View
+                                                </Button>
+                                                            </Typography>
+                                                        </CardContent>
+                                                    </Card>
+                                                </Grid>
+
+                                                <Grid item xs={12} md={6} lg={6}>
+                                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                                                        <CardContent style={{ paddingBottom: "8px", }}>
+                                                            <Typography
+                                                                gutterBottom
+                                                                component="h6"
+                                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                                                                {"projectpair[1]['name']"}
+                                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
+                                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
+                                                                </IconButton>
+                                                            </Typography>
+                                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
+                                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
+                                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
+                                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
+                                                                <Button
+                                                                    color="primary"
+                                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
+                                                                    component={Link}
+                                                                    to={"/dashboard"}
+                                                                >
+                                                                    View
+                                                </Button>
+                                                            </Typography>
+                                                        </CardContent>
+                                                    </Card>
+                                                </Grid>
+
+                                            </Grid>
+
+                                        }
+                                    )
+                                )
 
 
 
 
 
-                            : null } 
 
-                        </Container>
 
-                        <Fab
-                            aria-label="add"
-                            className={classes.marginFb}
-                            title="Create project"
-                            component={Link}
-                            to={"/project"}
-                        >
-                            <AddIcon />
-                        </Fab>
+                                    : null}
 
-                    </main>
-                </div>
-            </ThemeProvider>
-        </>
+                    </Container>
+
+                    <Fab
+                        aria-label="add"
+                        className={classes.marginFb}
+                        title="Create project"
+                        component={Link}
+                        to={"/project"}
+                    >
+                        <AddIcon />
+                    </Fab>
+
+                </main>
+            </div>
+        </ThemeProvider>
     );
 }
 
@@ -603,7 +617,7 @@ export default function Dashboard() {
 // export default function Dashboard() {
 //     const classes = useStyles();
 //     const currentUrl = useLocation();
-//     const [ setItems] = useState([]);
+//     const [ setProjects] = useState([]);
 //     //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 //     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -627,7 +641,7 @@ export default function Dashboard() {
 //         axios
 //       .get("https://farmmanager-api.herokuapp.com/api/farm/")
 //       .then((response) => {
-//         setItems(response.data);
+//         setProjects(response.data);
 //       })
 //       .catch((err) => {
 //         console.log(err);
@@ -661,7 +675,7 @@ export default function Dashboard() {
 //                             {project.length === 0 ? null : project.length === 1 ? (
 
 //                                 <Grid item xs={12} md={12} lg={12}>
-                                
+
 //                                     <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
 //                                         <CardContent style={{ paddingBottom: "8px", }}>
 
@@ -696,7 +710,7 @@ export default function Dashboard() {
 //                                     </Card>
 //                                 </Grid>
 //                             ) : project.length === 2 ? (
-                                
+
 //                                 <Grid container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
 
 //                                 <Grid item xs={12} md={6} lg={6}>
@@ -756,9 +770,9 @@ export default function Dashboard() {
 //                                         </CardContent>
 //                                     </Card>
 //                                 </Grid>
-                            
+
 //                             </Grid>
-                            
+
 //                             ) : null }
 
 //                         </Container>
