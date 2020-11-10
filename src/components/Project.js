@@ -238,7 +238,9 @@ export default function Project() {
 
           <main
             maxWidth="xs"
-            style={{ margin: "auto" }}
+            style={{
+              margin: "auto"
+            }}
           >
             <Card
               className={classes.paper}
