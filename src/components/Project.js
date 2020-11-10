@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Redirect, Route } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+
 
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import API from "../endPoints"
@@ -135,15 +136,15 @@ function Alert(props) {
 
 export default function Project() {
 
-  const [state, setState] = useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-  });
+  // const [state, setState] = useState({
+  //   open: false,
+  //   vertical: 'top',
+  //   horizontal: 'center',
+  // });
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-   
+  const [redirection, setRedirect] = useState(false);   
   const currentUrl = useLocation();
   
   const [form, setForm] = useState({
@@ -168,7 +169,9 @@ export default function Project() {
   const handleFormSubmit = (event) => {
     axios.post(API.farm, form)
       .then((response) => {
+
         setOpen(!open)
+        setRedirect(true)
         setForm({
             name: "",
             location: "",
@@ -176,12 +179,15 @@ export default function Project() {
             contactperson: "",
             phone: "",
             tin: "",
-          })
+        })
+        
+
       })
       .catch((error) => {
         console.error('There was an error!', error);
       });
     event.preventDefault();
+    
 
 
   }
@@ -265,10 +271,7 @@ export default function Project() {
   useEffect(() => {
     document.title = "Create a Project"
   }, []);
-  const { vertical, horizontal } = state;
   
-
-
   return (
     <>
       <ThemeProvider
@@ -460,6 +463,10 @@ export default function Project() {
                 </Buttonn>
 
               </form>
+              <Route exact path="/projects">
+                {redirection && <Redirect to="/projects"/>}
+              </Route>
+             
             </Card>
 
           </main>
