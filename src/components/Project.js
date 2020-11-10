@@ -8,6 +8,9 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import API from "../endPoints"
 
@@ -130,7 +133,7 @@ function Alert(props) {
   return <MuiAlert elevation={1} variant="filled" {...props} />;
 }
 
-export default function Dashboard() {
+export default function Project() {
 
   const [state, setState] = useState({
     open: false,
@@ -152,15 +155,7 @@ export default function Dashboard() {
     tin: "",
   })
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const currentUrl = useLocation();
-  const [form, setForm] = useState({
-    name: "",
-    location: "",
-    address: "",
-    contactperson: "",
-    phone: "",
-    tin: "",
-  })
+  
   const [errorMessages, setErrors] = useState({
     name: "",
     location: "",
@@ -172,23 +167,26 @@ export default function Dashboard() {
 
   const handleFormSubmit = (event) => {
     axios.post(API.farm, form)
-      .then((response) => console.log(response))
+      .then((response) => {
+        setOpen(!open)
+        setForm({
+            name: "",
+            location: "",
+            address: "",
+            contactperson: "",
+            phone: "",
+            tin: "",
+          })
+      })
       .catch((error) => {
         console.error('There was an error!', error);
       });
     event.preventDefault();
+
+
   }
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    
-    axios.post('https://farmmanager-api.herokuapp.com/api/farm/', form)
-      .then((response) => setOpen(!open))
-
-      .catch((error) => {
-        console.error('There was an error!', error);
-      });    
-  }
+  
    
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -285,6 +283,7 @@ export default function Dashboard() {
               Your Project Has been successfully created!
             </Alert>
           </Snackbar>
+          
 
           <main
             maxWidth="xs"
@@ -451,58 +450,7 @@ export default function Dashboard() {
                   </small>
                 }
 
-                <CssTextField
-                  autoComplete="title"
-                  margin="normal"
-                  autoFocus
-                  name="address"
-                  variant="outlined"
-                  required
-                  value={form.address}
-                  fullWidth
-                  id="address"
-                  label="Address"
-                  onChange={handleChange}
-                />
-                <CssTextField
-                  autoComplete="title"
-                  margin="normal"
-                  autoFocus
-                  name="contactperson"
-                  variant="outlined"
-                  required
-                  value={form.contactperson}
-                  fullWidth
-                  id="contactPerson"
-                  label="Contact Person"
-                  onChange={handleChange}
-                />
-                <CssTextField
-                  autoComplete="title"
-                  margin="normal"
-                  autoFocus
-                  name="phone"
-                  variant="outlined"
-                  required
-                  value={form.phone}
-                  fullWidth
-                  id="phone"
-                  label="Phone"
-                  onChange={handleChange}
-                />
-                <CssTextField
-                  autoComplete="title"
-                  margin="normal"
-                  name="tin"
-                  variant="outlined"
-                  required
-                  value={form.tin}
-                  fullWidth
-                  id="tin"
-                  label="TIN"
-                  onChange={handleChange}
-                />
-               
+                
                 <Buttonn
                   type="Submit"
                   variant="contained"
