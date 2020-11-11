@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import LinkPieChart from "./LinkPieChart";
 import ProjectAppBar from "./ProjectAppBar";
-import Chip from '@material-ui/core/Chip';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Chip from "@material-ui/core/Chip";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 import RequisitionsDashboard from "./RequisitionsDashboard";
@@ -96,7 +100,7 @@ export default function Dashboard() {
   );
 
   useEffect(() => {
-    document.title = "Dashboard"
+    document.title = "Dashboard";
   }, []);
 
   useEffect(() => {
@@ -309,7 +313,7 @@ export default function Dashboard() {
                       <sub
                         style={{
                           fontWeight: "600",
-                          fontSize: "0.8125rem"
+                          fontSize: "0.8125rem",
                         }}
                       >
                         {" KG"}
@@ -385,7 +389,7 @@ export default function Dashboard() {
                       <sub
                         style={{
                           fontWeight: "600",
-                          fontSize: "0.8125rem"
+                          fontSize: "0.8125rem",
                         }}
                       >
                         {" UGX"}

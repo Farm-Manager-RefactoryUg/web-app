@@ -7,6 +7,7 @@ import ProjectAppBar from "./ProjectAppBar";
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import axios from "axios";
 
 
 const drawerWidth = 240;
@@ -113,6 +114,8 @@ export default function Dashboard() {
   //let [[fullNamee, desce], setErrors] = useState(["", ""])
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
+ 
+
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -130,7 +133,27 @@ export default function Dashboard() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-  }
+    const user = {
+      name: "Emilly",
+      location: "Kasanga",
+      address: "Nakabugo-Bbira",
+      contactperson: "Seth",
+      phone: 734567332,
+      tin: 123456,
+    };
+      axios
+        .post("https://farmmanager-api.herokuapp.com/api/farm/", user)
+        .then(
+          (response) => {
+            console.log(response);
+            // window.location = "/";
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+  };
+  
 
   const handleChange = (event) => {
     //const { value } = event.target
@@ -138,40 +161,96 @@ export default function Dashboard() {
 
   useEffect(() => {
     document.title = "Create a Project"
+     
   }, []);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
-
           <ProjectAppBar location={currentUrl} />
 
           <main maxWidth="xs" style={{ margin: "auto" }}>
             <Card className={classes.paper}>
-
               <Typography
-                style={{ fontSize: "1.2rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "600",
+                  fontFamily: "Segoe UI",
+                  color: "rgba(0, 0, 0, 0.87)",
+                }}
                 component="h1"
               >
                 {"Create dashboard"}
               </Typography>
 
               <form onSubmit={handleSubmit} className={classes.form} noValidate>
-
                 <CssTextField
                   autoComplete="title"
                   margin="normal"
                   autoFocus
                   name="title"
                   variant="outlined"
-                  required
+                  // required
+                  fullWidth
+                  id="title"
+                  label="Name"
+                  //error={titlee.length > 0}
+                  onChange={handleChange}
+                />
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="title"
+                  variant="outlined"
+                  // required
+                  fullWidth
+                  id="title"
+                  label="Location"
+                  //error={titlee.length > 0}
+                  onChange={handleChange}
+                />
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="title"
+                  variant="outlined"
+                  // required
+                  fullWidth
+                  id="title"
+                  label="Address"
+                  //error={titlee.length > 0}
+                  onChange={handleChange}
+                />
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="title"
+                  variant="outlined"
+                  // required
+                  fullWidth
+                  id="title"
+                  label="Contact Person"
+                  //error={titlee.length > 0}
+                  onChange={handleChange}
+                />
+                <CssTextField
+                  autoComplete="title"
+                  margin="normal"
+                  autoFocus
+                  name="title"
+                  variant="outlined"
+                  // required
                   fullWidth
                   id="title"
                   label="Title"
                   //error={titlee.length > 0}
                   onChange={handleChange}
                 />
+                
                 {/* {emaile && <small
               style={{
                 color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
@@ -186,7 +265,7 @@ export default function Dashboard() {
                   margin="normal"
                   name="description"
                   variant="outlined"
-                  required
+                  // required
                   fullWidth
                   multiline
                   rows={5}
@@ -204,23 +283,18 @@ export default function Dashboard() {
               {emaile}
             </small>} */}
 
-
                 <Buttonn
                   type="submit"
                   variant="contained"
                   className={classes.submit}
-                  component='a'
-                  href={"/projects"}
+                  // component='a'
+                  // href={"/projects"}
                 >
                   Complete Step I
-          </Buttonn>
-
+                </Buttonn>
               </form>
             </Card>
-
           </main>
-
-
         </div>
       </ThemeProvider>
     </>
