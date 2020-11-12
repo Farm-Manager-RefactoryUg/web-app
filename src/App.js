@@ -55,10 +55,10 @@ export default function App() {
         <Route path="/salesdetails" component={SalesDetails} />
         <Route path="/casual" component={CasualWorkers} ></Route>
         <Route path="/consumables" component={Consumables} ></Route>
+        
       </Switch>
     </Router>
   );
 }
-
 
 
