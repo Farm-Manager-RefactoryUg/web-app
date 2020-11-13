@@ -185,7 +185,7 @@ export default function Dashboard() {
               />
                                   
                   
-              {project.length === 0 ? null : project.length === 1 ? (
+              {projects.length === 0 ? null : projects.length === 1 ? (
                 <Grid item xs={12} md={12} lg={12}>
                   <Card
                     style={{
@@ -269,7 +269,7 @@ export default function Dashboard() {
                     </CardContent>
                   </Card>
                 </Grid>
-              ) : project.length === 2 ?  ( 
+              ) : projects.length === 2 ?  ( 
                 <Grid
                   container
                   spacing={4}
