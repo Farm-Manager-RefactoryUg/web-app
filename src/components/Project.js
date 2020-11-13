@@ -172,7 +172,7 @@ export default function Project() {
   const classes = useStyles();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
   const currentUrl = useLocation();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
 
   function Alert(props) {

@@ -110,17 +110,26 @@ export default function UpdateDashboard() {
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
+        <Card
+            className={classes.root}
+        >
 
             <Typography
                 component="h6"
                 variant="h5"
                 style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
-                Update dashboard info
+                Update Project info
             </Typography>
 
-            <main maxWidth="xs" className={classes.container}>
-                <form onSubmit={handleSubmit} className={classes.form} noValidate>
+            <main
+                maxWidth="xs"
+                className={classes.container}
+            >
+                <form
+                    onSubmit={handleSubmit}
+                    className={classes.form}
+                    noValidate
+                >
                     <CssTextField
                         autoComplete="title"
                         margin="normal"
@@ -151,15 +160,34 @@ export default function UpdateDashboard() {
                     />
                     <small style={{ color: 'red', marginLeft: "15px", fontSize: "0.75rem", }}>{emaile}</small>
 
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
+                    <FormControl
+                        variant="outlined"
+                        className={classes.formControl}
+                    >
+                        <InputLabel
+                            id="demo-simple-select-filled-label"
+                        >
+                            Status
+                        </InputLabel>
+
                         <CustomSelect
                             native
                             label="Status"
                         >
-                            <option selected value="In progress">In Progress</option>
-                            <option value="Archived">Archived</option>
+                            <option
+                                selected
+                                value="In progress"
+                            >
+                                In Progress
+                            </option>
+
+                            <option
+                                value="Archived"
+                            >
+                                Archived
+                            </option>
                         </CustomSelect>
+                        
                     </FormControl>
                     <br></br>
 

@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import React, { useEffect } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -16,6 +16,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Divider from "@material-ui/core/Divider";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import API from "../endPoints"
+import axios from "axios"
 
 const drawerWidth = 240;
 
@@ -84,8 +86,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
     const classes = useStyles();
     const currentUrl = useLocation();
-    //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const [projects, setProjects] = useState([])
 
     const theme = React.useMemo(
         () =>
@@ -103,23 +105,41 @@ export default function Dashboard() {
     );
 
     useEffect(() => {
-        document.title = "Dasboards"
+        document.title = "Create a project"
+        axios
+            .get(API.farm)
+            .then((response) => {
+                setProjects(response.data);
+                console.log(projects)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <div className={classes.root}>
+            <ThemeProvider 
+            theme={theme}
+            >
+                <div 
+                className={classes.root}
+                >
 
-                    <ProjectAppBar location={currentUrl} />
+                    <ProjectAppBar 
+                    location={currentUrl} 
+                    />
 
-                    <main className={classes.content}>
+                    <main 
+                    className={classes.content}>
                         <div
                             className={classes.appBarSpacer}
                             style={{ minHeight: "3rem" }}
                         />
 
-                        <Container style={{ marginTop: "60px", }}>
+                        <Container 
+                        style={{ marginTop: "60px", }}
+                        >
 
                             <Typography
                                 style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
@@ -128,61 +148,64 @@ export default function Dashboard() {
                                 {"My Projects"}
                             </Typography>
 
-                            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+                            <Divider 
+                            style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} 
+                            />
 
-                            <Grid container spacing={4} style={{ marginTop: "20px", marginBottom: "20px", }}>
+                            <Grid 
+                            container 
+                            spacing={4} 
+                            style={{ marginTop: "20px", marginBottom: "20px", }}
+                            >
 
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Biyinzika Mukono C
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
-
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
-
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                            </Typography>
-
-                                            <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-
-                                            <Button
-                                                color="primary"
-                                                style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                component={Link}
-                                                to={"/dashboard"}
+                                {projects.map(project =>
+                                    <Grid 
+                                    item 
+                                    xs={12} 
+                                    md={6} 
+                                    lg={6}
+                                    >
+                                        <Card 
+                                        style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}
+                                        >
+                                            <CardContent 
+                                            style={{ paddingBottom: "8px", }}
                                             >
-                                                View
-                                            </Button>
 
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
+                                                <Typography
+                                                    gutterBottom
+                                                    component="h6"
+                                                    style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
+                                                    {project.name}
+                                                        <IconButton 
+                                                        title="Delete Dashboard" 
+                                                        color="primary" 
+                                                        aria-label="upload picture" 
+                                                        component="span" 
+                                                        style={{ margin: "0", padding: "0", float: "right" }}
+                                                        >
+                                                        <DeleteIcon 
+                                                        style={{ color: "green", transform: "scale(0.7)", }} />
+                                                    </IconButton>
+                                                </Typography>
 
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Galileo goat project I
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>                                 
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
+                                                <Chip 
+                                                classes={{ label: classes.label, }} 
+                                                style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} 
+                                                label="Finished" 
+                                                size="small" 
+                                                />
+
+                                                <Typography 
+                                                style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}
+                                                >
+                                                    {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
+                                                </Typography>
+
+                                                <Divider 
+                                                style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} 
+                                                />
+
                                                 <Button
                                                     color="primary"
                                                     style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
@@ -191,126 +214,11 @@ export default function Dashboard() {
                                                 >
                                                     View
                                                 </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
 
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Biyinzika Mukono C
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-                                                <Button
-                                                    color="primary"
-                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                    component={Link}
-                                                    to={"/dashboard"}
-                                                >
-                                                    View
-                                                </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Galileo goat project I
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-                                                <Button
-                                                    color="primary"
-                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                    component={Link}
-                                                    to={"/dashboard"}
-                                                >
-                                                    View
-                                                </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Biyinzika Mukono C
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} label="Finished" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-                                                <Button
-                                                    color="primary"
-                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                    component={Link}
-                                                    to={"/dashboard"}
-                                                >
-                                                    View
-                                                </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
-                                <Grid item xs={12} md={6} lg={6}>
-                                    <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
-                                        <CardContent style={{ paddingBottom: "8px", }}>
-                                            <Typography
-                                                gutterBottom
-                                                component="h6"
-                                                style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                                                Galileo goat project I
-                                                <IconButton title="Delete Dashboard" color="primary" aria-label="upload picture" component="span" style={{ margin: "0", padding: "0", float: "right" }}>
-                                                    <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                                </IconButton>
-                                            </Typography>
-                                            <Chip classes={{ label: classes.label, }} style={{ fontFamily: "Segoe UI", backgroundColor: "orange", }} label="In Progress" size="small" />
-                                            <Typography style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem", }}>
-                                                {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
-                                                <Divider style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} />
-                                                <Button
-                                                    color="primary"
-                                                    style={{ fontSize: "0.8125rem", textTransform: "lowercase", width: "100%", color: "green" }}
-                                                    component={Link}
-                                                    to={"/dashboard"}
-                                                >
-                                                    View
-                                                </Button>
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                )}
 
                             </Grid>
 
