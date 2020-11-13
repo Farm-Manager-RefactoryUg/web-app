@@ -109,7 +109,7 @@ export default function Dashboard() {
                 style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
                 component="h1"
               >
-                {"Dashboard Settings"}
+                {"Project Settings"}
               </Typography>
 
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />

@@ -1,6 +1,7 @@
+const DOMAIN = "https://farmmanager-api.herokuapp.com/api/"
 const API = {
-    farm: "https://farmmanager-api.herokuapp.com/api/farm/",
-    income: "https://farmmanager-api.herokuapp.com/api/income/",
+    farm: `${DOMAIN}customer/`,
+    income: `${DOMAIN}income/`,
 }
 
 export default API
