@@ -11,7 +11,6 @@ import Project from "./components/Project";
 import Projects from "./components/Projects";
 import Seasons from "./components/Seasons";
 import Analytics from "./components/Analytics";
-import Show from "./components/Show";
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";
 import CustomersDetails from "./components/CustomersDetails";

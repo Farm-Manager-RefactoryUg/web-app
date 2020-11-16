@@ -112,9 +112,10 @@ export default function Consumables() {
                   >
                     <TableCell>No.</TableCell>
                     <TableCell>Date</TableCell>
-                    <TableCell>Tool Name</TableCell>
+                    <TableCell>Name</TableCell>
                     <TableCell>Purpose</TableCell>
                     <TableCell>Main User</TableCell>
+                    <TableCell>Unit Cost</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -128,9 +129,10 @@ export default function Consumables() {
                         <TableRow hover role="checkbox" tabIndex={-1}>
                           <TableCell>{item.id}</TableCell>
                           <TableCell>{item.date}</TableCell>
-                          <TableCell>{item.toolname}</TableCell>
+                          <TableCell>{item.name}</TableCell>
                           <TableCell>{item.purpose}</TableCell>
                           <TableCell>{item.mainuser}</TableCell>
+                          <TableCell>{item.unitcost}</TableCell>
                         </TableRow>
                       ))}
                 </TableBody>
