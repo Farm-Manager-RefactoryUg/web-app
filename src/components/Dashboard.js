@@ -21,6 +21,7 @@ import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import SalesBarGraph from './SalesBarGraph'
+import API from "../endPoints"
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ export default function Dashboard() {
   useEffect(() => {
     setId(item.id);
     axios
-      .get(`https://farmmanager-api.herokuapp.com/api/income/${id}`)
+      .get(API.income + id)
       .then((response) => {
         setItems(response.data);
       })
@@ -136,7 +137,7 @@ export default function Dashboard() {
 
             <Grid container spacing={2} style={{ marginTop: "10px", marginBottom: "20px", }}>
 
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
@@ -212,7 +213,7 @@ export default function Dashboard() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card
                   style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                   <CardContent>
@@ -270,7 +271,7 @@ export default function Dashboard() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
@@ -342,7 +343,7 @@ export default function Dashboard() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={3} lg={3}>
+              <Grid item xs={12} md={6} lg={3}>
                 <Card
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
@@ -431,7 +432,7 @@ export default function Dashboard() {
               <Grid
                 item
                 xs={12}
-                sm={6}
+                sm={12}
                 lg={7}>
                 <Card
                   style={{
@@ -445,7 +446,7 @@ export default function Dashboard() {
               <Grid
                 item
                 xs={12}
-                sm={6}
+                sm={12}
                 lg={5}>
                 <Card
                   style={{

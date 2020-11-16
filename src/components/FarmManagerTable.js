@@ -6,12 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-//import Paper from '@material-ui/core/Paper';
-//import { Link } from "react-router-dom";
-//import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
@@ -54,13 +49,6 @@ export default function BasicTable() {
         <>
             <TableContainer component="div" >
 
-                <Typography
-                    component="h6"
-                    variant="h5"
-                    style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
-                    Manage Farm Managers
-                </Typography>
-
                 <Table className={classes.table} aria-label="simple table">
 
                     <TableHead>
@@ -68,8 +56,7 @@ export default function BasicTable() {
                         <TableRow>
                             <TableCell className={classes.headerFont}>#</TableCell>
                             <TableCell className={classes.headerFont} align="left">Email</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Password</TableCell>
-                            <TableCell className={classes.headerFont} align="left">Actions</TableCell>
+                            <TableCell className={classes.headerFont} align="left">Action</TableCell>
                         </TableRow>
 
                     </TableHead>
@@ -88,11 +75,8 @@ export default function BasicTable() {
                                     {row.name}
                                 </TableCell>
                                 <TableCell className={classes.tableFont} align="left">{row.calories}</TableCell>
-                                <TableCell className={classes.tableFont} align="left">{row.fat}</TableCell>
                                 <TableCell className={classes.tableFont} align="left">
-                                    <IconButton color="primary" aria-label="upload picture" component="span" size="small" style={{ margin: "0", padding: "0", marginRight: "8px" }}>
-                                        <EditIcon style={{ color: "green", transform: "scale(0.7)", }} />
-                                    </IconButton>
+            
                                     <IconButton color="primary" aria-label="upload picture" component="span" size="small" style={{ margin: "0", padding: "0" }}>
                                         <DeleteIcon style={{ color: "green", transform: "scale(0.7)", }} />
                                     </IconButton>
