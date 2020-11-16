@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import FarmManagerTable from "./FarmManagerTable";
-import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -43,25 +42,28 @@ const CssTextField = withStyles({
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
+  form: {
+    margin: "20px 15%",
+    width: "100%"
+  },
   submit: {
     backgroundColor: 'green',
     color: 'white',
+    marginTop: theme.spacing(2),
     textTransform: "initial",
     fontWeight: "600",
-    marginTop: theme.spacing(2),
+    padding: theme.spacing(1),
     paddingRight: theme.spacing(3),
   },
 }));
 
 export default function AddFarmManager() {
-
-  const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
   const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
   const classes = useStyles();
-  let [[fullNamee, emaile, passworde], setErrors] = useState(["", "", ""])
+  let [[emaile], setErrors] = useState([""])
 
   const handleSubmit = (event) => {
-    if (fullNamee || emaile || passworde) {
+    if (emaile) {
       event.preventDefault()
     }
   }
@@ -70,17 +72,9 @@ export default function AddFarmManager() {
     const { name, value } = event.target
 
     switch (name) {
-      case "fullName":
-        (!nameRegex.test(value)) ?
-          setErrors(["Atleast two names E.g: John Doe", emaile, passworde]) : setErrors(["", emaile, passworde])
-        break;
       case "email":
         (!emailRegex.test(value)) ?
-          setErrors([fullNamee, "Enter valid email E.g: abc@gmail.com", passworde]) : setErrors([fullNamee, "", passworde])
-        break;
-      case "password":
-        (value.length < 6) ?
-          setErrors([fullNamee, emaile, "Password should be more than 6 characters"]) : setErrors([fullNamee, emaile, ""])
+          setErrors(["Enter valid email E.g: abc@gmail.com"]) : setErrors([""])
         break;
 
       default:
@@ -91,105 +85,54 @@ export default function AddFarmManager() {
 
 
   return (
-    <Grid container spacing={3} style={{ marginBottom: "20px", }}>
+    <Card style={{ padding: "16px" }}>
 
-      <Grid item xs={12} sm={12} lg={7}>
-        <Card style={{ padding: "16px" }}>
-          <FarmManagerTable />
-        </Card>
-      </Grid>
+      <Typography
+        component="h6"
+        variant="h5"
+        style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+        Manage Farm Managers
+                </Typography>
 
-      <Grid item xs={12} sm={12} lg={5}>
-        <Card style={{ padding: "16px" }}>
+      <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
-          <Typography
-            component="h6"
-            variant="h5"
-            style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
-            Register Farm Manager
-          </Typography>
+        <CssTextField
+          margin="normal"
+          size="small"
+          variant="outlined"
+          required
+          id="email"
+          label="Email address"
+          name="email"
+          error={emaile.length > 0}
+          onChange={handleChange}
+        />
 
-          <form onSubmit={handleSubmit} className={classes.form} noValidate>
-
-            <CssTextField
-              autoComplete="fname"
-              name="fullName"
-              variant="outlined"
-              required
-              id="fullName"
-              label="Username"
-              error={fullNamee.length > 0}
-              onChange={handleChange}
-
-              margin="normal"
-            />
-            {fullNamee && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {fullNamee}
-            </small>}
-
-            <CssTextField
-              variant="outlined"
-              required
-              id="email"
-              label="Email address"
-              name="email"
-              error={emaile.length > 0}
-              onChange={handleChange}
-
-              margin="normal"
-            />
-            {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {emaile}
-            </small>}
-
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              required
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              error={passworde.length > 0}
-              onChange={handleChange}
-
-            />
-            {passworde && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {passworde}
-            </small>}
-            <br></br>
-
-            <Buttonn
-              type="submit"
-              variant="contained"
-              className={classes.submit}
-              startIcon={<AddIcon />}
-            >
-              Add
+        <Buttonn
+          type="submit"
+          variant="contained"
+          className={classes.submit}
+          startIcon={<AddIcon />}
+        >
+          Add
             </Buttonn>
+        <br></br>
 
-          </form>
-        
-        </Card>
-      </Grid>
+        {emaile && <small
+          style={{
+            color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+          }}
+        >
+          <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+          {emaile}
+        </small>}
 
-    </Grid>
+      </form>
+
+
+      <FarmManagerTable />
+
+    </Card>
   );
 }
 

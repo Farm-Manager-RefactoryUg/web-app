@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import TeleFarmerTable from "./TeleFarmerTable";
-import Grid from "@material-ui/core/Grid";
 import Card from '@material-ui/core/Card';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -43,12 +42,16 @@ const CssTextField = withStyles({
 })(TextField);
 
 const useStyles = makeStyles((theme) => ({
+  form: {
+    margin: "20px 15%",
+  },
   submit: {
     backgroundColor: 'green',
     color: 'white',
     marginTop: theme.spacing(2),
     textTransform: "initial",
     fontWeight: "600",
+    padding: theme.spacing(1),
     paddingRight: theme.spacing(3),
   },
 }));
@@ -74,63 +77,54 @@ export default function AddTeleFarmer() {
   }
 
   return (
-    <Grid container spacing={3} >
+      <Card style={{ padding: "16px" }}>
 
-      <Grid item xs={12} sm={12} lg={7}>
-        <Card style={{ padding: "16px" }}>
-          <TeleFarmerTable />
-        </Card>
-      </Grid>
+        <Typography
+          component="h6"
+          variant="h5"
+          style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
+          Manage Tele-Farmers
+                </Typography>
 
-      <Grid item xs={12} sm={12} lg={5}>
-        <Card style={{ padding: "16px" }}>
+        <form onSubmit={handleSubmit} className={classes.form} noValidate>
 
-          <Typography
-            component="h6"
-            variant="h5"
-            style={{ fontWeight: "600", color: "rgba(0,0,0,0.87)", fontSize: "1.0625rem", fontFamily: "Segoe UI", }}>
-            Register Tele-Farmer
-              </Typography>
+          <CssTextField
+            margin="normal"
+            size="small"
+            variant="outlined"
+            required
+            id="email"
+            label="Email address"
+            name="email"
+            error={emaile.length > 0}
+            onChange={handleChange}
+          />
 
-          <form onSubmit={handleSubmit} className={classes.form} noValidate>
-
-            <CssTextField
-              variant="outlined"
-              required
-              id="email"
-              label="Email address"
-              name="email"
-              error={emaile.length > 0}
-              onChange={handleChange}
-              margin="normal"
-            />
-            <br></br>
-
-            <Buttonn
-              type="submit"
-              variant="contained"
-              className={classes.submit}
-              startIcon={<AddIcon />}
-            >
-              Add
+          <Buttonn
+            type="submit"
+            variant="contained"
+            className={classes.submit}
+            startIcon={<AddIcon />}
+          >
+            Add
             </Buttonn>
-            <br></br>
+          <br></br>
 
-            {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {emaile}
-            </small>}
+          {emaile && <small
+            style={{
+              color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
+            }}
+          >
+            <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
+            {emaile}
+          </small>}
 
-          </form>
+        </form>
 
-        </Card>
-      </Grid>
+        <TeleFarmerTable />
 
-    </Grid>
+
+      </Card>
   );
 }
 

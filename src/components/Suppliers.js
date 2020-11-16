@@ -156,7 +156,7 @@ export default function Suppliers() {
               </h5>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
-                  <TableHead>
+                  <TableHead style={{ backgroundColor: "#f7f9fc"}}>
                     <TableRow>
                       <StyledTableCell align="left" component="th" scope="row">
                         No.

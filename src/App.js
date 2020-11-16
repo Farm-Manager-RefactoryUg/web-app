@@ -25,6 +25,19 @@ import Tables from "./components/Tables"
 import CasualWorkers from "./components/CasualWorkers";
 import Consumables from "./components/Consumables"
 
+// List (Read all)
+// - create
+// - Read (Read one - {id})
+// - Update / Patch - {id}
+// - Delete {id}
+
+// List - http://localhost:3000/projects
+// Create - http://localhost:3000/projects/add
+// Read - http://localhost:3000/projects/{id}
+// Update - http://localhost:3000/projects/{id}/edit
+// Delete - http://localhost:3000/projects/{id}/delete
+
+
 
 export default function App() {
 
