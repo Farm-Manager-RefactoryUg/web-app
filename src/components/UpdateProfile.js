@@ -153,7 +153,7 @@ export default function AddFarmManager() {
           fontFamily: "Segoe UI",
         }}
       >
-        Profile
+        Update Profile
       </Typography>
 
       <main className={classes.container}>

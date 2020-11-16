@@ -208,7 +208,7 @@ export default function Project() {
 
                     <Grid container spacing={2}>
 
-                        <Grid item xs={12} sm={12} lg={5}>
+                        <Grid item xs={12} sm={12} lg={6}>
                             <Typography
                                 className={classes.headerText}
                                 component="h1"
@@ -409,7 +409,7 @@ export default function Project() {
 
                         </Grid>
 
-                        <Grid item lg={7}>
+                        <Grid item lg={6}>
                             <img alt="Decorative" src={svgimage} height="400px" />
                         </Grid>
                     </Grid>
