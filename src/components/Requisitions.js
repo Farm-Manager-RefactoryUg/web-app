@@ -116,11 +116,12 @@ export default function Requisitions() {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow style={{ backgroundColor: "red", color: "white" }}>
+                    <TableCell>Request By</TableCell>
+                    <TableCell>Requisition No.</TableCell>
                     <TableCell>Date</TableCell>
-                    <TableCell>Requisition Number</TableCell>
                     <TableCell>Purpose</TableCell>
-                    <TableCell>Quantity</TableCell>
-                    <TableCell align="right">Total Price</TableCell>
+                    <TableCell>Amount</TableCell>
+                    <TableCell align="right">Approved By</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -132,11 +133,12 @@ export default function Requisitions() {
                       )
                       .map((item) => (
                         <TableRow hover role="checkbox" tabIndex={-1}>
-                          <TableCell>{item.date}</TableCell>
+                          <TableCell>{item.requestby}</TableCell>
                           <TableCell>{item.reqno}</TableCell>
+                          <TableCell>{item.date}</TableCell>
                           <TableCell>{item.purpose}</TableCell>
-                          <TableCell>{item.qty}</TableCell>
-                          <TableCell align="right">{item.total}</TableCell>
+                          <TableCell>{item.total}</TableCell>
+                          <TableCell align="right">{item.approvby}</TableCell>
                         </TableRow>
                       ))}
                 </TableBody>
