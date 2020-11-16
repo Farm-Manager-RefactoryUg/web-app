@@ -284,6 +284,7 @@ export default function Project() {
                     <Field
                       autoComplete="name"
                       margin="normal"
+                      size="small"
                       name="name"
                       variant="outlined"
                       required
@@ -309,6 +310,7 @@ export default function Project() {
                     <Field
                       autoComplete="location"
                       margin="normal"
+                      size="small"
                       name="location"
                       variant="outlined"
                       required
@@ -334,6 +336,7 @@ export default function Project() {
                     <Field
                       autoComplete="address"
                       margin="normal"
+                      size="small"
                       name="address"
                       variant="outlined"
                       required
@@ -359,6 +362,7 @@ export default function Project() {
                     <Field
                       autoComplete="contactperson"
                       margin="normal"
+                      size="small"
                       name="contactperson"
                       variant="outlined"
                       required
@@ -384,6 +388,7 @@ export default function Project() {
                     <Field
                       autoComplete="phone"
                       margin="normal"
+                      size="small"
                       name="phone"
                       variant="outlined"
                       required
@@ -409,6 +414,7 @@ export default function Project() {
                     <Field
                       autoComplete="tin"
                       margin="normal"
+                      size="small"
                       name="tin"
                       variant="outlined"
                       required

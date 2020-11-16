@@ -115,30 +115,30 @@ export default function Dashboard() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [projects]);
 
     return (
         <>
-            <ThemeProvider 
-            theme={theme}
+            <ThemeProvider
+                theme={theme}
             >
-                <div 
-                className={classes.root}
+                <div
+                    className={classes.root}
                 >
 
-                    <ProjectAppBar 
-                    location={currentUrl} 
+                    <ProjectAppBar
+                        location={currentUrl}
                     />
 
-                    <main 
-                    className={classes.content}>
+                    <main
+                        className={classes.content}>
                         <div
                             className={classes.appBarSpacer}
                             style={{ minHeight: "3rem" }}
                         />
 
-                        <Container 
-                        style={{ marginTop: "60px", }}
+                        <Container
+                            style={{ marginTop: "60px", }}
                         >
 
                             <Typography
@@ -148,28 +148,31 @@ export default function Dashboard() {
                                 {"My Projects"}
                             </Typography>
 
-                            <Divider 
-                            style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} 
+                            <Divider
+                                style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }}
                             />
 
-                            <Grid 
-                            container 
-                            spacing={4} 
-                            style={{ marginTop: "20px", marginBottom: "20px", }}
+                            <Grid
+                                container
+                                spacing={4}
+                                style={{ 
+                                    marginTop: "20px", 
+                                    marginBottom: "20px", 
+                                }}
                             >
 
                                 {projects.map(project =>
-                                    <Grid 
-                                    item 
-                                    xs={12} 
-                                    md={6} 
-                                    lg={6}
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        md={6}
+                                        lg={6}
                                     >
-                                        <Card 
-                                        style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}
+                                        <Card
+                                            style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}
                                         >
-                                            <CardContent 
-                                            style={{ paddingBottom: "8px", }}
+                                            <CardContent
+                                                style={{ paddingBottom: "8px", }}
                                             >
 
                                                 <Typography
@@ -177,33 +180,33 @@ export default function Dashboard() {
                                                     component="h6"
                                                     style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
                                                     {project.name}
-                                                        <IconButton 
-                                                        title="Delete Dashboard" 
-                                                        color="primary" 
-                                                        aria-label="upload picture" 
-                                                        component="span" 
+                                                    <IconButton
+                                                        title="Delete Dashboard"
+                                                        color="primary"
+                                                        aria-label="upload picture"
+                                                        component="span"
                                                         style={{ margin: "0", padding: "0", float: "right" }}
-                                                        >
-                                                        <DeleteIcon 
-                                                        style={{ color: "green", transform: "scale(0.7)", }} />
+                                                    >
+                                                        <DeleteIcon
+                                                            style={{ color: "green", transform: "scale(0.7)", }} />
                                                     </IconButton>
                                                 </Typography>
 
-                                                <Chip 
-                                                classes={{ label: classes.label, }} 
-                                                style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }} 
-                                                label="Finished" 
-                                                size="small" 
+                                                <Chip
+                                                    classes={{ label: classes.label, }}
+                                                    style={{ fontFamily: "Segoe UI", backgroundColor: "teal", }}
+                                                    label="Finished"
+                                                    size="small"
                                                 />
 
-                                                <Typography 
-                                                style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}
+                                                <Typography
+                                                    style={{ fontFamily: "Segoe UI", padding: "0px", paddingTop: "10px", color: "rgba(0, 0, 0, 0.87)", fontSize: "0.875rem" }}
                                                 >
                                                     {"If used for item selection, when opened, simple menus attempt to vertically align the currently selected menu item with the anchor element, and the initial focus will be placed on the selected menu item."}
                                                 </Typography>
 
-                                                <Divider 
-                                                style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }} 
+                                                <Divider
+                                                    style={{ marginTop: "20px", marginBottom: "8px", backgroundColor: "rgba(0, 0, 0, 0.2)" }}
                                                 />
 
                                                 <Button

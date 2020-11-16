@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +8,11 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Avatar from "@material-ui/core/Avatar";
 import michael from "../static/images/2.jfif";
 import SaveIcon from "@material-ui/icons/Save";
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import API from "../endPoints"
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import axios from "axios";
 
 const Buttonn = withStyles({
   root: {
@@ -69,57 +74,43 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(15),
     height: theme.spacing(16),
   },
+  errorText: {
+      color: "red",
+      fontSize: "0.8rem",
+      fontFamily: "Segoe UI",
+  },
+  errorIcon: {
+      transform: "scale(0.7)",
+  },
 }));
 
+
+const errorText = {
+  fullName: "Only letters and numbers allowed E.g. Biyinzika Mukono 2",
+  email: "Enter a valid email E.g. abc@gmail.com",
+  password: "Required.",
+}
+// The regular expressions should be reviewed and improved
+const formSchema = Yup.object()
+  .shape({
+      fullName: Yup.string()
+          .max(25)
+          .required()
+          .matches(/^[0-9a-zA-Z\s]*$/, errorText.fullName),
+      email: Yup.string()
+          .max(30)
+          .required()
+          .email(errorText.email),
+      password: Yup.string()
+          .max(20)
+          .required(errorText.password),
+  });
+
+
 export default function AddFarmManager() {
-  let [[fullNamee, emaile, passworde], setErrors] = useState(["", "", ""]);
   let [profileImg, setImage] = useState(michael);
+  const [data, setData] = useState()
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    let [fullNamee, emaile, passworde, mobilee] = [];
-    const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/;
-    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-    switch (name) {
-      case "fullName":
-        !nameRegex.test(value)
-          ? setErrors([
-              "Atleast two names e.g. John Doe",
-              emaile,
-              passworde,
-              mobilee,
-            ])
-          : setErrors(["", emaile, passworde, mobilee]);
-        break;
-      case "email":
-        !emailRegex.test(value)
-          ? setErrors([
-              fullNamee,
-              "Enter valid email e.g. abc@gmail.com",
-              passworde,
-              mobilee,
-            ])
-          : setErrors([fullNamee, "", passworde, mobilee]);
-        break;
-      case "password":
-        value.length < 6
-          ? setErrors([
-              fullNamee,
-              emaile,
-              "Password should be more than 6 characters",
-              mobilee,
-            ])
-          : setErrors([fullNamee, emaile, "", mobilee]);
-        break;
-
-      default:
-        break;
-    }
-  };
   const imageHandler = (event) => {
     let reader = new FileReader();
     reader.onload = () => {
@@ -132,8 +123,26 @@ export default function AddFarmManager() {
 
   const classes = useStyles();
 
+  useEffect(() => {
+    axios
+      .get(API.farm)
+      .then(() => {
+        //setData(res.data)
+        setData({
+          fullName: "Wamala Emmanuel Nsubuga",
+          email: "e.wamala@ciu.ac.ug",
+          password: "11111111",
+        })
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+      });
+  }, [setData]);
+  console.log(data)
+
   return (
-    <Card className={classes.root}>
+    data
+    ? <Card className={classes.root}>
       <Typography
         component="h6"
         variant="h5"
@@ -149,75 +158,116 @@ export default function AddFarmManager() {
 
       <main className={classes.container}>
         <div style={{ flex: "3" }}>
-          <form onSubmit={handleSubmit} className={classes.form} noValidate>
-            <CssTextField
-              autoComplete="fname"
-              name="fullName"
-              variant="outlined"
-              required
-              fullWidth
-              id="fullName"
-              label="Username"
-              error={fullNamee.length > 0}
-              onChange={handleChange}
-              margin="normal"
-              defaultValue="Wamala Emmanuel Nsubuga"
-            />
-            <small
-              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
-            >
-              {fullNamee}
-            </small>
 
-            <CssTextField
-              variant="outlined"
-              required
-              fullWidth
-              id="email"
-              label="Email address"
-              name="email"
-              error={emaile.length > 0}
-              onChange={handleChange}
-              margin="normal"
-              defaultValue={"e.wamala@ciu.ac.ug"}
-            />
-            <small
-              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
-            >
-              {emaile}
-            </small>
+          <Formik
+            initialValues={data}
+            validationSchema={formSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(true)
+              axios.post(API.farm, values)
+                .then(() => {
+                  // setOpen(!open)
+                })
+                .catch((error) => {
+                  console.error('There was an error!', error);
+                });
+            }}
+          >
 
-            <CssTextField
-              variant="outlined"
-              required
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              error={passworde.length > 0}
-              onChange={handleChange}
-              defaultValue={"Abc123%"}
-            />
-            <small
-              style={{ color: "red", marginLeft: "15px", fontSize: "0.75rem" }}
-            >
-              {passworde}
-            </small>
+            {({ errors, touched, isSubmitting }) => (
+              <Form
+                className={classes.form}
+                noValidate>
 
-            <Buttonn
-              type="submit"
-              variant="contained"
-              fullWidth
-              className={classes.submit}
-              startIcon={<SaveIcon />}
-              style={{ width: "160px", marginTop: "35px" }}
-            >
-              Save changes
+                <Field
+                  name="fullName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="fullName"
+                  label="Username"
+                  margin="normal"
+                  error={errors.fullName && touched.fullName}
+                  helperText={errors.fullName
+                      && touched.fullName
+                      && (<span>
+                          <ErrorOutlineIcon
+                              className={classes.errorIcon}
+                          />
+                          <span
+                              className={classes.errorText}>
+                              {errorText.fullName}
+                          </span>
+                      </span>)
+                  }
+                  as={CssTextField}
+                />
+
+
+                <Field
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email address"
+                  name="email"
+                  margin="normal"
+                  error={errors.email && touched.email}
+                  helperText={errors.email
+                      && touched.email
+                      && (<span>
+                          <ErrorOutlineIcon
+                              className={classes.errorIcon}
+                          />
+                          <span
+                              className={classes.errorText}>
+                              {errorText.email}
+                          </span>
+                      </span>)
+                  }
+                  as={CssTextField}
+                />
+
+                <Field
+                  variant="outlined"
+                  required
+                  margin="normal"
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  error={errors.password && touched.password}
+                  helperText={errors.password
+                      && touched.password
+                      && (<span>
+                          <ErrorOutlineIcon
+                              className={classes.errorIcon}
+                          />
+                          <span
+                              className={classes.errorText}>
+                              {errorText.password}
+                          </span>
+                      </span>)
+                  }
+                  as={CssTextField}
+                />
+
+                <Buttonn
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  disabled={isSubmitting}
+                  className={classes.submit}
+                  startIcon={<SaveIcon />}
+                  style={{ width: "160px", marginTop: "35px" }}
+                >
+                  Save changes
             </Buttonn>
-          </form>
+          </Form>
+            )}
+          </Formik>
         </div>
 
         <div
@@ -263,5 +313,6 @@ export default function AddFarmManager() {
         </div>
       </main>
     </Card>
+    : null
   );
 }

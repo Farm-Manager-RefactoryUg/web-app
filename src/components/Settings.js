@@ -9,7 +9,7 @@ import ProjectAppBar from "./ProjectAppBar";
 import Divider from "@material-ui/core/Divider";
 import AddFarmManager from "./AddFarmManager";
 import AddTeleFarmer from "./AddTeleFarmer";
-import UpdateDashboard from "./UpdateDashboard";
+import ProjectInfoForm from "./ProjectInfoForm";
 
 
 const drawerWidth = 240;
@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const currentUrl = useLocation();
-  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
   const theme = React.useMemo(
@@ -114,18 +113,18 @@ export default function Dashboard() {
 
               <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
 
-              <Grid container spacing={6} style={{ marginBottom: "20px", }}>
-
-                <Grid item xs={12} sm={12} lg={7}>
-                  <UpdateDashboard />
-                </Grid>
+              <Grid container spacing={2} style={{ marginBottom: "20px", }}>
 
                 <Grid item xs={12} sm={12} lg={12}>
+                  <ProjectInfoForm />
+                </Grid>
+
+                <Grid item xs={12} sm={12} lg={6}>
+                  <AddFarmManager/>
+                </Grid>
+
+                <Grid item xs={12} sm={12} lg={6}>
                   <AddTeleFarmer />
-                </Grid>
-
-                <Grid item xs={12} sm={12} lg={12}>
-                  <AddFarmManager />
                 </Grid>
 
               </Grid>
