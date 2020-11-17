@@ -3,7 +3,7 @@
 | Code Climate		| [![Code Climate](https://codeclimate.com/github/scottohara/loot/badges/gpa.svg)](https://codeclimate.com/github/scottohara/loot)																								|
 | Code Climate		| [![Test Coverage](https://codeclimate.com/github/scottohara/loot/badges/coverage.svg)](https://codeclimate.com/github/scottohara/loot)																					|
 # web-app
-Welcome to Tele-Farmer's front-end application developed by refactory bootcamp 4 students using React and Material UI.
+Welcome to Tele-Farmer's front-end application using React and Material UI.
 
 ## Features
 - Log in and Sign up with form validation.
