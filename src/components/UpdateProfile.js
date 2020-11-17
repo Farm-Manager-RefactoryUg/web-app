@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import michael from "../static/images/2.jfif";
 import SaveIcon from "@material-ui/icons/Save";
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import API from "../endPoints"
+import API from "../api"
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
