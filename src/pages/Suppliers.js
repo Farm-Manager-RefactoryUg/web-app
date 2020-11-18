@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "green",
+    // backgroundColor: "green",
     color: theme.palette.common.white,
   },
   body: {
@@ -76,7 +76,7 @@ export default function Consumables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [items, setItems] = useState("");
-  // const rows = [{ items }];
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -150,8 +150,7 @@ export default function Consumables() {
                           <TableCell>{item.telephone1}</TableCell>
                         </TableRow>
                       ))}
-                
-                
+                                
               </Table>
             </TableContainer>
             <TablePagination
