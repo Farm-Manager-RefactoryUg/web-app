@@ -25,8 +25,9 @@ const options = {
   },
 
   title: {
-    text: 'Monthly Sales',
-  },
+    text: 'Monthly Expenditure',
+    
+},
 subtitle: {
     text: '',
     style: {

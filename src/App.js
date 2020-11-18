@@ -12,18 +12,18 @@ import Projects from "./pages/Projects";
 import Seasons from "./pages/Seasons";
 import Analytics from "./pages/Analytics";
 
-import Customers from "./components/Customers";
-import Requisitions from "./components/Requisitions";
-import CustomersDetails from "./components/CustomersDetails";
-import ExpenditurePieChart from "./components/ExpenditurePieChart";
-import Workers from "./components/Workers";
-import SalesBarGraph from "./components/SalesLineGraph";
-import Suppliers from "./components/Suppliers";
-import SalesDetails from "./components/SalesDetails";
-import Tools from "./components/Tools";
-import Tables from "./components/Tables"
-import CasualWorkers from "./components/CasualWorkers";
-import Consumables from "./components/Consumables"
+import Customers from "./pages/Customers";
+import Requisitions from "./pages/Requisitions";
+import CustomersDetails from "./pages/CustomersDetails";
+import ExpenditurePieChart from "./pages/ExpenditurePieChart";
+import Workers from "./pages/Workers";
+import SalesLineGraph from "./pages/SalesLineGraph";
+import Suppliers from "./pages/Suppliers";
+import SalesDetails from "./pages/SalesDetails";
+import Tools from "./pages/Tools";
+import Tables from "./pages/Tables"
+import CasualWorkers from "./pages/CasualWorkers";
+import Consumables from "./pages/Consumables"
 
 // List (Read all)
 // - create
@@ -64,7 +64,7 @@ export default function App() {
         <Route path="/analytics" component={ExpenditurePieChart} />
         <Route path="/workers" exact component={Workers} />
         <Route path="/suppliers" exact component={Suppliers} />
-        <Route path="/saleschart" component={SalesBarGraph} />
+        <Route path="/saleschart" component={SalesLineGraph} />
         <Route path="/salesdetails" component={SalesDetails} />
         <Route path="/casual" component={CasualWorkers} ></Route>
         <Route path="/consumables" component={Consumables} ></Route>

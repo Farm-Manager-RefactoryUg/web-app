@@ -4,7 +4,6 @@ import axios from "axios";
 //import Link from "@material-ui/core/Link";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -106,7 +105,7 @@ export default function Consumables() {
             <br></br>
             <br></br>
             <Paper className={classes.root2}>
-              <h5 align="left" style={{ marginLeft: "0.5rem", color: "green" }}>
+              <h5 align="left" style={{ marginLeft: "0.5rem", color: "black" }}>
                 Recent Suppliers
               </h5>
               <TableContainer component={Paper}>
