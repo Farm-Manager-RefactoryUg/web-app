@@ -17,7 +17,7 @@ import Requisitions from "./components/Requisitions";
 import CustomersDetails from "./components/CustomersDetails";
 import ExpenditurePieChart from "./components/ExpenditurePieChart";
 import Workers from "./components/Workers";
-import SalesBarGraph from "./components/SalesBarGraph";
+import SalesBarGraph from "./components/SalesLineGraph";
 import Suppliers from "./components/Suppliers";
 import SalesDetails from "./components/SalesDetails";
 import Tools from "./components/Tools";

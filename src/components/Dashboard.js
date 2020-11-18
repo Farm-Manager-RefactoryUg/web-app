@@ -20,7 +20,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
-import SalesBarGraph from './SalesBarGraph'
+import SalesLineGraph from './SalesLineGraph'
 import API from "../endPoints"
 
 const drawerWidth = 240;
@@ -439,7 +439,7 @@ export default function Dashboard() {
                     backgroundColor: "white"
                   }}
                 >
-                  <SalesBarGraph />
+                  <SalesLineGraph />
                 </Card>
               </Grid>
 
