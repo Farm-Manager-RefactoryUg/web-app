@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 const StyledTableCell = withStyles((theme) => ({
   head: {
     // backgroundColor: "green",
-    color: theme.palette.common.white,
+    color: theme.palette.common.black,
   },
   body: {
     fontSize: 14,
@@ -112,26 +112,23 @@ export default function Consumables() {
                 <Table className={classes.table} aria-label="customized table">
                   <TableHead style={{ backgroundColor: "#f7f9fc"}}>
                     <TableRow>
-                      <StyledTableCell align="left" component="th" scope="row">
-                        No.
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
+                     <StyledTableCell
+                        align="left"
                         component="th"
                         scope="row"
                       >
                         Name
                       </StyledTableCell>
-                      <StyledTableCell align="center">
+                      <StyledTableCell align="left">
                         Company Name
                       </StyledTableCell>
-                      <StyledTableCell align="center">
+                      <StyledTableCell align="left">
                         Telephone
                       </StyledTableCell>
-                      <StyledTableCell align="center">
-                        Business Address
+                      <StyledTableCell align="left">
+                      Business Address
                       </StyledTableCell>
-                      <StyledTableCell align="center">Category</StyledTableCell>
+                    <StyledTableCell align="left">Category</StyledTableCell>
                     </TableRow>
                   </TableHead>
                   {items &&
@@ -144,9 +141,9 @@ export default function Consumables() {
                         <TableRow hover role="checkbox" tabIndex={-1}>
                           <TableCell>{item.name}</TableCell>
                           <TableCell>{item.companyname}</TableCell>
-                          <TableCell>{item.email}</TableCell>
-                          <TableCell>{item.category}</TableCell>
                           <TableCell>{item.telephone1}</TableCell>
+                          <TableCell>{item.busaddress}</TableCell>
+                          <TableCell>{item.category}</TableCell>
                         </TableRow>
                       ))}
                                 
