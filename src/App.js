@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Login from "./components/Login";
-import SignUp from "./components/Signup";
-import Settings from "./components/Settings";
-import ForgotPassword from './components/ForgotPassword';
-import PageNotFound from './components/PageNotFound';
-import UserProfile from "./components/UserProfile";
-import Dashboard from "./components/Dashboard";
-import Project from "./components/Project";
-import Projects from "./components/Projects";
-import Seasons from "./components/Seasons";
-import Analytics from "./components/Analytics";
+import Login from "./pages/Login";
+import SignUp from "./pages/Signup";
+import Settings from "./pages/Settings";
+import ForgotPassword from './pages/ForgotPassword';
+import PageNotFound from './pages/PageNotFound';
+import UserProfile from "./pages/UserProfile";
+import Dashboard from "./pages/Dashboard";
+import Project from "./pages/Project";
+import Projects from "./pages/Projects";
+import Seasons from "./pages/Seasons";
+import Analytics from "./pages/Analytics";
 
 import Customers from "./components/Customers";
 import Requisitions from "./components/Requisitions";

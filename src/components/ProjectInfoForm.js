@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import API from "../endPoints"
+import API from "../api"
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from "axios";
