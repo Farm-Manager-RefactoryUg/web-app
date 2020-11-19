@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, } from "react-router-dom";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +11,11 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import Divider from '@material-ui/core/Divider';
 import Logo from '../static/images/tree.svg'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-//import axios from "axios";
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import axios from "axios"
+import API from "../api"
+
 
 const Buttonn = withStyles({
   root: {
@@ -120,115 +124,53 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     fontSize: "0.8rem",
     fontFamily: "Segoe UI",
-    display: "block",
   },
   errorIcon: {
     transform: "scale(0.7)",
-  }
-}));
+  },
+  supportText: {
+  textAlign: "center",
+  marginTop: "8px",
+  fontFamily: "Segoe UI",
+  fontSize: "1rem",
+}
+})
+);
+
+const errorText = {
+  fullName: "At least two names e.g. John Doe",
+  email: "Enter valid email E.g: abc@gmail.com",
+  password: "Password should be more than 6 characters",
+  mobile: "Enter valid mobile E.g. 0773763258"
+}
+
+const formSchema = Yup.object()
+  .shape({
+    fullName: Yup.string()
+      .max(25)
+      .required()
+      .matches(/^[0-9a-zA-Z\s]*$/, errorText.fullName),
+    email: Yup.string()
+      .max(25)
+      .required()
+      .email(errorText.email),
+    password: Yup.string()
+      .min(6)
+      .max(25)
+      .required(errorText.password),
+    mobile: Yup.string()
+      .required()
+      .matches(/^07[0-9]{8}$/, errorText.mobile),
+  });
 
 
 export default function SignUp() {
   const classes = useStyles();
-  let [[fullNamee, emaile, passworde, mobilee], setErrors] = useState(["", "", "", ""])
-  const errorText = {
-    fullName: "At least two names e.g. John Doe",
-    email: "Enter valid email E.g: abc@gmail.com",
-    password: "Password should be more than 6 characters",
-    mobile: "Enter valid mobile E.g. 0773763258"
-  }
-
-  const handleSubmit = (event) => {
-    let { fullName, email, password, mobile } = event.target;
-
-    if (fullName.value === ""
-      && email.value === ""
-      && password.value === ""
-      && mobile.value === ""
-      && fullNamee === ""
-      && emaile === ""
-      && passworde === ""
-      && mobilee === "") {
-      setErrors([
-        errorText.fullName,
-        errorText.email,
-        errorText.password,
-        errorText.mobile
-      ])
-      event.preventDefault();
-    }
-    else if (fullName.value === ""
-      && fullNamee === ""
-      && emaile === ""
-      && passworde === ""
-      && mobilee === "") {
-      setErrors([errorText.fullName, emaile, passworde, mobilee])
-      event.preventDefault();
-    }
-    else if (email.value === ""
-      && fullNamee === ""
-      && emaile === ""
-      && passworde === ""
-      && mobilee === "") {
-      setErrors([fullNamee, errorText.email, passworde, mobilee])
-      event.preventDefault();
-    }
-    else if (password.value === ""
-      && fullNamee === ""
-      && emaile === ""
-      && passworde === ""
-      && mobilee === "") {
-      setErrors([fullNamee, emaile, errorText.password, mobilee])
-      event.preventDefault();
-    }
-    else if (mobile.value === ""
-      && fullNamee === ""
-      && emaile === ""
-      && passworde === ""
-      && mobilee === "") {
-      setErrors([fullNamee, emaile, passworde, errorText.mobile])
-      event.preventDefault();
-    }
-    // event.preventDefault();
-    // }
-  }
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    const nameRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
-    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    const mobileRegex = /^07[0-9]{8}$/
-
-    switch (name) {
-      case "fullName":
-        (!nameRegex.test(value) && value.length > 30)
-          ? setErrors([errorText.fullName, emaile, passworde, mobilee])
-          : setErrors(["", emaile, passworde, mobilee]);
-        break;
-      case "email":
-        (!emailRegex.test(value) && value.length > 100)
-          ? setErrors([fullNamee, errorText.email, passworde, mobilee])
-          : setErrors([fullNamee, "", passworde, mobilee]);
-        break;
-      case "password":
-        (value.length < 6 || value.length > 100)
-          ? setErrors([fullNamee, emaile, errorText.password, mobilee])
-          : setErrors([fullNamee, emaile, "", mobilee]);
-        break;
-      case "mobile":
-        (!mobileRegex.test(value) && value.length !== 10)
-          ? setErrors([fullNamee, emaile, passworde, errorText.mobile])
-          : setErrors([fullNamee, emaile, passworde, ""]);
-        break;
-
-      default:
-        break;
-    }
-  }
 
   useEffect(() => {
     document.title = "Sign Up"
   }, []);
+
 
   return (
     <div
@@ -239,10 +181,10 @@ export default function SignUp() {
         maxWidth="xs"
       >
         <CssBaseline />
+
         <div
           className={classes.paper}
         >
-
           <div
             className={classes.titleDiv}
           >
@@ -252,11 +194,13 @@ export default function SignUp() {
               width="25px"
               height="25px"
             />
+
             <h4
               className={classes.navBrand}
             >
               Tele-Farmer
             </h4>
+
           </div>
 
           <Typography
@@ -275,130 +219,176 @@ export default function SignUp() {
             Enter your information to stay connected and monitor your project(s) performance.
           </Typography>
 
-          <form
-            onSubmit={handleSubmit}
-            className={classes.form}
-            noValidate
+          <Formik
+            initialValues={{
+              fullName: "",
+              email: "",
+              password: "",
+              mobile: "",
+            }}
+            validationSchema={formSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(true)
+              axios.post(API, values)
+                .then(() => {
+                  // Add your logic that redirects an authenticated user
+                })
+                .catch((error) => {
+                  console.error('There was an error!', error);
+                });
+            }}
           >
 
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              autoFocus
-              required
-              fullWidth
-              id="fullName"
-              label="Fullname"
-              name="fullName"
-              error={fullNamee.length > 0}
-              onChange={handleChange}
-            />
-            {fullNamee &&
-              <small
-                className={classes.errorText}
+            {({ errors, touched, isSubmitting }) => (
+
+              <Form
+                className={classes.form}
+                noValidate
               >
-                <ErrorOutlineIcon
-                  className={classes.errorIcon}
+
+                <Field
+                  variant="outlined"
+                  margin="normal"
+                  autoFocus
+                  required
+                  fullWidth
+                  id="fullName"
+                  label="Fullname"
+                  name="fullName"
+                  as={CssTextField}
+                  error={errors.fullName && touched.fullName}
+                  helperText={errors.fullName
+                    && touched.fullName
+                    && (<span>
+                      <ErrorOutlineIcon
+                        className={classes.errorIcon}
+                      />
+                      <span
+                        className={classes.errorText}>
+                        {errorText.fullName}
+                      </span>
+                    </span>)
+                  }
                 />
-                {fullNamee}
-              </small>}
 
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              error={emaile.length > 0}
-              autoComplete="email"
-              onChange={handleChange}
-            />
-            {emaile && <small
-              className={classes.errorText}
-            >
-              <ErrorOutlineIcon
-                className={classes.errorIcon}
-              />
-              {emaile}
-            </small>}
+                <Field
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  as={CssTextField}
+                  error={errors.email && touched.email}
+                  helperText={errors.email
+                    && touched.email
+                    && (<span>
+                      <ErrorOutlineIcon
+                        className={classes.errorIcon}
+                      />
+                      <span
+                        className={classes.errorText}>
+                        {errorText.email}
+                      </span>
+                    </span>)
+                  }
+                />
 
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              id="password"
-              autoComplete="current-password"
-              error={passworde.length > 0}
-              type="password"
-              onChange={handleChange}
+                <Field
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  id="password"
+                  autoComplete="current-password"
+                  type="password"
+                  as={CssTextField}
+                  error={errors.password && touched.password}
+                  helperText={errors.password
+                    && touched.password
+                    && (<span>
+                      <ErrorOutlineIcon
+                        className={classes.errorIcon}
+                      />
+                      <span
+                        className={classes.errorText}>
+                        {errorText.password}
+                      </span>
+                    </span>)
+                  }
+                />
 
-            />
-            {passworde && <small
-              className={classes.errorText}
-            >
-              <ErrorOutlineIcon
-                className={classes.errorIcon}
-              />
-              {passworde}
-            </small>}
+                <Field
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="mobile"
+                  label="Mobile"
+                  name="mobile"
+                  as={CssTextField}
+                  error={errors.mobile && touched.mobile}
+                  helperText={errors.mobile
+                    && touched.mobile
+                    && (<span>
+                      <ErrorOutlineIcon
+                        className={classes.errorIcon}
+                      />
+                      <span
+                        className={classes.errorText}>
+                        {errorText.mobile}
+                      </span>
+                    </span>)
+                  }
+                />
 
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="mobile"
-              label="Mobile"
-              name="mobile"
-              error={mobilee.length > 0}
-              onChange={handleChange}
-            />
-            {mobilee && <small
-              className={classes.errorText}
-            >
-              <ErrorOutlineIcon
-                className={classes.errorIcon}
-              />
-              {mobilee}
-            </small>}
-
-            <Buttonn
-              type="submit"
-              fullWidth
-              variant="contained"
-              className={classes.submit}
-              endIcon={<ArrowRightAltIcon />}
-            >
-              create
-            </Buttonn>
-
-            <Divider />
-
-            <Grid container>
-              <Grid item xs={12} md={12} lg={12} style={{ textAlign: "center", marginTop: "8px", fontFamily: "Segoe UI", fontSize: "1rem" }}>
-                {"Already have an account? "}
-                <Link
-                  to={"/"}
-                  variant="body2"
-                  className={classes.links}
+                <Buttonn
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  className={classes.submit}
+                  disabled={isSubmitting}
+                  endIcon={<ArrowRightAltIcon />}
                 >
-                  Log In
-                </Link>
-              </Grid>
-            </Grid>
+                  create
+                </Buttonn>
 
-          </form>
+                <Divider />
+
+                <Grid
+                  item
+                  xs={12}
+                  md={12}
+                  lg={12}
+                  className={classes.supportText}
+                >
+                  {"Already have an account? "}
+
+                  <Link
+                    to={"/"}
+                    variant="body2"
+                    className={classes.links}
+                  >
+                    Log In
+                </Link>
+
+                </Grid>
+
+              </Form>
+            )}
+          </Formik>
 
         </div>
       </Container>
 
       <Container maxWidth="sm">
-        <footer className={classes.footer}>
+        <footer
+          className={classes.footer}
+        >
           Copyright © {new Date().getFullYear()}&nbsp;| Refactory, Uganda.
         </footer>
       </Container>

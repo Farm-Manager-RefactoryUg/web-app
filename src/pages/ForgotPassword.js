@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Logo from '../static/images/tree.svg'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import axios from "axios"
+import API from "../api"
 
 const Buttonn = withStyles({
     root: {
@@ -114,8 +118,31 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Segoe UI",
         fontWeight: "800",
         fontSize: "0.9rem",
-    }
-}));
+    },
+    errorText: {
+        color: "red",
+        fontSize: "0.8rem",
+        fontFamily: "Segoe UI",
+    },
+    errorIcon: {
+        transform: "scale(0.7)",
+    },
+})
+);
+
+const errorText = {
+    email: "Enter valid email E.g: abc@gmail.com",
+}
+
+const formSchema = Yup.object()
+    .shape({
+        email: Yup.string()
+            .max(25)
+            .required()
+            .email(errorText.email),
+    });
+
+
 
 export default function ForgotPassword() {
     const classes = useStyles();
@@ -143,62 +170,109 @@ export default function ForgotPassword() {
     return (
         <div className={classes.root}>
 
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
                 <div className={classes.paper}>
 
-                    <div className={classes.titleDiv}>
-                        <img src={Logo} alt="logo" width="25px" height="25px" />
-                        <h4 className={classes.navBrand}>Tele-Farmer</h4>
+                    <div
+                        className={classes.titleDiv}
+                    >
+                        <img
+                            src={Logo}
+                            alt="logo"
+                            width="25px"
+                            height="25px"
+                        />
+
+                        <h4
+                            className={classes.navBrand}
+                        >
+                            Tele-Farmer
+                        </h4>
                     </div>
 
 
-                    <Typography component="h1" variant="h5" className={classes.pageTitle}>
+                    <Typography
+                        component="h1"
+                        variant="h5"
+                        className={classes.pageTitle}
+                    >
                         Password recovery
                     </Typography>
 
-                    <Typography component="h2" variant="h5" className={classes.pageSubTitle}>
-                        Details will be sent to the registered email address related to the submitted email or phone number to help recover your account.
+                    <Typography
+                        component="h2"
+                        variant="h5"
+                        className={classes.pageSubTitle}
+                    >
+                        Unfortunately the resource you are looking for does not exist. Go back to the previous page and try again.
                     </Typography>
 
-                    <form onSubmit={handleSubmit} className={classes.form} noValidate>
+                    <Formik
+                        initialValues={{
+                            email: "",
+                            password: "",
+                        }}
+                        validationSchema={formSchema}
+                        onSubmit={(values, { setSubmitting }) => {
+                            setSubmitting(true)
+                            axios.post(API, values)
+                                .then(() => {
+                                    // Add your logic that redirects an authenticated user
+                                })
+                                .catch((error) => {
+                                    console.error('There was an error!', error);
+                                });
+                        }}
+                    >
 
-                        <CssTextField
-                            variant="outlined"
-                            margin="normal"
-                            autoFocus
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email or Phone"
-                            name="email"
-                            error={emaile.length > 0}
-                            autoComplete="email"
-                            onChange={handleChange}
-                        />
-                        {emaile && <small
-                            style={{
-                                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-                            }}
-                        >
-                            <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-                            {emaile}
-                        </small>}
+                        {({ errors, touched, isSubmitting }) => (
 
-                        <Buttonn
-                            type="submit"
-                            variant="contained"
-                            className={classes.submit}
-                        >
-                            Submit
-                        </Buttonn>
+                            <Form
+                                className={classes.form}
+                                noValidate
+                            >
+                                <Field
+                                    variant="outlined"
+                                    margin="normal"
+                                    autoFocus
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    as={CssTextField}
+                                    error={errors.email && touched.email}
+                                    helperText={errors.email
+                                        && touched.email
+                                        && (<span>
+                                            <ErrorOutlineIcon
+                                                className={classes.errorIcon}
+                                            />
+                                            <span
+                                                className={classes.errorText}>
+                                                {errorText.email}
+                                            </span>
+                                        </span>)
+                                    }
+                                />
 
-                    </form>
+                                <Buttonn
+                                    type="submit"
+                                    variant="contained"
+                                    disabled={isSubmitting}
+                                    className={classes.submit}
+                                >
+                                    Submit
+                                </Buttonn>
+
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
-            </Container>
 
             <Container maxWidth="sm">
-                <footer className={classes.footer}>
+                <footer 
+                className={classes.footer}>
                     Copyright © {new Date().getFullYear()}&nbsp;| Refactory, Uganda.
                 </footer>
             </Container>
