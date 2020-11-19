@@ -17,6 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "&:hover": {
@@ -71,26 +72,31 @@ export default function MainListItems(props) {
     compareUrl: "/compare",
     seasonsUrl: "/seasons",
     toolsUrl: "/tools",
-    consumableUrl: "/consumable",
+    consumableUrl: "/consumables",
     requisitionsUrl: "/requisitions",
     suppliersUrl: "/suppliers",
     customersUrl: "/customers",
     workersUrl: "/workers",
+    casualUrl: "/casual",
   }
   const listItemHighlightItems = classes.highlightItems;
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
+
   const handleClick1 = () => {
     setOpen1(!open1);
   };
+
   const handleClick2 = () => {
     setOpen2(!open2);
   };
+
   const handleClick3 = () => {
     setOpen3(!open3);
   };
+
   const handleClick4 = () => {
     setOpen4(!open4);
   };
@@ -257,24 +263,24 @@ export default function MainListItems(props) {
         button
         id="a"
         onClick={handleClick3}
-        className={urls.workersUrl === currentUrl ? classes.highlight : ""}
+        className={urls.workersUrl === currentUrl || urls.casualUrl === currentUrl ? classes.highlight : ""}
       >
         <ListItemIcon>
           <PeopleIcon
-            className={urls.workersUrl === currentUrl ? listItemHighlightItems : ""}
+            className={urls.workersUrl === currentUrl || urls.casualUrl === currentUrl ? listItemHighlightItems : ""}
           />
         </ListItemIcon>
         <ListItemText
           disableTypography
           primary="Employees"
-          className={classes.text}
+          className={clsx(classes.text, urls.workersUrl === currentUrl || urls.casualUrl === currentUrl ? listItemHighlightItems : "")}
         />
         {open1
           ? <ExpandLess
-            className={urls.workersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon}
+            className={urls.workersUrl === currentUrl || urls.casualUrl === currentUrl ? classes.blackIcon : classes.whiteIcon}
           />
           : <ExpandMore
-            className={urls.workersUrl === currentUrl ? classes.blackIcon : classes.whiteIcon}
+            className={urls.workersUrl === currentUrl || urls.casualUrl === currentUrl ? classes.blackIcon : classes.whiteIcon}
           />}
       </ListItem>
 
@@ -296,7 +302,7 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Employees"
-              className={classes.text}
+              className={clsx(classes.text, urls.workersUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
           <ListItem
@@ -308,7 +314,7 @@ export default function MainListItems(props) {
             <ListItemText
               disableTypography
               primary="Casual workers"
-              className={classes.text}
+              className={clsx(classes.text, urls.casualUrl === currentUrl ? classes.selectedItem : "")}
             />
           </ListItem>
         </List>
@@ -327,7 +333,7 @@ export default function MainListItems(props) {
         <ListItemText
           disableTypography
           primary="Tools"
-          className={classes.text}
+          className={clsx(classes.text, urls.toolsUrl === currentUrl || urls.consumableUrl === currentUrl ? listItemHighlightItems : "")}
         />
         {open4
           ? <ExpandLess

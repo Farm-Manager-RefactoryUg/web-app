@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-//import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,8 +10,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableContainer from "@material-ui/core/TableContainer";
-//import CssBaseline from "@material-ui/core/CssBaseline";
 import ProjectAppBar from "../components/ProjectAppBar";
+import { Typography } from "@material-ui/core";
+import API from "../api"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,19 +22,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f7f9fc",
   },
   root1: {
-    width: "100%",
-    padding: 20,
-    backgroundColor: "white",
-    color: "black",
+    margin: theme.spacing(2.5),
+    marginTop: theme.spacing(5),
+    padding: "20px",
   },
-  // container: {
-  //   maxHeight: 440,
-  // },
   spacing: {
     margin: 0,
   },
   title: {
-    flexGrow: 1,
+    color: "rgba(0,0,0,0.87)",
+    fontFamily: "Segoe UI",
+    fontWeight: "600",
+    fontSize: "1.2rem",
   },
   grid: {
     margin: "0px !important",
@@ -58,16 +58,13 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
-}));
-// const useStyles = makeStyles({
-//   root: {
-//     display: "flex",
-//     width: "90%",
-//   },
-//   container: {
-//     maxHeight: 440,
-//   },
-// });
+  tableRow: {
+    backgroundColor: "#fafafa",
+    fontWeight: "bold",
+  },
+})
+);
+
 
 export default function Consumables() {
   const currentUrl = useLocation();
@@ -75,10 +72,11 @@ export default function Consumables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [items, setItems] = useState("");
-  // const rows = [{ items }];
-  const handleChangePage = (event, newPage) => {
+
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -86,7 +84,7 @@ export default function Consumables() {
 
   useEffect(() => {
     axios
-      .get("https://farmmanager-api.herokuapp.com/api/consumable")
+      .get(API.consumable)
       .then((response) => {
         setItems(response.data);
       })
@@ -94,21 +92,32 @@ export default function Consumables() {
         console.log(err);
       });
   }, []);
+
+
   return (
     <div className={classes.root}>
-      <React.Fragment>
-        {/* <CssBaseline/> */}
-        <ProjectAppBar location={currentUrl} />
+
+        <ProjectAppBar 
+        location={currentUrl} 
+        />
 
         <main className={classes.content}>
+
           <Paper className={classes.root1}>
-            <h5>Consumables</h5>
+
+            <Typography
+            className={classes.title}
+            >
+              Consumables
+              </Typography>
+
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
+
                 <TableHead>
                   <TableRow
                     position="static"
-                    style={{ backgroundColor: "#dff8fa;", fontWeight: "bold" }}
+                    className={classes.TableRow}
                   >
                     <TableCell>No.</TableCell>
                     <TableCell>Date</TableCell>
@@ -117,9 +126,10 @@ export default function Consumables() {
                     <TableCell>Main User</TableCell>
                   </TableRow>
                 </TableHead>
+
                 <TableBody>
-                  {items &&
-                    items
+                  {items 
+                  && items
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
@@ -134,8 +144,10 @@ export default function Consumables() {
                         </TableRow>
                       ))}
                 </TableBody>
+
               </Table>
             </TableContainer>
+
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
@@ -145,9 +157,9 @@ export default function Consumables() {
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
+
           </Paper>
         </main>
-      </React.Fragment>
     </div>
   );
 }
