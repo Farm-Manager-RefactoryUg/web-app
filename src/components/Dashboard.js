@@ -83,10 +83,12 @@ export default function Dashboard() {
   const classes = useStyles();
   const currentUrl = useLocation();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const [items, setItems] = useState([]);
+  const [expenditure, setExpenditure] = useState([]);
+  const [totalExpenditure, setTotalExpenditure]= useState(0);
   const [id, setId] = useState();
   const [income, setIncome]= useState([]);
   const [totalIncome, setTotalIcome]= useState(0);
+  const [totalIncome2, setTotalIcome2]= useState(0);
 
   const theme = React.useMemo(
     () =>
@@ -118,16 +120,20 @@ export default function Dashboard() {
               return newState;
         })
         let sum = 0;
+        let sum2 = 0;
     await  response.data.map((item)=>{
         sum += item["total"]
+        sum2 += item["unit"]
     // console.log(item["total"])
   })
  console.log(sum);
  
-        return sum;
+        return sum ;
+ 
       // console.log(response.data)
       }).then((sum)=>{
         setTotalIcome(sum)
+        
         console.log(sum)
       })
     
@@ -136,24 +142,34 @@ export default function Dashboard() {
           });
       }, [income.id, id]);
   
-    // setId(items.id);
-    // axios
-    //   .get(API.income )
-    //   .then((response) => {
-    //     setIncome(response.data)
-
-    //     let sum = 0;
-    //  let numbers = [5,10,15]
-    //       for(let i = 0; i <= numbers.length; i++){
-    //         sum =+ numbers[i];
-    //       }
-    //       // return setTotalIcome(sum);
-    //     console.log(number);
-    //   })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [income.id, id]);
+      useEffect(
+        ()=>{
+          axios.get ("https://farmmanager-api.herokuapp.com/api/expenditure/")
+          .then(
+           async (response)=>{
+            setExpenditure((currentState)=>{
+            let newState = currentState;
+              newState = [...response.data]
+                  return newState;
+            })
+            let sum = 0;
+        await  response.data.map((item)=>{
+            sum += item["amountpaid"]
+        // console.log(item["total"])
+      })
+     console.log(sum);
+     
+            return sum;
+          // console.log(response.data)
+          }).then((sum)=>{
+            setTotalExpenditure(sum)
+            console.log(sum)
+          })
+        
+        .catch((err) => {
+                console.log(err);
+              });
+          }, [expenditure.id, id]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -218,7 +234,7 @@ export default function Dashboard() {
                         fontSize: "1.5rem"
                       }}
                     >
-                      {"2.532"}
+                      {totalExpenditure}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -264,7 +280,7 @@ export default function Dashboard() {
                       gutterBottom
                       component="h6"
                       style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                      Sales Revenue
+                     Profit or Loss
                         <Chip
                         classes={{ label: classes.label, }}
                         style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
@@ -277,7 +293,7 @@ export default function Dashboard() {
                         fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem"
                       }}
                     >
-                      {"170.212"}
+                     {  totalIncome - totalExpenditure}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -349,7 +365,7 @@ export default function Dashboard() {
                         fontSize: "1.5rem"
                       }}
                     >
-                      {"33"}
+                      {totalIncome2}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -417,14 +433,6 @@ export default function Dashboard() {
                       />
                     </Typography>
 
-
-
-
-
-                    {/* {items &&
-                    items
-                      .map((item) => ( */}
-                      
                     <Typography
                       style={{
                         fontFamily: "Segoe UI",
@@ -446,7 +454,7 @@ export default function Dashboard() {
                         {" UGX"}
                       </sub>
                     </Typography>
-                       {/* ))} */}
+                   
                     <Typography
                       style={{
                         fontFamily: "Segoe UI",
@@ -568,7 +576,7 @@ export default function Dashboard() {
                       marginBottom: "20px",
                     }}
                   >
-                    {"765.43"}
+                {totalExpenditure}
                     <sub
                       style={{
                         fontWeight: "600",
