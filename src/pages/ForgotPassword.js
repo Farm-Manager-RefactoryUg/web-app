@@ -56,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        width: "30%",
+        margin: "auto"
     },
     titleDiv: {
         display: "flex",
