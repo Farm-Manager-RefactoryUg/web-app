@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         fontFamily: "Segoe UI",
         backgroundColor: "rgb(247, 249, 252)",
-        //minHeight: "100vh",
     },
     spacing: {
         margin: 0,
@@ -81,9 +80,8 @@ const useStyles = makeStyles((theme) => ({
         overflow: "auto",
     },
     card: {
-        //width: "600px",
-        margin: theme.spacing(2.5),
-        marginLeft: theme.spacing(0),
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
         padding: theme.spacing(1, 2.5, 2, 2.5),
         display: 'flex',
         flexDirection: 'column',
@@ -99,14 +97,12 @@ const useStyles = makeStyles((theme) => ({
         color: "rgba(0, 0, 0, 0.87)",
     },
     form: {
-        //width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
         marginBottom: "0",
         width: "160px",
-        //marginTop: "35px",
         backgroundColor: 'green',
         color: 'white',
         outline: 'none',
@@ -131,7 +127,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "0.8125rem",
         fontWeight: "400"
     }
-}));
+})
+);
 
 const errorText = {
     name: "Only letters and numbers allowed E.g. Biyinzika Mukono 2",
@@ -174,7 +171,6 @@ export default function Project() {
     const [open, setOpen] = useState(false);
     const [data, setData] = useState()
 
-
     useEffect(() => {
         axios
             .get(API.farm)
@@ -195,17 +191,15 @@ export default function Project() {
     }, [setData]);
     console.log(data)
 
+
     return (
         data
             ? <div
                 className={classes.root}
             >
-
                 <Card
-                    maxWidth="xs"
                     className={classes.card}
                 >
-
                     <Grid container spacing={2}>
 
                         <Grid item xs={12} sm={12} lg={6}>
