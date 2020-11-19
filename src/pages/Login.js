@@ -61,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: "30%",
+    margin: "auto"
   },
   titleDiv: {
     display: "flex",
@@ -87,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
   },
   form: {
-    width: "30%", // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(2),
   },
   submit: {
