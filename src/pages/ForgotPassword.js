@@ -143,25 +143,8 @@ const formSchema = Yup.object()
     });
 
 
-
 export default function ForgotPassword() {
     const classes = useStyles();
-    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-    let [emaile, setErrors] = useState("")
-
-    const handleSubmit = (event) => {
-        if (emaile) {
-            event.preventDefault();
-        }
-    }
-
-    const handleChange = (event) => {
-        const { value } = event.target;
-
-        (!emailRegex.test(value))
-            ? setErrors("Enter valid email E.g: abc@gmail.com")
-            : setErrors("");
-    }
 
     useEffect(() => {
         document.title = "Password Recovery"
