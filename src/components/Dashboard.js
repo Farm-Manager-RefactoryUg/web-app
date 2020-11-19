@@ -27,6 +27,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import SalesBarGraph from './SalesBarGraph'
 import API from "../endPoints"
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -82,8 +83,10 @@ export default function Dashboard() {
   const classes = useStyles();
   const currentUrl = useLocation();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const [item, setItems] = useState("");
+  const [items, setItems] = useState([]);
   const [id, setId] = useState();
+  const [income, setIncome]= useState([]);
+  const [totalIncome, setTotalIcome]= useState(0);
 
   const theme = React.useMemo(
     () =>
@@ -104,17 +107,53 @@ export default function Dashboard() {
     document.title = "Dashboard";
   }, []);
 
-  useEffect(() => {
-    setId(item.id);
-    axios
-      .get(API.income + id)
-      .then((response) => {
-        setItems(response.data);
+  useEffect(
+    ()=>{
+      axios.get (API.income)
+      .then(
+       async (response)=>{
+        setIncome((currentState)=>{
+        let newState = currentState;
+          newState = [...response.data]
+              return newState;
+        })
+        let sum = 0;
+    await  response.data.map((item)=>{
+        sum += item["total"]
+    // console.log(item["total"])
+  })
+ console.log(sum);
+ 
+        return sum;
+      // console.log(response.data)
+      }).then((sum)=>{
+        setTotalIcome(sum)
+        console.log(sum)
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [item.id, id]);
+    
+    .catch((err) => {
+            console.log(err);
+          });
+      }, [income.id, id]);
+  
+    // setId(items.id);
+    // axios
+    //   .get(API.income )
+    //   .then((response) => {
+    //     setIncome(response.data)
+
+    //     let sum = 0;
+    //  let numbers = [5,10,15]
+    //       for(let i = 0; i <= numbers.length; i++){
+    //         sum =+ numbers[i];
+    //       }
+    //       // return setTotalIcome(sum);
+    //     console.log(number);
+    //   })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [income.id, id]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -377,6 +416,15 @@ export default function Dashboard() {
                         size="small"
                       />
                     </Typography>
+
+
+
+
+
+                    {/* {items &&
+                    items
+                      .map((item) => ( */}
+                      
                     <Typography
                       style={{
                         fontFamily: "Segoe UI",
@@ -386,7 +434,9 @@ export default function Dashboard() {
                         fontSize: "1.5rem"
                       }}
                     >
-                      {" 45,000,000"}
+                    
+                   {totalIncome}
+                      {/* {" 45,000,000"} */}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -396,6 +446,7 @@ export default function Dashboard() {
                         {" UGX"}
                       </sub>
                     </Typography>
+                       {/* ))} */}
                     <Typography
                       style={{
                         fontFamily: "Segoe UI",

@@ -115,7 +115,7 @@ export default function Dashboard() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [projects]);
 
     return (
         <>
