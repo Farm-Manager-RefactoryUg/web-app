@@ -25,6 +25,8 @@ import Tables from "./pages/Tables"
 import CasualWorkers from "./pages/CasualWorkers";
 import Consumables from "./pages/Consumables"
 
+// Endpoints need to be revised i.e.
+
 // List (Read all)
 // - create
 // - Read (Read one - {id})
