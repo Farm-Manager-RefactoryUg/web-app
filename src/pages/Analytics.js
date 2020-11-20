@@ -5,8 +5,7 @@ import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-//import Link from "@material-ui/core/Link";
-//import LinkPieChart from "./LinkPieChart";
+
 import ProjectAppBar from "../components/ProjectAppBar";
 import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
