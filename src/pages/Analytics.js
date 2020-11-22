@@ -5,8 +5,6 @@ import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-//import Link from "@material-ui/core/Link";
-//import LinkPieChart from "./LinkPieChart";
 import ProjectAppBar from "../components/ProjectAppBar";
 import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
@@ -97,17 +95,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Dashboard() {
   const classes = useStyles();
+  const currentUrl = useLocation();
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
   const [[startDate, endDate], setSelectedDate] = useState([new Date(), new Date()]);
   const [selectData1, setData1] = useState('');
   const [selectData2, setData2] = useState('');
   const [selectData3, setData3] = useState('');
   const [selectChart, setChart] = useState('');
   const [selectItems, setItems] = useState(1);
-  const [on ,setChartDisplay] = useState(false);
-  const currentUrl = useLocation();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const [on, setChartDisplay] = useState(false);
 
   const handleDateChange1 = (date) => {
     setSelectedDate([date, endDate])
@@ -156,157 +155,237 @@ export default function Dashboard() {
     document.title = "Analysis Page"
   }, []);
 
+
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <div className={classes.root}>
+    //---Remove all inline styling and add it to the useStyles object---
+    <ThemeProvider
+      theme={theme}
+    >
+      <div className={classes.root}>
 
-          <ProjectAppBar location={currentUrl} />
+        <ProjectAppBar
+          location={currentUrl}
+        />
 
-          <main className={classes.content}>
-            <div
-              className={classes.appBarSpacer}
-              style={{ minHeight: "3rem" }}
-            />
+        <main className={classes.content}>
 
-            <Container style={{ marginTop: "40px" }}>
+          <div
+            className={classes.appBarSpacer}
+            style={{ minHeight: "3rem" }}
+          />
 
-              <Typography
-                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
-                component="h1"
+          <Container style={{ marginTop: "40px" }}>
+
+            <Typography
+              style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+              component="h1"
+            >
+              Decision Support
+            </Typography>
+
+            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+
+            <Grid
+              container
+              spacing={2}
+              style={{ marginTop: "30px", marginBottom: "20px", }}
+            >
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                lg={12}
               >
-                {"Decision Support"}
-              </Typography>
+                <Card
+                  style={{ paddingBottom: theme.spacing(2) }}
+                >
+                  <Typography
+                    style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", margin: theme.spacing(2, 2, 1, 2), }}
+                    component="h1"
+                  >
+                    Instructions
+                  </Typography>
 
-              <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
-
-              <Grid container spacing={2} style={{ marginTop: "30px", marginBottom: "20px", }} >
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ paddingBottom: theme.spacing(2) }}>
-                    <Typography
-                      style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", margin: theme.spacing(2,2,1,2), }}
-                      component="h1"
-                    >
-                      {"Instructions"}
-                    </Typography>
-
-                    <ul style={{ fontSize: "0.8125rem" }}>
-                      <li>Select the dates within which the data will be displayed.</li>
-                      <li>Select a chart type of your choice.</li>
-                      <li>Select number of items to be displayed e.g. Select 2 to plot Sales Vs Expenditure or Revenue Vs Sales.</li>
-                      <li>Select the type of data to be displayed.</li>
-                    </ul>
-                  </Card>
-                </Grid>
+                  <ul style={{ fontSize: "0.8125rem" }}>
+                    <li>Select the dates within which the data will be displayed.</li>
+                    <li>Select a chart type of your choice.</li>
+                    <li>Select number of items to be displayed e.g. Select 2 to plot Sales Vs Expenditure or Revenue Vs Sales.</li>
+                    <li>Select the type of data to be displayed.</li>
+                  </ul>
+                </Card>
               </Grid>
+            </Grid>
 
-              <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }} >
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ paddingBottom: theme.spacing(2) }}>
+            <Grid
+              container
+              spacing={2}
+              style={{
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <Grid item xs={12} sm={12} lg={12}>
+                <Card style={{ paddingBottom: theme.spacing(2) }}>
 
-                    <Typography
-                      style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", margin: theme.spacing(2, 2, 0, 2), }}
-                      component="h1"
+                  <Typography
+                    style={{
+                      fontSize: "1.0625rem",
+                      fontWeight: "600",
+                      fontFamily: "Segoe UI",
+                      color: "rgba(0, 0, 0, 0.87)",
+                      margin: theme.spacing(2, 2, 0, 2),
+                    }}
+                    component="h1"
+                  >
+                    Create a chart
+                  </Typography>
+
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+
+                    <KeyboardDatePicker
+                      disableToolbar
+                      format="dd/MM/yyyy"
+                      margin="normal"
+                      id="date-picker-inline1"
+                      label={
+                        <span
+                          style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                        >
+                          Start Date
+                        </span>
+                      }
+                      value={startDate}
+                      onChange={handleDateChange1}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                      style={{ marginLeft: "20px", }}
+                    />
+
+                    <KeyboardDatePicker
+                      disableToolbar
+                      format="dd/MM/yyyy"
+                      margin="normal"
+                      id="date-picker-inline2"
+                      label={
+                        <span
+                          style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                        >
+                          End Date
+                        </span>
+                      }
+                      value={endDate}
+                      onChange={handleDateChange2}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                      style={{ marginLeft: "20px", }}
+                    />
+
+                  </MuiPickersUtilsProvider>
+
+
+                  <FormControl className={classes.formControl}>
+                    <InputLabel
+                      shrink
+                      style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                      id="demo-simple-select-placeholder-label-label"
                     >
-                      {"Create a chart"}
-                    </Typography>
-
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-
-                      <KeyboardDatePicker
-                        disableToolbar
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="date-picker-inline1"
-                        label={<span style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}>Start Date</span>}
-                        value={startDate}
-                        onChange={handleDateChange1}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                        style={{ marginLeft: "20px", }}
-                      />
-
-                      <KeyboardDatePicker
-                        disableToolbar
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="date-picker-inline2"
-                        label={<span style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}>End Date</span>}
-                        value={endDate}
-                        onChange={handleDateChange2}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                        style={{ marginLeft: "20px", }}
-                      />
-
-                    </MuiPickersUtilsProvider>
-
-
-                    <FormControl className={classes.formControl}>
-                      <InputLabel shrink style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }} id="demo-simple-select-placeholder-label-label">
-                        Chart
+                      Chart
                         </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={selectChart}
-                        onChange={handleChartChange}
-                        displayEmpty
-                        className={classes.selectEmpty}
-                      >
-                        <MenuItem value=""><span style={{ color: "rgba(0,0,0,0.3)" }}>Select</span></MenuItem>
-                        <MenuItem value="line">Line</MenuItem>
-                        <MenuItem value="pie">Pie</MenuItem>
-                        <MenuItem value="column">Column</MenuItem>
-                        <MenuItem value="bar">Bar</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={selectChart}
+                      onChange={handleChartChange}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                    >
+                      <MenuItem value="">
+                        <span
+                          style={{ color: "rgba(0,0,0,0.3)" }}
+                        >
+                          Select
+                          </span>
+                      </MenuItem>
+                      <MenuItem value="line">Line</MenuItem>
+                      <MenuItem value="pie">Pie</MenuItem>
+                      <MenuItem value="column">Column</MenuItem>
+                      <MenuItem value="bar">Bar</MenuItem>
+                    </Select>
+                  </FormControl>
 
 
-                    <FormControl className={classes.formControl}>
-                      <InputLabel shrink style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }} id="demo-simple-select-placeholder-label-label">
-                        No. of items
+                  <FormControl className={classes.formControl}>
+
+                    <InputLabel
+                      shrink
+                      style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                      id="demo-simple-select-placeholder-label-label"
+                    >
+                      No. of items
                         </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={selectItems}
-                        onChange={handleNoOfItemsChange}
-                        displayEmpty
-                        className={classes.selectEmpty}
-                      >
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <br></br>
 
-                    <FormControl className={classes.formControl}>
-                      <InputLabel shrink style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }} id="demo-simple-select-placeholder-label-label">
-                        Data 1
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={selectItems}
+                      onChange={handleNoOfItemsChange}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                    >
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                    </Select>
+
+                  </FormControl>
+                  <br></br>
+
+                  <FormControl className={classes.formControl}>
+
+                    <InputLabel
+                      shrink
+                      style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                      id="demo-simple-select-placeholder-label-label"
+                    >
+                      Data 1
                         </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={selectData1}
-                        onChange={handleData1Change}
-                        displayEmpty
-                        className={classes.selectEmpty}
-                      >
-                        <MenuItem value=""><span style={{ color: "rgba(0,0,0,0.5)" }}>Select</span></MenuItem>
-                        <MenuItem value="sales">Sales</MenuItem>
-                        <MenuItem value="revenue">Revenue</MenuItem>
-                        <MenuItem value="expenditure">Expenditure</MenuItem>
-                      </Select>
-                    </FormControl>
 
-                    {selectItems > 1 && <FormControl className={classes.formControl}>
-                      <InputLabel shrink style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }} id="demo-simple-select-placeholder-label-label">
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={selectData1}
+                      onChange={handleData1Change}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                    >
+                      <MenuItem value="">
+                        <span
+                          style={{ color: "rgba(0,0,0,0.5)" }}
+                        >
+                          Select
+                        </span>
+                      </MenuItem>
+                      <MenuItem value="sales">Sales</MenuItem>
+                      <MenuItem value="revenue">Revenue</MenuItem>
+                      <MenuItem value="expenditure">Expenditure</MenuItem>
+                    </Select>
+
+                  </FormControl>
+
+                  {selectItems > 1
+                    && <FormControl
+                      className={classes.formControl}
+                    >
+                      <InputLabel
+                        shrink
+                        style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                        id="demo-simple-select-placeholder-label-label"
+                      >
                         Data 2
                         </InputLabel>
+
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
                         id="demo-simple-select-placeholder-label"
@@ -320,12 +399,21 @@ export default function Dashboard() {
                         <MenuItem value="revenue">Revenue</MenuItem>
                         <MenuItem value="expenditure">Expenditure</MenuItem>
                       </Select>
+
                     </FormControl>}
 
-                    {selectItems === 3 && <FormControl className={classes.formControl}>
-                      <InputLabel shrink style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }} id="demo-simple-select-placeholder-label-label">
+                  {selectItems === 3
+                    && <FormControl
+                      className={classes.formControl}
+                    >
+                      <InputLabel
+                        shrink
+                        style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                        id="demo-simple-select-placeholder-label-label"
+                      >
                         Data 3
                         </InputLabel>
+
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
                         id="demo-simple-select-placeholder-label"
@@ -339,38 +427,52 @@ export default function Dashboard() {
                         <MenuItem value="revenue">Revenue</MenuItem>
                         <MenuItem value="expenditure">Expenditure</MenuItem>
                       </Select>
-                    </FormControl>}
 
-                    <br></br>
+                    </FormControl>
+                  }
 
-                    <Buttonn
-                      type="submit"
-                      variant="contained"
-                      fullWidth
-                      className={classes.submit}
-                      startIcon={<BarChartIcon />}
-                      onClick={handleSubmit}
-                    >
-                      Visualize
+                  <br></br>
+
+                  <Buttonn
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    className={classes.submit}
+                    startIcon={<BarChartIcon />}
+                    onClick={handleSubmit}
+                  >
+                    Visualize
                     </Buttonn>
-                  </Card>
-                </Grid>
+                </Card>
               </Grid>
+            </Grid>
 
-              {on && <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }} >
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ paddingBottom: theme.spacing(2) }}>
+            {on
+              && <Grid
+                container
+                spacing={2}
+                style={{ marginTop: "20px", marginBottom: "20px", }}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  lg={12}
+                >
+                  <Card
+                    style={{ paddingBottom: theme.spacing(2) }}
+                  >
                     <SalesLineChart />
                   </Card>
                 </Grid>
-              </Grid>}
+              </Grid>
+            }
 
-              <br></br>
+            <br></br>
 
-            </Container>
-          </main>
-        </div>
-      </ThemeProvider>
-    </>
+          </Container>
+        </main>
+      </div>
+    </ThemeProvider>
   );
 }

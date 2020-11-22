@@ -212,9 +212,10 @@ export default function LogIn() {
             setSubmitting(true)
             axios.post(API, values)
               .then(() => {
-                // Add your logic that redirects an authenticated user
+                //---Add logic to redirect an authenticated user---
               })
               .catch((error) => {
+                //---Review and improve the error handling logic below---
                 console.error('There was an error!', error);
               });
           }}
@@ -239,14 +240,16 @@ export default function LogIn() {
                 autoComplete="email"
                 as={CssTextField}
                 error={errors.email && touched.email}
-                helperText={errors.email
+                helperText={
+                  errors.email
                   && touched.email
                   && (<span>
                     <ErrorOutlineIcon
                       className={classes.errorIcon}
                     />
                     <span
-                      className={classes.errorText}>
+                      className={classes.errorText}
+                    >
                       {errorText.email}
                     </span>
                   </span>)
@@ -265,7 +268,8 @@ export default function LogIn() {
                 type="password"
                 as={CssTextField}
                 error={errors.password && touched.password}
-                helperText={errors.password
+                helperText={
+                  errors.password
                   && touched.password
                   && (<span>
                     <ErrorOutlineIcon
@@ -325,7 +329,9 @@ export default function LogIn() {
 
       </div>
 
-      <Container maxWidth="sm">
+      <Container
+        maxWidth="sm"
+      >
         <footer
           className={classes.footer}
         >
