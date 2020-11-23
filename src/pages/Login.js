@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -11,7 +11,10 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import Divider from '@material-ui/core/Divider';
 import Logo from '../static/images/tree.svg'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import axios from "axios";
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import axios from "axios"
+import API from "../api"
 
 const Buttonn = withStyles({
   root: {
@@ -57,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: "30%",
+    margin: "auto"
   },
   titleDiv: {
     display: "flex",
@@ -118,63 +123,38 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Segoe UI",
     fontWeight: "800",
     fontSize: "0.9rem",
-  }
-}));
+  },
+  errorText: {
+    color: "red",
+    fontSize: "0.8rem",
+    fontFamily: "Segoe UI",
+  },
+  errorIcon: {
+    transform: "scale(0.7)",
+  },
+})
+);
+
+const errorText = {
+  email: "Enter valid email E.g: abc@gmail.com",
+  password: "Password should be 6 or more characters",
+}
+
+const formSchema = Yup.object()
+  .shape({
+    email: Yup.string()
+      .max(25)
+      .required()
+      .email(errorText.email),
+    password: Yup.string()
+      .min(6)
+      .max(25)
+      .required(errorText.password),
+  });
+
 
 export default function LogIn() {
-  let history = useHistory();
   const classes = useStyles();
-  let [[emaile, passworde], setErrors] = useState(["", ""])
-
-  const handleSubmit = event => {
-    const url = "http://www.something.com/login";
-    let { email, password } = event.target;
-
-    if (email.value !== "" && password.value !== "" && emaile === "" && passworde === "") {
-      axios.post(url, { email, password })
-        .then(data => {
-          if (data.message === "true") {
-            history.pushState("/projects")
-          } else {
-            // Render error message on Login page
-          }
-        })
-        .catch(() => {
-          history.push("/pagenotfound");
-        })
-    } else {
-      if (email.value === "" && password.value === "" && emaile === "" && passworde === "") {
-        setErrors(["Enter valid email E.g: abc@gmail.com", "Password should be more than 6 characters"])
-      }
-      else if (email.value === "" && emaile === "" && passworde === "") {
-        setErrors(["Enter valid email E.g: abc@gmail.com", passworde])
-      }
-      else if (password.value === "" && emaile === "" && passworde === "") {
-        setErrors([emaile, "Password should be more than 6 characters",])
-      }
-      event.preventDefault();
-    }
-  }
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
-
-    switch (name) {
-      case "email":
-        (!emailRegex.test(value))
-          ? setErrors(["Enter valid email E.g: abc@gmail.com", passworde])
-          : setErrors(["", passworde]);
-        break;
-
-      case "password":
-        (value.length < 6) ? setErrors([emaile, "Password should be more than 6 characters"]) : setErrors([emaile, ""]);
-        break;
-
-      default:
-        break;
-    }
-  }
 
   useEffect(() => {
     document.title = "Log In"
@@ -183,98 +163,150 @@ export default function LogIn() {
 
   return (
     <div className={classes.root}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
 
-          <div className={classes.titleDiv}>
-            <img src={Logo} alt="logo" width="25px" height="25px" />
-            <h4 className={classes.navBrand}>Tele-Farmer</h4>
-          </div>
+      <CssBaseline />
 
-          <Typography component="h1" variant="h5" className={classes.pageTitle}>
-            Log In
+      <div className={classes.paper}>
+
+        <div className={classes.titleDiv}>
+
+          <img
+            src={Logo}
+            alt="Tele-farmer logo"
+            width="25px"
+            height="25px"
+          />
+
+          <h4
+            className={classes.navBrand}
+          >
+            Tele-Farmer
+            </h4>
+
+        </div>
+
+        <Typography
+          component="h1"
+          variant="h5"
+          className={classes.pageTitle}
+        >
+          Log In
           </Typography>
 
-          <Typography component="h2" variant="h5" className={classes.pageSubTitle}>
-            Enter your information to stay connected and monitor your project(s) performance.
+        <Typography
+          component="h2"
+          variant="h5"
+          className={classes.pageSubTitle}
+        >
+          Enter your information to stay connected and monitor your project(s) performance.
           </Typography>
 
-          <form onSubmit={handleSubmit} className={classes.form} noValidate>
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              autoFocus
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              error={emaile.length > 0}
-              autoComplete="email"
-              onChange={handleChange}
-            />
-            {emaile && <small
-              style={{
-                color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI"
-              }}
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          validationSchema={formSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(true)
+            axios.post(API, values)
+              .then(() => {
+                // Add your logic that redirects an authenticated user
+              })
+              .catch((error) => {
+                console.error('There was an error!', error);
+              });
+          }}
+        >
+
+          {({ errors, touched, isSubmitting }) => (
+
+            <Form
+              className={classes.form}
+              noValidate
             >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {emaile}
-            </small>}
 
-            <CssTextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              id="password"
-              autoComplete="current-password"
-              error={passworde.length > 0}
-              type="password"
-              onChange={handleChange}
+              <Field
+                variant="outlined"
+                margin="normal"
+                autoFocus
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                as={CssTextField}
+                error={errors.email && touched.email}
+                helperText={errors.email
+                  && touched.email
+                  && (<span>
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
+                    />
+                    <span
+                      className={classes.errorText}>
+                      {errorText.email}
+                    </span>
+                  </span>)
+                }
+              />
 
+              <Field
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                id="password"
+                autoComplete="current-password"
+                type="password"
+                as={CssTextField}
+                error={errors.password && touched.password}
+                helperText={errors.password
+                  && touched.password
+                  && (<span>
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
+                    />
+                    <span
+                      className={classes.errorText}>
+                      {errorText.password}
+                    </span>
+                  </span>)
+                }
+              />
 
-            />
-            {passworde && <small
-              style={{ color: "red", fontSize: "0.8rem", fontFamily: "Segoe UI" }}
-            >
-              <ErrorOutlineIcon style={{ transform: "scale(0.7)", }} />
-              {passworde}
-            </small>}
-
-
-
-            <Link
-              to={"/forgotpassword"}
-              variant="body2"
-              className={classes.links}
-              style={{ float: "right" }}
-            >
-              Forgot password?
+              <Link
+                to={"/forgotpassword"}
+                variant="body2"
+                className={classes.links}
+                style={{ float: "right" }}
+              >
+                Forgot password?
               </Link>
 
-
-
-            <Buttonn
-              type="submit"
-              fullWidth
-              variant="contained"
-              className={classes.submit}
-              endIcon={<ArrowRightAltIcon />}
-            component={Link}      // "Component" and "to" prop to be removed.
-            to={"/projects"}     //  Currently for demonstration purposes only.
-            >
-              Login
+              <Buttonn
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+                disabled={isSubmitting}
+                endIcon={<ArrowRightAltIcon />}
+              >
+                Login
             </Buttonn>
 
-            <Divider />
+              <Divider />
 
-            <Grid container>
-
-              <Grid item xs={12} md={12} lg={12} style={{ textAlign: "center", marginTop: "8px" }}>
+              <Grid
+                item
+                xs={12}
+                md={12}
+                lg={12}
+                style={{ textAlign: "center", marginTop: "8px" }}
+              >
 
                 <Link
                   to={"/signup"}
@@ -286,18 +318,20 @@ export default function LogIn() {
 
               </Grid>
 
-            </Grid>
+            </Form>
+          )}
+        </Formik>
 
-          </form>
-
-        </div>
-      </Container>
+      </div>
 
       <Container maxWidth="sm">
-        <footer className={classes.footer}>
+        <footer
+          className={classes.footer}
+        >
           Copyright © {new Date().getFullYear()}&nbsp;| Refactory, Uganda.
         </footer>
       </Container>
+
     </div >
 
   );

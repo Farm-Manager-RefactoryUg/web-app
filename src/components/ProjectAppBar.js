@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectAppBar(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
   const theme = React.useMemo(
     () =>
