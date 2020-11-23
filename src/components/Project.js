@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, } from "react-router-dom";
+import { useLocation, Redirect, Route } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -7,13 +7,13 @@ import ProjectAppBar from "./ProjectAppBar";
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import API from "../endPoints"
+import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import axios from "axios";
+
+
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import API from "../endPoints"
 
 const drawerWidth = 240;
 const Buttonn = withStyles({
@@ -90,6 +90,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  // fixedHeight: {
+  //   height: 150,
+  // },
   label: {
     fontSize: "0.7rem",
     color: "white",
@@ -117,74 +120,87 @@ const useStyles = makeStyles((theme) => ({
   errorText: {
     color: "red",
     fontSize: "0.8rem",
-    fontFamily: "Segoe UI",
+    fontFamily: "Segoe UI"
   },
   errorIcon: {
     transform: "scale(0.7)",
   },
-  snackBar: {
-    marginTop: "40px",
-  },
-  alert: {
-    fontFamily: "Segoe UI",
-    fontSize: "0.8125rem",
-    fontWeight: "400"
+  lastErrorText: {
+    marginBottom: "10px"
   }
 }));
 
-const errorText = {
-  name: "Only letters and numbers allowed E.g. Biyinzika Mukono 2",
-  location: "Only letters and numbers allowed E.g. Bukasa Muyenga",
-  address: "Only letters and numbers allowed E.g. 101 Le Palm",
-  contactperson: "At least two names E.g. John Doe",
-  phone: "Enter a valid number E.g. 0773763258",
-  tin: "Enter a valid TIN E.g. 1283587938"
+function Alert(props) {
+  return <MuiAlert elevation={1} variant="filled" {...props} />;
 }
-// The regular expressions should be reviewed and improved
-const formSchema = Yup.object()
-  .shape({
-    name: Yup.string()
-      .max(25)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.name),
-    location: Yup.string()
-      .max(20)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.location),
-    address: Yup.string()
-      .max(20)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.address),
-    contactperson: Yup.string()
-      .max(21)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.contactperson),
-    phone: Yup.string()
-      .required()
-      .matches(/^07[0-9]{8}$/, errorText.phone),
-    tin: Yup.string()
-      .required()
-      .matches(/^[0-9]{10}$/, errorText.tin),
-  });
-
 
 export default function Project() {
+
+  // const [state, setState] = useState({
+  //   open: false,
+  //   vertical: 'top',
+  //   horizontal: 'center',
+  // });
+
   const classes = useStyles();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const currentUrl = useLocation();
   const [open, setOpen] = useState(false);
+  const [redirection, setRedirect] = useState(false);   
+  const currentUrl = useLocation();
+  
+  const [form, setForm] = useState({
+    name: "",
+    location: "",
+    address: "",
+    contactperson: "",
+    phone: "",
+    tin: "",
+  })
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  
+  const [errorMessages, setErrors] = useState({
+    name: "",
+    location: "",
+    address: "",
+    contactperson: "",
+    phone: "",
+    tin: "",
+  })
+
+  const handleFormSubmit = (event) => {
+    axios.post(API.farm, form)
+      .then((response) => {
+
+        setOpen(!open)
+        setRedirect(true)
+        setForm({
+            name: "",
+            location: "",
+            address: "",
+            contactperson: "",
+            phone: "",
+            tin: "",
+        })
+        
+
+      })
+      .catch((error) => {
+        console.error('There was an error!', error);
+      });
+    event.preventDefault();
+    
 
 
-  function Alert(props) {
-    return <MuiAlert elevation={1} variant="filled" {...props} />;
   }
 
-  const handleClose = (reason) => {
+  
+   
+  const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
+
     setOpen(!open);
-  };
+  };  
 
  
 
@@ -195,20 +211,70 @@ export default function Project() {
           MuiGrid: {
             "spacing-xs-2": "-6px !important",
           },
-        },
-        palette: {
+        },    
+         palette: {
           type: prefersDarkMode ? "light" : "dark",
         },
       }),
     [prefersDarkMode]
   );
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    const nameRegex = /^[a-zA-Z]+[ a-zA-Z]*$/
+    const contactPersonRegex = /^[a-zA-Z]+\s+[a-zA-Z]+[ a-zA-Z]*$/
+    const mobileRegex = /^07[0-9]{8}$/
+    const alphaNumRegex = nameRegex
+    //const numberRegex = /^[0-9]*$/
+
+    switch (name) {
+      case "name":
+        (!nameRegex.test(value))
+          ? setErrors({ ...errorMessages, name: "Only letters and numbers allowed E.g. BIyinizika 2" })
+          : setErrors({ ...errorMessages, name: "" });
+        setForm({ ...form, name: value })
+        break;
+      case "location":
+        (!alphaNumRegex.test(value))
+          ? setErrors({ ...errorMessages, location: "Enter valid address E.g. Muyenga, Bukasa" })
+          : setErrors({ ...errorMessages, location: "" });
+        setForm({ ...form, location: value })
+        break;
+      case "address":
+        (!alphaNumRegex.test(value))
+          ? setErrors({ ...errorMessages, address: "Enter valid address E.g. Muyenga, Bukasa" })
+          : setErrors({ ...errorMessages, address: "" });
+        setForm({ ...form, address: value })
+        break;
+      case "contactperson":
+        (!contactPersonRegex.test(value))
+          ? setErrors({ ...errorMessages, contactperson: "At least two names E.g. John Doe" })
+          : setErrors({ ...errorMessages, contactperson: "" });
+        setForm({ ...form, contactperson: value })
+        break;
+      case "phone":
+        (!mobileRegex.test(value))
+          ? setErrors({ ...errorMessages, phone: "Enter valid number E.g. 0773763258" })
+          : setErrors({ ...errorMessages, phone: "" });
+        setForm({ ...form, phone: value })
+        break;
+      case "tin":
+        (value.length !== 10)
+          ? setErrors({ ...errorMessages, tin: "Enter valid tin" })
+          : setErrors({ ...errorMessages, tin: "" });
+        setForm({ ...form, tin: value })
+        break;
+
+      default:
+        break;
+    }
+  }
+
   useEffect(() => {
     document.title = "Create a Project"
      
   }, []);
-
-
+  
   return (
     <>
       <ThemeProvider
@@ -217,33 +283,17 @@ export default function Project() {
           className={classes.root}
         >
 
-          <ProjectAppBar
-            location={currentUrl}
-          />
-
-          <Snackbar
-            open={open}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "center"
-            }}
-            className={classes.snackBar}
-          >
-            <Alert
-              onClose={handleClose}
-              severity="success"
-              className={classes.alert}
-            >
-              Project created successfully!
+          <ProjectAppBar location={currentUrl} />
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:"top", horizontal:"center" }}>
+            <Alert onClose={handleClose} severity="success">
+              Your Project Has been successfully created!
             </Alert>
           </Snackbar>
+          
 
           <main
             maxWidth="xs"
-            style={{
-              margin: "auto"
-            }}
+            style={{ margin: "auto" }}
           >
             <Card
               className={classes.paper}
@@ -256,197 +306,170 @@ export default function Project() {
                 Create Project
               </Typography>
 
-              <Formik
-                initialValues={{
-                  name: "",
-                  location: "",
-                  address: "",
-                  contactperson: "",
-                  phone: "",
-                  tin: "",
-                }}
-                validationSchema={formSchema}
-                onSubmit={(values, { resetForm, setSubmitting }) => {
-                  setSubmitting(true)
-                  axios.post(API.farm, values)
-                    .then(() => {
-                      setOpen(!open)
-                      resetForm()
-                    })
-                    .catch((error) => {
-                      console.error('There was an error!', error);
-                    });
-                }}
-              >
+              <form
+                className={classes.form}
+                onSubmit={handleFormSubmit}
+                noValidate>
 
-                {({ errors, touched, isSubmitting }) => (
-                  <Form
-                    className={classes.form}
-                    noValidate>
+                <CssTextField
+                  autoComplete="name"
+                  margin="normal"
+                  autoFocus
+                  name="name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  value={form.name}
+                  id="name"
+                  label="Name"
+                  onChange={handleChange}
+                />
 
-                    <Field
-                      autoComplete="name"
-                      margin="normal"
-                      name="name"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.name && touched.name}
-                      helperText={errors.name
-                        && touched.name
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.name}
-                          </span>
-                        </span>)
-                      }
-                      id="name"
-                      label="Name"
-                      as={CssTextField}
+                {errorMessages.name &&
+                  <small
+                    className={classes.errorText}
+                  >
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
                     />
+                    {errorMessages.name}
+                  </small>
+                }
 
-                    <Field
-                      autoComplete="location"
-                      margin="normal"
-                      name="location"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.location && touched.location}
-                      helperText={errors.location
-                        && touched.location
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.location}
-                          </span>
-                        </span>)
-                      }
-                      id="location"
-                      label="Location"
-                      as={CssTextField}
+                <CssTextField
+                  autoComplete="location"
+                  margin="normal"
+                  name="location"
+                  variant="outlined"
+                  required
+                  value={form.location}
+                  fullWidth
+                  id="location"
+                  label="Location"
+                  onChange={handleChange}
+                />
+
+                {errorMessages.location &&
+                  <small
+                    className={classes.errorText}
+                  >
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
                     />
+                    {errorMessages.location}
+                  </small>
+                }
 
-                    <Field
-                      autoComplete="address"
-                      margin="normal"
-                      name="address"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.address && touched.address}
-                      helperText={errors.address
-                        && touched.address
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.address}
-                          </span>
-                        </span>)
-                      }
-                      id="address"
-                      label="Address"
-                      as={CssTextField}
+                <CssTextField
+                  autoComplete="address"
+                  margin="normal"
+                  name="address"
+                  variant="outlined"
+                  required
+                  value={form.address}
+                  fullWidth
+                  id="address"
+                  label="Address"
+                  onChange={handleChange}
+                />
+
+                {errorMessages.address &&
+                  <small
+                    className={classes.errorText}
+                  >
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
                     />
+                    {errorMessages.address}
+                  </small>
+                }
 
-                    <Field
-                      autoComplete="contactperson"
-                      margin="normal"
-                      name="contactperson"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.contactperson && touched.contactperson}
-                      helperText={errors.contactperson
-                        && touched.contactperson
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.contactperson}
-                          </span>
-                        </span>)
-                      }
-                      id="contactPerson"
-                      label="Contact Person"
-                      as={CssTextField}
+                <CssTextField
+                  autoComplete="contactperson"
+                  margin="normal"
+                  name="contactperson"
+                  variant="outlined"
+                  required
+                  value={form.contactperson}
+                  fullWidth
+                  id="contactPerson"
+                  label="Contact Person"
+                  onChange={handleChange}
+                />
+
+                {errorMessages.contactperson &&
+                  <small
+                    className={classes.errorText}
+                  >
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
                     />
+                    {errorMessages.contactperson}
+                  </small>
+                }
 
-                    <Field
-                      autoComplete="phone"
-                      margin="normal"
-                      name="phone"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.phone && touched.phone}
-                      helperText={errors.phone
-                        && touched.phone
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.phone}
-                          </span>
-                        </span>)
-                      }
-                      id="phone"
-                      label="Phone"
-                      as={CssTextField}
+                <CssTextField
+                  autoComplete="phone"
+                  margin="normal"
+                  name="phone"
+                  variant="outlined"
+                  required
+                  value={form.phone}
+                  fullWidth
+                  id="phone"
+                  label="Phone"
+                  onChange={handleChange}
+                />
+
+                {errorMessages.phone &&
+                  <small
+                    className={classes.errorText}
+                  >
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
                     />
+                    {errorMessages.phone}
+                  </small>
+                }
 
-                    <Field
-                      autoComplete="tin"
-                      margin="normal"
-                      name="tin"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.tin && touched.tin}
-                      helperText={errors.tin
-                        && touched.tin
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.tin}
-                          </span>
-                        </span>)
-                      }
-                      id="tin"
-                      label="TIN"
-                      as={CssTextField}
+                <CssTextField
+                  autoComplete="tin"
+                  margin="normal"
+                  name="tin"
+                  variant="outlined"
+                  required
+                  value={form.tin}
+                  fullWidth
+                  id="tin"
+                  label="TIN"
+                  onChange={handleChange}
+                />
+
+                {errorMessages.tin &&
+                  <small
+                    className={classes.errorText}
+                  >
+                    <ErrorOutlineIcon
+                      className={classes.errorIcon}
                     />
+                    {errorMessages.tin}
+                  </small>
+                }
 
-                    <Buttonn
-                      type="submit"
-                      variant="contained"
-                      className={classes.submit}
-                      disabled={isSubmitting}
-                    >
-                      Send
-                    </Buttonn>
+                
+                <Buttonn
+                  type="Submit"
+                  variant="contained"
+                  className={classes.submit}
+                >
+                  Send
+                </Buttonn>
 
-                  </Form>
-
-                )}
-              </Formik>
+              </form>
+              <Route exact path="/projects">
+                {redirection && <Redirect to="/projects"/>}
+              </Route>
+             
             </Card>
           </main>
         </div>
