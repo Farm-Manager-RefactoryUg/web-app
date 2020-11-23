@@ -25,8 +25,8 @@ export default function Expenditure() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [items, setItems] = useState("");
-  const rows = [{ items }];
+  const [items, setItems] = useState([]);
+  // const item = [{ items }];
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -87,7 +87,7 @@ export default function Expenditure() {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={items.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

@@ -202,6 +202,8 @@ export default function Project() {
     setOpen(!open);
   };  
 
+ 
+
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -270,6 +272,7 @@ export default function Project() {
 
   useEffect(() => {
     document.title = "Create a Project"
+     
   }, []);
   
   return (
@@ -468,9 +471,7 @@ export default function Project() {
               </Route>
              
             </Card>
-
           </main>
-
         </div>
       </ThemeProvider>
     </>
