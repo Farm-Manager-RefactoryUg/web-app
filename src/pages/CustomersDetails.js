@@ -37,6 +37,7 @@ export default function CustomersDetails() {
   const [open, setOpen] = React.useState(false);
   const [user, setuser] = useState({});
   const [email, setId] = useState();
+
   const handleClickOpen = () => {
     setOpen(true);
     setId(user.email);
@@ -62,6 +63,7 @@ export default function CustomersDetails() {
         console.log(err);
       });
   }, [email]);
+
   return (
     <div>
       <Button variant="success" color="primary" onClick={handleClickOpen}>
@@ -107,7 +109,6 @@ export default function CustomersDetails() {
                             <th>Product purchased</th>
                             <th>Amount</th>
                             <th>Date</th>
-                            {/* <th>Options</th> */}
                           </tr>
                         </thead>
 
@@ -124,9 +125,7 @@ export default function CustomersDetails() {
                             <td>Product</td>
                             <td>Amount</td>
                             <td>Date</td>
-                            {/* <td>
-                              <Button variant="secondary">Options</Button>
-                            </td> */}
+                            
                           </tr>
                         </tbody>
                       </Table>

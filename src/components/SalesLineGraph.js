@@ -26,9 +26,7 @@ const options = {
 
   title: {
     text: 'Monthly Expenditure',
-    style: {
-        display: 'none'
-    }
+    
 },
 subtitle: {
     text: '',

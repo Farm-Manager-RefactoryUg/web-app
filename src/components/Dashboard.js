@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import LinkPieChart from "../components/LinkPieChart";
-import ProjectAppBar from "../components/ProjectAppBar";
-import Chip from '@material-ui/core/Chip';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import LinkPieChart from "./LinkPieChart";
+import ProjectAppBar from "./ProjectAppBar";
+import Chip from "@material-ui/core/Chip";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import axios from "axios";
-import RequisitionsDashboard from "../components/RequisitionsDashboard";
+import RequisitionsDashboard from "./RequisitionsDashboard";
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
@@ -20,8 +24,9 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
-import SalesLineGraph from './SalesLineGraph'
-import API from "../api"
+import SalesBarGraph from './SalesBarGraph'
+import API from "../endPoints"
+
 
 const drawerWidth = 240;
 
@@ -78,8 +83,12 @@ export default function Dashboard() {
   const classes = useStyles();
   const currentUrl = useLocation();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const [item, setItems] = useState("");
+  const [expenditure, setExpenditure] = useState([]);
+  const [totalExpenditure, setTotalExpenditure]= useState(0);
   const [id, setId] = useState();
+  const [income, setIncome]= useState([]);
+  const [totalIncome, setTotalIcome]= useState(0);
+  const [totalIncome2, setTotalIcome2]= useState(0);
 
   const theme = React.useMemo(
     () =>
@@ -97,20 +106,70 @@ export default function Dashboard() {
   );
 
   useEffect(() => {
-    document.title = "Dashboard"
+    document.title = "Dashboard";
   }, []);
 
-  useEffect(() => {
-    setId(item.id);
-    axios
-      .get(API.income + id)
-      .then((response) => {
-        setItems(response.data);
+  useEffect(
+    ()=>{
+      axios.get (API.income)
+      .then(
+       async (response)=>{
+        setIncome((currentState)=>{
+        let newState = currentState;
+          newState = [...response.data]
+              return newState;
+        })
+        let sum = 0;
+        let sum2 = 0;
+    await  response.data.map((item)=>{
+        sum += item["total"]
+        sum2 += item["unit"]
+    // console.log(item["total"])
+  })
+ console.log(sum);
+ 
+        return sum ;
+ 
+      // console.log(response.data)
+      }).then((sum)=>{
+        setTotalIcome(sum)
+        
+        console.log(sum)
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [item.id, id]);
+    
+    .catch((err) => {
+            console.log(err);
+          });
+      }, [income.id, id]);
+  
+      useEffect(
+        ()=>{
+          axios.get ("https://farmmanager-api.herokuapp.com/api/expenditure/")
+          .then(
+           async (response)=>{
+            setExpenditure((currentState)=>{
+            let newState = currentState;
+              newState = [...response.data]
+                  return newState;
+            })
+            let sum = 0;
+        await  response.data.map((item)=>{
+            sum += item["amountpaid"]
+        // console.log(item["total"])
+      })
+     console.log(sum);
+     
+            return sum;
+          // console.log(response.data)
+          }).then((sum)=>{
+            setTotalExpenditure(sum)
+            console.log(sum)
+          })
+        
+        .catch((err) => {
+                console.log(err);
+              });
+          }, [expenditure.id, id]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -137,7 +196,7 @@ export default function Dashboard() {
 
             <Grid container spacing={2} style={{ marginTop: "10px", marginBottom: "20px", }}>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={3} lg={3}>
                 <Card
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
@@ -175,7 +234,7 @@ export default function Dashboard() {
                         fontSize: "1.5rem"
                       }}
                     >
-                      {"2.532"}
+                      {totalExpenditure}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -213,7 +272,7 @@ export default function Dashboard() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={3} lg={3}>
                 <Card
                   style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
                   <CardContent>
@@ -221,7 +280,7 @@ export default function Dashboard() {
                       gutterBottom
                       component="h6"
                       style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                      Sales Revenue
+                     Profit or Loss
                         <Chip
                         classes={{ label: classes.label, }}
                         style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
@@ -234,7 +293,7 @@ export default function Dashboard() {
                         fontFamily: "Segoe UI", padding: "0", paddingTop: "3px", fontWeight: "400", fontSize: "1.5rem"
                       }}
                     >
-                      {"170.212"}
+                     {  totalIncome - totalExpenditure}
                       <sub
                         style={{
                           fontWeight: "600",
@@ -271,7 +330,7 @@ export default function Dashboard() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={3} lg={3}>
                 <Card
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
@@ -306,11 +365,11 @@ export default function Dashboard() {
                         fontSize: "1.5rem"
                       }}
                     >
-                      {"33"}
+                      {totalIncome2}
                       <sub
                         style={{
                           fontWeight: "600",
-                          fontSize: "0.8125rem"
+                          fontSize: "0.8125rem",
                         }}
                       >
                         {" KG"}
@@ -343,7 +402,7 @@ export default function Dashboard() {
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={3} lg={3}>
                 <Card
                   style={{
                     backgroundColor: "rgb(255, 255, 255)",
@@ -373,6 +432,7 @@ export default function Dashboard() {
                         size="small"
                       />
                     </Typography>
+
                     <Typography
                       style={{
                         fontFamily: "Segoe UI",
@@ -382,16 +442,19 @@ export default function Dashboard() {
                         fontSize: "1.5rem"
                       }}
                     >
-                      {" 45,000,000"}
+                    
+                   {totalIncome}
+                      {/* {" 45,000,000"} */}
                       <sub
                         style={{
                           fontWeight: "600",
-                          fontSize: "0.8125rem"
+                          fontSize: "0.8125rem",
                         }}
                       >
                         {" UGX"}
                       </sub>
                     </Typography>
+                   
                     <Typography
                       style={{
                         fontFamily: "Segoe UI",
@@ -432,21 +495,21 @@ export default function Dashboard() {
               <Grid
                 item
                 xs={12}
-                sm={12}
+                sm={6}
                 lg={7}>
                 <Card
                   style={{
                     backgroundColor: "white"
                   }}
                 >
-                  <SalesLineGraph />
+                  <SalesBarGraph />
                 </Card>
               </Grid>
 
               <Grid
                 item
                 xs={12}
-                sm={12}
+                sm={6}
                 lg={5}>
                 <Card
                   style={{
@@ -513,7 +576,7 @@ export default function Dashboard() {
                       marginBottom: "20px",
                     }}
                   >
-                    {"765.43"}
+                {totalExpenditure}
                     <sub
                       style={{
                         fontWeight: "600",
