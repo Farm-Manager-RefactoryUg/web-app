@@ -199,6 +199,14 @@ export default function Dashboard() {
                 </Grid>
               </Grid>
 
+              {on && <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }} >
+                <Grid item xs={12} sm={12} lg={12}>
+                  <Card style={{ paddingBottom: theme.spacing(2) }}>
+                    <SalesLineGraph />
+                  </Card>
+                </Grid>
+              </Grid>}
+
               <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }} >
                 <Grid item xs={12} sm={12} lg={12}>
                   <Card style={{ paddingBottom: theme.spacing(2) }}>
@@ -356,13 +364,7 @@ export default function Dashboard() {
                 </Grid>
               </Grid>
 
-              {on && <Grid container spacing={2} style={{ marginTop: "20px", marginBottom: "20px", }} >
-                <Grid item xs={12} sm={12} lg={12}>
-                  <Card style={{ paddingBottom: theme.spacing(2) }}>
-                    <SalesLineGraph />
-                  </Card>
-                </Grid>
-              </Grid>}
+              
 
               <br></br>
 
