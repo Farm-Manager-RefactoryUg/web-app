@@ -12,7 +12,10 @@ import Paper from "@material-ui/core/Paper";
 import TablePagination from "@material-ui/core/TablePagination";
 import ProjectAppBar from "../components/ProjectAppBar";
 import { motion } from "framer-motion";
-import API from "../api"
+import API from "../api";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +73,23 @@ export default function Requisitions() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [items, setItems] = useState([]);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        overrides: {
+          MuiGrid: {
+            "spacing-xs-2": "-6px !important",
+          },
+        },
+        palette: {
+          type: prefersDarkMode ? "light" : "dark",
+        },
+      }),
+    [prefersDarkMode]
+  );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -93,7 +113,10 @@ export default function Requisitions() {
 
 
   return (
-    <div className={classes.root}>
+    <ThemeProvider
+      theme={theme}
+    >
+      <div className={classes.root}>
 
       <ProjectAppBar
         location={currentUrl}
@@ -152,6 +175,8 @@ export default function Requisitions() {
           />
         </Paper>
       </main>
-    </div>
+      </div>
+    </ThemeProvider>
+   
   );
 }

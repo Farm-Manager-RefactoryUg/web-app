@@ -173,19 +173,9 @@ export default function ProjectAppBar(props) {
               style={{ marginRight: "5px" }}
             />
               Tele-Farmer
-            </Typography>
-
-          <IconButton
-            color="inherit">
-            <Badge
-              badgeContent={4}
-              color="secondary"
-            >
-              <NotificationsIcon
-                style={{ color: "rgba(0,0,0,0.87)" }}
-              />
-            </Badge>
-          </IconButton>
+            </Typography>                      
+          
+          
 
           <Avatar
             alt="Michael"
