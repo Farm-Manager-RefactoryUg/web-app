@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     fontFamily: "Segoe UI",
-    backgroundColor: "#f7f9fc",
+    // backgroundColor: "#f7f9fc",
   },
   root1: {
     margin: theme.spacing(2.5),
@@ -72,7 +74,21 @@ export default function Consumables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [items, setItems] = useState("");
-
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        overrides: {
+          MuiGrid: {
+            "spacing-xs-2": "-6px !important",
+          },
+        },
+        palette: {
+          type: prefersDarkMode ? "light" : "dark",
+        },
+      }),
+    [prefersDarkMode]
+  );
   const handleChangePage = (newPage) => {
     setPage(newPage);
   };
@@ -95,6 +111,9 @@ export default function Consumables() {
 
 
   return (
+     <ThemeProvider
+      theme={theme}
+    >
     <div className={classes.root}>
 
         <ProjectAppBar 
@@ -121,9 +140,10 @@ export default function Consumables() {
                   >
                     <TableCell>No.</TableCell>
                     <TableCell>Date</TableCell>
-                    <TableCell>Tool Name</TableCell>
+                    <TableCell>Name</TableCell>
                     <TableCell>Purpose</TableCell>
                     <TableCell>Main User</TableCell>
+                    <TableCell>Unit Cost</TableCell>
                   </TableRow>
                 </TableHead>
 
@@ -138,9 +158,10 @@ export default function Consumables() {
                         <TableRow hover role="checkbox" tabIndex={-1}>
                           <TableCell>{item.id}</TableCell>
                           <TableCell>{item.date}</TableCell>
-                          <TableCell>{item.toolname}</TableCell>
+                          <TableCell>{item.name}</TableCell>
                           <TableCell>{item.purpose}</TableCell>
                           <TableCell>{item.mainuser}</TableCell>
+                          <TableCell>{item.unitcost}</TableCell>
                         </TableRow>
                       ))}
                 </TableBody>
@@ -160,6 +181,7 @@ export default function Consumables() {
 
           </Paper>
         </main>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }

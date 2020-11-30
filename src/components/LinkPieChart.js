@@ -15,7 +15,7 @@ const options = {
 
     title: {
         text: "Expenditure Distribution",
-        align: "left",
+        align: "center",
         margin: 20,
         x: 10,
         y: 28,

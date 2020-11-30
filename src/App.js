@@ -17,13 +17,15 @@ import Requisitions from "./pages/Requisitions";
 import CustomersDetails from "./pages/CustomersDetails";
 import ExpenditurePieChart from "./pages/ExpenditurePieChart";
 import Workers from "./pages/Workers";
-import SalesBarGraph from "./pages/SalesBarGraph";
+import SalesLineGraph from "./pages/SalesLineGraph";
 import Suppliers from "./pages/Suppliers";
 import SalesDetails from "./pages/SalesDetails";
 import Tools from "./pages/Tools";
 import Tables from "./pages/Tables"
 import CasualWorkers from "./pages/CasualWorkers";
 import Consumables from "./pages/Consumables"
+
+// Endpoints need to be revised i.e.
 
 // List (Read all)
 // - create
@@ -64,14 +66,14 @@ export default function App() {
         <Route path="/analytics" component={ExpenditurePieChart} />
         <Route path="/workers" exact component={Workers} />
         <Route path="/suppliers" exact component={Suppliers} />
-        <Route path="/saleschart" component={SalesBarGraph} />
+        <Route path="/saleschart" component={SalesLineGraph} />
         <Route path="/salesdetails" component={SalesDetails} />
         <Route path="/casual" component={CasualWorkers} ></Route>
         <Route path="/consumables" component={Consumables} ></Route>
+
       </Switch>
     </Router>
   );
 }
-
 
 

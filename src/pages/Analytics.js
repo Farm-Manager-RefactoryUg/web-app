@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import ProjectAppBar from "../components/ProjectAppBar";
 import Card from '@material-ui/core/Card';
 import Divider from "@material-ui/core/Divider";
-import SalesLineChart from '../components/SalesLineChart';
+import SalesLineGraph from '../components/SalesLineGraph';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, } from '@material-ui/pickers';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -462,7 +462,7 @@ export default function Dashboard() {
                   <Card
                     style={{ paddingBottom: theme.spacing(2) }}
                   >
-                    <SalesLineChart />
+                    <SalesLineGraph />
                   </Card>
                 </Grid>
               </Grid>
