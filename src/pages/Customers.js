@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles } from "@material-ui/core/styles";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TablePagination from "@material-ui/core/TablePagination";
-import ProjectAppBar from "../components/ProjectAppBar";
-import CustomersDetails from "./CustomersDetails";
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import axios from "axios"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import { makeStyles } from "@material-ui/core/styles"
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Paper from "@material-ui/core/Paper"
+import Typography from "@material-ui/core/Typography"
+import TablePagination from "@material-ui/core/TablePagination"
+import ProjectAppBar from "../components/ProjectAppBar"
+import CustomersDetails from "./CustomersDetails"
 import API from "../api"
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,17 +75,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.7rem",
     color: "white",
   },
-})
-);
-
+}))
 
 export default function Suppliers() {
-  const currentUrl = useLocation();
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState([]);
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const currentUrl = useLocation()
+  const classes = useStyles()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [items, setItems] = useState([])
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
 
   const theme = React.useMemo(
     () =>
@@ -101,101 +98,69 @@ export default function Suppliers() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
 
   const handleChangePage = (newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   useEffect(() => {
     axios
       .get(API.customer)
       .then((response) => {
-        setItems(response.data);
+        setItems(response.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+        console.log(err)
+      })
+  }, [])
 
   return (
-    <ThemeProvider
-      theme={theme}
-    >
+    <ThemeProvider theme={theme}>
       <div className={classes.root}>
-
-        <ProjectAppBar
-          location={currentUrl}
-        />
+        <ProjectAppBar location={currentUrl} />
 
         <main className={classes.content}>
-
           <Paper className={classes.root2}>
-
-            <Typography
-            className={classes.title}
-            >
-              Recent Customers
-              </Typography>
+            <Typography className={classes.title}>Recent Customers</Typography>
 
             <TableContainer className={classes.container}>
               <Table className={classes.table}>
-
                 <TableHead>
                   <TableRow
                     position="static"
                     style={{ backgroundColor: "#f7f9fc" }}
                   >
-                    <TableCell
-                      style={{ color: "black" }}
-                    >
-                      Name
+                    <TableCell style={{ color: "black" }}>Name</TableCell>
+
+                    <TableCell style={{ color: "black" }}>Email</TableCell>
+
+                    <TableCell style={{ color: "black" }}>Telephone</TableCell>
+
+                    <TableCell style={{ color: "black" }}>
+                      Delivery Address
                     </TableCell>
 
-                    <TableCell
-                      style={{ color: "black" }}
-                    >
-                      Email
-                      </TableCell>
-
-                    <TableCell
-                      style={{ color: "black" }}
-                    >
-                      Telephone
-                      </TableCell>
-
-                    <TableCell
-                      style={{ color: "black" }}
-                    >
-                      Delivery Address
-                      </TableCell>
-
-                    <TableCell
-                      align="center"
-                      style={{ color: "black" }}
-                    >
+                    {/* <TableCell align="center" style={{ color: "black" }}>
                       Details
-                      </TableCell>
-
+                    </TableCell> */}
                   </TableRow>
                 </TableHead>
 
                 <TableBody>
-                  {items
-                    && items
+                  {items &&
+                    items
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
                       .map((item) => (
                         <TableRow hover role="checkbox" tabIndex={-1}>
-
                           <TableCell>{item.name}</TableCell>
 
                           <TableCell>
@@ -203,21 +168,20 @@ export default function Suppliers() {
                           </TableCell>
 
                           <TableCell>
-                            {" "}<a href="tel:{item.phone} ">
+                            {" "}
+                            <a href="tel:{item.phone} ">
                               {item.telephone1}{" "}
                             </a>{" "}
                           </TableCell>
 
                           <TableCell>{item.deliveryaddress}</TableCell>
 
-                          <TableCell align="center">
+                          {/* <TableCell align="center">
                             <CustomersDetails />
-                          </TableCell>
-
+                          </TableCell> */}
                         </TableRow>
                       ))}
                 </TableBody>
-
               </Table>
             </TableContainer>
 
@@ -230,11 +194,9 @@ export default function Suppliers() {
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-
           </Paper>
-
         </main>
       </div>
     </ThemeProvider>
-  );
+  )
 }
