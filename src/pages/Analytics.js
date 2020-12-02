@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import ProjectAppBar from "../components/ProjectAppBar";
-import Card from '@material-ui/core/Card';
-import Divider from "@material-ui/core/Divider";
-import SalesLineGraph from '../components/SalesLineGraph';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker, } from '@material-ui/pickers';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import BarChartIcon from "@material-ui/icons/BarChart";
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+  withStyles,
+} from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import ProjectAppBar from "../components/ProjectAppBar"
+import Card from "@material-ui/core/Card"
+import Divider from "@material-ui/core/Divider"
+import SalesLineGraph from "./SalesLineGraph"
+import DateFnsUtils from "@date-io/date-fns"
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import FormControl from "@material-ui/core/FormControl"
+import Select from "@material-ui/core/Select"
+import Button from "@material-ui/core/Button"
+import BarChartIcon from "@material-ui/icons/BarChart"
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 const Buttonn = withStyles({
   root: {
-    '&:hover': {
-      backgroundColor: 'green',
-      opacity: '0.9'
+    "&:hover": {
+      backgroundColor: "green",
+      opacity: "0.9",
     },
-    '&:active , &:focus': {
-      outline: 'none',
+    "&:active , &:focus": {
+      outline: "none",
     },
   },
-})(Button);
+})(Button)
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -82,8 +89,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   submit: {
-    backgroundColor: 'green',
-    color: 'white',
+    backgroundColor: "green",
+    color: "white",
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     marginTop: theme.spacing(3),
@@ -93,20 +100,22 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
     width: "120px",
   },
-}));
-
+}))
 
 export default function Dashboard() {
-  const classes = useStyles();
-  const currentUrl = useLocation();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const [[startDate, endDate], setSelectedDate] = useState([new Date(), new Date()]);
-  const [selectData1, setData1] = useState('');
-  const [selectData2, setData2] = useState('');
-  const [selectData3, setData3] = useState('');
-  const [selectChart, setChart] = useState('');
-  const [selectItems, setItems] = useState(1);
-  const [on, setChartDisplay] = useState(false);
+  const classes = useStyles()
+  const currentUrl = useLocation()
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
+  const [[startDate, endDate], setSelectedDate] = useState([
+    new Date(),
+    new Date(),
+  ])
+  const [selectData1, setData1] = useState("")
+  const [selectData2, setData2] = useState("")
+  const [selectData3, setData3] = useState("")
+  const [selectChart, setChart] = useState("")
+  const [selectItems, setItems] = useState(1)
+  const [on, setChartDisplay] = useState(false)
 
   const handleDateChange1 = (date) => {
     setSelectedDate([date, endDate])
@@ -114,25 +123,24 @@ export default function Dashboard() {
 
   const handleDateChange2 = (date) => {
     setSelectedDate([startDate, date])
-  };
+  }
 
   const handleData1Change = (event) => {
-    setData1(event.target.value);
-
-  };
+    setData1(event.target.value)
+  }
   const handleData2Change = (event) => {
-    setData2(event.target.value);
-  };
+    setData2(event.target.value)
+  }
   const handleData3Change = (event) => {
-    setData3(event.target.value);
-  };
+    setData3(event.target.value)
+  }
   const handleChartChange = (event) => {
-    setChart(event.target.value);
-  };
+    setChart(event.target.value)
+  }
   const handleNoOfItemsChange = (event) => {
-    setItems(event.target.value);
-  };
-  const handleSubmit = (event) => {
+    setItems(event.target.value)
+  }
+  const handleSubmit = () => {
     setChartDisplay(!on)
   }
 
@@ -149,84 +157,51 @@ export default function Dashboard() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
 
   useEffect(() => {
     document.title = "Analysis Page"
-  }, []);
-
+  }, [])
 
   return (
     //---Remove all inline styling and add it to the useStyles object---
-    <ThemeProvider
-      theme={theme}
-    >
+    <ThemeProvider theme={theme}>
       <div className={classes.root}>
-
-        <ProjectAppBar
-          location={currentUrl}
-        />
+        <ProjectAppBar location={currentUrl} />
 
         <main className={classes.content}>
-
-          <div
-            className={classes.appBarSpacer}
-            style={{ minHeight: "3rem" }}
-          />
+          <div className={classes.appBarSpacer} style={{ minHeight: "3rem" }} />
 
           <Container style={{ marginTop: "40px" }}>
-
             <Typography
-              style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                fontFamily: "Segoe UI",
+                color: "rgba(0, 0, 0, 0.87)",
+              }}
               component="h1"
             >
               Decision Support
             </Typography>
 
-            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
-
-            <Grid
-              container
-              spacing={2}
-              style={{ marginTop: "30px", marginBottom: "20px", }}
-            >
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                lg={12}
-              >
-                <Card
-                  style={{ paddingBottom: theme.spacing(2) }}
-                >
-                  <Typography
-                    style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", margin: theme.spacing(2, 2, 1, 2), }}
-                    component="h1"
-                  >
-                    Instructions
-                  </Typography>
-
-                  <ul style={{ fontSize: "0.8125rem" }}>
-                    <li>Select the dates within which the data will be displayed.</li>
-                    <li>Select a chart type of your choice.</li>
-                    <li>Select number of items to be displayed e.g. Select 2 to plot Sales Vs Expenditure or Revenue Vs Sales.</li>
-                    <li>Select the type of data to be displayed.</li>
-                  </ul>
-                </Card>
-              </Grid>
-            </Grid>
+            <Divider
+              style={{
+                marginTop: "15px",
+                backgroundColor: "rgba(0,0,0,0.2)",
+              }}
+            />
 
             <Grid
               container
               spacing={2}
               style={{
-                marginTop: "20px",
+                marginTop: "10px",
                 marginBottom: "20px",
               }}
             >
               <Grid item xs={12} sm={12} lg={12}>
                 <Card style={{ paddingBottom: theme.spacing(2) }}>
-
                   <Typography
                     style={{
                       fontSize: "1.0625rem",
@@ -241,7 +216,6 @@ export default function Dashboard() {
                   </Typography>
 
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-
                     <KeyboardDatePicker
                       disableToolbar
                       format="dd/MM/yyyy"
@@ -249,7 +223,12 @@ export default function Dashboard() {
                       id="date-picker-inline1"
                       label={
                         <span
-                          style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                          style={{
+                            fontSize: "1.0625rem",
+                            fontWeight: "600",
+                            fontFamily: "Segoe UI",
+                            color: "rgba(0, 0, 0, 0.87)",
+                          }}
                         >
                           Start Date
                         </span>
@@ -257,9 +236,9 @@ export default function Dashboard() {
                       value={startDate}
                       onChange={handleDateChange1}
                       KeyboardButtonProps={{
-                        'aria-label': 'change date',
+                        "aria-label": "change date",
                       }}
-                      style={{ marginLeft: "20px", }}
+                      style={{ marginLeft: "20px" }}
                     />
 
                     <KeyboardDatePicker
@@ -269,7 +248,12 @@ export default function Dashboard() {
                       id="date-picker-inline2"
                       label={
                         <span
-                          style={{ fontSize: "1.0625rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                          style={{
+                            fontSize: "1.0625rem",
+                            fontWeight: "600",
+                            fontFamily: "Segoe UI",
+                            color: "rgba(0, 0, 0, 0.87)",
+                          }}
                         >
                           End Date
                         </span>
@@ -277,22 +261,25 @@ export default function Dashboard() {
                       value={endDate}
                       onChange={handleDateChange2}
                       KeyboardButtonProps={{
-                        'aria-label': 'change date',
+                        "aria-label": "change date",
                       }}
-                      style={{ marginLeft: "20px", }}
+                      style={{ marginLeft: "20px" }}
                     />
-
                   </MuiPickersUtilsProvider>
-
 
                   <FormControl className={classes.formControl}>
                     <InputLabel
                       shrink
-                      style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                      style={{
+                        color: "rgba(0,0,0,0.87)",
+                        fontFamily: "Segoe UI",
+                        fontWeight: "600",
+                        fontSize: "1.0625rem",
+                      }}
                       id="demo-simple-select-placeholder-label-label"
                     >
                       Chart
-                        </InputLabel>
+                    </InputLabel>
                     <Select
                       labelId="demo-simple-select-placeholder-label-label"
                       id="demo-simple-select-placeholder-label"
@@ -303,10 +290,12 @@ export default function Dashboard() {
                     >
                       <MenuItem value="">
                         <span
-                          style={{ color: "rgba(0,0,0,0.3)" }}
+                          style={{
+                            color: "rgba(0,0,0,0.3)",
+                          }}
                         >
                           Select
-                          </span>
+                        </span>
                       </MenuItem>
                       <MenuItem value="line">Line</MenuItem>
                       <MenuItem value="pie">Pie</MenuItem>
@@ -315,16 +304,19 @@ export default function Dashboard() {
                     </Select>
                   </FormControl>
 
-
                   <FormControl className={classes.formControl}>
-
                     <InputLabel
                       shrink
-                      style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                      style={{
+                        color: "rgba(0,0,0,0.87)",
+                        fontFamily: "Segoe UI",
+                        fontWeight: "600",
+                        fontSize: "1.0625rem",
+                      }}
                       id="demo-simple-select-placeholder-label-label"
                     >
                       No. of items
-                        </InputLabel>
+                    </InputLabel>
 
                     <Select
                       labelId="demo-simple-select-placeholder-label-label"
@@ -338,19 +330,22 @@ export default function Dashboard() {
                       <MenuItem value={2}>2</MenuItem>
                       <MenuItem value={3}>3</MenuItem>
                     </Select>
-
                   </FormControl>
                   <br></br>
 
                   <FormControl className={classes.formControl}>
-
                     <InputLabel
                       shrink
-                      style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                      style={{
+                        color: "rgba(0,0,0,0.87)",
+                        fontFamily: "Segoe UI",
+                        fontWeight: "600",
+                        fontSize: "1.0625rem",
+                      }}
                       id="demo-simple-select-placeholder-label-label"
                     >
                       Data 1
-                        </InputLabel>
+                    </InputLabel>
 
                     <Select
                       labelId="demo-simple-select-placeholder-label-label"
@@ -362,7 +357,9 @@ export default function Dashboard() {
                     >
                       <MenuItem value="">
                         <span
-                          style={{ color: "rgba(0,0,0,0.5)" }}
+                          style={{
+                            color: "rgba(0,0,0,0.5)",
+                          }}
                         >
                           Select
                         </span>
@@ -371,20 +368,22 @@ export default function Dashboard() {
                       <MenuItem value="revenue">Revenue</MenuItem>
                       <MenuItem value="expenditure">Expenditure</MenuItem>
                     </Select>
-
                   </FormControl>
 
-                  {selectItems > 1
-                    && <FormControl
-                      className={classes.formControl}
-                    >
+                  {selectItems > 1 && (
+                    <FormControl className={classes.formControl}>
                       <InputLabel
                         shrink
-                        style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                        style={{
+                          color: "rgba(0,0,0,0.87)",
+                          fontFamily: "Segoe UI",
+                          fontWeight: "600",
+                          fontSize: "1.0625rem",
+                        }}
                         id="demo-simple-select-placeholder-label-label"
                       >
                         Data 2
-                        </InputLabel>
+                      </InputLabel>
 
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
@@ -394,25 +393,30 @@ export default function Dashboard() {
                         displayEmpty
                         className={classes.selectEmpty}
                       >
-                        <MenuItem disabled value="">Select</MenuItem>
+                        <MenuItem disabled value="">
+                          Select
+                        </MenuItem>
                         <MenuItem value="sales">Sales</MenuItem>
                         <MenuItem value="revenue">Revenue</MenuItem>
                         <MenuItem value="expenditure">Expenditure</MenuItem>
                       </Select>
+                    </FormControl>
+                  )}
 
-                    </FormControl>}
-
-                  {selectItems === 3
-                    && <FormControl
-                      className={classes.formControl}
-                    >
+                  {selectItems === 3 && (
+                    <FormControl className={classes.formControl}>
                       <InputLabel
                         shrink
-                        style={{ color: "rgba(0,0,0,0.87)", fontFamily: "Segoe UI", fontWeight: "600", fontSize: "1.0625rem", }}
+                        style={{
+                          color: "rgba(0,0,0,0.87)",
+                          fontFamily: "Segoe UI",
+                          fontWeight: "600",
+                          fontSize: "1.0625rem",
+                        }}
                         id="demo-simple-select-placeholder-label-label"
                       >
                         Data 3
-                        </InputLabel>
+                      </InputLabel>
 
                       <Select
                         labelId="demo-simple-select-placeholder-label-label"
@@ -422,14 +426,15 @@ export default function Dashboard() {
                         displayEmpty
                         className={classes.selectEmpty}
                       >
-                        <MenuItem disabled value="">Select</MenuItem>
+                        <MenuItem disabled value="">
+                          Select
+                        </MenuItem>
                         <MenuItem value="sales">Sales</MenuItem>
                         <MenuItem value="revenue">Revenue</MenuItem>
                         <MenuItem value="expenditure">Expenditure</MenuItem>
                       </Select>
-
                     </FormControl>
-                  }
+                  )}
 
                   <br></br>
 
@@ -442,37 +447,30 @@ export default function Dashboard() {
                     onClick={handleSubmit}
                   >
                     Visualize
-                    </Buttonn>
+                  </Buttonn>
                 </Card>
               </Grid>
-            </Grid>
 
-            {on
-              && <Grid
-                container
-                spacing={2}
-                style={{ marginTop: "20px", marginBottom: "20px", }}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sm={12}
-                  lg={12}
-                >
-                  <Card
-                    style={{ paddingBottom: theme.spacing(2) }}
-                  >
-                    <SalesLineGraph />
-                  </Card>
+              {on && (
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={12} lg={12}>
+                    <Card
+                      style={{
+                        paddingBottom: theme.spacing(2),
+                        marginTop: theme.spacing(2),
+                      }}
+                    >
+                      <SalesLineGraph />
+                    </Card>
+                  </Grid>
                 </Grid>
-              </Grid>
-            }
+              )}
 
-            <br></br>
-
+              <br></br>
+            </Grid>
           </Container>
         </main>
       </div>
     </ThemeProvider>
-  );
+  )
 }
