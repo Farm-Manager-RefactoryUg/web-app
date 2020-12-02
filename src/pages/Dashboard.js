@@ -24,7 +24,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import MoneyIcon from '@material-ui/icons/Money';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssessmentIcon from '@material-ui/icons/Assessment';
-import SalesBarGraph from '../components/SalesLineGraph'
+import SalesLineGraph from './SalesLineGraph'
 import API from "../api"
 
 
@@ -280,7 +280,7 @@ export default function Dashboard() {
                       gutterBottom
                       component="h6"
                       style={{ fontFamily: "Segoe UI", padding: "0", fontWeight: "600", fontSize: "1.0625rem" }}>
-                      Profit or Loss
+                      Revenue
                         <Chip
                         classes={{ label: classes.label, }}
                         style={{ fontFamily: "Segoe UI", float: "right", backgroundColor: "purple", }}
@@ -502,7 +502,7 @@ export default function Dashboard() {
                     backgroundColor: "white"
                   }}
                 >
-                  <SalesBarGraph />
+                  <SalesLineGraph />
                 </Card>
               </Grid>
 

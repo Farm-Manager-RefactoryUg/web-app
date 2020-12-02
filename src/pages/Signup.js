@@ -143,7 +143,7 @@ const errorText = {
   password: "Password should be more than 6 characters",
   mobile: "Enter valid mobile E.g. 0773763258"
 }
-
+//---Review and improve the regular expressions below---
 const formSchema = Yup.object()
   .shape({
     fullName: Yup.string()

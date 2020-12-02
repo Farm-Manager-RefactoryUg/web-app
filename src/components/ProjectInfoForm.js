@@ -138,7 +138,7 @@ const errorText = {
     phone: "Enter a valid number E.g. 0773763258",
     tin: "Enter a valid TIN E.g. 1283587938"
 }
-// The regular expressions should be reviewed and improved
+//---Review and improve the regular expressions below---
 const formSchema = Yup.object()
     .shape({
         name: Yup.string()
@@ -171,11 +171,11 @@ export default function Project() {
     const [open, setOpen] = useState(false);
     const [data, setData] = useState()
 
+
     useEffect(() => {
-        axios
-            .get(API.farm)
+        axios.get(API.farm)
+            //---Remove the .then chain below when the API is available---
             .then(() => {
-                //setData(res.data)
                 setData({
                     name: "Biyinzika Mukono 2",
                     location: "Bukasa Muyenga",
@@ -184,12 +184,16 @@ export default function Project() {
                     phone: "0773763258",
                     tin: "1283587938"
                 })
+                //---Uncomment the .then chain below when the API is available---
+                // .then((res) => {
+                //     setData(res.data)
+                // })
             })
             .catch((error) => {
+                //---Review and improve the error handling logic below---
                 console.error('There was an error!', error);
             });
     }, [setData]);
-    console.log(data)
 
 
     return (
@@ -220,6 +224,7 @@ export default function Project() {
                                             setOpen(!open)
                                         })
                                         .catch((error) => {
+                                            //---Review and improve the error handling logic below---
                                             console.error('There was an error!', error);
                                         });
                                 }}
@@ -239,7 +244,8 @@ export default function Project() {
                                             required
                                             fullWidth
                                             error={errors.name && touched.name}
-                                            helperText={errors.name
+                                            helperText={
+                                                errors.name
                                                 && touched.name
                                                 && (<span>
                                                     <ErrorOutlineIcon
@@ -265,7 +271,8 @@ export default function Project() {
                                             required
                                             fullWidth
                                             error={errors.location && touched.location}
-                                            helperText={errors.location
+                                            helperText={
+                                                errors.location
                                                 && touched.location
                                                 && (<span>
                                                     <ErrorOutlineIcon
@@ -291,7 +298,8 @@ export default function Project() {
                                             required
                                             fullWidth
                                             error={errors.address && touched.address}
-                                            helperText={errors.address
+                                            helperText={
+                                                errors.address
                                                 && touched.address
                                                 && (<span>
                                                     <ErrorOutlineIcon
@@ -317,7 +325,8 @@ export default function Project() {
                                             required
                                             fullWidth
                                             error={errors.contactperson && touched.contactperson}
-                                            helperText={errors.contactperson
+                                            helperText={
+                                                errors.contactperson
                                                 && touched.contactperson
                                                 && (<span>
                                                     <ErrorOutlineIcon
@@ -343,7 +352,8 @@ export default function Project() {
                                             required
                                             fullWidth
                                             error={errors.phone && touched.phone}
-                                            helperText={errors.phone
+                                            helperText={
+                                                errors.phone
                                                 && touched.phone
                                                 && (<span>
                                                     <ErrorOutlineIcon
@@ -369,7 +379,8 @@ export default function Project() {
                                             required
                                             fullWidth
                                             error={errors.tin && touched.tin}
-                                            helperText={errors.tin
+                                            helperText={
+                                                errors.tin
                                                 && touched.tin
                                                 && (<span>
                                                     <ErrorOutlineIcon
@@ -403,8 +414,16 @@ export default function Project() {
 
                         </Grid>
 
-                        <Grid item lg={6}>
-                            <img alt="Decorative" src={svgimage} height="400px" />
+                        <Grid
+                            item
+                            lg={6}
+                        >
+                            <img
+                                alt="Update project profile"
+                                src={svgimage}
+                                height="400px"
+                            />
+
                         </Grid>
                     </Grid>
                 </Card>

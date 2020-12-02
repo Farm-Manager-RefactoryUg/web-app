@@ -75,12 +75,12 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(16),
   },
   errorText: {
-      color: "red",
-      fontSize: "0.8rem",
-      fontFamily: "Segoe UI",
+    color: "red",
+    fontSize: "0.8rem",
+    fontFamily: "Segoe UI",
   },
   errorIcon: {
-      transform: "scale(0.7)",
+    transform: "scale(0.7)",
   },
 }));
 
@@ -93,17 +93,17 @@ const errorText = {
 // The regular expressions should be reviewed and improved
 const formSchema = Yup.object()
   .shape({
-      fullName: Yup.string()
-          .max(25)
-          .required()
-          .matches(/^[0-9a-zA-Z\s]*$/, errorText.fullName),
-      email: Yup.string()
-          .max(30)
-          .required()
-          .email(errorText.email),
-      password: Yup.string()
-          .max(20)
-          .required(errorText.password),
+    fullName: Yup.string()
+      .max(25)
+      .required()
+      .matches(/^[0-9a-zA-Z\s]*$/, errorText.fullName),
+    email: Yup.string()
+      .max(30)
+      .required()
+      .email(errorText.email),
+    password: Yup.string()
+      .max(20)
+      .required(errorText.password),
   });
 
 
@@ -142,177 +142,182 @@ export default function AddFarmManager() {
 
   return (
     data
-    ? <Card className={classes.root}>
-      <Typography
-        component="h6"
-        variant="h5"
-        style={{
-          fontWeight: "600",
-          color: "rgba(0,0,0,0.87)",
-          fontSize: "1.0625rem",
-          fontFamily: "Segoe UI",
-        }}
-      >
-        Update Profile
-      </Typography>
-
-      <main className={classes.container}>
-        <div style={{ flex: "3" }}>
-
-          <Formik
-            initialValues={data}
-            validationSchema={formSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              setSubmitting(true)
-              axios.post(API.farm, values)
-                .then(() => {
-                  // setOpen(!open)
-                })
-                .catch((error) => {
-                  console.error('There was an error!', error);
-                });
-            }}
-          >
-
-            {({ errors, touched, isSubmitting }) => (
-              <Form
-                className={classes.form}
-                noValidate>
-
-                <Field
-                  name="fullName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="fullName"
-                  label="Username"
-                  margin="normal"
-                  error={errors.fullName && touched.fullName}
-                  helperText={errors.fullName
-                      && touched.fullName
-                      && (<span>
-                          <ErrorOutlineIcon
-                              className={classes.errorIcon}
-                          />
-                          <span
-                              className={classes.errorText}>
-                              {errorText.fullName}
-                          </span>
-                      </span>)
-                  }
-                  as={CssTextField}
-                />
-
-
-                <Field
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email address"
-                  name="email"
-                  margin="normal"
-                  error={errors.email && touched.email}
-                  helperText={errors.email
-                      && touched.email
-                      && (<span>
-                          <ErrorOutlineIcon
-                              className={classes.errorIcon}
-                          />
-                          <span
-                              className={classes.errorText}>
-                              {errorText.email}
-                          </span>
-                      </span>)
-                  }
-                  as={CssTextField}
-                />
-
-                <Field
-                  variant="outlined"
-                  required
-                  margin="normal"
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  error={errors.password && touched.password}
-                  helperText={errors.password
-                      && touched.password
-                      && (<span>
-                          <ErrorOutlineIcon
-                              className={classes.errorIcon}
-                          />
-                          <span
-                              className={classes.errorText}>
-                              {errorText.password}
-                          </span>
-                      </span>)
-                  }
-                  as={CssTextField}
-                />
-
-                <Buttonn
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  disabled={isSubmitting}
-                  className={classes.submit}
-                  startIcon={<SaveIcon />}
-                  style={{ width: "160px", marginTop: "35px" }}
-                >
-                  Save changes
-            </Buttonn>
-          </Form>
-            )}
-          </Formik>
-        </div>
-
-        <div
+      ? <Card className={classes.root}>
+        <Typography
+          component="h6"
+          variant="h5"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            flex: "3",
-            marginLeft: "35px",
+            fontWeight: "600",
+            color: "rgba(0,0,0,0.87)",
+            fontSize: "1.0625rem",
+            fontFamily: "Segoe UI",
           }}
         >
-          <Avatar alt="Michael" src={profileImg} className={classes.large} />
+          Update Profile
+      </Typography>
 
-          <input
-            accept="image/*"
-            className={classes.input}
-            id="contained-button-file"
-            type="file"
-            onChange={imageHandler}
-          />
+        <main className={classes.container}>
+          <div style={{ flex: "3" }}>
 
-          <label htmlFor="contained-button-file">
-            <Buttonn
-              variant="contained"
-              className={classes.submit}
-              startIcon={<CloudUploadIcon />}
-              component="span"
+            <Formik
+              initialValues={data}
+              validationSchema={formSchema}
+              onSubmit={(values, { setSubmitting }) => {
+                setSubmitting(true)
+                axios.post(API.farm, values)
+                  .then(() => {
+                    // setOpen(!open)
+                  })
+                  .catch((error) => {
+                    console.error('There was an error!', error);
+                  });
+              }}
             >
-              Upload
-            </Buttonn>
-          </label>
 
-          <small
+              {({ errors, touched, isSubmitting }) => (
+                <Form
+                  className={classes.form}
+                  noValidate
+                >
+                  <Field
+                    name="fullName"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="fullName"
+                    label="Username"
+                    margin="normal"
+                    error={errors.fullName && touched.fullName}
+                    helperText={
+                      errors.fullName
+                      && touched.fullName
+                      && (<span>
+                        <ErrorOutlineIcon
+                          className={classes.errorIcon}
+                        />
+                        <span
+                          className={classes.errorText}>
+                          {errorText.fullName}
+                        </span>
+                      </span>)
+                    }
+                    as={CssTextField}
+                  />
+
+                  <Field
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email address"
+                    name="email"
+                    margin="normal"
+                    error={errors.email && touched.email}
+                    helperText={
+                      errors.email
+                      && touched.email
+                      && (<span>
+                        <ErrorOutlineIcon
+                          className={classes.errorIcon}
+                        />
+                        <span
+                          className={classes.errorText}>
+                          {errorText.email}
+                        </span>
+                      </span>)
+                    }
+                    as={CssTextField}
+                  />
+
+                  <Field
+                    variant="outlined"
+                    required
+                    margin="normal"
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    error={errors.password && touched.password}
+                    helperText={
+                      errors.password
+                      && touched.password
+                      && (<span>
+                        <ErrorOutlineIcon
+                          className={classes.errorIcon}
+                        />
+                        <span
+                          className={classes.errorText}>
+                          {errorText.password}
+                        </span>
+                      </span>)
+                    }
+                    as={CssTextField}
+                  />
+
+                  <Buttonn
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    disabled={isSubmitting}
+                    className={classes.submit}
+                    startIcon={<SaveIcon />}
+                    style={{ width: "160px", marginTop: "35px" }}
+                  >
+                    Save changes
+            </Buttonn>
+
+                </Form>
+              )}
+            </Formik>
+
+          </div>
+
+          <div
             style={{
-              fontFamily: "Segoe UI",
-              fontSize: "0.8125rem",
-              color: "rgba(0, 0, 0, 0.87)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              flex: "3",
+              marginLeft: "35px",
             }}
           >
-            For best results, use an image at least 128px by 128px in .jpg
-            format
+            <Avatar alt="Michael" src={profileImg} className={classes.large} />
+
+            <input
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              type="file"
+              onChange={imageHandler}
+            />
+
+            <label htmlFor="contained-button-file">
+              <Buttonn
+                variant="contained"
+                className={classes.submit}
+                startIcon={<CloudUploadIcon />}
+                component="span"
+              >
+                Upload
+            </Buttonn>
+            </label>
+
+            <small
+              style={{
+                fontFamily: "Segoe UI",
+                fontSize: "0.8125rem",
+                color: "rgba(0, 0, 0, 0.87)",
+              }}
+            >
+              For best results, use an image at least 128px by 128px in .jpg
+              format
           </small>
-        </div>
-      </main>
-    </Card>
-    : null
+          </div>
+        </main>
+      
+      </Card>
+      : null
   );
 }

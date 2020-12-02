@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import _ from "lodash";
+import API from "../api"
 
 const ops = {
   jan: [0],
@@ -25,36 +26,41 @@ const options = {
   },
 
   title: {
-    text: 'Monthly Expenditure',
-    
-},
-subtitle: {
-    text: '',
+    text: "Sales Distribution",
+    align: "left",
+    marginLeft: 20,
+    x: 10,
+    y: 28,
     style: {
-        display: 'none'
-    }
-},
- 
+      fontFamily: "Segoe UI",
+      fontWeight: "600",
+      fontSize: "1.0625rem",
+      color: "rgba(0, 0, 0, 0.87)"
+    },
+  },
+
+  credits: {
+    enabled: false,
+  },
   legend: {
     align: "right",
     verticalAlign: "middle",
-    layout: "vertical",
   },
 
   xAxis: {
     categories: [
-      "Jan 2020",
-      "Feb2020",
-      "Mar2020",
-      "Apr2020",
-      "May2020",
-      "Jun2020",
-      "Jul2020",
-      "Aug2020",
-      "Sep2020",
-      "Oct2020",
-      "Nov2020",
-      "Dec2020",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ],
     labels: {
       x: 0,
@@ -64,14 +70,13 @@ subtitle: {
   yAxis: {
     allowDecimals: false,
     title: {
-      text: "Amount(UGX)",
+      text: "Number",
     },
   },
 
   series: [
     {
       name: "Sales",
-      
     },
   ],
   responsive: {
@@ -93,32 +98,31 @@ subtitle: {
               y: -5,
             }, 
             title: {
-              text: "Amount",
+              text: "Number",
             },
           },
           subtitle: {
             text: null,
           },
-          
+          credits: {
+            enabled: false,
+          },
         },
       },
     ],
   },
 };
 
+
 export default function SalesBarGraph() {
   const [graphOptions, setGraphOptions] = useState({});
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(
-        "https://farmmanager-api.herokuapp.com/api/income/"
-      );
-      const jsondata = await response.json();
-      const newArray = [...jsondata];
-      console.log(newArray);
 
-      
+    async function fetchData() {
+      const response = await fetch(API.income);
+      const jsondata = await response.json();
+      const newArray = [...jsondata]
       newArray.map((item) => {
         var date = item.date;
         var amount = item.amountrecvd;
@@ -164,21 +168,20 @@ export default function SalesBarGraph() {
         _.sum(ops.oct),
         _.sum(ops.nov),
         _.sum(ops.dec),
-      ];
-      setGraphOptions(options)
-      console.log(options)
-    }
-    fetchData();   
-  }, []);
+      ]
 
-   
+      setGraphOptions(options)
+    }
+
+    fetchData()
+
+  }, [])
 
   return (
-    
     <React.Fragment>
       <HighchartsReact highcharts={Highcharts} options={graphOptions} />
-      <br></br>
     </React.Fragment>
-  );
+  )
 }
+
 
