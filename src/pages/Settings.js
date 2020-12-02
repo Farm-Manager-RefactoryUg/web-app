@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import ProjectAppBar from "../components/ProjectAppBar";
-import Divider from "@material-ui/core/Divider";
-import AddFarmManager from "../components/AddFarmManager";
-import AddTeleFarmer from "../components/AddTeleFarmer";
-import ProjectInfoForm from "../components/ProjectInfoForm";
+import React, { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import ProjectAppBar from "../components/ProjectAppBar"
+import Divider from "@material-ui/core/Divider"
+import AddFarmManager from "../components/AddFarmManager"
+import AddTeleFarmer from "../components/AddTeleFarmer"
+import ProjectInfoForm from "../components/ProjectInfoForm"
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,12 +65,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.7rem",
     color: "white",
   },
-}));
+}))
 
 export default function Dashboard() {
-  const classes = useStyles();
-  const currentUrl = useLocation();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const classes = useStyles()
+  const currentUrl = useLocation()
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
 
   const theme = React.useMemo(
     () =>
@@ -82,19 +85,16 @@ export default function Dashboard() {
         },
       }),
     [prefersDarkMode]
-  );
-
-
+  )
 
   useEffect(() => {
     document.title = "Dashboard Settings"
-  }, []);
+  }, [])
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
-
           <ProjectAppBar location={currentUrl} />
           <main className={classes.content}>
             <div
@@ -102,37 +102,45 @@ export default function Dashboard() {
               style={{ minHeight: "3rem" }}
             />
 
-            <Container style={{ marginTop: "40px", paddingLeft: theme.spacing(3), }}>
-
+            <Container
+              style={{ marginTop: "40px", paddingLeft: theme.spacing(3) }}
+            >
               <Typography
-                style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: "600",
+                  fontFamily: "Segoe UI",
+                  color: "rgba(0, 0, 0, 0.87)",
+                }}
                 component="h1"
               >
                 {"Project Settings"}
               </Typography>
 
-              <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+              <Divider
+                style={{
+                  marginTop: "15px",
+                  backgroundColor: "rgba(0,0,0,0.2)",
+                }}
+              />
 
-              <Grid container spacing={2} style={{ marginBottom: "20px", }}>
-
+              <Grid container spacing={2} style={{ marginBottom: "20px" }}>
                 <Grid item xs={12} sm={12} lg={12}>
                   <ProjectInfoForm />
                 </Grid>
 
                 <Grid item xs={12} sm={12} lg={6}>
-                  <AddFarmManager/>
+                  <AddFarmManager />
                 </Grid>
 
                 <Grid item xs={12} sm={12} lg={6}>
                   <AddTeleFarmer />
                 </Grid>
-
               </Grid>
-
             </Container>
           </main>
         </div>
       </ThemeProvider>
     </>
-  );
+  )
 }

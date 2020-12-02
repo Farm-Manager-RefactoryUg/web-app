@@ -1,53 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import ProjectAppBar from "../components/ProjectAppBar";
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+  withStyles,
+} from "@material-ui/core/styles"
+import Divider from "@material-ui/core/Divider"
+import Typography from "@material-ui/core/Typography"
+import ProjectAppBar from "../components/ProjectAppBar"
+import Card from "@material-ui/core/Card"
+import Button from "@material-ui/core/Button"
+import TextField from "@material-ui/core/TextField"
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline"
 import API from "../api"
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import axios from "axios";
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+import { Formik, Form, Field } from "formik"
+import * as Yup from "yup"
+import axios from "axios"
 
-const drawerWidth = 240;
+const drawerWidth = 240
 const Buttonn = withStyles({
   root: {
-    '&:hover': {
-      backgroundColor: 'green',
-      opacity: '0.9',
+    "&:hover": {
+      backgroundColor: "green",
+      opacity: "0.9",
       color: "white",
     },
-    '&:active , &:focus': {
-      outline: 'none',
+    "&:active , &:focus": {
+      outline: "none",
     },
   },
-})(Button);
+})(Button)
 
 const CssTextField = withStyles({
   root: {
-    '& label.Mui-focused': {
-      color: 'rgba(0,0,0,0.87)',
+    "& label.Mui-focused": {
+      color: "rgba(0,0,0,0.87)",
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'rgba(0,0,0,0.3)',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "rgba(0,0,0,0.3)",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: 'green',
+      "&.Mui-focused fieldset": {
+        borderColor: "green",
       },
-      '&.Mui-error fieldset': {
-        borderColor: 'red',
+      "&.Mui-error fieldset": {
+        borderColor: "red",
       },
-
     },
   },
-})(TextField);
+})(TextField)
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,11 +89,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: "600px",
     margin: "auto",
-    marginTop: theme.spacing(18),
-    marginBottom: theme.spacing(12),
+    marginTop: theme.spacing(12),
+    marginBottom: theme.spacing(1),
     padding: theme.spacing(1, 5),
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   label: {
     fontSize: "0.7rem",
@@ -101,16 +106,16 @@ const useStyles = makeStyles((theme) => ({
     color: "rgba(0, 0, 0, 0.87)",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'green',
-    color: 'white',
-    outline: 'none',
-    paddingTop: '10px',
-    paddingBottom: '10px',
+    backgroundColor: "green",
+    color: "white",
+    outline: "none",
+    paddingTop: "10px",
+    paddingBottom: "10px",
     fontWeight: "600",
     textTransform: "initial",
   },
@@ -128,63 +133,61 @@ const useStyles = makeStyles((theme) => ({
   alert: {
     fontFamily: "Segoe UI",
     fontSize: "0.8125rem",
-    fontWeight: "400"
-  }
-}));
+    fontWeight: "400",
+    marginLeft: theme.spacing(24),
+  },
+}))
 
 const errorText = {
-  name: "Only letters and numbers allowed E.g. Biyinzika Mukono 2",
-  location: "Only letters and numbers allowed E.g. Bukasa Muyenga",
-  address: "Only letters and numbers allowed E.g. 101 Le Palm",
-  contactperson: "At least two names E.g. John Doe",
-  phone: "Enter a valid number E.g. 0773763258",
-  tin: "Enter a valid TIN E.g. 1283587938"
+  title: "Only letters and numbers allowed E.g. Biyinzika Mukono 2",
+  description: "Only letters and numbers allowed.",
 }
 // The regular expressions should be reviewed and improved
-const formSchema = Yup.object()
-  .shape({
-    name: Yup.string()
-      .max(25)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.name),
-    location: Yup.string()
-      .max(20)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.location),
-    address: Yup.string()
-      .max(20)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.address),
-    contactperson: Yup.string()
-      .max(21)
-      .required()
-      .matches(/^[0-9a-zA-Z\s]*$/, errorText.contactperson),
-    phone: Yup.string()
-      .required()
-      .matches(/^07[0-9]{8}$/, errorText.phone),
-    tin: Yup.string()
-      .required()
-      .matches(/^[0-9]{10}$/, errorText.tin),
-  });
-
+const formSchema = Yup.object().shape({
+  name: Yup.string()
+    .max(25)
+    .required()
+    .matches(/^[0-9a-zA-Z\s]*$/, errorText.name),
+  location: Yup.string()
+    .max(20)
+    .required()
+    .matches(/^[0-9a-zA-Z\s]*$/, errorText.location),
+  address: Yup.string()
+    .max(20)
+    .required()
+    .matches(/^[0-9a-zA-Z\s]*$/, errorText.address),
+  contactperson: Yup.string()
+    .max(21)
+    .required()
+    .matches(/^[0-9a-zA-Z\s]*$/, errorText.contactperson),
+  phone: Yup.string()
+    .required()
+    .matches(/^07[0-9]{8}$/, errorText.phone),
+  tin: Yup.string()
+    .required()
+    .matches(/^[0-9]{10}$/, errorText.tin),
+})
 
 export default function Project() {
-  const classes = useStyles();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  const currentUrl = useLocation();
-  const [open, setOpen] = useState(false);
-
+  const classes = useStyles()
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
+  const currentUrl = useLocation()
+  const [open, setOpen] = useState(false)
 
   function Alert(props) {
-    return <MuiAlert elevation={1} variant="filled" {...props} />;
+    return <MuiAlert elevation={1} variant="filled" {...props} />
   }
 
   const handleClose = (reason) => {
-    if (reason === 'clickaway') {
-      return;
+    if (reason === "clickaway") {
+      return
     }
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
+
+  const handleAlert = () => {
+    setOpen(true)
+  }
 
   const theme = React.useMemo(
     () =>
@@ -199,31 +202,24 @@ export default function Project() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
 
   useEffect(() => {
     document.title = "Create a Project"
-  }, []);
-
+  }, [])
 
   return (
     <>
-      <ThemeProvider
-        theme={theme}>
-        <div
-          className={classes.root}
-        >
-
-          <ProjectAppBar
-            location={currentUrl}
-          />
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <ProjectAppBar location={currentUrl} />
 
           <Snackbar
             open={open}
             onClose={handleClose}
             anchorOrigin={{
               vertical: "top",
-              horizontal: "center"
+              horizontal: "center",
             }}
             className={classes.snackBar}
           >
@@ -239,223 +235,127 @@ export default function Project() {
           <main
             maxWidth="xs"
             style={{
-              margin: "auto"
+              paddingLeft: theme.spacing(3),
+              paddingRight: theme.spacing(3),
+              width: "100%",
             }}
           >
-            <Card
-              className={classes.paper}
+            <Typography
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                fontFamily: "Segoe UI",
+                color: "rgba(0, 0, 0, 0.87)",
+                marginTop: theme.spacing(9),
+                marginRight: "0",
+                paddingRight: "0",
+              }}
+              component="h1"
             >
+              Create Project
+            </Typography>
 
-              <Typography
-                className={classes.headerText}
-                component="h1"
-              >
-                Create Project
+            <Divider
+              style={{
+                marginTop: theme.spacing(1),
+                backgroundColor: "rgba(0,0,0,0.2)",
+              }}
+            />
+
+            <Card className={classes.paper}>
+              <Typography className={classes.headerText} component="h1">
+                Enter project details
               </Typography>
 
               <Formik
                 initialValues={{
-                  name: "",
-                  location: "",
-                  address: "",
-                  contactperson: "",
-                  phone: "",
-                  tin: "",
+                  title: "",
+                  description: "",
                 }}
                 validationSchema={formSchema}
                 onSubmit={(values, { resetForm, setSubmitting }) => {
                   setSubmitting(true)
-                  axios.post(API.farm, values)
-                    .then(() => {
-                      setOpen(!open)
-                      resetForm()
-                    })
-                    .catch((error) => {
-                      console.error('There was an error!', error);
-                    });
+                  setOpen(() => true)
+                  // axios
+                  //   .post(API.farm, values)
+                  //   .then(() => {
+                  //     setOpen(!open)
+                  //     resetForm()
+                  //   })
+                  //   .catch((error) => {
+                  //     console.error("There was an error!", error)
+                  //   })
                 }}
               >
-
                 {({ errors, touched, isSubmitting }) => (
-                  <Form
-                    className={classes.form}
-                    noValidate>
-
+                  <Form className={classes.form} noValidate>
                     <Field
-                      autoComplete="name"
+                      autoComplete="title"
                       margin="normal"
                       size="small"
-                      name="name"
+                      name="title"
                       variant="outlined"
                       required
                       fullWidth
-                      error={errors.name && touched.name}
-                      helperText={errors.name
-                        && touched.name
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.name}
+                      error={errors.title && touched.title}
+                      helperText={
+                        errors.title &&
+                        touched.title && (
+                          <span>
+                            <ErrorOutlineIcon className={classes.errorIcon} />
+                            <span className={classes.errorText}>
+                              {errorText.title}
+                            </span>
                           </span>
-                        </span>)
+                        )
                       }
-                      id="name"
-                      label="Name"
+                      id="title"
+                      label="Title"
                       as={CssTextField}
                     />
 
                     <Field
-                      autoComplete="location"
+                      autoComplete="description"
                       margin="normal"
-                      size="small"
-                      name="location"
+                      name="description"
                       variant="outlined"
                       required
                       fullWidth
-                      error={errors.location && touched.location}
-                      helperText={errors.location
-                        && touched.location
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.location}
+                      multiline
+                      rows={5}
+                      id="description"
+                      label="Description"
+                      error={errors.description && touched.description}
+                      helperText={
+                        errors.description &&
+                        touched.description && (
+                          <span>
+                            <ErrorOutlineIcon className={classes.errorIcon} />
+                            <span className={classes.errorText}>
+                              {errorText.description}
+                            </span>
                           </span>
-                        </span>)
+                        )
                       }
-                      id="location"
-                      label="Location"
-                      as={CssTextField}
-                    />
-
-                    <Field
-                      autoComplete="address"
-                      margin="normal"
-                      size="small"
-                      name="address"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.address && touched.address}
-                      helperText={errors.address
-                        && touched.address
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.address}
-                          </span>
-                        </span>)
-                      }
-                      id="address"
-                      label="Address"
-                      as={CssTextField}
-                    />
-
-                    <Field
-                      autoComplete="contactperson"
-                      margin="normal"
-                      size="small"
-                      name="contactperson"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.contactperson && touched.contactperson}
-                      helperText={errors.contactperson
-                        && touched.contactperson
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.contactperson}
-                          </span>
-                        </span>)
-                      }
-                      id="contactPerson"
-                      label="Contact Person"
-                      as={CssTextField}
-                    />
-
-                    <Field
-                      autoComplete="phone"
-                      margin="normal"
-                      size="small"
-                      name="phone"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.phone && touched.phone}
-                      helperText={errors.phone
-                        && touched.phone
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.phone}
-                          </span>
-                        </span>)
-                      }
-                      id="phone"
-                      label="Phone"
-                      as={CssTextField}
-                    />
-
-                    <Field
-                      autoComplete="tin"
-                      margin="normal"
-                      size="small"
-                      name="tin"
-                      variant="outlined"
-                      required
-                      fullWidth
-                      error={errors.tin && touched.tin}
-                      helperText={errors.tin
-                        && touched.tin
-                        && (<span>
-                          <ErrorOutlineIcon
-                            className={classes.errorIcon}
-                          />
-                          <span
-                            className={classes.errorText}>
-                            {errorText.tin}
-                          </span>
-                        </span>)
-                      }
-                      id="tin"
-                      label="TIN"
                       as={CssTextField}
                     />
 
                     <Buttonn
                       type="submit"
                       variant="contained"
+                      onClick={handleAlert}
                       className={classes.submit}
                       disabled={isSubmitting}
                     >
-                      Send
+                      Create
                     </Buttonn>
-
                   </Form>
-
                 )}
               </Formik>
             </Card>
-
           </main>
-
         </div>
       </ThemeProvider>
     </>
-  );
+  )
 }

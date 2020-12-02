@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return*/
-import React, { useEffect, useState } from "react";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import _ from "lodash";
+import React, { useEffect, useState } from "react"
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import _ from "lodash"
 import API from "../api"
 
 const ops = {
@@ -18,7 +18,7 @@ const ops = {
   oct: [0],
   nov: [0],
   dec: [0],
-};
+}
 
 const options = {
   chart: {
@@ -35,7 +35,7 @@ const options = {
       fontFamily: "Segoe UI",
       fontWeight: "600",
       fontSize: "1.0625rem",
-      color: "rgba(0, 0, 0, 0.87)"
+      color: "rgba(0, 0, 0, 0.87)",
     },
   },
 
@@ -96,7 +96,7 @@ const options = {
               align: "left",
               x: 0,
               y: -5,
-            }, 
+            },
             title: {
               text: "Number",
             },
@@ -111,49 +111,56 @@ const options = {
       },
     ],
   },
-};
-
+}
 
 export default function SalesBarGraph() {
-  const [graphOptions, setGraphOptions] = useState({});
+  const [graphOptions, setGraphOptions] = useState({})
 
   useEffect(() => {
-
     async function fetchData() {
-      const response = await fetch(API.income);
-      const jsondata = await response.json();
+      const response = await fetch(API.income)
+      const jsondata = await response.json()
       const newArray = [...jsondata]
       newArray.map((item) => {
-        var date = item.date;
-        var amount = item.amountrecvd;
-      
+        var date = item.date
+        var amount = item.amountrecvd
+
         if (date.startsWith("1")) {
-          ops.jan.push(amount);
-        }if (date.startsWith("2")) {
-          ops.feb.push(amount);
-        } if (date.startsWith("3")) {
-          ops.mar.push(amount);
-        } if (date.startsWith("4")) {
-          ops.apr.push(amount);
-        } if (date.startsWith("5")) {
-          ops.may.push(amount);
-        } if (date.startsWith("6")) {
-          ops.jun.push(amount);
-        } if (date.startsWith("7")) {
-          ops.jul.push(amount);
-        } if (date.startsWith("8")) {
-          ops.aug.push(amount);
-        } if (date.startsWith("9")) {
-          ops.sep.push(amount);
-        } if (date.startsWith("10")) {
-          ops.oct.push(amount);
-        } if (date.startsWith("11")) {
-          ops.nov.push(amount);
+          ops.jan.push(amount)
+        }
+        if (date.startsWith("2")) {
+          ops.feb.push(amount)
+        }
+        if (date.startsWith("3")) {
+          ops.mar.push(amount)
+        }
+        if (date.startsWith("4")) {
+          ops.apr.push(amount)
+        }
+        if (date.startsWith("5")) {
+          ops.may.push(amount)
+        }
+        if (date.startsWith("6")) {
+          ops.jun.push(amount)
+        }
+        if (date.startsWith("7")) {
+          ops.jul.push(amount)
+        }
+        if (date.startsWith("8")) {
+          ops.aug.push(amount)
+        }
+        if (date.startsWith("9")) {
+          ops.sep.push(amount)
+        }
+        if (date.startsWith("10")) {
+          ops.oct.push(amount)
+        }
+        if (date.startsWith("11")) {
+          ops.nov.push(amount)
         } else {
           ops.dec.push(amount)
         }
-               
-      });
+      })
 
       options.series[0].data = [
         _.sum(ops.jan),
@@ -174,7 +181,6 @@ export default function SalesBarGraph() {
     }
 
     fetchData()
-
   }, [])
 
   return (
@@ -183,5 +189,3 @@ export default function SalesBarGraph() {
     </React.Fragment>
   )
 }
-
-
