@@ -1,28 +1,28 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import SignUp from "./pages/Signup";
-import Settings from "./pages/Settings";
-import ForgotPassword from './pages/ForgotPassword';
-import PageNotFound from './pages/PageNotFound';
-import UserProfile from "./pages/UserProfile";
-import Dashboard from "./pages/Dashboard";
-import Project from "./pages/Project";
-import Projects from "./pages/Projects";
-import Seasons from "./pages/Seasons";
-import Analytics from "./pages/Analytics";
+import React from "react"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Login from "./pages/Login"
+import SignUp from "./pages/Signup"
+import Settings from "./pages/Settings"
+import ForgotPassword from "./pages/ForgotPassword"
+import PageNotFound from "./pages/PageNotFound"
+import UserProfile from "./pages/UserProfile"
+import Dashboard from "./pages/Dashboard"
+import Project from "./pages/Project"
+import Projects from "./pages/Projects"
+import Seasons from "./pages/Seasons"
+import Analytics from "./pages/Analytics"
 
-import Customers from "./pages/Customers";
-import Requisitions from "./pages/Requisitions";
-import CustomersDetails from "./pages/CustomersDetails";
-import ExpenditurePieChart from "./pages/ExpenditurePieChart";
-import Workers from "./pages/Workers";
-import SalesLineGraph from "./pages/SalesLineGraph";
-import Suppliers from "./pages/Suppliers";
-import SalesDetails from "./pages/SalesDetails";
-import Tools from "./pages/Tools";
+import Customers from "./pages/Customers"
+import Requisitions from "./pages/Requisitions"
+import CustomersDetails from "./pages/CustomersDetails"
+import ExpenditurePieChart from "./pages/ExpenditurePieChart"
+import Workers from "./pages/Workers"
+import SalesLineGraph from "./pages/SalesLineGraph"
+import Suppliers from "./pages/Suppliers"
+import SalesDetails from "./pages/SalesDetails"
+import Tools from "./pages/Tools"
 import Tables from "./pages/Tables"
-import CasualWorkers from "./pages/CasualWorkers";
+import CasualWorkers from "./pages/CasualWorkers"
 import Consumables from "./pages/Consumables"
 
 // Endpoints need to be revised i.e.
@@ -39,10 +39,7 @@ import Consumables from "./pages/Consumables"
 // Update - http://localhost:3000/projects/{id}/edit
 // Delete - http://localhost:3000/projects/{id}/delete
 
-
-
 export default function App() {
-
   return (
     <Router>
       <Switch>
@@ -68,12 +65,9 @@ export default function App() {
         <Route path="/suppliers" exact component={Suppliers} />
         <Route path="/saleschart" component={SalesLineGraph} />
         <Route path="/salesdetails" component={SalesDetails} />
-        <Route path="/casual" component={CasualWorkers} ></Route>
-        <Route path="/consumables" component={Consumables} ></Route>
-
+        <Route path="/casual" component={CasualWorkers}></Route>
+        <Route path="/consumables" component={Consumables}></Route>
       </Switch>
     </Router>
-  );
+  )
 }
-
-

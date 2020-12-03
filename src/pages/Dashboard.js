@@ -393,7 +393,7 @@ export default function Dashboard() {
                         fontSize: "1.5rem",
                       }}
                     >
-                      {totalIncome2}
+                      345
                       <sub
                         style={{
                           fontWeight: "600",

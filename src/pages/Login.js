@@ -179,6 +179,8 @@ export default function LogIn() {
             email: "",
             password: "",
           }}
+          validateOnChange={false}
+          validateOnBlur={false}
           validationSchema={formSchema}
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(() => true)
@@ -199,6 +201,7 @@ export default function LogIn() {
                 variant="outlined"
                 margin="normal"
                 required
+                autoFocus
                 fullWidth
                 id="email"
                 label="Email Address"
