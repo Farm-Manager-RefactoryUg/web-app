@@ -13,7 +13,7 @@ import ProjectAppBar from "../components/ProjectAppBar"
 import Divider from "@material-ui/core/Divider"
 import AddFarmManager from "../components/AddFarmManager"
 import AddTeleFarmer from "../components/AddTeleFarmer"
-import ProjectInfoForm from "../components/ProjectInfoForm"
+import ProjectInfo from "../components/ProjectInfo"
 
 const drawerWidth = 240
 
@@ -125,15 +125,42 @@ export default function Dashboard() {
               />
 
               <Grid container spacing={2} style={{ marginBottom: "20px" }}>
-                <Grid item xs={12} sm={12} lg={12}>
-                  <ProjectInfoForm />
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  lg={12}
+                  style={{
+                    paddingLeft: theme.spacing(15),
+                    paddingRight: theme.spacing(15),
+                  }}
+                >
+                  <ProjectInfo />
                 </Grid>
 
-                <Grid item xs={12} sm={12} lg={6}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  lg={12}
+                  style={{
+                    paddingLeft: theme.spacing(15),
+                    paddingRight: theme.spacing(15),
+                  }}
+                >
                   <AddFarmManager />
                 </Grid>
 
-                <Grid item xs={12} sm={12} lg={6}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={12}
+                  lg={12}
+                  style={{
+                    paddingLeft: theme.spacing(15),
+                    paddingRight: theme.spacing(15),
+                  }}
+                >
                   <AddTeleFarmer />
                 </Grid>
               </Grid>

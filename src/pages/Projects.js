@@ -20,6 +20,7 @@ import CardContent from "@material-ui/core/CardContent"
 import Divider from "@material-ui/core/Divider"
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from "@material-ui/icons/Delete"
+import DeleteProjectDialog from "../components/DeleteProjectDialog"
 // import API from "../api"
 // import axios from "axios"
 
@@ -90,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles()
   const currentUrl = useLocation()
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
   //   const [projects, setProjects] = useState([])
 
   const theme = React.useMemo(
@@ -170,37 +171,27 @@ export default function Dashboard() {
                     }}
                   >
                     <CardContent style={{ paddingBottom: "8px" }}>
-                      <Typography
-                        gutterBottom
-                        component="h6"
+                      <div
                         style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem",
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {/* {project.name} */}
-                        Biyinzika Mukono II
-                        <IconButton
-                          title="Delete Dashboard"
-                          color="primary"
-                          aria-label="upload picture"
-                          component="span"
+                        <Typography
+                          gutterBottom
+                          component="h6"
                           style={{
-                            margin: "0",
+                            fontFamily: "Segoe UI",
                             padding: "0",
-                            float: "right",
+                            fontWeight: "600",
+                            fontSize: "1.0625rem",
                           }}
                         >
-                          <DeleteIcon
-                            style={{
-                              color: "green",
-                              transform: "scale(0.7)",
-                            }}
-                          />
-                        </IconButton>
-                      </Typography>
+                          {/* {project.name} */}
+                          Biyinzika Mukono II
+                        </Typography>
+                        <DeleteProjectDialog />
+                      </div>
 
                       <Chip
                         classes={{ label: classes.label }}
@@ -259,37 +250,27 @@ export default function Dashboard() {
                     }}
                   >
                     <CardContent style={{ paddingBottom: "8px" }}>
-                      <Typography
-                        gutterBottom
-                        component="h6"
+                      <div
                         style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem",
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {/* {project.name} */}
-                        Robasta Fortportal
-                        <IconButton
-                          title="Delete Dashboard"
-                          color="primary"
-                          aria-label="upload picture"
-                          component="span"
+                        <Typography
+                          gutterBottom
+                          component="h6"
                           style={{
-                            margin: "0",
+                            fontFamily: "Segoe UI",
                             padding: "0",
-                            float: "right",
+                            fontWeight: "600",
+                            fontSize: "1.0625rem",
                           }}
                         >
-                          <DeleteIcon
-                            style={{
-                              color: "green",
-                              transform: "scale(0.7)",
-                            }}
-                          />
-                        </IconButton>
-                      </Typography>
+                          {/* {project.name} */}
+                          Robasta Fortportal
+                        </Typography>
+                        <DeleteProjectDialog />
+                      </div>
 
                       <Chip
                         classes={{ label: classes.label }}
@@ -348,37 +329,27 @@ export default function Dashboard() {
                     }}
                   >
                     <CardContent style={{ paddingBottom: "8px" }}>
-                      <Typography
-                        gutterBottom
-                        component="h6"
+                      <div
                         style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem",
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {/* {project.name} */}
-                        Bukomansimbi Mixed Farm
-                        <IconButton
-                          title="Delete Dashboard"
-                          color="primary"
-                          aria-label="upload picture"
-                          component="span"
+                        <Typography
+                          gutterBottom
+                          component="h6"
                           style={{
-                            margin: "0",
+                            fontFamily: "Segoe UI",
                             padding: "0",
-                            float: "right",
+                            fontWeight: "600",
+                            fontSize: "1.0625rem",
                           }}
                         >
-                          <DeleteIcon
-                            style={{
-                              color: "green",
-                              transform: "scale(0.7)",
-                            }}
-                          />
-                        </IconButton>
-                      </Typography>
+                          {/* {project.name} */}
+                          Bukomansimbi Mixed Farm
+                        </Typography>
+                        <DeleteProjectDialog />
+                      </div>
 
                       <Chip
                         classes={{ label: classes.label }}
@@ -437,37 +408,27 @@ export default function Dashboard() {
                     }}
                   >
                     <CardContent style={{ paddingBottom: "8px" }}>
-                      <Typography
-                        gutterBottom
-                        component="h6"
+                      <div
                         style={{
-                          fontFamily: "Segoe UI",
-                          padding: "0",
-                          fontWeight: "600",
-                          fontSize: "1.0625rem",
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {/* {project.name} */}
-                        Galileo Goat Project
-                        <IconButton
-                          title="Delete Dashboard"
-                          color="primary"
-                          aria-label="upload picture"
-                          component="span"
+                        <Typography
+                          gutterBottom
+                          component="h6"
                           style={{
-                            margin: "0",
+                            fontFamily: "Segoe UI",
                             padding: "0",
-                            float: "right",
+                            fontWeight: "600",
+                            fontSize: "1.0625rem",
                           }}
                         >
-                          <DeleteIcon
-                            style={{
-                              color: "green",
-                              transform: "scale(0.7)",
-                            }}
-                          />
-                        </IconButton>
-                      </Typography>
+                          {/* {project.name} */}
+                          Galileo Goat Project
+                        </Typography>
+                        <DeleteProjectDialog />
+                      </div>
 
                       <Chip
                         classes={{ label: classes.label }}

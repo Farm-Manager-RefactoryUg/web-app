@@ -30,14 +30,12 @@ const drawerWidth = 240
 const Buttonn = withStyles({
   root: {
     "&:hover": {
-      backgroundColor: "green",
+      backgroundColor: "rgba(123, 239, 178, 0.1)",
       opacity: "0.9",
-    },
-    "&:active , &:focus": {
-      outline: "none",
     },
   },
 })(Button)
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -89,16 +87,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   submit: {
-    backgroundColor: "green",
-    color: "white",
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    backgroundColor: "white",
+    color: "green",
+    border: "1px solid",
+    borderColor: "green",
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(3),
     textTransform: "initial",
     fontWeight: "600",
-    height: "40px",
-    width: "120px",
   },
 }))
 
@@ -266,6 +262,8 @@ export default function Dashboard() {
                       style={{ marginLeft: "20px" }}
                     />
                   </MuiPickersUtilsProvider>
+
+                  <br />
 
                   <FormControl className={classes.formControl}>
                     <InputLabel
@@ -440,8 +438,7 @@ export default function Dashboard() {
 
                   <Buttonn
                     type="submit"
-                    variant="contained"
-                    fullWidth
+                    //variant="contained"
                     className={classes.submit}
                     startIcon={<BarChartIcon />}
                     onClick={handleSubmit}
