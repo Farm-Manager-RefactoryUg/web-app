@@ -154,8 +154,6 @@
 //     color: "green",
 //   };
 
-
-  
 //   const [anchorEl, setAnchorEl] = React.useState(null);
 //   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 //   const [refAnchorEl, setrefAnchorEl] = React.useState(null);
@@ -222,7 +220,6 @@
 //   const handleproMenuClose = () => {
 //     setproAnchorEl(null);
 //   };
-    
 
 //   const menuId = "primary-search-account-menu";
 //   const renderMenu = (
@@ -484,7 +481,7 @@
 
 //         <Divider />
 // <<<<<<< HEAD
-        
+
 //         <Button variant="success" href="/">Home</Button>
 //         <Dropdown className="dropdown">
 //           <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -536,7 +533,7 @@
 
 //           <ListItem button style={navstyle}>
 //             <div className={classes.sectionMobile}>
-              
+
 //               <IconButton
 //                 aria-label="show more"
 //                 aria-controls={mobileMenuId}
@@ -689,8 +686,6 @@
 //             </Link>
 //           </ListItem>
 //         </List>
-
-            
 
 // >>>>>>> 59a69a702a8a503988b9791aea3703190eff16a1
 //       </Drawer>

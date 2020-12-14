@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableContainer from "@material-ui/core/TableContainer";
-import ProjectAppBar from "../components/ProjectAppBar";
-import { Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import axios from "axios"
+import { makeStyles } from "@material-ui/core/styles"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Paper from "@material-ui/core/Paper"
+import TablePagination from "@material-ui/core/TablePagination"
+import TableContainer from "@material-ui/core/TableContainer"
+import ProjectAppBar from "../components/ProjectAppBar"
+import { Typography } from "@material-ui/core"
 import API from "../api"
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,17 +63,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fafafa",
     fontWeight: "bold",
   },
-})
-);
-
+}))
 
 export default function Consumables() {
-  const currentUrl = useLocation();
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState("");
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const currentUrl = useLocation()
+  const classes = useStyles()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [items, setItems] = useState("")
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -88,56 +85,40 @@ export default function Consumables() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
   const handleChangePage = (newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   useEffect(() => {
     axios
       .get(API.consumable)
       .then((response) => {
-        setItems(response.data);
+        setItems(response.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+        console.log(err)
+      })
+  }, [])
 
   return (
-     <ThemeProvider
-      theme={theme}
-    >
-    <div className={classes.root}>
-
-        <ProjectAppBar 
-        location={currentUrl} 
-        />
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <ProjectAppBar location={currentUrl} />
 
         <main className={classes.content}>
-
           <Paper className={classes.root1}>
-
-            <Typography
-            className={classes.title}
-            >
-              Consumables
-              </Typography>
+            <Typography className={classes.title}>Consumables</Typography>
 
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
-
                 <TableHead>
-                  <TableRow
-                    position="static"
-                    className={classes.TableRow}
-                  >
+                  <TableRow position="static" className={classes.TableRow}>
                     <TableCell>No.</TableCell>
                     <TableCell>Date</TableCell>
                     <TableCell>Name</TableCell>
@@ -148,8 +129,8 @@ export default function Consumables() {
                 </TableHead>
 
                 <TableBody>
-                  {items 
-                  && items
+                  {items &&
+                    items
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
@@ -165,7 +146,6 @@ export default function Consumables() {
                         </TableRow>
                       ))}
                 </TableBody>
-
               </Table>
             </TableContainer>
 
@@ -178,10 +158,9 @@ export default function Consumables() {
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-
           </Paper>
         </main>
       </div>
     </ThemeProvider>
-  );
+  )
 }

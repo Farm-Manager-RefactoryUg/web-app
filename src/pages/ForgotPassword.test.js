@@ -1,11 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ForgotPassword from './ForgotPassword';
-
+import React from "react"
+import ReactDOM from "react-dom"
+import ForgotPassword from "./ForgotPassword"
 
 it("Component ForgotPassword renders without crashing", () => {
-  const div = document.createElement('div');
+  const div = document.createElement("div")
   ReactDOM.render(<ForgotPassword />, div)
   ReactDOM.unmountComponentAtNode(div)
-});
-
+})

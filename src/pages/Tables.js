@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
+import React, { useEffect, useState } from "react"
+import axios from "axios"
+import { makeStyles } from "@material-ui/core/styles"
+import Paper from "@material-ui/core/Paper"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TablePagination from "@material-ui/core/TablePagination"
+import TableRow from "@material-ui/core/TableRow"
 
 // const rows = [
 //   createData('India', 'IN', 1324171354, 3287263),
@@ -30,39 +30,38 @@ import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: "100%",
   },
   container: {
     maxHeight: 440,
   },
-});
+})
 
 export default function Tables() {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState("");
-    
+  const classes = useStyles()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [items, setItems] = useState("")
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
   useEffect(() => {
     axios
       .get("https://farmmanager-api.herokuapp.com/api/requisition")
       .then((response) => {
-        setItems(response.data);
+        setItems(response.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, [items]);
-     const rows = [{ items }];
+        console.log(err)
+      })
+  }, [items])
+  const rows = [{ items }]
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -79,7 +78,7 @@ export default function Tables() {
           <TableBody>
             {items &&
               items.map((item) => (
-                <TableRow hover role="checkbox" tabIndex={-1} >
+                <TableRow hover role="checkbox" tabIndex={-1}>
                   <TableCell>{item.date}</TableCell>
                   <TableCell>{item.reqno}</TableCell>
                   <TableCell>{item.purpose}</TableCell>
@@ -100,5 +99,5 @@ export default function Tables() {
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>
-  );
+  )
 }

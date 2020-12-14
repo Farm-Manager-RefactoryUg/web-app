@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Button, Form } from "react-bootstrap";
-import { makeStyles } from "@material-ui/core/styles";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
-import Typography from "@material-ui/core/Typography";
-import { Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react"
+import axios from "axios"
+import { Button, Form } from "react-bootstrap"
+import { makeStyles } from "@material-ui/core/styles"
+import Dialog from "@material-ui/core/Dialog"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import FormControl from "@material-ui/core/FormControl"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import Select from "@material-ui/core/Select"
+import Switch from "@material-ui/core/Switch"
+import Typography from "@material-ui/core/Typography"
+import { Table } from "react-bootstrap"
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -29,40 +29,40 @@ const useStyles = makeStyles((theme) => ({
   formControlLabel: {
     marginTop: theme.spacing(1),
   },
-}));
+}))
 
 export default function CustomersDetails() {
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState("md");
-  const [open, setOpen] = React.useState(false);
-  const [user, setuser] = useState({});
-  const [email, setId] = useState();
+  const [fullWidth, setFullWidth] = React.useState(true)
+  const [maxWidth, setMaxWidth] = React.useState("md")
+  const [open, setOpen] = React.useState(false)
+  const [user, setuser] = useState({})
+  const [email, setId] = useState()
 
   const handleClickOpen = () => {
-    setOpen(true);
-    setId(user.email);
-  };
-  const classes = useStyles();
+    setOpen(true)
+    setId(user.email)
+  }
+  const classes = useStyles()
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
   const handleFullWidthChange = (event) => {
-    setFullWidth(event.target.checked);
-  };
+    setFullWidth(event.target.checked)
+  }
   const handleMaxWidthChange = (event) => {
-    setMaxWidth(event.target.value);
-  };
+    setMaxWidth(event.target.value)
+  }
 
   useEffect(() => {
     axios
       .get(`https://farmmanager-api.herokuapp.com/api/customer/${email}`)
       .then((response) => {
-        setuser(response.data);
+        setuser(response.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, [email]);
+        console.log(err)
+      })
+  }, [email])
 
   return (
     <div>
@@ -125,7 +125,6 @@ export default function CustomersDetails() {
                             <td>Product</td>
                             <td>Amount</td>
                             <td>Date</td>
-                            
                           </tr>
                         </tbody>
                       </Table>
@@ -171,5 +170,5 @@ export default function CustomersDetails() {
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }

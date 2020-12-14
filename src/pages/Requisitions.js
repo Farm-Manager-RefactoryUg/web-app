@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import TablePagination from "@material-ui/core/TablePagination";
-import ProjectAppBar from "../components/ProjectAppBar";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import axios from "axios"
+import { makeStyles } from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Typography from "@material-ui/core/Typography"
+import Paper from "@material-ui/core/Paper"
+import TablePagination from "@material-ui/core/TablePagination"
+import ProjectAppBar from "../components/ProjectAppBar"
+import { motion } from "framer-motion"
 import API from "../api"
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     fontFamily: "Segoe UI",
     backgroundColor: "rgb(247, 249, 252)",
-
   },
   root1: {
     margin: theme.spacing(2.5),
@@ -35,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Segoe UI",
     fontWeight: "600",
     fontSize: "1.2rem",
-    marginBottom: "10px"
+    marginBottom: "10px",
   },
   grid: {
     margin: "0px !important",
@@ -60,54 +58,42 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
-})
-);
-
+}))
 
 export default function Requisitions() {
-  const currentUrl = useLocation();
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState([]);
+  const currentUrl = useLocation()
+  const classes = useStyles()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [items, setItems] = useState([])
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   useEffect(() => {
     axios
       .get(API.requisition)
       .then((response) => {
-        setItems(response.data);
+        setItems(response.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+        console.log(err)
+      })
+  }, [])
 
   return (
     <div className={classes.root}>
-
-      <ProjectAppBar
-        location={currentUrl}
-      />
+      <ProjectAppBar location={currentUrl} />
 
       <main className={classes.content}>
-
         <Paper className={classes.root1}>
-
-          <Typography
-            className={classes.title}
-          >
-            Recent Orders
-            </Typography>
+          <Typography className={classes.title}>Recent Orders</Typography>
           <motion.TableContainer
             className={classes.container}
             whileHover={{ scale: 1.2 }}
@@ -125,10 +111,7 @@ export default function Requisitions() {
               <TableBody>
                 {items &&
                   items
-                    .slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((item) => (
                       <TableRow hover role="checkbox" tabIndex={-1}>
                         <TableCell>{item.date}</TableCell>
@@ -153,5 +136,5 @@ export default function Requisitions() {
         </Paper>
       </main>
     </div>
-  );
+  )
 }

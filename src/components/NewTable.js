@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import {
   fade,
   makeStyles,
   createMuiTheme,
   ThemeProvider,
-} from "@material-ui/core/styles";
-import SearchField from "react-search-field";
+} from "@material-ui/core/styles"
+import SearchField from "react-search-field"
 
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import axios from "axios";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
-import { data } from "jquery";
+import Paper from "@material-ui/core/Paper"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TablePagination from "@material-ui/core/TablePagination"
+import TableRow from "@material-ui/core/TableRow"
+import axios from "axios"
+import InputBase from "@material-ui/core/InputBase"
+import SearchIcon from "@material-ui/icons/Search"
+import { data } from "jquery"
 
 const useStyles = makeStyles({
   root: {
@@ -64,46 +64,46 @@ const useStyles = makeStyles({
   //     width: "20ch",
   //   },
   // },
-});
+})
 
 export default function NewTable({ data }) {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [items, setItems] = useState([]);
-  const [q, setQ] = useState("");
+  const classes = useStyles()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [items, setItems] = useState([])
+  const [q, setQ] = useState("")
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
   const onChange = (e) => {
-    return e.target.value;
-  };
+    return e.target.value
+  }
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((res) => {
-        setItems(res.data);
+        setItems(res.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+        console.log(err)
+      })
+  }, [])
 
   function search() {
-    return items.filter((item) => item.name.toLowerCase().indexOf(q) > -1);
+    return items.filter((item) => item.name.toLowerCase().indexOf(q) > -1)
   }
   return (
     <div>
       <Paper className={classes.root}>
         <SearchField
           placeholder="Search..."
-          onChange={(e) => (e.target.value)}
+          onChange={(e) => e.target.value}
           // searchText="This is initial search text"
           classNames="test-class"
         />
@@ -136,7 +136,7 @@ export default function NewTable({ data }) {
                       <TableRow hover role="checkbox" tabIndex={-1}>
                         {item.name}
                       </TableRow>
-                    );
+                    )
                   })}
             </TableBody>
           </Table>
@@ -152,5 +152,5 @@ export default function NewTable({ data }) {
         />
       </Paper>
     </div>
-  );
+  )
 }

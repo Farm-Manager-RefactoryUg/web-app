@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import React, { useState } from "react"
+import clsx from "clsx"
+import { makeStyles } from "@material-ui/core/styles"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import Paper from "@material-ui/core/Paper"
 //import { Link } from "react-router-dom"
-import Navbar from "./Navbar";
-import Deposits from "./materialDesign/Deposits";
+import Navbar from "./Navbar"
+import Deposits from "./materialDesign/Deposits"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,17 +80,15 @@ const useStyles = makeStyles((theme) => ({
     height: 150,
     color: "black",
   },
-}));
+}))
 
 function Reports() {
-  const classes = useStyles();
+  const classes = useStyles()
 
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [totalCapital] = useState(150000);
-  const [totalSales] = useState(50000);
-  const [totalIncome] = useState(
-    `${totalCapital - totalSales}`
-  );
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
+  const [totalCapital] = useState(150000)
+  const [totalSales] = useState(50000)
+  const [totalIncome] = useState(`${totalCapital - totalSales}`)
 
   return (
     <>
@@ -105,7 +103,7 @@ function Reports() {
                   title="Current Season Capital"
                   amount={totalCapital}
                   details="View details"
-                  link ="./expenditurechart"
+                  link="./expenditurechart"
                 />
               </Paper>
             </Grid>
@@ -115,7 +113,7 @@ function Reports() {
                   title="Current Season Sales"
                   amount={totalSales}
                   details="View details"
-                  link='./saleschart'
+                  link="./saleschart"
                 />
               </Paper>
             </Grid>
@@ -128,7 +126,7 @@ function Reports() {
         </Container>
       </div>
     </>
-  );
+  )
 }
 
-export default Reports;
+export default Reports

@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import ProjectAppBar from "../components/ProjectAppBar";
-import Card from '@material-ui/core/Card';
-import Divider from "@material-ui/core/Divider";
-import SeasonsTable from '../components/SeasonsTable';
+import React, { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import ProjectAppBar from "../components/ProjectAppBar"
+import Card from "@material-ui/core/Card"
+import Divider from "@material-ui/core/Divider"
+import SeasonsTable from "../components/SeasonsTable"
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,13 +63,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     marginTop: "0",
   },
-}));
+}))
 
 export default function Dashboard() {
-
-  const classes = useStyles();
-  const currentUrl = useLocation();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const classes = useStyles()
+  const currentUrl = useLocation()
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
 
   const theme = React.useMemo(
     () =>
@@ -81,17 +83,16 @@ export default function Dashboard() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
 
   useEffect(() => {
     document.title = "Analysis Page"
-  }, []);
+  }, [])
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className={classes.root}>
-
           <ProjectAppBar location={currentUrl} />
 
           <main className={classes.content}>
@@ -102,7 +103,7 @@ export default function Dashboard() {
 
             <Container
               style={{
-                marginTop: "40px"
+                marginTop: "40px",
               }}
             >
               <Typography
@@ -120,7 +121,7 @@ export default function Dashboard() {
               <Divider
                 style={{
                   marginTop: "15px",
-                  backgroundColor: "rgba(0,0,0,0.2)"
+                  backgroundColor: "rgba(0,0,0,0.2)",
                 }}
               />
 
@@ -131,26 +132,16 @@ export default function Dashboard() {
                   marginBottom: "20px",
                 }}
               >
-
-                <Grid
-                  item
-                  xs={12}
-                  sm={12}
-                  lg={12}
-                >
-                  <Card
-                    className={classes.tableCard}
-                  >
+                <Grid item xs={12} sm={12} lg={12}>
+                  <Card className={classes.tableCard}>
                     <SeasonsTable />
                   </Card>
                 </Grid>
-
               </Grid>
-
             </Container>
           </main>
         </div>
       </ThemeProvider>
     </>
-  );
+  )
 }

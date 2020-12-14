@@ -1,9 +1,8 @@
-
-import React, {useEffect} from "react";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import ProjectAppBar from "../components/ProjectAppBar";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react"
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import ProjectAppBar from "../components/ProjectAppBar"
+import { makeStyles } from "@material-ui/core/styles"
 
 const options = {
   chart: {
@@ -11,9 +10,8 @@ const options = {
     plotBorderWidth: null,
     plotShadow: false,
     type: "pie",
-    
   },
-  
+
   title: {
     text: "Expenditure Distribution Last Planting Season",
   },
@@ -42,7 +40,7 @@ const options = {
           fontsize: 10,
         },
         formatter: function () {
-          return this.key + ": " + this.y + "/=";
+          return this.key + ": " + this.y + "/="
         },
       },
     },
@@ -60,8 +58,8 @@ const options = {
       ],
     },
   ],
-};
-  
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -94,39 +92,28 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 150,
   },
-}));
-
-
+}))
 
 export default function ExpenditurePieChart() {
- 
   useEffect(() => {
-    
-          fetch("https://farmmanager-api.herokuapp.com/api/expenditure/")
-            .then((res) => res.json())
-            .then((result) => console.log(result))      
-            .catch((error) => {
-              console.log(error)
-            })
-    
+    fetch("https://farmmanager-api.herokuapp.com/api/expenditure/")
+      .then((res) => res.json())
+      .then((result) => console.log(result))
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
-    
-  }, []);
-  
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <div className={classes.root}>
       <React.Fragment>
         <ProjectAppBar />
 
         <main className={classes.content}>
-         
           <HighchartsReact highcharts={Highcharts} options={options} />
         </main>
       </React.Fragment>
     </div>
-  );
-    
-
-
+  )
 }

@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TablePagination from "@material-ui/core/TablePagination";
-import ProjectAppBar from "../components/ProjectAppBar";
-
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import axios from "axios"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import { withStyles, makeStyles } from "@material-ui/core/styles"
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Paper from "@material-ui/core/Paper"
+import Typography from "@material-ui/core/Typography"
+import TablePagination from "@material-ui/core/TablePagination"
+import ProjectAppBar from "../components/ProjectAppBar"
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -23,9 +22,9 @@ const StyledTableCell = withStyles((theme) => ({
   body: {
     fontSize: 14,
   },
-}))(TableCell);
+}))(TableCell)
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Segoe UI",
     fontWeight: "600",
     fontSize: "1.2rem",
-    marginBottom: "10px"
+    marginBottom: "10px",
   },
   grid: {
     margin: "0px !important",
@@ -88,16 +87,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fafafa",
     fontWeight: "bold",
   },
-}));
-
+}))
 
 export default function Suppliers() {
-  const currentUrl = useLocation();
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [items, setItems] = useState([]);
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const currentUrl = useLocation()
+  const classes = useStyles()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [items, setItems] = useState([])
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
 
   const theme = React.useMemo(
     () =>
@@ -112,109 +110,66 @@ export default function Suppliers() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    setRowsPerPage(+event.target.value)
+    setPage(0)
+  }
 
   useEffect(() => {
     axios
       .get("https://farmmanager-api.herokuapp.com/api/supplier")
       .then((response) => {
-        setItems(response.data);
+        setItems(response.data)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+        console.log(err)
+      })
+  }, [])
 
   return (
-    <ThemeProvider
-      theme={theme}
-    >
+    <ThemeProvider theme={theme}>
       <div className={classes.root}>
-
-        <ProjectAppBar
-          location={currentUrl}
-        />
+        <ProjectAppBar location={currentUrl} />
 
         <main className={classes.content}>
-
           <Paper className={classes.root2}>
-
-            <Typography
-              className={classes.title}
-            >
-              Recent suppliers
-            </Typography>
+            <Typography className={classes.title}>Recent suppliers</Typography>
 
             <TableContainer component={Paper}>
-
-              <Table
-                className={classes.table}
-                aria-label="customized table">
-
+              <Table className={classes.table} aria-label="customized table">
                 <TableHead style={{ backgroundColor: "#f7f9fc" }}>
-
-                  <TableRow
-                    className={classes.tableRow}
-                  >
-                    <StyledTableCell
-                      align="left"
-                      component="th"
-                      scope="row"
-                    >
+                  <TableRow className={classes.tableRow}>
+                    <StyledTableCell align="left" component="th" scope="row">
                       No.
                     </StyledTableCell>
 
-                    <StyledTableCell
-                      align="center"
-                      component="th"
-                      scope="row"
-                    >
+                    <StyledTableCell align="center" component="th" scope="row">
                       Name
                     </StyledTableCell>
 
-                    <StyledTableCell
-                      align="center"
-                    >
+                    <StyledTableCell align="center">
                       Company Name
                     </StyledTableCell>
 
-                    <StyledTableCell
-                      align="center"
-                    >
-                      Telephone
-                    </StyledTableCell>
+                    <StyledTableCell align="center">Telephone</StyledTableCell>
 
-                    <StyledTableCell
-                      align="center"
-                    >
+                    <StyledTableCell align="center">
                       Business Address
                     </StyledTableCell>
 
-                    <StyledTableCell
-                      align="center"
-                    >
-                      Category
-                    </StyledTableCell>
-
+                    <StyledTableCell align="center">Category</StyledTableCell>
                   </TableRow>
                 </TableHead>
 
-                {items
-                  && items
-                    .slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
+                {items &&
+                  items
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((item) => (
                       <TableBody key={item.id}>
                         <StyledTableCell align="left">
@@ -236,9 +191,7 @@ export default function Suppliers() {
                           {item.category}
                         </StyledTableCell>
                       </TableBody>
-                    ))
-                }
-
+                    ))}
               </Table>
             </TableContainer>
 
@@ -251,11 +204,9 @@ export default function Suppliers() {
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-
           </Paper>
-
         </main>
       </div>
     </ThemeProvider>
-  );
+  )
 }

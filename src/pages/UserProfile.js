@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, createMuiTheme, ThemeProvider, } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import ProjectAppBar from "../components/ProjectAppBar";
-import Card from '@material-ui/core/Card';
-import Divider from "@material-ui/core/Divider";
-import UpdateProfile from "../components/UpdateProfile";
+import React, { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import ProjectAppBar from "../components/ProjectAppBar"
+import Card from "@material-ui/core/Card"
+import Divider from "@material-ui/core/Divider"
+import UpdateProfile from "../components/UpdateProfile"
 
-
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,13 +64,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.7rem",
     color: "white",
   },
-}));
+}))
 
 export default function Dashboard() {
-
-  const classes = useStyles();
-  const currentUrl = useLocation();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
+  const classes = useStyles()
+  const currentUrl = useLocation()
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)")
 
   const theme = React.useMemo(
     () =>
@@ -82,52 +84,58 @@ export default function Dashboard() {
         },
       }),
     [prefersDarkMode]
-  );
+  )
 
   useEffect(() => {
     document.title = "Account Settings"
-  }, []);
-
-
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
-
         <ProjectAppBar location={currentUrl} />
 
         <main className={classes.content}>
-          
-          <div
-            className={classes.appBarSpacer}
-            style={{ minHeight: "3rem" }}
-          />
+          <div className={classes.appBarSpacer} style={{ minHeight: "3rem" }} />
 
-          <Container style={{ marginTop: "60px", paddingLeft: theme.spacing(3), }}>
-
+          <Container
+            style={{ marginTop: "60px", paddingLeft: theme.spacing(3) }}
+          >
             <Typography
-              style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "Segoe UI", color: "rgba(0, 0, 0, 0.87)", }}
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                fontFamily: "Segoe UI",
+                color: "rgba(0, 0, 0, 0.87)",
+              }}
               component="h1"
             >
               {"Account Management"}
             </Typography>
 
-            <Divider style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }} />
+            <Divider
+              style={{ marginTop: "15px", backgroundColor: "rgba(0,0,0,0.2)" }}
+            />
 
-            <Grid container spacing={6} style={{ marginTop: "20px", marginBottom: "20px", }}>
-
+            <Grid
+              container
+              spacing={6}
+              style={{ marginTop: "20px", marginBottom: "20px" }}
+            >
               <Grid item xs={12} md={12} lg={12}>
-                <Card style={{ backgroundColor: "rgb(255, 255, 255)", color: "rgba(0, 0, 0, 0.87)", }}>
+                <Card
+                  style={{
+                    backgroundColor: "rgb(255, 255, 255)",
+                    color: "rgba(0, 0, 0, 0.87)",
+                  }}
+                >
                   <UpdateProfile />
                 </Card>
               </Grid>
-
             </Grid>
-
           </Container>
         </main>
-
       </div>
     </ThemeProvider>
-  );
+  )
 }
