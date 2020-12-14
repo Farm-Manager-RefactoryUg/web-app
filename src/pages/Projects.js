@@ -292,7 +292,7 @@ export default function Dashboard() {
                         }}
                       >
                         {
-                          "It's a small-sized farm that deals with livestock only. It has a list of chores that must be done everyday especially the poultry houses and also swine parlors. Different activities are done on this farm; monitoring the conditions inside the different houses on the farm, collection of eggs from chicken house, monitoring the animals health and so on."
+                          "It's a small-sized farm that deals with livestock only. It has a list of chores that must be done everyday especially the poultry houses and also swine parlors. Different activities are done on this farm."
                         }
                       </Typography>
 
@@ -371,7 +371,7 @@ export default function Dashboard() {
                         }}
                       >
                         {
-                          "This farm involves running a system of livestock and arable crops being grown and raised. It involves brown Swiss dairy cows. We are able to grow upto 70% of the food required by cows and other animals in the farm to reduce on costs."
+                          "This farm involves running a system of livestock and arable crops being grown and raised. It involves brown Swiss cows for beef and fat juicy freisan cows for milk. "
                         }
                       </Typography>
 
@@ -450,7 +450,7 @@ export default function Dashboard() {
                         }}
                       >
                         {
-                          "This farm involves raising and breeding of domestic goats as a branch of animal husbandry. And we principally do farm goats for their meat, milk, fibre and skins. Goats do well when allowed to roam about and browse on grass and shrubs. They love to feed on the leaves of small trees and nibble on small twigs."
+                          "This farm involves raising and breeding of domestic goats as a branch of animal husbandry. And we principally do farm goats for their meat, milk, fibre and skins."
                         }
                       </Typography>
 
