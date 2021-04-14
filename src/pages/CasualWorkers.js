@@ -101,10 +101,10 @@ export default function CasualWorkers() {
               <TableHead>
                 <TableRow position="static" className={classes.tableRow}>
                   <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
+                  <TableCell>Phone</TableCell>
                   <TableCell>Position</TableCell>
-                  <TableCell>Department</TableCell>
-                  <TableCell>Details</TableCell>
+                  <TableCell>Reason for Hire</TableCell>
+                  
                 </TableRow>
               </TableHead>
 
@@ -118,7 +118,7 @@ export default function CasualWorkers() {
                         <TableCell>{item.phone1}</TableCell>
                         <TableCell>{item.postion}</TableCell>
                         <TableCell>{item.department}</TableCell>
-                        <TableCell>{item.department}</TableCell>
+                        
                       </TableRow>
                     ))}
               </TableBody>

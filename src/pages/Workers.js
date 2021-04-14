@@ -120,7 +120,7 @@ export default function Workers() {
                     <TableCell>Email</TableCell>
                     <TableCell>Position</TableCell>
                     <TableCell>Department</TableCell>
-                    <TableCell>Details</TableCell>
+                    <TableCell>Qualification</TableCell>
                   </TableRow>
                 </TableHead>
 
