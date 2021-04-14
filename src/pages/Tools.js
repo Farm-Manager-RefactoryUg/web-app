@@ -123,8 +123,7 @@ export default function Tools() {
                     <TableCell>No.</TableCell>
                     <TableCell>Date</TableCell>
                     <TableCell>Tool Name</TableCell>
-                    <TableCell>Purpose</TableCell>
-                    <TableCell>Main User</TableCell>
+                    
                   </TableRow>
                 </TableHead>
 
@@ -140,8 +139,6 @@ export default function Tools() {
                           <TableCell>{item.id}</TableCell>
                           <TableCell>{item.date}</TableCell>
                           <TableCell>{item.toolname}</TableCell>
-                          <TableCell>{item.purpose}</TableCell>
-                          <TableCell>{item.mainuser}</TableCell>
                         </TableRow>
                       ))}
                 </TableBody>

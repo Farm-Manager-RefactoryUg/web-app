@@ -123,7 +123,6 @@ export default function Consumables() {
                     <TableCell>Date</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell>Purpose</TableCell>
-                    <TableCell>Main User</TableCell>
                     <TableCell>Unit Cost</TableCell>
                   </TableRow>
                 </TableHead>
@@ -141,7 +140,6 @@ export default function Consumables() {
                           <TableCell>{item.date}</TableCell>
                           <TableCell>{item.name}</TableCell>
                           <TableCell>{item.purpose}</TableCell>
-                          <TableCell>{item.mainuser}</TableCell>
                           <TableCell>{item.unitcost}</TableCell>
                         </TableRow>
                       ))}
